@@ -48,3 +48,5 @@ Temporary Items
 
 # Custom
 src/db.sqlite3
+**/*.pyc
+**/*.pyo
