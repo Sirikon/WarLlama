@@ -1,0 +1,7 @@
+<h1> Awesome Activities </h1>
+
+<ul>
+    {% for act in activity_list %}
+    <li><a href="{% url 'alpaca:activity' act.id %}" class="btn btn-default">{{ act }})</a></li>           
+    {% endfor %}
+</ul>

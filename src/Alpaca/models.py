@@ -4,6 +4,7 @@ from django.core.validators import MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
 
+import datetime
 
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -17,6 +18,7 @@ class Profile (models.Model):
 class Activity (models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
+    pub_date = models.DateTimeField('publication date', default=datetime.datetime.now())
    
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
     attendants = models.ManyToManyField(User, related_name="attending_activities", blank=True)
@@ -27,7 +29,7 @@ class Activity (models.Model):
     age_minimum = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title + " - Author: " + self.author.username + " - Attendants #" + str(self.attendants.count())
+        return self.pub_date.strftime('(%Y-%m-%d, %H:%M)') + " " + self.title + " - Author: " + self.author.username + " - Attendants #" + str(self.attendants.count())
 
 
 class Session (models.Model):
@@ -41,5 +43,5 @@ class Session (models.Model):
     confirmed_attendants = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
-        return self.activity.title + ": " + self.date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_time.strftime('to %H:%M') + " - " + str(self.confirmed_attendants.count()) + " confirmed attending." 
+        return self.description + " - " + self.date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_time.strftime('to %H:%M') + " - " + str(self.confirmed_attendants.count()) + " confirmed attending." 
     

@@ -1,0 +1,12 @@
+<h1> {{ activity.title }} </h1>
+<p>Published: {{ activity.pub_date }}</p>
+<p>Author: {{ activity.author.username }}</p>
+<p>Description: {{ activity.description }}</p>
+<ul>
+    {% for session in session_list %}
+    <li>{{ session }}</li>
+    {% endfor %}
+</ul>
+
+<button>Join!</button>
+

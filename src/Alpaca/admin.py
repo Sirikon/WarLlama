@@ -29,7 +29,7 @@ class SessionInline(admin.TabularInline):
 
 class ActivityAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None,          {'fields': ['author', 'title', 'description']}),
+        (None,          {'fields': ['pub_date', 'author', 'title', 'description']}),
         ('Settings',    {'fields': ['auto_register', 'confirmation_period', 'age_minimum']})
     ]
     inlines = [SessionInline]
