@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpaca</title>
+        <link href="https://fonts.googleapis.com/css?family=Ravi+Prakash" rel="stylesheet">
+        <link rel="stylesheet" href="{% static "style.css" %}">
+    </head>
+    <body>
+
+        <div class="al-header">
+            <div class="al-header-content">
+                <h1 class="al-header-title">
+                    <a href="/">Alpaca</a>
+                </h1>
+            </div>
+        </div>
+
+        <div class="al-content-wrapper">
+            <h1>{% block title %}{% endblock %}</h1>
+            <div class="al-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </body>
+</html>

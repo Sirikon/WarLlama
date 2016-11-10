@@ -1,18 +1,22 @@
-<h1> Awesome Activities </h1>
+{% extends './_layout.html' %}
 
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th># of Attendants</th>
-        <th>Published Date</th>
-    </tr>
-    {% for act in activity_list %}
-    <tr>
-        <th><a href="{% url 'alpaca:activity' act.id %}" class="btn btn-default">{{ act.title }}</a></th>
-        <th>{{ act.author }}</th>
-        <th>{{ act.attendants.count }}</th>
-        <th>{{ act.pub_date }}</th>
-    </tr>           
-    {% endfor %}
-</table>
+{% block title %}Awesome Activities{% endblock %}
+
+{% block content %}
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th># of Attendants</th>
+            <th>Published Date</th>
+        </tr>
+        {% for activity in activity_list %}
+        <tr>
+            <td><a href="{% url 'alpaca:activity' activity.id %}">{{ activity.title }}</a></td>
+            <td>{{ activity.author }}</td>
+            <td>{{ activity.attendants.count }}</td>
+            <td>{{ activity.pub_date }}</td>
+        </tr>           
+        {% endfor %}
+    </table>
+{% endblock %}

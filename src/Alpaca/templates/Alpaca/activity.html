@@ -1,25 +1,41 @@
-<h1> {{ activity.title }} </h1>
-<p>Published: {{ activity.pub_date }}</p>
-<p>Author: {{ activity.author.username }}</p>
-<p>Description: {{ activity.description }}</p>
+<h1>  </h1>
 
-<button>Join!</button>
 
-<table>
-    <tr>
-        <th>Description</th>
-        <th>Start</th>
-        <th>End</th>
-        <th>Confirmed Attendants</th>
-        <th>Are you coming?</th>
-    </tr>
-    {% for session in session_list %}
-    <tr>
-        <th>{{ session.description }}</th>
-        <th>{{ session.start_date }}</th>
-        <th>{{ session.end_date }}</th>
-        <th>{{ session.confirmed_attendants.count }}</th>
-        <th><button>I'm coming!</button></th>
-    </tr>           
-    {% endfor %}
-</table>
+
+
+
+{% extends './_layout.html' %}
+
+{% block title %}{{ activity.title }}{% endblock %}
+
+{% block content %}
+    <div class="al-rich-content">
+        <ul>
+            <li>Published: {{ activity.pub_date }}</li>
+            <li>Author: {{ activity.author.username }}</li>
+            <li>Description: {{ activity.description }}</li>
+        </ul>
+        <p>
+            <button>Join!</button>
+        </p>
+    </div>
+
+    <table>
+        <tr>
+            <th>Description</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Confirmed Attendants</th>
+            <th>Are you coming?</th>
+        </tr>
+        {% for session in session_list %}
+        <tr>
+            <td>{{ session.description }}</td>
+            <td>{{ session.start_date }}</td>
+            <td>{{ session.end_date }}</td>
+            <td>{{ session.confirmed_attendants.count }}</td>
+            <td><button>I'm coming!</button></td>
+        </tr>           
+        {% endfor %}
+    </table>
+{% endblock %}

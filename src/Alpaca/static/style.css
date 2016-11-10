@@ -1,0 +1,63 @@
+html, body {
+    background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.al-header {
+    background-color: #e67e22;
+}
+
+.al-header-content {
+    height: 60px;
+    width: 1120px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.al-header-title {
+    font-family: 'Ravi Prakash', cursive;
+    margin: 0;
+    margin-top: .23em;
+    color: white;
+    font-size: 2.5em;
+}
+
+.al-header-title > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.al-content-wrapper {
+    width: 1120px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.al-content {
+    background-color: white;
+}
+
+.al-rich-content {
+    padding: 1px 1em;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th,
+table td {
+    text-align: left;
+    border: 1px solid lightgrey;
+    padding: 5px 7px;
+}
+
+table th {
+    background-color: lightgrey;
+}
