@@ -18,7 +18,7 @@ class Profile (models.Model):
 class Activity (models.Model):
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=500)
-    pub_date = models.DateTimeField('publication date', default=datetime.datetime.now())
+    pub_date = models.DateTimeField('publication date')
    
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
     attendants = models.ManyToManyField(User, related_name="attending_activities", blank=True)

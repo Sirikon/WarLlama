@@ -1,9 +1,6 @@
-FROM python:2.7
+FROM python:2.7-alpine
 
-RUN apt-get update && \
-    apt-get upgrade -y && \
-    apt-get install -y nano && \
-    pip install --upgrade pip && \
+RUN pip install --upgrade pip && \
     mkdir -p /srv/src
 
 WORKDIR /srv/src
