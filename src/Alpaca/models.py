@@ -8,8 +8,7 @@ import datetime
 
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    birth_date = models.DateTimeField('date of birth')
-    reg_date = models.DateTimeField('date registered')
+    birth_date = models.DateTimeField('date of birth', blank=True, null=True)
 
     def __str__(self):
         return user.username
