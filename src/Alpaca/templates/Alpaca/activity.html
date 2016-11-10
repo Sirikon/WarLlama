@@ -2,11 +2,24 @@
 <p>Published: {{ activity.pub_date }}</p>
 <p>Author: {{ activity.author.username }}</p>
 <p>Description: {{ activity.description }}</p>
-<ul>
-    {% for session in session_list %}
-    <li>{{ session }}</li>
-    {% endfor %}
-</ul>
 
 <button>Join!</button>
 
+<table>
+    <tr>
+        <th>Description</th>
+        <th>Start</th>
+        <th>End</th>
+        <th>Confirmed Attendants</th>
+        <th>Are you coming?</th>
+    </tr>
+    {% for session in session_list %}
+    <tr>
+        <th>{{ session.description }}</th>
+        <th>{{ session.start_date }}</th>
+        <th>{{ session.end_date }}</th>
+        <th>{{ session.confirmed_attendants.count }}</th>
+        <th><button>I'm coming!</button></th>
+    </tr>           
+    {% endfor %}
+</table>

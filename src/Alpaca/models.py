@@ -36,12 +36,11 @@ class Session (models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     description = models.CharField(max_length=500)
 
-    date = models.DateTimeField('start time')
-    end_time = models.TimeField('end time (approx.)')
+    start_date = models.DateTimeField('start date')
+    end_date = models.DateTimeField('end date')
 
     place = models.CharField(max_length=100)
     confirmed_attendants = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
-        return self.description + " - " + self.date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_time.strftime('to %H:%M') + " - " + str(self.confirmed_attendants.count()) + " confirmed attending." 
-    
+        return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') + " - " + str(self.confirmed_attendants.count()) + " confirmed attending." 

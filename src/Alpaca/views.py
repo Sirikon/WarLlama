@@ -10,7 +10,7 @@ def index(request):
 
 def activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
-    session_list = activity.session_set.order_by('-date')
+    session_list = activity.session_set.order_by('-start_date')
     context = {'activity': activity,
                'session_list': session_list}
     return render(request, 'Alpaca/activity.html', context)

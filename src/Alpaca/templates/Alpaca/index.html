@@ -1,7 +1,18 @@
 <h1> Awesome Activities </h1>
 
-<ul>
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th># of Attendants</th>
+        <th>Published Date</th>
+    </tr>
     {% for act in activity_list %}
-    <li><a href="{% url 'alpaca:activity' act.id %}" class="btn btn-default">{{ act }})</a></li>           
+    <tr>
+        <th><a href="{% url 'alpaca:activity' act.id %}" class="btn btn-default">{{ act.title }}</a></th>
+        <th>{{ act.author }}</th>
+        <th>{{ act.attendants.count }}</th>
+        <th>{{ act.pub_date }}</th>
+    </tr>           
     {% endfor %}
-</ul>
+</table>
