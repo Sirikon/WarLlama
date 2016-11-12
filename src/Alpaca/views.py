@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth import login as auth_login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 from .forms import *
@@ -23,7 +23,7 @@ def activity(request, activity_id):
 
 def signup(request):
     if request.method == "POST":
-        form = ProfileCreationForm(request.POST)
+        form = ProfileCreationForm(data=request.POST)
         if form.is_valid():
             form.save()
         text = "Welcome to Alpaca!"
@@ -35,13 +35,13 @@ def signup(request):
 
 def login(request):
     if request.method == "POST":
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = request.POST['username']
             password = request.POST['password']
             access = authenticate(username=user, password=password)
             if access is not None and access.is_active:
-                login(request, access)
+                auth_login(request, access)
                 return HttpResponseRedirect(reverse('alpaca:index'))
             else:
                 return render(request, 'Alpaca/not_active_user.html')
