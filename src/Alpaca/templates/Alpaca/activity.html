@@ -1,9 +1,3 @@
-<h1>  </h1>
-
-
-
-
-
 {% extends './_layout.html' %}
 
 {% block title %}{{ activity.title }}{% endblock %}
@@ -15,9 +9,16 @@
             <li>Author: {{ activity.author.username }}</li>
             <li>Description: {{ activity.description }}</li>
         </ul>
-        <p>
-            <button>Join!</button>
-        </p>
+        <h3>{{ user.username }}</h3>
+        {% if user.is_authenticated %}
+            {% if user in activity.attendants %}
+                <p>You are part of this activity!</p>
+            {% else %}
+                <a href="{% url 'alpaca:activity' activity.id %}">Join!</a>
+            {% endif%}
+        {% else %}  
+            <a href="{% url 'alpaca:login' activity.id %}">Join!</a>  
+        {% endif %}
     </div>
 
     <table>
