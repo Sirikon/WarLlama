@@ -1,20 +1,28 @@
 {% extends './_layout.html' %}
 
-{% block title %}{{ activity.title }}{% endblock %}
+{% block title %}{{ activity.title }} by {{ activity.author.username }}{% endblock %}
 
 {% block content %}
     <div class="al-rich-content">
-        <ul>
-            <li>Published: {{ activity.pub_date }}</li>
-            <li>Author: {{ activity.author.username }}</li>
-            <li>Description: {{ activity.description }}</li>
-        </ul>
-        <h3>{{ user.username }}</h3>
+        <p>Published: {{ activity.pub_date }}</p>
+        <h3>Description</h3>           
+        <p>{{ activity.description }}</p>
+       
+        <h3>Attending</h3>
+        <p>
+        {% for att in activity.attendants.all %}
+            {{ att.username }} 
+        {% endfor %}
+        </p>
+
         {% if user.is_authenticated %}
-            {% if user in activity.attendants %}
+            {% if activity.author == user or user in activity.attendants.all %}
                 <p>You are part of this activity!</p>
             {% else %}
-                <a href="{% url 'alpaca:activity' activity.id %}">Join!</a>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="submit" name="al_join" value="Join!"/>
+                </form>
             {% endif%}
         {% else %}  
             <a href="{% url 'alpaca:login' activity.id %}">Join!</a>  
@@ -31,11 +39,29 @@
         </tr>
         {% for session in session_list %}
         <tr>
-            <td>{{ session.description }}</td>
-            <td>{{ session.start_date }}</td>
-            <td>{{ session.end_date }}</td>
-            <td>{{ session.confirmed_attendants.count }}</td>
-            <td><button>I'm coming!</button></td>
+            <td><p>{{ session.description }}</p></td>
+            <td><p>{{ session.start_date }}</p></td>
+            <td><p>{{ session.end_date }}</p></td>
+            <td><p>{{ session.confirmed_attendants.count }}</p></td>
+            <td>
+                {% if user.is_authenticated %}
+                    {% if sessions.isOnConfirmationPeriod %}
+                        {% if session.canUserJoin %}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="session_id" value="{{ session.id }}"/>
+                                <input type="submit" name="al_confirm" value="I'm going!!"/>
+                            </form>
+                        {% else %}
+                            <p>See you there ^^</p>
+                        {% endif %}
+                    {% elif not session.hasFinished %}
+                        <p>Coming soon!</p>
+                    {% endif %}
+                {% else %}
+                    <p>Join the activity to come!</p>
+                {% endif %}
+            </td>
         </tr>           
         {% endfor %}
     </table>

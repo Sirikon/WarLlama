@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.core.validators import MinValueValidator
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 import datetime
 
@@ -42,4 +43,16 @@ class Session (models.Model):
     confirmed_attendants = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
-        return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') + " - " + str(self.confirmed_attendants.count()) + " confirmed attending." 
+        return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') + " - " + str(self.confirmed_attendants.count()) + " confirmed attending."
+
+    def hasFinished():
+        now = timezone.now()
+        return now >= self.end_date
+    
+    def isOnConfirmationPeriod():
+        now = timezone.now()
+        return self.start_date - self.activity.confirmation_period <= now <= self.end_date 
+
+    def canUserJoin(user):
+        return self.activity.author != user and user in self.activity.attendants.all and user not in self.confirmed_attendants.all
+    

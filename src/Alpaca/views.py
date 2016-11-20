@@ -16,10 +16,27 @@ def index(request):
 
 def activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
+    user = request.user
+    authenticated = user.is_authenticated()
+
+    if request.method == "POST" and authenticated:
+        if "al_join" in request.POST:
+            activity.attendants.add(user)
+            activity.save()
+            
+        if  "al_confirm" in request.POST:
+            if user in activity.attendants:
+                session = get_object_or_404(Session, request.POST.get("session_id"))
+                if activity == session.activity and session.isOnConfirmationPeriod():
+                    session.confirmed_attendants.add(user)
+                    session.save()
+
     session_list = activity.session_set.order_by('-start_date')
-    context = { 'user': request.user,
+# authenticated and s.isOnConfirmationPeriod() and s.canUserJoin(user)
+    context = { 'user': user,
                 'activity': activity,
                 'session_list': session_list }
+
     return render(request, 'Alpaca/activity.html', context)
 
 
