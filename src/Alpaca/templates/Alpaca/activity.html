@@ -45,8 +45,8 @@
             <td><p>{{ session.confirmed_attendants.count }}</p></td>
             <td>
                 {% if user.is_authenticated %}
-                    {% if sessions.isOnConfirmationPeriod %}
-                        {% if session.canUserJoin %}
+                    {% if sessions.is_on_confirmation_period %}
+                        {% if session.can_user_join %}
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="session_id" value="{{ session.id }}"/>
@@ -55,7 +55,7 @@
                         {% else %}
                             <p>See you there ^^</p>
                         {% endif %}
-                    {% elif not session.hasFinished %}
+                    {% elif not session.has_finished %}
                         <p>Coming soon!</p>
                     {% endif %}
                 {% else %}

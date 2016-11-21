@@ -29,7 +29,7 @@ class Activity (models.Model):
     age_minimum = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.pub_date.strftime('(%Y-%m-%d, %H:%M)') + " " + self.title + " - Author: " + self.author.username + " - Attendants #" + str(self.attendants.count())
+        return self.pub_date.strftime('(%Y-%m-%d, %H:%M)') + " " + self.title + " - Author: " + self.author.username
 
 
 class Session (models.Model):
@@ -43,16 +43,17 @@ class Session (models.Model):
     confirmed_attendants = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
-        return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') + " - " + str(self.confirmed_attendants.count()) + " confirmed attending."
+        return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') 
 
-    def hasFinished():
+    def has_finished(self):
         now = timezone.now()
-        return now >= self.end_date
+        return now >= self.start_date + datetime.timedelta(minutes=30)
     
-    def isOnConfirmationPeriod():
+    def is_on_confirmation_period(self):
         now = timezone.now()
-        return self.start_date - self.activity.confirmation_period <= now <= self.end_date 
+        period_days = datetime.timedelta(days=self.activity.confirmation_period)
+        return self.start_date - period_days <= now and not self.has_finished()
 
-    def canUserJoin(user):
-        return self.activity.author != user and user in self.activity.attendants.all and user not in self.confirmed_attendants.all
+    def can_user_join(self, user):
+        return self.activity.author != user and self.activity.attendants.filter(id=user.id).exists() and not self.confirmed_attendants.filter(id=user.id).exists()
     
