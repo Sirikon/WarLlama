@@ -1,42 +1,36 @@
+{% extends './_layout_activity.html' %}
 
-{% extends './_layout.html' %}
-
-{% block title %}{{ activity.title }} by {{ activity.author.username }}{% endblock %}
+<!--{% block title %}{{ activity.title }} by {{ activity.author.username }}{% endblock %}-->
 
 {% block content %}
-    <div class="al-rich-content">
-        <p>Published: {{ activity.pub_date }}</p>
-        <h3>Description</h3>           
-        <p>{{ activity.description }}</p>
-       
-        <h3>Attending</h3>
-        <p>
-        {% for att in activity.attendants.all %}
-            {{ att.username }} 
-        {% endfor %}
-        </p>
 
-        <a href="{% url 'alpaca:login' activity.id %}">Join!</a>  
+    {% include "./partials/activity-header.html" %}
+
+    {% include "./partials/activity-description.html" %}
+
+    {% include "./partials/activity-attendants.html" %}
+
+    <div class="al-content">
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Confirmed Attendants</th>
+            </tr>
+            {% for session in session_list %}
+                <tr>
+                    <td><p>{{ session.description }}</p></td>
+                    <td><p>{{ session.start_date }}</p></td>
+                    <td><p>{{ session.end_date }}</p></td>
+                    <td>
+                        {% for confirmed_user in session.confirmed_attendants.all %}
+                            <p>{{ confirmed_user.username }}</p>
+                        {% endfor %}                
+                    </td>
+                </tr>           
+            {% endfor %}
+        </table>
     </div>
 
-    <table>
-        <tr>
-            <th>Description</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Confirmed Attendants</th>
-        </tr>
-        {% for session in session_list %}
-            <tr>
-                <td><p>{{ session.description }}</p></td>
-                <td><p>{{ session.start_date }}</p></td>
-                <td><p>{{ session.end_date }}</p></td>
-                <td>
-                    {% for confirmed_user in session.confirmed_attendants.all %}
-                        <p>{{ confirmed_user.username }}</p>
-                    {% endfor %}                
-                </td>
-            </tr>           
-        {% endfor %}
-    </table>
 {% endblock %}

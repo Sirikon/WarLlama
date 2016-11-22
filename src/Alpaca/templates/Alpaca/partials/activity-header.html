@@ -1,0 +1,14 @@
+<div class="al-activity-header">
+    <div class="al-activity-header-section">
+        <h1 class="al-activity-header-title">{{ activity.title }} <small>by {{ activity.author.username }}</small></h1>
+        <p class="al-activity-header-date">
+            <i class="fa fa-calendar"></i>
+            Next Session <b>{{ session_list.first.start_date }}</b>
+        </p>
+    </div>
+    <div class="al-activity-header-section al-activity-header-section-right">
+        <a href="{% url 'alpaca:login' activity.id %}">
+            <button class="al-activity-header-join al-btn-important">Join!</button>
+        </a>
+    </div>
+</div>

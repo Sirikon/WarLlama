@@ -1,11 +1,11 @@
-{% extends './_layout.html' %}
-
-{% block title %}Sign up!{% endblock %}
+{% extends './_layout_floating_box.html' %}
 
 {% block content %}
-    <form method="POST">
+    <form method="POST" class="al-floating-box-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Submit!"/>
+        <div class="al-form-submit-big-wrapper">
+            <input class="al-form-submit-big al-btn-important" type="submit" value="Sign Up"/>
+        </div>
     </form>
 {% endblock %}

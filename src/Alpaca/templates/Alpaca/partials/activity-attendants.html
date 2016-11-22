@@ -1,0 +1,6 @@
+<div class="al-content al-activity-attendants">
+    <small>Attendants:</small>
+    {% for att in activity.attendants.all %}
+        <span class="al-activity-attendant">{{ att.username }}</span>
+    {% endfor %}
+</div>

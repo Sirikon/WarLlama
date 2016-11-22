@@ -1,9 +1,65 @@
+* {
+    outline: none !important;
+}
+
 html, body {
     background-color: whitesmoke;
     margin: 0;
     padding: 0;
-    font-family: sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
 }
+
+/* FORMS */
+label {
+    font-size: 0.9em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid #eaeaea;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.4em;
+    border-radius: 3px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #e67e22;
+}
+
+input[type="submit"],
+button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #e67e22;
+    border: none;
+    padding: 0.4em 0.8em;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"].al-btn-important,
+button.al-btn-important {
+    display: inline-block;
+    padding: 0 1.1em 0.1em 1.1em !important;
+    height: 2.2em;
+    border-radius: 1.1em;
+}
+
+span.helptext {
+    font-size: 0.7em;
+    color: #b1b1b1;
+}
+
+/* Custom */
 
 .al-header {
     background-color: #e67e22;
@@ -11,12 +67,13 @@ html, body {
 
 .al-header-content {
     height: 60px;
-    width: 1120px;
+    max-width: 1120px;
     margin: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    padding: 0 20px;
 }
 
 .al-header-title {
@@ -25,6 +82,7 @@ html, body {
     margin-top: .23em;
     color: white;
     font-size: 2.5em;
+    line-height: 1em;
 }
 
 .al-header-title > a {
@@ -35,26 +93,26 @@ html, body {
 .al-header-menu {
     width: 100%;
     margin: 0;
-    margin-top: .23em;
     text-align: right;
 }
 
 .al-header-menu > a {
     padding-left: .75em;
-    font-family: 'Ravi Prakash', cursive;
-    font-size: 1.5em;
+    font-family: 'Open Sans', sans-serif;
     color: white;
     text-decoration: none;
 }
 
 .al-content-wrapper {
-    width: 1120px;
+    max-width: 1120px;
     margin: auto;
     margin-top: 15px;
+    padding: 0 20px;
 }
 
 .al-content {
     background-color: white;
+    border-radius: 3px;
 }
 
 .al-rich-content {
@@ -75,4 +133,103 @@ table td {
 
 table th {
     background-color: lightgrey;
+}
+
+.al-floating-box {
+    max-width: 400px;
+    margin: auto;
+    margin: 40px auto;
+}
+
+.al-floating-box-title {
+    text-align: center;
+    font-family: 'Ravi Prakash', cursive;
+    color: #e67e22;
+    font-size: 2em;
+    margin: 0;
+    line-height: 1em;
+}
+
+.al-floating-box-title h1 {
+    margin: 15px;
+}
+
+.al-floating-box-content {
+    background-color: white;
+    padding: 1px 15px 15px 15px;
+    box-shadow: 0px 3px 40px rgba(0,0,0,0.03);
+    border-radius: 3px;
+}
+
+.al-floating-box-form p label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.al-floating-box-form input {
+    font-size: 1.2em;
+}
+
+.al-form-submit-big-wrapper {
+    text-align: center;
+    margin-bottom: -15px;
+    margin-top: -15px;
+}
+
+.al-form-submit-big {
+    transform: translate(0px, 50%);
+}
+
+.al-activity-header {
+    margin: 15px 0 25px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.al-activity-header-section-right {
+    text-align: right;
+}
+
+.al-activity-header small {
+    font-size: .5em;
+    font-weight: 200;
+}
+
+.al-activity-header-title {
+    font-size: 2.5em;
+    margin: 0 0 10px;
+}
+
+.al-activity-header-date {
+    margin: 0;
+    color: grey;
+    font-size: 0.9em;
+}
+
+.al-activity-header-date b {
+    color: black;
+    font-weight: bold;
+}
+
+.al-activity-header-join {
+    font-size: 1.5em;
+}
+
+.al-activity-description {
+    margin: 25px 0;
+    padding: 15px;
+}
+
+.al-activity-attendants {
+    margin: 25px 0;
+    padding: 15px;
+}
+
+.al-activity-attendant {
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: whitesmoke;
+    border-radius: 3px;
 }
