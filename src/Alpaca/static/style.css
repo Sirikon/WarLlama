@@ -32,6 +32,21 @@ html, body {
     color: inherit;
 }
 
+.al-header-menu {
+    width: 100%;
+    margin: 0;
+    margin-top: .23em;
+    text-align: right;
+}
+
+.al-header-menu > a {
+    padding-left: .75em;
+    font-family: 'Ravi Prakash', cursive;
+    font-size: 1.5em;
+    color: white;
+    text-decoration: none;
+}
+
 .al-content-wrapper {
     width: 1120px;
     margin: auto;

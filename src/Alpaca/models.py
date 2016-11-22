@@ -40,8 +40,9 @@ class Session (models.Model):
     start_date = models.DateTimeField('start date')
     end_date = models.DateTimeField('end date')
 
-    place = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
     confirmed_attendants = models.ManyToManyField(User, blank=True)
+    emails_are_sent = models.BooleanField(default=False)
 
     def __str__(self):
         return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') 

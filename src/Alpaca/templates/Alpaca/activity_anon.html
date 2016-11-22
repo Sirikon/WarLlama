@@ -25,7 +25,6 @@
             <th>Start</th>
             <th>End</th>
             <th>Confirmed Attendants</th>
-            <th>Are you coming?</th>
         </tr>
         {% for session in session_list %}
             <tr>
@@ -36,13 +35,6 @@
                     {% for confirmed_user in session.confirmed_attendants.all %}
                         <p>{{ confirmed_user.username }}</p>
                     {% endfor %}                
-                </td>
-                <td>
-                    {% if session.has_finished %}
-                        <p>Closed & Finished</p>
-                    {% else %}
-                        <p>Join the activity to come!</p>            
-                    {% endif %}
                 </td>
             </tr>           
         {% endfor %}

@@ -8,10 +8,12 @@ urlpatterns = [
     url(r'^signup/(?P<activity_id>[0-9]*)$', views.signup, name='signup'),
     url(r'^login/(?P<activity_id>[0-9]*)$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
+    url(r'^newactivity/$', views.new_activity, name='new_activity'),
     url(r'^activity/(?P<activity_id>[0-9]+)$', views.activity, name='activity'),
     url(r'^activity/join/(?P<activity_id>[0-9]+)$', views.join_activity, name='join_activity'),
     url(r'^activity/leave/(?P<activity_id>[0-9]+)$', views.leave_activity, name='leave_activity'),
-    url(r'^activity/confirm/(?P<activity_id>[0-9]+)$', views.confirm_session, name='confirm_session'),
     url(r'^activity/kick/(?P<activity_id>[0-9]+)$', views.kick_attendant, name='kick_attendant'),
-    url(r'^activity/waitlist/(?P<activity_id>[0-9]+)$', views.waitlist, name='waitlist')
+    url(r'^activity/waitlist/(?P<activity_id>[0-9]+)$', views.waitlist, name='waitlist'),
+    url(r'^activity/(?P<activity_id>[0-9]+)/newsession$', views.new_session, name='new_session'),
+    url(r'^activity/(?P<activity_id>[0-9]+)/confirm/$', views.confirm_session, name='confirm_session'),
 ]

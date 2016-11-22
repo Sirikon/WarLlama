@@ -3,9 +3,12 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 from .forms import *
 from .models import *
+
+import datetime
 
 def index(request):
     activity_list = Activity.objects.order_by('-pub_date')
@@ -13,7 +16,7 @@ def index(request):
                 'activity_list': activity_list }
     return render(request, 'Alpaca/index.html', context)
 
-## AUTHENTICATION
+## -- AUTHENTICATION -- ##
 def signup(request, activity_id):
     if request.user.is_authenticated():
         if activity_id == "":
@@ -69,7 +72,28 @@ def logout(request):
     return HttpResponseRedirect(reverse('alpaca:index'))
     
 
-## ACTIVITIES
+## -- ACTIVITIES -- ##
+def new_activity(request):
+    user = request.user
+    if not user.is_authenticated():
+        return  HttpResponseRedirect(reverse('alpaca:index'))
+    
+    if request.method == "POST":
+        form = NewActivityForm(data=request.POST)
+        if form.is_valid():
+            activity = form.save(commit=False)    
+            activity.pub_date = timezone.now()
+            activity.author = user
+            activity.save()    
+            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
+        else:
+            context = { 'form': form }
+            return render(request, 'Alpaca/new_activity.html', context)
+
+    else:
+        context = {'form': NewActivityForm()}
+        return render(request, 'Alpaca/new_activity.html', context)
+
 def activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
     user = request.user
@@ -84,7 +108,7 @@ def activity(request, activity_id):
         else:
             return render(request, 'Alpaca/activity_user.html', context)
     else:        
-        return render(request, 'Alpaca/activity_anonymous.html', context)
+        return render(request, 'Alpaca/activity_anon.html', context)
 
 
 def join_activity(request, activity_id):
@@ -97,6 +121,7 @@ def join_activity(request, activity_id):
         else:
             activity.pending_attendants.add(user)
         activity.save()
+        # TO-DO --> Send "User has join your activity" email to activity's author
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -112,20 +137,7 @@ def leave_activity(request, activity_id):
             if not session.has_finished():
                 session.confirmed_attendants.remove(user)
                 session.save()
-
-    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
-
-
-def confirm_session(request, activity_id):
-    activity = get_object_or_404(Activity, pk=activity_id)
-    user = request.user
-
-    if request.method == "POST":
-        if user in activity.attendants.all():
-            session = get_object_or_404(Session, id=request.POST.get("session_id"))
-            if activity == session.activity and session.is_on_confirmation_period():
-                session.confirmed_attendants.add(user)
-                session.save()
+                # TO-DO --> Send "User has left your activity" email to activity's author
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -141,6 +153,7 @@ def kick_attendant(request, activity_id):
             if not session.has_finished():
                 session.confirmed_attendants.remove(selected_user)
                 session.save()
+                # TO-DO --> Send "You have been kicked from activity" email to kicked user
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -157,5 +170,46 @@ def waitlist(request, activity_id):
         elif "deny_participant" in request.POST:
             activity.pending_attendants.remove(selected_user)            
         activity.save()
+        # TO-DO --> Send "You have pending requests" email to activity's author
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+
+
+## -- SESSIONS -- ##
+def new_session(request, activity_id):
+    activity = get_object_or_404(Activity, id=activity_id)
+    user = request.user
+    if not user.is_authenticated() or user != activity.author:
+        return  HttpResponseRedirect(reverse('alpaca:index'))
+    
+    if request.method == "POST":
+        form = NewSessionForm(data=request.POST)
+        if form.is_valid():
+            session = form.save(commit=False)    
+            session.activity = activity
+            session.save()    
+            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
+        else:
+            context = { 'form': form }
+            return render(request, 'Alpaca/new_session.html', context)
+
+    else:
+        context = {'form': NewSessionForm()}
+        return render(request, 'Alpaca/new_session.html', context)
+
+
+def confirm_session(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+    user = request.user
+
+    if request.method == "POST":
+        if user in activity.attendants.all():
+            session = get_object_or_404(Session, id=request.POST.get("session_id"))
+            if activity == session.activity and session.is_on_confirmation_period():
+                session.confirmed_attendants.add(user)
+                session.save()
+                # TO-DO --> Send "User has confirmed assistance" email to activity's author
+
+    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+
+

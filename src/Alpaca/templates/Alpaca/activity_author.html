@@ -8,10 +8,21 @@
         <p>Published: {{ activity.pub_date }}</p>
         <h3>Description</h3>           
         <p>{{ activity.description }}</p>
+
+        <h3>Settings</h3>
+        <p>Auto-registration is
+        {% if activity.auto_register %}
+            activated.
+        {% else %}
+            not activated.
+        {% endif %}    
+        </p>
+        <p>Confirmation period starts {{activity.confirmation_period}} days before the session's start date.</p>
+        <p>The minimum age to join this activity is {{activity.age_minimum}} years-old.</p>
        
         <h3>Attending</h3>   
         {% if activity.attendants.count <= 0 %}
-            <p>There are no user attending your activity, except yourself.</p>
+            <p>There are no users attending your activity, except yourself.</p>
         {% else %}    
             <form action="kick/{{activity.id}}" method="POST">
                 {% csrf_token %}
@@ -44,13 +55,15 @@
         {% endif %}  
     </div>
 
+    <a href="{% url 'alpaca:new_session' activity.id %}">Add session</a>
+    <a href="{% url 'alpaca:new_session' activity.id %}">Edit activity</a>
     <table>
         <tr>
             <th>Description</th>
             <th>Start</th>
             <th>End</th>
             <th>Confirmed Attendants</th>
-            <th>Are you coming?</th>
+            <th>State</th>
         </tr>
         {% for session in session_list %}
             <tr>
@@ -65,8 +78,10 @@
                 <td>
                     {% if session.has_finished %}
                         <p>Closed & Finished</p>
+                    {% elif session.is_on_confirmation_period %}
+                        <p>Open for confirmation</p>
                     {% else %}
-                        <p>Good luck! :)</p>
+                        <p>Not ready yet</p>
                     {% endif %}
                 </td>
             </tr>           

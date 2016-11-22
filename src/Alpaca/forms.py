@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.core.validators import MinValueValidator
 
-from .models import Profile
+from .models import *
 
 
 class ProfileCreationForm(UserCreationForm):
@@ -24,3 +25,25 @@ class ProfileCreationForm(UserCreationForm):
             profile = Profile(user=user)
             profile.save()
         return user
+
+class NewActivityForm(forms.ModelForm):
+    title = forms.CharField(required=True, max_length=200)
+    description = forms.CharField(required=True, max_length=500)
+    auto_register = forms.BooleanField(required=False)
+    confirmation_period = forms.IntegerField(required=True, validators=[MinValueValidator(3)])
+    age_minimum = forms.IntegerField(required=True)
+    
+    class Meta:
+        model = Activity
+        fields = ("title", "description", "auto_register", "confirmation_period", "age_minimum")
+
+
+class NewSessionForm(forms.ModelForm):
+    description = forms.CharField(required=True, max_length=500)
+    start_date = forms.DateTimeField(required=True)
+    end_date = forms.DateTimeField(required=True)
+    location = forms.CharField(required=True, max_length=100)
+    
+    class Meta:
+        model = Session
+        fields = ("description", "start_date", "end_date", "location")

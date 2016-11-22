@@ -59,7 +59,7 @@
                             {% if user in session.confirmed_attendants.all %}
                                 <p>See you there ^^</p>
                             {% else %}
-                                <form action="confirm/{{activity.id}}" method="POST">
+                                <form action="{{activity.id}}/confirm/" method="POST">
                                     {% csrf_token %}
                                     <input type="hidden" name="session_id" value="{{ session.id }}"/>
                                     <input type="submit" name="confirm_session" value="I'm going!!"/>
