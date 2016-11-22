@@ -22,6 +22,7 @@ class Activity (models.Model):
    
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
     attendants = models.ManyToManyField(User, related_name="attending_activities", blank=True)
+    pending_attendants = models.ManyToManyField(User, related_name="waiting_activities", blank=True)
 
     # Settings
     auto_register = models.BooleanField(default=False)

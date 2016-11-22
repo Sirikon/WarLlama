@@ -7,38 +7,13 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 
-# Create your views here.
 def index(request):
     activity_list = Activity.objects.order_by('-pub_date')
     context = { 'user': request.user,
                 'activity_list': activity_list }
     return render(request, 'Alpaca/index.html', context)
 
-def activity(request, activity_id):
-    activity = get_object_or_404(Activity, pk=activity_id)
-    user = request.user
-    authenticated = user.is_authenticated()
-
-    if request.method == "POST" and authenticated:
-        if "al_join" in request.POST:
-            activity.attendants.add(user)
-            activity.save()
-            
-        if  "al_confirm" in request.POST:
-            if user in activity.attendants.all():
-                session = get_object_or_404(Session, id=request.POST.get("session_id"))
-                if activity == session.activity and session.is_on_confirmation_period():
-                    session.confirmed_attendants.add(user)
-                    session.save()
-
-    session_list = activity.session_set.order_by('start_date')
-    context = { 'user': user,
-                'activity': activity,
-                'session_list': session_list}
-
-    return render(request, 'Alpaca/activity.html', context)
-
-
+## AUTHENTICATION
 def signup(request, activity_id):
     if request.user.is_authenticated():
         if activity_id == "":
@@ -89,6 +64,98 @@ def login(request, activity_id):
     return render(request, 'Alpaca/login.html', context)
 
 def logout(request):
+
     auth.logout(request)
     return HttpResponseRedirect(reverse('alpaca:index'))
     
+
+## ACTIVITIES
+def activity(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+    user = request.user
+    session_list = activity.session_set.order_by('start_date')
+    context = { 'user': user,
+                'activity': activity,
+                'session_list': session_list}
+
+    if user.is_authenticated:
+        if user == activity.author:
+            return render(request, 'Alpaca/activity_author.html', context)
+        else:
+            return render(request, 'Alpaca/activity_user.html', context)
+    else:        
+        return render(request, 'Alpaca/activity_anonymous.html', context)
+
+
+def join_activity(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+    user = request.user
+
+    if request.method == "POST":
+        if activity.auto_register:
+            activity.attendants.add(user)
+        else:
+            activity.pending_attendants.add(user)
+        activity.save()
+
+    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+
+
+def leave_activity(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+    user = request.user
+
+    if request.method == "POST":
+        activity.attendants.remove(user)
+        activity.save()
+        for session in activity.session_set.all():
+            if not session.has_finished():
+                session.confirmed_attendants.remove(user)
+                session.save()
+
+    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+
+
+def confirm_session(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+    user = request.user
+
+    if request.method == "POST":
+        if user in activity.attendants.all():
+            session = get_object_or_404(Session, id=request.POST.get("session_id"))
+            if activity == session.activity and session.is_on_confirmation_period():
+                session.confirmed_attendants.add(user)
+                session.save()
+
+    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+
+
+def kick_attendant(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    if request.method == "POST":
+        selected_user = get_object_or_404(User, id=request.POST.get("attending"))
+        activity.attendants.remove(selected_user)
+        activity.save()
+        for session in activity.session_set.all():
+            if not session.has_finished():
+                session.confirmed_attendants.remove(selected_user)
+                session.save()
+
+    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+
+
+def waitlist(request, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+
+    if request.method == "POST":
+        selected_user = get_object_or_404(User, id=request.POST.get("waiting"))
+        if "accept_participant" in request.POST:
+            activity.attendants.add(selected_user)
+            activity.pending_attendants.remove(selected_user)
+
+        elif "deny_participant" in request.POST:
+            activity.pending_attendants.remove(selected_user)            
+        activity.save()
+
+    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
