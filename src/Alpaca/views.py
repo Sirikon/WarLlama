@@ -25,17 +25,16 @@ def activity(request, activity_id):
             activity.save()
             
         if  "al_confirm" in request.POST:
-            if user in activity.attendants:
-                session = get_object_or_404(Session, request.POST.get("session_id"))
+            if user in activity.attendants.all():
+                session = get_object_or_404(Session, id=request.POST.get("session_id"))
                 if activity == session.activity and session.is_on_confirmation_period():
                     session.confirmed_attendants.add(user)
                     session.save()
 
-    session_list = activity.session_set.order_by('-start_date')
-# authenticated and s.is_on_confirmation_period() and s.canUserJoin(user)
+    session_list = activity.session_set.order_by('start_date')
     context = { 'user': user,
                 'activity': activity,
-                'session_list': session_list }
+                'session_list': session_list}
 
     return render(request, 'Alpaca/activity.html', context)
 

@@ -1,3 +1,4 @@
+
 {% extends './_layout.html' %}
 
 {% block title %}{{ activity.title }} by {{ activity.author.username }}{% endblock %}
@@ -44,9 +45,9 @@
             <td><p>{{ session.end_date }}</p></td>
             <td><p>{{ session.confirmed_attendants.count }}</p></td>
             <td>
-                {% if user.is_authenticated %}
-                    {% if sessions.is_on_confirmation_period %}
-                        {% if session.can_user_join %}
+                {% if user.is_authenticated and user in activity.attendants.all %}
+                    {% if session.is_on_confirmation_period %}
+                        {% if user not in session.confirmed_attendants.all %}
                             <form method="POST">
                                 {% csrf_token %}
                                 <input type="hidden" name="session_id" value="{{ session.id }}"/>
@@ -57,6 +58,8 @@
                         {% endif %}
                     {% elif not session.has_finished %}
                         <p>Coming soon!</p>
+                    {% else %}
+                        <p>Closed & Finished</p>
                     {% endif %}
                 {% else %}
                     <p>Join the activity to come!</p>
