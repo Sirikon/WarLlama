@@ -43,7 +43,11 @@
             <td><p>{{ session.description }}</p></td>
             <td><p>{{ session.start_date }}</p></td>
             <td><p>{{ session.end_date }}</p></td>
-            <td><p>{{ session.confirmed_attendants.count }}</p></td>
+            <td>
+                {% for confirmed_user in session.confirmed_attendants.all %}
+                <p>{{ confirmed_user.username }}</p>
+                {% endfor %}                
+            </td>
             <td>
                 {% if user.is_authenticated and user in activity.attendants.all %}
                     {% if session.is_on_confirmation_period %}
