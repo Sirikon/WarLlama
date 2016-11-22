@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^activity/join/(?P<activity_id>[0-9]+)$', views.join_activity, name='join_activity'),
     url(r'^activity/leave/(?P<activity_id>[0-9]+)$', views.leave_activity, name='leave_activity'),
     url(r'^activity/kick/(?P<activity_id>[0-9]+)$', views.kick_attendant, name='kick_attendant'),
-    url(r'^activity/waitlist/(?P<activity_id>[0-9]+)$', views.waitlist, name='waitlist'),
+    url(r'^activity/pending/(?P<activity_id>[0-9]+)$', views.pending_requests, name='pending_requests'),
     url(r'^activity/(?P<activity_id>[0-9]+)/newsession$', views.new_session, name='new_session'),
     url(r'^activity/(?P<activity_id>[0-9]+)/confirm/$', views.confirm_session, name='confirm_session'),
 ]

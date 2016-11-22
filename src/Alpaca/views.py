@@ -158,16 +158,16 @@ def kick_attendant(request, activity_id):
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
 
-def waitlist(request, activity_id):
+def pending_requests(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":
-        selected_user = get_object_or_404(User, id=request.POST.get("waiting"))
-        if "accept_participant" in request.POST:
+        selected_user = get_object_or_404(User, id=request.POST.get("request"))
+        if "accept_request" in request.POST:
             activity.attendants.add(selected_user)
             activity.pending_attendants.remove(selected_user)
 
-        elif "deny_participant" in request.POST:
+        elif "deny_request" in request.POST:
             activity.pending_attendants.remove(selected_user)            
         activity.save()
         # TO-DO --> Send "You have pending requests" email to activity's author

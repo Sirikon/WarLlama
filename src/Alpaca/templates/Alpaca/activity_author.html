@@ -1,90 +1,54 @@
+{% extends './_layout_activity.html' %}
 
-{% extends './_layout.html' %}
-
-{% block title %}{{ activity.title }} - You are the author of this activity{% endblock %}
+<!--{% block title %}{{ activity.title }} - You are the author of this activity{% endblock %}-->
 
 {% block content %}
-    <div class="al-rich-content">
-        <p>Published: {{ activity.pub_date }}</p>
-        <h3>Description</h3>           
-        <p>{{ activity.description }}</p>
 
-        <h3>Settings</h3>
-        <p>Auto-registration is
-        {% if activity.auto_register %}
-            activated.
-        {% else %}
-            not activated.
-        {% endif %}    
-        </p>
-        <p>Confirmation period starts {{activity.confirmation_period}} days before the session's start date.</p>
-        <p>The minimum age to join this activity is {{activity.age_minimum}} years-old.</p>
-       
-        <h3>Attending</h3>   
-        {% if activity.attendants.count <= 0 %}
-            <p>There are no users attending your activity, except yourself.</p>
-        {% else %}    
-            <form action="kick/{{activity.id}}" method="POST">
-                {% csrf_token %}
-                <select id="attending_users" name="attending">
-                {% for att in activity.attendants.all %}
-                    <option value="{{att.id}}">{{ att.username }}</option>
-                {% endfor %}
-                </select>
-                <input type="submit" name="kick_participant" value="Kick out"/>
-            </form>
-        {% endif %}
-        
-        {% if not activity.auto_register %}
-            <h3>Wait List</h3>  
-            {% if activity.pending_attendants.count <= 0 %}
-                <p>There are no pending requests to join your activity.</p>
-            {% else %}
-                <p>These are the pending requests to join your activity:</p>
-                <form action="waitlist/{{activity.id}}" method="POST">
-                    {% csrf_token %}
-                    <select id="waitlist_users" name="waiting">
-                    {% for att in activity.pending_attendants.all %}
-                        <option value="{{att.id}}">{{ att.username }}</option>
-                    {% endfor %}
-                    </select>
-                    <input type="submit" name="accept_participant" value="Accept"/>
-                    <input type="submit" name="deny_participant" value="Deny"/>
-                </form>  
-            {% endif %}
-        {% endif %}  
-    </div>
+    {% include "./partials/activity-header.html" %}
 
-    <a href="{% url 'alpaca:new_session' activity.id %}">Add session</a>
-    <a href="{% url 'alpaca:new_session' activity.id %}">Edit activity</a>
-    <table>
-        <tr>
-            <th>Description</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Confirmed Attendants</th>
-            <th>State</th>
-        </tr>
-        {% for session in session_list %}
+    {% include "./partials/activity-description.html" %}
+
+    {% include "./partials/activity-attendants.html" %}
+
+    {% include "./partials/activity-settings.html" %}
+    
+    {% if not activity.auto_register %}
+        {% include "./partials/activity-pending-requests.html" %}
+    {% endif %} 
+
+    <div class="al-content">
+        <a href="{% url 'alpaca:new_session' activity.id %}">Add session</a>
+        <a href="{% url 'alpaca:new_session' activity.id %}">Edit activity</a>
+        <table>
             <tr>
-                <td><p>{{ session.description }}</p></td>
-                <td><p>{{ session.start_date }}</p></td>
-                <td><p>{{ session.end_date }}</p></td>
-                <td>
-                    {% for confirmed_user in session.confirmed_attendants.all %}
-                        <p>{{ confirmed_user.username }}</p>
-                    {% endfor %}                
-                </td>
-                <td>
-                    {% if session.has_finished %}
-                        <p>Closed & Finished</p>
-                    {% elif session.is_on_confirmation_period %}
-                        <p>Open for confirmation</p>
-                    {% else %}
-                        <p>Not ready yet</p>
-                    {% endif %}
-                </td>
-            </tr>           
-        {% endfor %}
-    </table>
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Confirmed Attendants</th>
+                <th>State</th>
+            </tr>
+            {% for session in session_list %}
+                <tr>
+                    <td><p>{{ session.description }}</p></td>
+                    <td><p>{{ session.start_date }}</p></td>
+                    <td><p>{{ session.end_date }}</p></td>
+                    <td>
+                        {% for confirmed_user in session.confirmed_attendants.all %}
+                            <p>{{ confirmed_user.username }}</p>
+                        {% endfor %}                
+                    </td>
+                    <td>
+                        {% if session.has_finished %}
+                            <p>Closed & Finished</p>
+                        {% elif session.is_on_confirmation_period %}
+                            <p>Open for confirmation</p>
+                        {% else %}
+                            <p>Not ready yet</p>
+                        {% endif %}
+                    </td>
+                </tr>           
+            {% endfor %}
+        </table>
+    </div>
+    
 {% endblock %}

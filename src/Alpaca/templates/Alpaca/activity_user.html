@@ -1,76 +1,58 @@
+{% extends './_layout_activity.html' %}
 
-{% extends './_layout.html' %}
-
-{% block title %}{{ activity.title }} by {{ activity.author.username }}{% endblock %}
+<!--{% block title %}{{ activity.title }} by {{ activity.author.username }}{% endblock %}-->
 
 {% block content %}
-    <div class="al-rich-content">
-        <p>Published: {{ activity.pub_date }}</p>
-        <h3>Description</h3>           
-        <p>{{ activity.description }}</p>
-       
-        <h3>Attending</h3>
-        <p>
-        {% for att in activity.attendants.all %}
-            {{ att.username }} 
-        {% endfor %}
-        </p>
 
-        {% if user in activity.attendants.all %}
-            <form action="leave/{{activity.id}}" method="POST">
-                {% csrf_token %}
-                <input type="submit" name="join_activity" value="Leave activity"/>
-            </form>
-        {% elif user in activity.pending_attendants.all %}
-            <p>The author of this activity has received your request to join!</p>
-        {% else %}
-            <form action="join/{{activity.id}}" method="POST">
-                {% csrf_token %}
-                <input type="submit" name="join_activity" value="Join activity!"/>
-            </form>
-        {% endif%}
-    </div>
+    {% include "./partials/activity-header.html" %}
 
-    <table>
-        <tr>
-            <th>Description</th>
-            <th>Start</th>
-            <th>End</th>
-            <th>Confirmed Attendants</th>
-            <th>Are you coming?</th>
-        </tr>
-        {% for session in session_list %}
+    {% include "./partials/activity-description.html" %}
+
+    {% include "./partials/activity-attendants.html" %}
+
+    <div class="al-content">
+        <table>
             <tr>
-                <td><p>{{ session.description }}</p></td>
-                <td><p>{{ session.start_date }}</p></td>
-                <td><p>{{ session.end_date }}</p></td>
-                <td>
-                    {% for confirmed_user in session.confirmed_attendants.all %}
-                        <p>{{ confirmed_user.username }}</p>
-                    {% endfor %}                
-                </td>
-                <td>
-                    {% if session.has_finished %}
-                        <p>Closed & Finished</p>
-                    {% else %}
-                        {% if user not in activity.attendants.all %}
-                            <p>Join the activity to come!</p>
-                        {% elif session.is_on_confirmation_period %}
-                            {% if user in session.confirmed_attendants.all %}
-                                <p>See you there ^^</p>
-                            {% else %}
-                                <form action="{{activity.id}}/confirm/" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="session_id" value="{{ session.id }}"/>
-                                    <input type="submit" name="confirm_session" value="I'm going!!"/>
-                                </form>
-                            {% endif %}
+                <th>Description</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Confirmed Attendants</th>
+                <th>Are you coming?</th>
+            </tr>
+            {% for session in session_list %}
+                <tr>
+                    <td><p>{{ session.description }}</p></td>
+                    <td><p>{{ session.start_date }}</p></td>
+                    <td><p>{{ session.end_date }}</p></td>
+                    <td>
+                        {% for confirmed_user in session.confirmed_attendants.all %}
+                            <p>{{ confirmed_user.username }}</p>
+                        {% endfor %}                
+                    </td>
+                    <td>
+                        {% if session.has_finished %}
+                            <p>Closed & Finished</p>
                         {% else %}
-                            <p>Coming soon...</p>
+                            {% if user not in activity.attendants.all %}
+                                <p>Join the activity to come!</p>
+                            {% elif session.is_on_confirmation_period %}
+                                {% if user in session.confirmed_attendants.all %}
+                                    <p>See you there ^^</p>
+                                {% else %}
+                                    <form action="{{activity.id}}/confirm/" method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="session_id" value="{{ session.id }}"/>
+                                        <input type="submit" name="confirm_session" value="I'm going!!"/>
+                                    </form>
+                                {% endif %}
+                            {% else %}
+                                <p>Coming soon...</p>
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
-                </td>
-            </tr>           
-        {% endfor %}
-    </table>
+                    </td>
+                </tr>           
+            {% endfor %}
+        </table>
+    </div>
+    
 {% endblock %}
