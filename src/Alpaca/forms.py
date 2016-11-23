@@ -28,10 +28,10 @@ class ProfileCreationForm(UserCreationForm):
 
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=200)
-    description = forms.CharField(required=True, max_length=500)
+    description = forms.CharField(required=True, max_length=500, widget=forms.Textarea)
     auto_register = forms.BooleanField(required=False)
-    confirmation_period = forms.IntegerField(required=True, validators=[MinValueValidator(3)])
-    age_minimum = forms.IntegerField(required=True)
+    confirmation_period = forms.IntegerField(required=True, validators=[MinValueValidator(3)], initial=3)
+    age_minimum = forms.IntegerField(required=True, initial=18)
     
     class Meta:
         model = Activity
@@ -39,7 +39,7 @@ class ActivityForm(forms.ModelForm):
 
 
 class SessionForm(forms.ModelForm):
-    description = forms.CharField(required=True, max_length=500)
+    description = forms.CharField(required=True, max_length=500, widget=forms.Textarea)
     start_date = forms.DateTimeField(required=True)
     end_date = forms.DateTimeField(required=True)
     location = forms.CharField(required=True, max_length=100)

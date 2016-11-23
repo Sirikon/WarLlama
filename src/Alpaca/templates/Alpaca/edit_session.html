@@ -3,9 +3,7 @@
 {% block title %}Edit a session{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save changes!"/>
-    </form>
+    {% with "Save changes" as submit_text %}
+        {% include "./partials/session-form.html" %}
+    {% endwith %}
 {% endblock %}

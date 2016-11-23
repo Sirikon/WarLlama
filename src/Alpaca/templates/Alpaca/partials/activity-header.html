@@ -1,10 +1,11 @@
 <div class="al-activity-header">
     <div class="al-activity-header-section">
         <h1 class="al-activity-header-title">{{ activity.title }} <small>by {{ activity.author.username }}</small></h1>
+        {% if session_list.first %}
         <p class="al-activity-header-date">
-            <i class="fa fa-calendar"></i>
-            Next Session <b>{{ session_list.first.start_date }}</b>
+            <i class="fa fa-calendar"></i> Next Session <b>{{ session_list.first.start_date }}</b>
         </p>
+        {% endif %}
     </div>
     <div class="al-activity-header-section al-activity-header-section-right">
         {% if not user.is_authenticated %}
@@ -26,7 +27,7 @@
         {% else %}
             <a href="{% url 'alpaca:edit_activity' activity.id %}">
                 <button class="al-activity-header-join al-btn-important">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Edit</span>
                 </button>
             </a>
         {% endif%}

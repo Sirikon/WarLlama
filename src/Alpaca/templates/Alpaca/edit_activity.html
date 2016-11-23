@@ -1,11 +1,9 @@
 {% extends './_layout.html' %}
 
-{% block title %}Edit your activity{% endblock %}
+{% block title %}Editing activity "{{ form.instance.title }}"{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save changes!"/>
-    </form>
+    {% with "Save changes" as submit_text %}
+        {% include "./partials/activity-form.html" %}
+    {% endwith %}
 {% endblock %}
