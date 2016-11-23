@@ -49,6 +49,7 @@ button {
     padding: 0.4em 0.8em;
     color: white;
     cursor: pointer;
+    border-radius: 3px;
 }
 
 input[type="submit"] *,
