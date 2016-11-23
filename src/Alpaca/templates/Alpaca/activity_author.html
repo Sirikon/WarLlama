@@ -18,18 +18,20 @@
 
     <div class="al-content">
         <a href="{% url 'alpaca:new_session' activity.id %}">Add session</a>
-        <a href="{% url 'alpaca:new_session' activity.id %}">Edit activity</a>
         <table>
             <tr>
                 <th>Description</th>
+                <th>Where</th>
                 <th>Start</th>
                 <th>End</th>
                 <th>Confirmed Attendants</th>
                 <th>State</th>
+                <th>Edit</th>
             </tr>
             {% for session in session_list %}
                 <tr>
                     <td><p>{{ session.description }}</p></td>
+                    <td><p>{{ session.location }}</p></td>
                     <td><p>{{ session.start_date }}</p></td>
                     <td><p>{{ session.end_date }}</p></td>
                     <td>
@@ -44,6 +46,13 @@
                             <p>Open for confirmation</p>
                         {% else %}
                             <p>Not ready yet</p>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not session.has_finished %}
+                            <a href="{% url 'alpaca:edit_session' activity.id session.id %}">
+                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            </a>
                         {% endif %}
                     </td>
                 </tr>           

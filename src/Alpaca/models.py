@@ -17,7 +17,7 @@ class Profile (models.Model):
 
 class Activity (models.Model):
     title = models.CharField(max_length=200)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=1000)
     pub_date = models.DateTimeField('publication date')
    
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
@@ -35,7 +35,7 @@ class Activity (models.Model):
 
 class Session (models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
-    description = models.CharField(max_length=500)
+    description = models.TextField(max_length=500)
 
     start_date = models.DateTimeField('start date')
     end_date = models.DateTimeField('end date')

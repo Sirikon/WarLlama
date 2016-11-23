@@ -23,6 +23,12 @@
                 {% csrf_token %}
                 <input class="al-activity-header-join al-btn-important" type="submit" name="join_activity" value="Join!"/>
             </form>
+        {% else %}
+            <a href="{% url 'alpaca:edit_activity' activity.id %}">
+                <button class="al-activity-header-join al-btn-important">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
+                </button>
+            </a>
         {% endif%}
     </div>
 </div>

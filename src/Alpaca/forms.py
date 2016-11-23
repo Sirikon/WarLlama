@@ -26,7 +26,7 @@ class ProfileCreationForm(UserCreationForm):
             profile.save()
         return user
 
-class NewActivityForm(forms.ModelForm):
+class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=200)
     description = forms.CharField(required=True, max_length=500)
     auto_register = forms.BooleanField(required=False)
@@ -38,7 +38,7 @@ class NewActivityForm(forms.ModelForm):
         fields = ("title", "description", "auto_register", "confirmation_period", "age_minimum")
 
 
-class NewSessionForm(forms.ModelForm):
+class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, max_length=500)
     start_date = forms.DateTimeField(required=True)
     end_date = forms.DateTimeField(required=True)

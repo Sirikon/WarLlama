@@ -79,7 +79,7 @@ def new_activity(request):
         return  HttpResponseRedirect(reverse('alpaca:index'))
     
     if request.method == "POST":
-        form = NewActivityForm(data=request.POST)
+        form = ActivityForm(data=request.POST)
         if form.is_valid():
             activity = form.save(commit=False)    
             activity.pub_date = timezone.now()
@@ -91,8 +91,29 @@ def new_activity(request):
             return render(request, 'Alpaca/new_activity.html', context)
 
     else:
-        context = {'form': NewActivityForm()}
+        context = {'form': ActivityForm()}
         return render(request, 'Alpaca/new_activity.html', context)
+
+
+def edit_activity(request, activity_id):
+    user = request.user
+    activity = get_object_or_404(Activity, pk=activity_id)
+    if not user.is_authenticated() or user != activity.author:
+        return  HttpResponseRedirect(reverse('alpaca:index'))
+                   
+    if request.method == "POST":
+        form = ActivityForm(data=request.POST, instance=activity)
+        if form.is_valid():
+            form.save()   
+            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
+        else:
+            context = { 'form': form }
+            return render(request, 'Alpaca/edit_activity.html', context)
+
+    else:
+        context = {'form': ActivityForm(instance=activity)}
+        return render(request, 'Alpaca/edit_activity.html', context)
+
 
 def activity(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
@@ -183,7 +204,7 @@ def new_session(request, activity_id):
         return  HttpResponseRedirect(reverse('alpaca:index'))
     
     if request.method == "POST":
-        form = NewSessionForm(data=request.POST)
+        form = SessionForm(data=request.POST)
         if form.is_valid():
             session = form.save(commit=False)    
             session.activity = activity
@@ -194,8 +215,30 @@ def new_session(request, activity_id):
             return render(request, 'Alpaca/new_session.html', context)
 
     else:
-        context = {'form': NewSessionForm()}
+        context = {'form': SessionForm()}
         return render(request, 'Alpaca/new_session.html', context)
+
+
+def edit_session(request, activity_id, session_id):
+    user = request.user
+    activity = get_object_or_404(Activity, id=activity_id)   
+    session = get_object_or_404(Session, id=session_id)   
+
+    if not user.is_authenticated() or user != activity.author:
+        return  HttpResponseRedirect(reverse('alpaca:index'))    
+
+    if request.method == "POST":
+        form = SessionForm(data=request.POST, instance=session)
+        if form.is_valid():
+            form.save()   
+            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
+        else:
+            context = { 'form': form }
+            return render(request, 'Alpaca/edit_session.html', context)
+
+    else:
+        context = {'form': SessionForm(instance=session)}
+        return render(request, 'Alpaca/edit_session.html', context)
 
 
 def confirm_session(request, activity_id):

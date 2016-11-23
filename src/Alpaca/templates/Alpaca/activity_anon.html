@@ -14,6 +14,7 @@
         <table>
             <tr>
                 <th>Description</th>
+                <th>Where</th>
                 <th>Start</th>
                 <th>End</th>
                 <th>Confirmed Attendants</th>
@@ -21,6 +22,7 @@
             {% for session in session_list %}
                 <tr>
                     <td><p>{{ session.description }}</p></td>
+                    <td><p>{{ session.location }}</p></td>
                     <td><p>{{ session.start_date }}</p></td>
                     <td><p>{{ session.end_date }}</p></td>
                     <td>
