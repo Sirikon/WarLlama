@@ -3,7 +3,22 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template import loader
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.core.mail import send_mail
+from settings import DEFAULT_FROM_EMAIL
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.db.models.query_utils import Q
+
+
 from django.utils import timezone
+from django.views.generic import *
 
 from .forms import *
 from .models import *
@@ -71,6 +86,11 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('alpaca:index'))
     
+
+## -- USER MANAGEMENT -- ##
+def reset_password(request):
+    context = { 'form': form }
+    return render(request, 'Alpaca/reset_password.html')
 
 ## -- ACTIVITIES -- ##
 def new_activity(request):

@@ -75,12 +75,29 @@ ALLOWED_HOSTS = ['*']
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+DATABASES = {}
+
+if os.environ['ALPACA_ENVIRONMENT'] == 'PRODUCTION':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ['ALPACA_DB_DATABASE'],
+            'USER': os.environ['ALPACA_DB_USERNAME'],
+            'PASSWORD': os.environ['ALPACA_DB_PASSWORD'],
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+
+
 
 
 # Password validation
@@ -120,17 +137,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Email Settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# Host for sending e-mail.
-EMAIL_HOST = 'localhost'
-
-# Port for sending e-mail.
-EMAIL_PORT = 1025
-
-# Optional SMTP authentication information for EMAIL_HOST.
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
