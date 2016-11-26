@@ -78,14 +78,20 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {}
 
 if os.environ['ALPACA_ENVIRONMENT'] == 'PRODUCTION':
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #         'NAME': os.environ['ALPACA_DB_DATABASE'],
+    #         'USER': os.environ['ALPACA_DB_USERNAME'],
+    #         'PASSWORD': os.environ['ALPACA_DB_PASSWORD'],
+    #         'HOST': 'localhost',
+    #         'PORT': '',
+    #     }
+    # }
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ['ALPACA_DB_DATABASE'],
-            'USER': os.environ['ALPACA_DB_USERNAME'],
-            'PASSWORD': os.environ['ALPACA_DB_PASSWORD'],
-            'HOST': 'localhost',
-            'PORT': '',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.environ['ALPACA_DB_PATH'],
         }
     }
 else:
