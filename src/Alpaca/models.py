@@ -17,7 +17,7 @@ class Profile (models.Model):
 
 class Activity (models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField(max_length=1000)
+    description = models.TextField(max_length=5000)
     pub_date = models.DateTimeField('publication date')
    
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
