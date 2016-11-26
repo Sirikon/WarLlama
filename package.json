@@ -1,0 +1,25 @@
+{
+  "name": "alpaca",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "gulp",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Darkatom/WarLlama.git"
+  },
+  "author": "Darkatom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Darkatom/WarLlama/issues"
+  },
+  "homepage": "https://github.com/Darkatom/WarLlama#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.9.1"
+  }
+}

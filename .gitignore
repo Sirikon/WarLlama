@@ -48,6 +48,11 @@ Temporary Items
 
 # Custom
 src/db.sqlite3
+src/Alpaca/static/main.css
+src/Alpaca/static/main.css.map
 **/*.pyc
 **/*.pyo
 .vscode/
+node_modules/
+virtualenv/
+npm-debug.log
