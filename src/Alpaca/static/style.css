@@ -17,7 +17,9 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="number"],
+input[type="password"],
+textarea {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -30,8 +32,11 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
-input[type="password"]:focus {
+input[type="number"]:focus,
+input[type="password"]:focus,
+textarea:focus {
     border-color: #e67e22;
+    resize: vertical;
 }
 
 input[type="submit"],
@@ -44,6 +49,12 @@ button {
     padding: 0.4em 0.8em;
     color: white;
     cursor: pointer;
+    border-radius: 3px;
+}
+
+input[type="submit"] *,
+button * {
+    vertical-align: middle;
 }
 
 input[type="submit"].al-btn-important,
@@ -259,4 +270,32 @@ table th {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;      
+
+
+/* Form-specific style */
+.al-new-activity-form #id_title {
+    font-size: 1.2em;
+}
+.al-new-activity-form #id_confirmation_period,
+.al-new-activity-form #id_age_minimum {
+    width: 100px;
+}
+
+.al-new-activity-form label[for="id_confirmation_period"],
+.al-new-activity-form label[for="id_age_minimum"] {
+    display: inline-block;
+    width: 160px;
+}
+
+.al-new-session-form #id_start_date,
+.al-new-session-form #id_end_date,
+.al-new-session-form #id_location {
+    width: 150px;
+}
+
+.al-new-session-form [for="id_start_date"],
+.al-new-session-form [for="id_end_date"],
+.al-new-session-form [for="id_location"] {
+    width: 100px;
+    display: inline-block;
 }

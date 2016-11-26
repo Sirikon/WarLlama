@@ -70,6 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'WarLlama.wsgi.application'
 
+ALLOWED_HOSTS = ['*']
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases

@@ -1,12 +1,17 @@
 <div class="al-content">
-    <small>Settings</small>
-    <p>Auto-registration is
-    {% if activity.auto_register %}
-        activated.
-    {% else %}
-        not activated.
-    {% endif %}    
-    </p>
-    <p>Confirmation period starts {{activity.confirmation_period}} days before the session's start date.</p>
-    <p>The minimum age to join this activity is {{activity.age_minimum}} years-old.</p>
+    <div class="al-rich-content">
+        <p>
+            <small>Settings:</small>
+        </p>
+        <p>
+            Auto-registration is
+            {% if activity.auto_register %}
+                <b>activated.</b>
+            {% else %}
+                <b>not activated.</b>
+            {% endif %}    
+        </p>
+        <p>Confirmation period starts <b>{{activity.confirmation_period}} days</b> before the session's start date.</p>
+        <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
+    </div>
 </div>

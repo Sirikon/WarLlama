@@ -131,7 +131,7 @@ def edit_activity(request, activity_id):
             return render(request, 'Alpaca/edit_activity.html', context)
 
     else:
-        context = {'form': ActivityForm(instance=activity)}
+        context = { 'form': ActivityForm(instance=activity) }
         return render(request, 'Alpaca/edit_activity.html', context)
 
 

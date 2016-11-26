@@ -17,7 +17,13 @@
     {% endif %} 
 
     <div class="al-content">
-        <a href="{% url 'alpaca:new_session' activity.id %}">Add session</a>
+        <div class="al-rich-content">
+            <p>
+                <a href="{% url 'alpaca:new_session' activity.id %}">
+                    <button><i class="fa fa-plus"></i> <span>Add session</span></button>
+                </a>
+            </p>
+        </div>
         <table>
             <tr>
                 <th>Description</th>
