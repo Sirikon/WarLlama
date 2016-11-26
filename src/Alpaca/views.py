@@ -206,7 +206,7 @@ def pending_requests(request, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":
-        selected_user = get_object_or_404(User, id=request.POST.get("request"))
+        selected_user = get_object_or_404(User, id=request.POST.get("user_join_request"))
         if "accept_request" in request.POST:
             activity.attendants.add(selected_user)
             activity.pending_attendants.remove(selected_user)

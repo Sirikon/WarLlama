@@ -6,7 +6,7 @@
         <p>Manage the requests to join the activity:</p>
         <form action="pending/{{activity.id}}" method="POST">
             {% csrf_token %}
-            <select id="pending_requests" name="requests">
+            <select id="pending_requests" name="user_join_request">
             {% for att in activity.pending_attendants.all %}
                 <option value="{{att.id}}">{{ att.username }}</option>
             {% endfor %}
