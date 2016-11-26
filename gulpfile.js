@@ -6,13 +6,20 @@ const sourcemaps = require('gulp-sourcemaps');
 
 const SASS_ENTRY_POINT = './src_front/sass/main.scss';
 const SASS_SOURCES = './src_front/sass/**/*.scss';
+const SASS_OUTPUT = './src/Alpaca/static';
 
 gulp.task('sass:dev', () => {
     return gulp.src(SASS_ENTRY_POINT)
         .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('./src/Alpaca/static'));
+        .pipe(gulp.dest(SASS_OUTPUT));
+});
+
+gulp.task('sass:release', () => {
+    return gulp.src(SASS_ENTRY_POINT)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(SASS_OUTPUT));
 });
 
 gulp.task('watch', () => {
@@ -20,3 +27,4 @@ gulp.task('watch', () => {
 })
 
 gulp.task('default', ['sass:dev', 'watch']);
+gulp.task('release', ['sass:release']);

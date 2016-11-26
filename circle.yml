@@ -5,4 +5,5 @@ deployment:
   master:
     branch: master
     commands:
+      - npm run release
       - sh deploy.sh
