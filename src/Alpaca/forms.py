@@ -26,6 +26,9 @@ class ProfileCreationForm(UserCreationForm):
             profile.save()
         return user
 
+class PasswordResetRequestForm(forms.Form):
+    email_or_username = forms.CharField(label=("Email Or Username"), max_length=254)
+    
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=200)
     description = forms.CharField(required=True, max_length=500)

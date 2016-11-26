@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 
 from django.core.validators import MinValueValidator
@@ -12,8 +13,7 @@ class Profile (models.Model):
     birth_date = models.DateTimeField('date of birth', blank=True, null=True)
 
     def __str__(self):
-        return user.username
-
+        return self.user.username
 
 class Activity (models.Model):
     title = models.CharField(max_length=200)
@@ -32,6 +32,8 @@ class Activity (models.Model):
     def __str__(self):
         return self.pub_date.strftime('(%Y-%m-%d, %H:%M)') + " " + self.title + " - Author: " + self.author.username
 
+    def __unicode__(self):
+        return u'{t}/{d}'.format(t=self.title, d=self.description)
 
 class Session (models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
@@ -46,6 +48,9 @@ class Session (models.Model):
 
     def __str__(self):
         return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') 
+
+    def __unicode__(self):
+        return u'{t}/{d}'.format(t=self.activity.title, d=self.description)
 
     def has_finished(self):
         now = timezone.now()
