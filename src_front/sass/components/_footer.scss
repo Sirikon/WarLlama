@@ -1,0 +1,23 @@
+.al-footer {
+    background-color: #e67e22;
+
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+
+    height: 40px;  
+    padding: 1rem;
+
+    &-content {
+        color: #fff;
+        max-width: 1120px;
+        margin: auto;
+        padding: 0 20px;
+
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}

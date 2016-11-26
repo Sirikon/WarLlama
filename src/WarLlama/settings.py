@@ -77,7 +77,7 @@ ALLOWED_HOSTS = ['*']
 
 DATABASES = {}
 
-if os.environ['ALPACA_ENVIRONMENT'] == 'PRODUCTION':
+if os.environ.get('ALPACA_ENVIRONMENT') == 'PRODUCTION':
     # DATABASES = {
     #     'default': {
     #         'ENGINE': 'django.db.backends.postgresql_psycopg2',

@@ -41,8 +41,11 @@ def signup(request, activity_id):
 
     if request.method == "POST":
         form = ProfileCreationForm(data=request.POST)
+
         if form.is_valid():
             form.save()
+        else:
+            return render(request, 'Alpaca/signup.html', {'form': form})
         
         if activity_id == "":
             return  HttpResponseRedirect(reverse('alpaca:index'))

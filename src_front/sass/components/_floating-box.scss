@@ -1,0 +1,36 @@
+@import '../global/variables';
+
+.al-floating-box {
+    max-width: 400px;
+    margin: auto;
+    margin: 40px auto;
+}
+
+.al-floating-box-title {
+    text-align: center;
+    font-family: 'Ravi Prakash', cursive;
+    color: $brand-color;
+    font-size: 2em;
+    margin: 0;
+    line-height: 1em;
+}
+
+.al-floating-box-title h1 {
+    margin: 15px;
+}
+
+.al-floating-box-content {
+    background-color: white;
+    padding: 1px 15px 15px 15px;
+    box-shadow: 0px 3px 40px rgba(0,0,0,0.03);
+    border-radius: 3px;
+}
+
+.al-floating-box-form p label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.al-floating-box-form input {
+    font-size: 1.2em;
+}
