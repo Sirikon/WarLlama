@@ -31,7 +31,7 @@ class PasswordResetRequestForm(forms.Form):
     
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=200)
-    description = forms.CharField(required=True, max_length=500, widget=forms.Textarea)
+    description = forms.CharField(required=True, max_length=5000, widget=forms.Textarea)
     auto_register = forms.BooleanField(required=False)
     confirmation_period = forms.IntegerField(required=True, validators=[MinValueValidator(3)], initial=3)
     age_minimum = forms.IntegerField(required=True, initial=18)
