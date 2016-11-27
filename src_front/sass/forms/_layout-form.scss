@@ -1,0 +1,28 @@
+
+.al-layout-form #id_title {
+    font-size: 1.2em;
+}
+
+.al-layout-form #id_confirmation_period,
+.al-layout-form #id_age_minimum {
+    width: 100px;
+}
+
+.al-layout-form label[for="id_confirmation_period"],
+.al-layout-form label[for="id_age_minimum"] {
+    display: inline-block;
+    width: 160px;
+}
+
+.al-layout-form #id_start_date,
+.al-layout-form #id_end_date,
+.al-layout-form #id_location {
+    width: 150px;
+}
+
+.al-layout-form [for="id_start_date"],
+.al-layout-form [for="id_end_date"],
+.al-layout-form [for="id_location"] {
+    width: 100px;
+    display: inline-block;
+}

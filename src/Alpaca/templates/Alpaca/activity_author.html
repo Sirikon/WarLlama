@@ -1,19 +1,18 @@
-{% extends './_layout_activity.html' %}
+{% extends './_layout.html' %}
 
-<!--{% block title %}{{ activity.title }} - You are the author of this activity{% endblock %}-->
+{% block title %}
+    {% include "./partials/activities/activity-header.html" %}
+{% endblock %}   
 
 {% block content %}
+    {% include "./partials/activities/activity-description.html" %}
 
-    {% include "./partials/activity-header.html" %}
+    {% include "./partials/activities/activity-attendants.html" %}
 
-    {% include "./partials/activity-description.html" %}
-
-    {% include "./partials/activity-attendants.html" %}
-
-    {% include "./partials/activity-settings.html" %}
+    {% include "./partials/activities/activity-settings.html" %}
     
     {% if not activity.auto_register %}
-        {% include "./partials/activity-pending-requests.html" %}
+        {% include "./partials/activities/activity-pending-requests.html" %}
     {% endif %} 
 
     <div class="al-content">
@@ -36,7 +35,7 @@
             </tr>
             {% for session in session_list %}
                 <tr>
-                    <td><p>{{ session.description }}</p></td>
+                    <td><p>{{ session.description | safe }}</p></td>
                     <td><p>{{ session.location }}</p></td>
                     <td><p>{{ session.start_date }}</p></td>
                     <td><p>{{ session.end_date }}</p></td>

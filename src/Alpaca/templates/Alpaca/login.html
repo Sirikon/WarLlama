@@ -1,13 +1,6 @@
-{% extends './_layout_floating_box.html' %}
+{% extends './floating_form.html' %}
 
-{% block content %}
-    <form method="POST" class="al-floating-box-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <a href="{% url 'alpaca:reset_password' %}">Forgot your password?</a>
-        <p>Or click <a href="{% url 'alpaca:signup' activity_id %}">here</a> to sign up!</p>
-        <div class="al-form-submit-big-wrapper">
-            <input class="al-form-submit-big al-btn-important" type="submit" value="Log In"/>
-        </div>
-    </form>
+{% block other-content %}
+    <a href="{% url 'alpaca:reset_password' %}">Forgot your password?</a>
+    <p>Or click <a href="{% url 'alpaca:signup' activity_id %}">here</a> to sign up!</p>
 {% endblock %}

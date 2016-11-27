@@ -1,14 +1,14 @@
-{% extends './_layout_activity.html' %}
+{% extends './_layout.html' %}
 
-<!--{% block title %}{{ activity.title }} by {{ activity.author.username }}{% endblock %}-->
+{% block title %}
+    {% include "./partials/activities/activity-header.html" %}
+{% endblock %}   
 
 {% block content %}
 
-    {% include "./partials/activity-header.html" %}
+    {% include "./partials/activities/activity-description.html" %}
 
-    {% include "./partials/activity-description.html" %}
-
-    {% include "./partials/activity-attendants.html" %}
+    {% include "./partials/activities/activity-attendants.html" %}
 
     <div class="al-content">
         <table>
@@ -21,7 +21,7 @@
             </tr>
             {% for session in session_list %}
                 <tr>
-                    <td><p>{{ session.description }}</p></td>
+                    <td><p>{{ session.description | safe  }}</p></td>
                     <td><p>{{ session.location }}</p></td>
                     <td><p>{{ session.start_date }}</p></td>
                     <td><p>{{ session.end_date }}</p></td>

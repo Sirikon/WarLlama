@@ -10,7 +10,6 @@
         {% include "./partials/ckeditor.html" %}
     </head>
     <body>
-
         <div class="al-header">
             <div class="al-header-content">
                 <h1 class="al-header-title">
@@ -29,13 +28,17 @@
         </div>
 
         <div class="al-content-wrapper">
-            <h1>{% block title %}{% endblock %}</h1>
+            {% block title %}{% endblock %}
             <div class="al-content">
                 {% block content %}
                 {% endblock %}
             </div>
         </div>
 
-        {% include "./partials/footer.html" %}
+        <div class="al-footer">
+            <div class="al-footer-content">
+                <p>Found a problem? Please, <a href="https://github.com/Darkatom/WarLlama/issues">help us!</a></p>
+            </div>
+        </div>
     </body>
 </html>

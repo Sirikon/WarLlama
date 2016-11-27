@@ -1,9 +1,0 @@
-{% extends './_layout.html' %}
-
-{% block title %}Editing activity "{{ form.instance.title }}"{% endblock %}
-
-{% block content %}
-    {% with "Save changes" as submit_text %}
-        {% include "./partials/activity-form.html" %}
-    {% endwith %}
-{% endblock %}
