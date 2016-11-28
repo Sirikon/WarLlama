@@ -1,38 +1,18 @@
-{% extends './_layout.html' %}
+{% extends './_layout_activity.html' %}
+    
+{% block user_options %}
+    <a href="{% url 'alpaca:login' activity.id %}">
+        <button class="al-activity-header-join al-btn-important">Join!</button>
+    </a>
+{% endblock %}
 
-{% block title %}
-    {% include "./partials/activities/activity-header.html" %}
-{% endblock %}   
 
-{% block content %}
-
-    {% include "./partials/activities/activity-description.html" %}
-
-    {% include "./partials/activities/activity-attendants.html" %}
-
-    <div class="al-content">
-        <table>
-            <tr>
-                <th>Description</th>
-                <th>Where</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Confirmed Attendants</th>
-            </tr>
-            {% for session in session_list %}
-                <tr>
-                    <td><p>{{ session.description | safe  }}</p></td>
-                    <td><p>{{ session.location }}</p></td>
-                    <td><p>{{ session.start_date }}</p></td>
-                    <td><p>{{ session.end_date }}</p></td>
-                    <td>
-                        {% for confirmed_user in session.confirmed_attendants.all %}
-                            <p>{{ confirmed_user.username }}</p>
-                        {% endfor %}                
-                    </td>
-                </tr>           
-            {% endfor %}
-        </table>
-    </div>
-
+{% block attendants %}
+    {% if activity.attendants.count <= 0 %}
+        <p>There are no users attending this activity, except {{ activity.author }}.</p>
+    {% else %}    
+        {% for att in activity.attendants.all %}
+            <span class="al-activity-attendant">{{ att.username }}</span>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

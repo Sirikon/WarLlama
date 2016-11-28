@@ -2,18 +2,22 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import MinValueValidator
+from django.forms.extras.widgets import SelectDateWidget
 
 from .models import *
+
+import datetime
 
 
 class ProfileCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    first_name = forms.CharField(required=False)
-    last_name = forms.CharField(required=False)
+    birth_date = forms.DateField(required=True, widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))
+    first_name = forms.CharField(required=False, help_text="Optional")
+    last_name = forms.CharField(required=False, help_text="Optional")
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2", "first_name", "last_name")
+        fields = ("username", "email", "birth_date", "password1", "password2", "first_name", "last_name")
 
     def save(self, commit=True):
         user = super(ProfileCreationForm, self).save(commit=False)
@@ -32,9 +36,9 @@ class PasswordResetRequestForm(forms.Form):
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=200)
     description = forms.CharField(required=True, max_length=5000, widget=forms.Textarea)
-    auto_register = forms.BooleanField(required=False)
-    confirmation_period = forms.IntegerField(required=True, validators=[MinValueValidator(3)], initial=3)
-    age_minimum = forms.IntegerField(required=True, initial=18)
+    auto_register = forms.BooleanField(required=False, help_text="Selected: Users join automatically. Not selected: Author decides to accept or reject joining requests.")
+    confirmation_period = forms.IntegerField(required=True, validators=[MinValueValidator(3)], initial=3, help_text="How many days before a session starts the assistance confirmation period?")
+    age_minimum = forms.IntegerField(required=True, initial=18, help_text="Minimum age to attend this activity.")
     
     class Meta:
         model = Activity

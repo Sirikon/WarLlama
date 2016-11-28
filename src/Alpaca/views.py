@@ -48,15 +48,15 @@ def signup(request, activity_id):
             form.save()
         else:
             context['form'] = form
-            return render(request, 'Alpaca/signup.html', context)
+            return render(request, 'Alpaca/form_floating.html', context)
         
         if activity_id == "":
             return  HttpResponseRedirect(reverse('alpaca:index'))
         else:
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
     else:
-        contextProfileCreationForm()
-        return render(request, 'Alpaca/floating_form.html', context)
+        context['form'] = ProfileCreationForm()
+        return render(request, 'Alpaca/form_floating.html', context)
 
 
 def login(request, activity_id):
@@ -96,8 +96,10 @@ def logout(request):
 
 ## -- USER MANAGEMENT -- ##
 def reset_password(request):
-    context = { 'form': form }
-    return render(request, 'Alpaca/reset_password.html')
+    context = { 'submit_text': "Sign up!", 
+                'rich_field_name': "",
+                'form': None }
+    return render(request, 'Alpaca/form_floating.html')
 
 ## -- ACTIVITIES -- ##
 def new_activity(request):
@@ -119,11 +121,11 @@ def new_activity(request):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/layout_form.html', context)
+            return render(request, 'Alpaca/form_layout.html', context)
 
     else:
         context['form'] = ActivityForm() 
-        return render(request, 'Alpaca/layout_form.html', context)
+        return render(request, 'Alpaca/form_layout.html', context)
 
 
 def edit_activity(request, activity_id):
@@ -143,11 +145,11 @@ def edit_activity(request, activity_id):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/layout_form.html', context)
+            return render(request, 'Alpaca/form_layout.html', context)
 
     else:
         context['form'] = ActivityForm(instance=activity)
-        return render(request, 'Alpaca/layout_form.html', context)
+        return render(request, 'Alpaca/form_layout.html', context)
 
 
 def activity(request, activity_id):
@@ -223,7 +225,7 @@ def pending_requests(request, activity_id):
             activity.attendants.add(selected_user)
             activity.pending_attendants.remove(selected_user)
 
-        elif "deny_request" in request.POST:
+        elif "reject_request" in request.POST:
             activity.pending_attendants.remove(selected_user)            
         activity.save()
         # TO-DO --> Send "You have pending requests" email to activity's author
@@ -251,11 +253,11 @@ def new_session(request, activity_id):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/layout_form.html', context)
+            return render(request, 'Alpaca/form_layout.html', context)
 
     else:
         context['form'] = SessionForm()
-        return render(request, 'Alpaca/layout_form.html', context)
+        return render(request, 'Alpaca/form_layout.html', context)
 
 
 def edit_session(request, activity_id, session_id):
@@ -277,11 +279,11 @@ def edit_session(request, activity_id, session_id):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/layout_form.html', context)
+            return render(request, 'Alpaca/form_layout.html', context)
 
     else:
         context['form'] = SessionForm(instance=session)
-        return render(request, 'Alpaca/layout_form.html', context)
+        return render(request, 'Alpaca/form_layout.html', context)
 
 
 def confirm_session(request, activity_id):
