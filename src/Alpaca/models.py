@@ -45,7 +45,7 @@ class Activity (models.Model):
         return self.session_set.filter(Q(start_date__gt=today))
 
     def get_next_session(self):
-        return self.get_future_sessions().first()
+        return self.get_future_sessions().order_by('start_date').first()
 
     def is_user_old_enough(self, user):
         # http://stackoverflow.com/questions/2217488/age-from-birthdate-in-python/9754466#9754466

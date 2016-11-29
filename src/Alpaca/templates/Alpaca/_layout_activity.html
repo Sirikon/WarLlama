@@ -6,7 +6,7 @@
        <h1 class="al-activity-header-title">{{ activity.title }} <small>by {{ activity.author.username }}</small></h1>
         {% if session_list.first %}
         <p class="al-activity-header-date">
-            <i class="fa fa-calendar"></i> Next Session <b>{{ session_list.first.start_date }}</b>
+            <i class="fa fa-calendar"></i> Next Session <b>{{ activity.get_next_session.start_date }}</b>
         </p>
         {% endif %}
     </div>
