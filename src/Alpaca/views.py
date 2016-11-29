@@ -158,6 +158,7 @@ def activity(request, activity_id):
     session_list = activity.session_set.order_by('start_date')
     context = { 'user': user,
                 'activity': activity,
+                'user_is_old_enough': activity.is_user_old_enough(user),
                 'session_list': session_list}
 
     if user.is_authenticated:

@@ -2,8 +2,46 @@ import datetime
 
 from django.test import TestCase
 from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 
 from .models import *
+
+class ActivityMethodTests(TestCase):
+    def test_is_user_old_enough_over_minimum_age(self):
+        """ 
+        is_user_old_enough() should return True for users
+        whose age is over the minimum age of the activity
+        """
+        date = timezone.now() - relativedelta(years=30)
+        old_user = User(username="")
+        profile = Profile(user=old_user, birth_date=date)
+
+        the_activity = Activity(age_minimum=18)
+        self.assertIs(the_activity.is_user_old_enough(old_user), True)
+
+    def test_is_user_old_enough_exact_minimum_age(self):
+        """ 
+        is_user_old_enough() should return True for users
+        whose age is equal to the minimum age of the activity
+        """
+        date = timezone.now() - relativedelta(years=18)
+        the_user = User(username="")
+        profile = Profile(user=the_user, birth_date=date)
+
+        the_activity = Activity(age_minimum=18)
+        self.assertIs(the_activity.is_user_old_enough(the_user), True)
+
+    def test_is_user_old_enough_under_minimum_age(self):
+        """ 
+        is_user_old_enough() should return False for users
+        whose age is under the minimum age of the activity
+        """
+        date = timezone.now() - relativedelta(years=5)
+        young_user = User(username="")
+        profile = Profile(user=young_user, birth_date=date)
+
+        the_activity = Activity(age_minimum=18)
+        self.assertIs(the_activity.is_user_old_enough(young_user), False)
 
 
 class SessionMethodTests(TestCase):

@@ -1,7 +1,10 @@
 {% extends './_layout_activity.html' %}
 
 {% block user_options %}
-    {% if user in activity.pending_attendants.all %}
+    
+    {% if not user_is_old_enough %}
+        <p>You are too young to attend this activity.</p>
+    {% elif user in activity.pending_attendants.all %}
         <p>The author of this activity has received your request to join!</p>
     {% elif user in activity.attendants.all %}
         <form action="leave/{{activity.id}}" method="POST">

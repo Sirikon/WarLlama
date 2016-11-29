@@ -35,6 +35,16 @@ class Activity (models.Model):
     def __unicode__(self):
         return u'{t}/{d}'.format(t=self.title, d=self.description)
 
+    def is_user_old_enough(self, user):
+        # http://stackoverflow.com/questions/2217488/age-from-birthdate-in-python/9754466#9754466
+        today = timezone.now()
+        born = user.profile.birth_date
+        years_difference = today.year - born.year
+        is_before_birthday = (today.month, today.day) < (born.month, born.day)
+        elapsed_years = years_difference - int(is_before_birthday)
+        return elapsed_years >= self.age_minimum
+
+
 class Session (models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     description = models.TextField(max_length=500)
