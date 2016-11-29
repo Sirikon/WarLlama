@@ -1,88 +1,11 @@
 {% extends './_layout.html' %}
 
-{% block title %}Awesome Activities{% endblock %}
+{% block title %}
+    {% if user.is_authenticated %}
+        <a href="/newactivity/"><i class="fa fa-plus"></i> New Activity</a>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <table>
-        <tr>
-            <th>
-                <a href="?order_by=title&last={{sort_sign}}{{sorted_column}}">
-                    TITLE 
-                    {% if sorted_column == "title" %}
-                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
-                    {% else %}
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-                    {% endif %}
-                </a>
-            </th>
-            <th>
-                <a href="?order_by=author&last={{sort_sign}}{{sorted_column}}">
-                    AUTHOR
-                    {% if sorted_column == "author" %}
-                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
-                    {% else %}
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-                    {% endif %}
-                </a>
-            </th>
-            <th>
-                <a href="?order_by=age_minimum&last={{sort_sign}}{{sorted_column}}">
-                    AGE MINIMUM
-                    {% if sorted_column == "age_minimum" %}
-                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
-                    {% else %}
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-                    {% endif %}
-                </a>
-            </th>
-            <th>
-                <a href="?order_by=attendants&last={{sort_sign}}{{sorted_column}}">
-                    # OF ATTENDANTS
-                    {% if sorted_column == "attendants" %}
-                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
-                    {% else %}
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-                    {% endif %}
-                </a>
-            </th>
-            <th>
-                <a href="?order_by=pub_date&last={{sort_sign}}{{sorted_column}}">
-                    PUBLISHED DATE
-                    {% if sorted_column == "pub_date" %}
-                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
-                    {% else %}
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-                    {% endif %}
-                </a>
-            </th>
-            <th>
-                <a href="?order_by=next_session&last={{sort_sign}}{{sorted_column}}">
-                    NEXT SESSION
-                    {% if sorted_column == "next_session" %}
-                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
-                    {% else %}
-                        <i class="fa fa-sort" aria-hidden="true"></i>
-                    {% endif %}
-                </a>
-            </th>
-        </tr>
-        {% for activity in activity_list %}
-        <tr>
-            <td><a href="{% url 'alpaca:activity' activity.id %}">{{ activity.title }}</a></td>
-            <td>{{ activity.author }}</td>
-            <td>{{ activity.age_minimum }} years-old</td>
-            <td>{{ activity.attendants.count }}</td>
-            <td>{{ activity.pub_date }}</td>
-            <td>
-                {% with activity.get_next_session as next_session %}
-                    {% if next_session %}
-                        {{ next_session.start_date }}
-                    {% else %}
-                        No sessions yet
-                    {% endif %}
-                {% endwith %}
-            </td>
-        </tr>           
-        {% endfor %}
-    </table>
+    {% include './partials/activity-table.html' %}
 {% endblock %}

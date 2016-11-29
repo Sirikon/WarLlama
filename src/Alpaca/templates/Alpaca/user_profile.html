@@ -1,0 +1,21 @@
+{% extends './_layout.html' %}
+
+{% block title %}
+    <h1 class="al-activity-header-title">{{ looking_at_user.username }} 
+        {% if complete_name != "" %}
+            <small>({{ complete_name }})</small>
+        {% endif %}
+    </h1>
+{% endblock %}
+
+{% block content %}
+    <div class="al-content">
+        <div class="al-rich_content">
+            <p>{{ looking_at_user.username }} was born in {{ looking_at_user.profile.birth_date }}</p>
+        </div>
+    </div>
+
+    <h3>Activities organized by {{ looking_at_user.username }}</h3>
+    {% include './partials/activity-table.html' %}
+
+{% endblock %}
