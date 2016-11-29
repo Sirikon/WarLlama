@@ -1,10 +1,11 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals
 
+from django.db.models import Q
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 import datetime
 
@@ -34,6 +35,17 @@ class Activity (models.Model):
 
     def __unicode__(self):
         return u'{t}/{d}'.format(t=self.title, d=self.description)
+
+    def get_past_sessions(self):
+        today = timezone.now()
+        return self.session_set.filter(Q(start_date__lt=today))
+        
+    def get_future_sessions(self):
+        today = timezone.now()
+        return self.session_set.filter(Q(start_date__gt=today))
+
+    def get_next_session(self):
+        return self.get_future_sessions().first()
 
     def is_user_old_enough(self, user):
         # http://stackoverflow.com/questions/2217488/age-from-birthdate-in-python/9754466#9754466

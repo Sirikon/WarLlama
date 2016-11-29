@@ -45,7 +45,7 @@
                 <p>Join the activity to come!</p>
             {% elif session.is_on_confirmation_period %}
                 {% if user in session.confirmed_attendants.all %}
-                    <p>See you there ^^</p>
+                    <p>See you there!</p>
                 {% else %}
                     <form action="{{activity.id}}/confirm/" method="POST">
                         {% csrf_token %}
