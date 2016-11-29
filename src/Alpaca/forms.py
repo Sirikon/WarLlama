@@ -26,7 +26,7 @@ class ProfileCreationForm(UserCreationForm):
         user.last_name = self.cleaned_data["last_name"]
         if commit:
             user.save()
-            profile = Profile(user=user)
+            profile = Profile(user=user, birth_date=self.cleaned_data["birth_date"])
             profile.save()
         return user
 
