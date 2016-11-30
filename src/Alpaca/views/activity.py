@@ -31,11 +31,11 @@ def new_activity(request):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_layout.html', context)
+            return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
         context['form'] = ActivityForm() 
-        return render(request, 'Alpaca/form_layout.html', context)
+        return render(request, 'Alpaca/_form_layout.html', context)
 
 
 def edit_activity(request, activity_id):
@@ -55,11 +55,11 @@ def edit_activity(request, activity_id):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_layout.html', context)
+            return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
         context['form'] = ActivityForm(instance=activity)
-        return render(request, 'Alpaca/form_layout.html', context)
+        return render(request, 'Alpaca/_form_layout.html', context)
 
 
 def activity(request, activity_id):

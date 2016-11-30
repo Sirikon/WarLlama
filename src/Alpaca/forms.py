@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.validators import MinValueValidator
 from django.forms.extras.widgets import SelectDateWidget
+from django.shortcuts import get_object_or_404 
 
 from .models import *
 
@@ -30,9 +31,46 @@ class ProfileCreationForm(UserCreationForm):
             profile.save()
         return user
 
+class ProfileForm(forms.ModelForm):
+    birth_date = forms.DateField(disabled=True)
+    show_birthday = forms.BooleanField(required=False)
+    show_email = forms.BooleanField(required=False)
+    show_real_name = forms.BooleanField(required=False)  
+    
+    format_options = ( ("nick (full_name)", "Username (Full Name)"),
+                       ("full_name (nick)", "Full Name (Username)"),
+                       ("nick (first_name)", "Username (First Name)"),
+                       ("nick (last_name)", "Username (Last Name)"),
+                       ("first_name (nick)", "First Name (Username)"),
+                       ("last_name (nick)", "Last Name (Username)"),
+                )
+    display_name_format = forms.ChoiceField(required=True, choices=format_options)
+
+    class Meta:
+        model = Profile
+        fields = ("birth_date", "show_birthday", "show_email", "show_real_name", "display_name_format")
+
 class PasswordResetRequestForm(forms.Form):
     email_or_username = forms.CharField(label=("Email Or Username"), max_length=254)
-    
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(required=True, label="Old password:", widget=forms.PasswordInput())
+    new_password = forms.CharField(required=True, label="New password:", widget=forms.PasswordInput())
+    repeat_password = forms.CharField(required=True, label="Repeat new password:", widget=forms.PasswordInput())
+ 
+    class Meta:
+        fields = ("old_password", "new_password", "repeat_password")
+
+    def is_valid(self, user):
+        return user.check_password(self.data['old_password']) and self.data['new_password'] == self.data['repeat_password']
+        
+    def save(self, user, commit=True):    
+        user.set_password(self.data['new_password'])
+        if commit:
+            user.save()
+        return user
+
+
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=200)
     description = forms.CharField(required=True, max_length=5000, widget=forms.Textarea)
@@ -43,7 +81,6 @@ class ActivityForm(forms.ModelForm):
     class Meta:
         model = Activity
         fields = ("title", "description", "auto_register", "confirmation_period", "age_minimum")
-
 
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, max_length=500, widget=forms.Textarea)

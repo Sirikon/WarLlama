@@ -30,7 +30,7 @@ def signup(request, activity_id):
             form.save()
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_floating.html', context)
+            return render(request, 'Alpaca/_form_floating.html', context)
         
         if activity_id == "":
             return  HttpResponseRedirect(reverse('alpaca:index'))
@@ -38,7 +38,7 @@ def signup(request, activity_id):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
     else:
         context['form'] = ProfileCreationForm()
-        return render(request, 'Alpaca/form_floating.html', context)
+        return render(request, 'Alpaca/_form_floating.html', context)
 
 
 def login(request, activity_id):
@@ -66,10 +66,10 @@ def login(request, activity_id):
                 return render(request, 'Alpaca/not_active_user.html')
         else:
             context['form'] = form
-            return render(request, 'Alpaca/login.html', context)
+            return render(request, 'Alpaca/form_login.html', context)
 
     context['form'] = AuthenticationForm() 
-    return render(request, 'Alpaca/login.html', context)
+    return render(request, 'Alpaca/form_login.html', context)
 
 def logout(request):
     auth.logout(request)
