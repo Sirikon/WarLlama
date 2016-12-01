@@ -1,11 +1,11 @@
 {% extends './_layout_floating_box.html' %}
 
 {% block content %}
-    <form method="POST" class="al-floating-box-form">
+    <form method="POST" class="al-form-base">
         {% csrf_token %}
         {{ form.as_p }}
-        <div class="al-form-submit-big-wrapper">
-            <input class="al-form-submit-big al-btn-important" type="submit" value="{{ submit_text }}"/>
+        <div class="al-submit-wrapper-edge">
+            <input class="al-submit-big" type="submit" value="{{ submit_text }}"/>
         </div>
     </form>
     {% if rich_field_name != "" %}
@@ -13,5 +13,6 @@
         CKEDITOR.replace( '{{ rich_field_name }}' );
     </script>
     {% endif %}
+    
     {% block other-content %}{% endblock %}
-{% endblock %}
+{% endblock %} 

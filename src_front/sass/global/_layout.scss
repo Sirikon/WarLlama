@@ -2,16 +2,16 @@
 
 .al-header {
     background-color: $brand-color;
+    height: 60px;
+    padding: 0 20px;
 
     &-content {
-        height: 60px;
         max-width: 1120px;
         margin: auto;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        padding: 0 20px;
     }
 
     &-title {
@@ -42,3 +42,39 @@
     }
 }
 
+.al-content-wrapper {
+    max-width: 1120px;
+    margin: auto;
+    margin-top: 15px;
+    padding: 0 20px;
+}
+
+.al-content {
+    background-color: white;
+    border-radius: 3px;
+    padding: 1px 1em;
+}
+
+.al-footer {
+    background-color: #e67e22;
+
+    right: 0;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+
+    height: 40px;  
+    padding: 1rem;
+
+    &-content {
+        color: #fff;
+        max-width: 1120px;
+        margin: auto;
+        padding: 0 20px;
+
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}

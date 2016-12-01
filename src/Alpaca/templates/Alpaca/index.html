@@ -2,6 +2,10 @@
 
 {% block title %}
     {% if user.is_authenticated %}
+        <small>Filters:
+            <a href="?filter=author"> My Activities: Author </a>
+            <a href="?filter=attendant"> My Activities: Attendant</a>
+        </small>
         <a href="/newactivity/"><i class="fa fa-plus"></i> New Activity</a>
     {% endif %}
 {% endblock %}

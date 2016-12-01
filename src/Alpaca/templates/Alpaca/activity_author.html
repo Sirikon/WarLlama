@@ -1,16 +1,12 @@
 {% extends './_layout_activity.html' %}
 
-{% block user_options %}
-    <a href="{% url 'alpaca:edit_activity' activity.id %}">
-        <button class="al-activity-header-join al-btn-important">
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Edit</span>
-        </button>
+{% block user_options %}    
+    <a class="al-btn-menu" href="{% url 'alpaca:edit_activity' activity.id %}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Edit</span>
     </a>
     
-    <a href="{% url 'alpaca:new_session' activity.id %}">
-        <button>
-            <i class="fa fa-plus"></i> <span>Add session</span>
-        </button>
+    <a class="al-btn-menu" href="{% url 'alpaca:new_session' activity.id %}">
+        <i class="fa fa-plus"></i> <span>Add session</span>
     </a>
 {% endblock %}
 

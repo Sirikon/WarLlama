@@ -1,0 +1,89 @@
+@import '../global/variables';
+
+.al-form-base {
+    /* Django-generated-specific */
+    span.helptext {
+        font-size: 0.7em;
+        color: #b1b1b1;
+    }
+
+    ul.errorlist {
+        padding: 0;
+        list-style: none;
+        color: white;
+        border-radius: 3px;
+        font-size: .9em;
+
+        li {
+            background-color: red;
+            margin: 3px 0;
+            padding: 5px 8px;
+            border-radius: 3px;
+        }
+    }
+    /* ------------------------- */
+
+    label {
+        font-size: 0.9em;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    input[type="text"], input[type="email"],
+    input[type="number"], input[type="password"],
+    textarea {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0.4em;
+
+        border: 1px solid #eaeaea;
+        border-radius: 3px;       
+
+        &:focus {
+            border-color: $brand-color;
+        }
+    }
+
+    .al-submit-wrapper {
+        text-align: center;
+        margin-bottom: 15px;
+
+        &-edge {
+            text-align: center;
+            margin-bottom: -15px;
+            margin-top: -15px;
+        }
+    }
+
+    input[type="submit"] {
+        background-color: $brand-color;
+        height: 2.2em;
+        display: inline-block;
+        vertical-align: middle;
+
+        padding: 0 1.1em 0.1em 1.1em;
+        border: none;
+        border-radius: 1.1em;   
+            
+        color: white;
+        cursor: pointer;       
+        
+        &.al-submit-big {
+            transform: translate(0px, 50%);       
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            padding: 0.4em 0.8em;
+        }
+    }
+    
+    &-footer {
+        margin-top: 50px;
+    }
+
+}

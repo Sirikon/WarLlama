@@ -1,5 +1,7 @@
 {% extends './_form_layout.html' %}
 
 {% block other-content %}
-    <a href="{% url 'alpaca:change_password' %}">Change your password</a>
+    <div class="al-form-base-footer">
+        <a href="{% url 'alpaca:change_password' %}">Change your password</a>
+    </div>
 {% endblock %}

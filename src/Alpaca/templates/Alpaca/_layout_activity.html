@@ -2,48 +2,47 @@
 
 {% block title %}
 <div class="al-activity-header">
-    <div class="al-activity-header-section">
-       <h1 class="al-activity-header-title">{{ activity.title }} <small>by {{ activity.author.username }}</small></h1>
+    <div class="al-activity-title">
+        <h1>{{ activity.title }} <small>by {{ activity.author.username }}</small></h1>
+    
         {% if session_list.first %}
-        <p class="al-activity-header-date">
-            <i class="fa fa-calendar"></i> Next Session <b>{{ activity.get_next_session.start_date }}</b>
-        </p>
+        <div class="al-activity-next-session">
+            <p><i class="fa fa-calendar"></i> Next Session <b>{{ activity.get_next_session.start_date }}</b><p>
+        </div>
         {% endif %}
     </div>
-    <div class="al-activity-header-section al-activity-header-section-right">
+    <div class="al-activity-menu">
         {% block user_options %}{% endblock %}
     </div>
 </div>
 {% endblock %}
 
 {% block content %}
-    <div class="al-content">
-        <div class="al-activity-description">
-            <div class="al-activity-description-title">{{ activity.description | safe }}</div>
-        </div>
+    
+    <small>Description:</small>
+    <p>{{ activity.description | safe }}</p>
 
-        <div class="al-rich-content">
-            <small>Settings:</small>
-            <p>Users may join this activity
-            {% if activity.auto_register %}
-                <b> freely.</b>
-            {% else %}
-                <b> upon request.</b>
-            {% endif %}    
-            </p>
-            <p>Confirmation period starts <b>{{activity.confirmation_period}} days</b> before the session's start date.</p>
-            <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
-        </div>
+    <small>Settings:</small>
+    <p>Users may join this activity
+    {% if activity.auto_register %}
+        <b> freely.</b>
+    {% else %}
+        <b> upon request.</b>
+    {% endif %}    
+    </p>
+    <p>Confirmation period starts <b>{{activity.confirmation_period}} days</b> before the session's start date.</p>
+    <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
 
-        <div class="al-activity-attendants">
-            <small>Attendants:</small>
-            {% block attendants %}{% endblock %}
-        </div>
 
-        {% block requests %}
-        {% endblock %}
+    <div class="al-activity-attendants">
+        <small>Attendants:</small>
+        {% block attendants %}{% endblock %}
+    </div>
 
-        <table>
+    {% block requests %}
+    {% endblock %}
+
+    <table>
         <tr>
             <th>Description</th>
             <th>Where</th>
@@ -66,7 +65,5 @@
                 {% block session_extra_cells %}{% endblock %}                
             </tr>           
         {% endfor %}
-        </table>
-    </div>
-
+    </table>
 {% endblock %}

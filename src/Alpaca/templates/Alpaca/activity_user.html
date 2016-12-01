@@ -1,7 +1,6 @@
 {% extends './_layout_activity.html' %}
 
-{% block user_options %}
-    
+{% block user_options %}    
     {% if not user_is_old_enough %}
         <p>You are too young to attend this activity.</p>
     {% elif user in activity.pending_attendants.all %}
@@ -9,12 +8,12 @@
     {% elif user in activity.attendants.all %}
         <form action="leave/{{activity.id}}" method="POST">
             {% csrf_token %}
-            <input class="al-activity-header-join al-btn-important" type="submit" name="leave_activity" value="Leave"/>
+            <input class="al-btn-menu" type="submit" name="leave_activity" value="Leave"/>
         </form>
     {% else %}
         <form action="join/{{activity.id}}" method="POST">
             {% csrf_token %}
-            <input class="al-activity-header-join al-btn-important" type="submit" name="join_activity" value="Join!"/>
+            <input class="al-btn-menu" type="submit" name="join_activity" value="Join!"/>
         </form>
     {% endif %}
 {% endblock %}

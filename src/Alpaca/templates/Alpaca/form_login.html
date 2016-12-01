@@ -1,6 +1,8 @@
 {% extends './_form_floating.html' %}
 
 {% block other-content %}
-    <a href="{% url 'alpaca:reset_password' %}">Forgot your password?</a>
-    <p>Or click <a href="{% url 'alpaca:signup' activity_id %}">here</a> to sign up!</p>
+    <div class="al-form-base-footer">
+        <p><a href="{% url 'alpaca:reset_password' %}">Forgot your password?</a><p>
+        <p>Or click <a href="{% url 'alpaca:signup' activity_id %}">here</a> to sign up!</p>
+    </div>
 {% endblock %}
