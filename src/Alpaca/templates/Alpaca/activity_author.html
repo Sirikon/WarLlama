@@ -1,12 +1,8 @@
 {% extends './_layout_activity.html' %}
 
 {% block user_options %}    
-    <a class="al-btn-menu" href="{% url 'alpaca:edit_activity' activity.id %}">
+    <a class="al-btn-menu-big" href="{% url 'alpaca:edit_activity' activity.id %}">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Edit</span>
-    </a>
-    
-    <a class="al-btn-menu" href="{% url 'alpaca:new_session' activity.id %}">
-        <i class="fa fa-plus"></i> <span>Add session</span>
     </a>
 {% endblock %}
 
@@ -49,7 +45,12 @@
     </div>
 {% endblock %}
 
-
+{% block session_list_menu %}
+    <a class="al-btn-menu-small" href="{% url 'alpaca:new_session' activity.id %}">
+        <i class="fa fa-plus"></i> <span>Add session</span>
+    </a>
+{% endblock %}
+    
 {% block session_extra_columns %}
     <th>State</th>
     <th>Edit</th>

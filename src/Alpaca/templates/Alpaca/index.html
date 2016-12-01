@@ -2,11 +2,20 @@
 
 {% block title %}
     {% if user.is_authenticated %}
-        <small>Filters:
-            <a href="?filter=author"> My Activities: Author </a>
-            <a href="?filter=attendant"> My Activities: Attendant</a>
-        </small>
-        <a href="/newactivity/"><i class="fa fa-plus"></i> New Activity</a>
+        <div class="al-table-header">
+            <div class="al-table-filters">
+                <small>Filters:</small>
+                <a class="al-btn-sqrflat-small" href="?filter=all"> <span>All Activities</span> </a>
+                <a class="al-btn-sqrflat-small" href="?filter=author"> <span>My Activities: Author</span> </a>
+                <a class="al-btn-sqrflat-small" href="?filter=attendant"> <span>My Activities: Attendant</span></a>
+                
+            </div>
+            <div class="al-table-menu">
+                <a class="al-btn-menu-big" href="/newactivity/">
+                    <i class="fa fa-plus"></i><span> New Activity</span>
+                </a>
+            </div>
+        </div>
     {% endif %}
 {% endblock %}
 

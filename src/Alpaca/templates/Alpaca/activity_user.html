@@ -8,12 +8,12 @@
     {% elif user in activity.attendants.all %}
         <form action="leave/{{activity.id}}" method="POST">
             {% csrf_token %}
-            <input class="al-btn-menu" type="submit" name="leave_activity" value="Leave"/>
+            <input class="al-btn-menu-big" type="submit" name="leave_activity" value="Leave"/>
         </form>
     {% else %}
         <form action="join/{{activity.id}}" method="POST">
             {% csrf_token %}
-            <input class="al-btn-menu" type="submit" name="join_activity" value="Join!"/>
+            <input class="al-btn-menu-big" type="submit" name="join_activity" value="Join!"/>
         </form>
     {% endif %}
 {% endblock %}

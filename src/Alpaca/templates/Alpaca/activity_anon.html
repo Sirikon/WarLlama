@@ -1,7 +1,7 @@
 {% extends './_layout_activity.html' %}
     
 {% block user_options %}
-    <a href="{% url 'alpaca:login' activity.id %}">
+    <a class="al-btn-menu-big" href="{% url 'alpaca:login' activity.id %}">
         <button class="al-btn-important">Join!</button>
     </a>
 {% endblock %}
