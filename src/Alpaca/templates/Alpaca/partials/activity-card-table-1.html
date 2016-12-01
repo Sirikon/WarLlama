@@ -1,0 +1,39 @@
+
+<div class="al-all-activities">
+{% for row in activity_table %}
+    <div class="al-all-activities-row">
+        {% for activity in row %}
+        <div class="al-activity-card">
+            <a href="/activity/{{activity.id}}">
+                <div class="al-activity-card-header">
+                    <h1>{{ activity.title }} <small>by {{ activity.author }}</small></h1>
+                </div>
+                <div class="al-activity-card-body">
+                    <div class="al-activity-card-symbol">
+                        <i class="fa fa-superpowers"></i>
+                    </div>
+                    <div class="al-activity-card-descriptors">
+                        <ul>
+                            <li><i class="fa fa-bookmark"></i> {{ activity.pub_date }}</li>
+                            <li><i class="fa fa-calendar"></i> 
+                                {% with activity.get_next_session as next_session %}
+                                    {% if next_session %}
+                                        {{ next_session.start_date }}
+                                    {% elif activity.session_set.count == 0 %}
+                                        No sessions yet
+                                    {% else %}
+                                        Waiting for future sessions!
+                                    {% endif %}
+                                {% endwith %}
+                            </li>
+                            <li><i class="fa fa-address-card-o"></i> {{ activity.age_minimum }} years-old</li>
+                            <li><i class="fa fa-user-o"></i> {{ activity.attendants.count }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+</div>

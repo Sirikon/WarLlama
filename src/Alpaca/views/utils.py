@@ -1,3 +1,4 @@
+from django.db.models import Count, Q
 
 # Useful functions for the views. These functions return contexts.
 

@@ -1,0 +1,108 @@
+@import '../global/variables';
+
+.al-all-activities {    
+    display: flex;
+    flex-direction: row;
+
+    &-row {
+        display: inline-block;
+        margin: 0 auto;
+    }
+}
+
+.al-activity-card {
+    background-color: #D0D7EA;
+    height: auto;
+    width: 300px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: 10px;
+    padding: 5px;
+
+    border: 1px #0A2262 solid;
+    border-radius: 3px;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &-header {
+        border-bottom: 1px #0A2262 solid;
+        text-align: center;
+        margin: 10px 0 10px;
+        padding-bottom: 10px;
+
+        h1 {
+            font-size: 15px;
+        }
+
+        small {
+            font-size: 12px;
+            font-weight: 200;
+        }
+    }
+
+
+    &-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-symbol {
+        width: 30%;
+        height: 100%;
+        float: left;
+        margin: auto;
+        text-align: center;
+
+        i {
+            color: $brand-color;
+            font-size: 25px;
+        }
+    }
+
+    &-descriptors {
+        width: 70%;
+        float: right;
+        padding: 2px;
+        border-left: 1px #0A2262 solid; 
+
+        i {
+            color: $brand-color;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: auto;
+            padding: 0 10px 0px 10px;
+        }
+
+        li {
+            font-size: 13px;
+            padding: 0 0 10px 0;
+        }
+    }
+
+    &-summary {
+        
+    }
+
+}
+
+.al-activity-card:hover {
+    background: #0A2262;
+    color: white;
+
+    &-header {
+        border-bottom: 1px #D0D7EA solid;
+    }
+    &-descriptors {
+        border-left: 1px #D0D7EA solid;
+    }
+}
