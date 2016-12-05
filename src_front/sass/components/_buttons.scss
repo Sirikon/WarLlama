@@ -34,26 +34,9 @@ button {
     cursor: pointer;
 }
 
-.al-btn-menu { 
-    background-color: $brand-color; 
-    line-height: 1.5em;
-    display: inline-block;
-    vertical-align: middle; 
-    padding: 0 1em 0.1em 1em;   
-    border: none;
-    border-radius: 1.1em; 
-
-    color: white;    
-    font-size: 1em;  
-    text-decoration: none;
-
-    cursor: pointer;
-}
-
-
 .al-btn-menu-small { 
     background-color: $brand-color; 
-    line-height: 1.5em;
+    line-height: 2em;
     display: inline-block;
     vertical-align: middle; 
     padding: 0 1em 0.1em 1em;   

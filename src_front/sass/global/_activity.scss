@@ -10,7 +10,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-    }    
+    }
 
     &-title {
         h1 {
@@ -39,9 +39,10 @@
     }
 
     &-attendant {
+        background-color: whitesmoke;
         display: inline-block;
         padding: 2px 4px;
-        background-color: whitesmoke;
+        border: 1px solid #cccccc;
         border-radius: 3px;
     }
 }

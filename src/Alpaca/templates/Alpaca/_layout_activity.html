@@ -1,47 +1,56 @@
 {% extends './_layout.html' %}
 
 {% block title %}
-<div class="al-activity-header">
-    <div class="al-activity-title">
-        <h1>{{ activity.title }} <small>by {{ activity.author.username }}</small></h1>
-    
-        {% if session_list.first %}
-        <div class="al-activity-next-session">
-            <p><i class="fa fa-calendar"></i> Next Session <b>{{ activity.get_next_session.start_date }}</b><p>
-        </div>
-        {% endif %}
+<div class="al-content-header al-flex">
+    <div class="al-flex-grow">
+        <h1>
+            <span>{{ activity.title }}</span>
+            <span class="al-text-tail">by {{ activity.author.username }}</span>
+        </h1>
+        {% with activity.get_next_session as next_session %}
+            {% if next_session %}
+                <p>
+                    <i class="fa fa-calendar"></i>
+                    <span>Next Session <b>{{ next_session.start_date }}</b></span>
+                </p>
+            {% endif %}
+        {% endwith %}
     </div>
-    <div class="al-activity-menu">
+    <div>
         {% block user_options %}{% endblock %}
     </div>
 </div>
 {% endblock %}
 
-{% block content %}    
-    <div class="al-rich-content">
+{% block content %}
+    <div class="al-content-panel">
         <small>Description:</small>
         <p>{{ activity.description | safe }}</p>
+    </div>
 
-        <small>Settings:</small>
-        <p>Users may join this activity
-        {% if activity.auto_register %}
-            <b> freely.</b>
-        {% else %}
-            <b> upon request.</b>
-        {% endif %}    
-        </p>
-        <p>Confirmation period starts <b>{{activity.confirmation_period}} days</b> before the session's start date.</p>
-        <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
+    <div class="al-flex">
+        <div class="al-content-panel">
+            <small>Settings:</small>
+            <p>Users may join this activity
+            {% if activity.auto_register %}
+                <b> freely.</b>
+            {% else %}
+                <b> upon request.</b>
+            {% endif %}    
+            </p>
+            <p>Confirmation period starts <b>{{activity.confirmation_period}} days</b> before the session's start date.</p>
+            <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
+        </div>
 
-
-        <div class="al-activity-attendants">
+        <div class="al-content-panel">
             <small>Attendants:</small>
             {% block attendants %}{% endblock %}
         </div>
-
+        
         {% block requests %}
         {% endblock %}
     </div>
+
     <div class="al-table">
         <div class="al-table-header">
             <div class="al-table-filters">
