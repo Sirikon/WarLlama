@@ -42,17 +42,21 @@
     }
 }
 
-.al-content-wrapper {
-    max-width: 1120px;
-    margin: auto;
-    margin-top: 15px;
-    padding: 0 20px;
-}
+.al-content {
+    &-wrapper {
+        max-width: 1120px;
+        margin: auto;
+        margin-top: 15px;
+        padding: 0 20px;
+    }
 
-.al-rich-content {
-    background-color: white;
-    border-radius: 3px;
-    padding: 1px 1em;
+    &-panel {
+        background-color: white;
+        padding: 0.5em 1em;
+        margin: 10px 0;
+        border: 1px solid #eeeeee;
+        border-radius: 5px;
+    }
 }
 
 .al-footer {

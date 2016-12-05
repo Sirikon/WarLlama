@@ -1,7 +1,7 @@
 {% extends './_layout_activity.html' %}
 
 {% block user_options %}    
-    <a class="al-btn-menu-big" href="{% url 'alpaca:edit_activity' activity.id %}">
+    <a class="al-btn-action-big" href="{% url 'alpaca:edit_activity' activity.id %}">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Edit</span>
     </a>
 {% endblock %}
@@ -18,14 +18,13 @@
                 <option value="{{att.id}}">{{ att.username }}</option>
             {% endfor %}
             </select>
-            <input type="submit" name="kick_participant" value="Kick out"/>
+            <input type="submit" class="al-btn-sqrflat-small" name="kick_participant" value="Kick out"/>
         </form>
     {% endif %}
 {% endblock %}
 
-
 {% block requests %}
-    <div class="al-activity-attendants">
+    <div class="al-content-panel">
         <small>Pending requests:</small>  
         {% if activity.pending_attendants.count <= 0 %}
             <p>There are no pending requests to join the activity.</p>
@@ -38,15 +37,15 @@
                     <option value="{{att.id}}">{{ att.username }}</option>
                 {% endfor %}
                 </select>
-                <input type="submit" name="accept_request" value="Accept"/>
-                <input type="submit" name="reject_request" value="Reject"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="Accept"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="Reject"/>
             </form>  
         {% endif %}
     </div>
 {% endblock %}
 
 {% block session_list_menu %}
-    <a class="al-btn-menu-small" href="{% url 'alpaca:new_session' activity.id %}">
+    <a class="al-btn-action-small" href="{% url 'alpaca:new_session' activity.id %}">
         <i class="fa fa-plus"></i> <span>Add session</span>
     </a>
 {% endblock %}

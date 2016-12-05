@@ -18,7 +18,7 @@ button {
     cursor: pointer;
 }
 
-.al-btn-menu-big { 
+.al-btn-action-big { 
     background-color: $brand-color; 
     line-height: 1.5em;
     display: inline-block;
@@ -34,9 +34,9 @@ button {
     cursor: pointer;
 }
 
-.al-btn-menu-small { 
+.al-btn-action-small { 
     background-color: $brand-color; 
-    line-height: 1.5em;
+    line-height: 2em;
     display: inline-block;
     vertical-align: middle; 
     padding: 0 1em 0.1em 1em;   

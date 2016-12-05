@@ -23,7 +23,66 @@
 {% endblock %}
 
 {% block content %}
+    <div class="al-content-panel">
+        <small>Description:</small>
+        <p>{{ activity.description | safe }}</p>
+    </div>
 
+    <div class="al-flex">
+        <div class="al-content-panel">
+            <small>Settings:</small>
+            <p>Users may join this activity
+            {% if activity.auto_register %}
+                <b> freely.</b>
+            {% else %}
+                <b> upon request.</b>
+            {% endif %}    
+            </p>
+            <p>Confirmation period starts <b>{{activity.confirmation_period}} days</b> before the session's start date.</p>
+            <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
+        </div>
 
+        <div class="al-content-panel">
+            <small>Attendants:</small>
+            {% block attendants %}{% endblock %}
+        </div>
+        
+        {% block requests %}
+        {% endblock %}
+    </div>
 
+    <div class="al-table">
+        <div class="al-table-header">
+            <div class="al-table-filters">
+            </div>
+            <div class="al-table-menu">
+                {% block session_list_menu %}
+                {% endblock %}
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Where</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Confirmed Attendants</th>
+                {% block session_extra_columns %}{% endblock %}
+            </tr>
+            {% for session in session_list %}
+                <tr>
+                    <td><p>{{ session.description | safe }}</p></td>
+                    <td><p>{{ session.location }}</p></td>
+                    <td><p>{{ session.start_date }}</p></td>
+                    <td><p>{{ session.end_date }}</p></td>
+                    <td>
+                        {% for confirmed_user in session.confirmed_attendants.all %}
+                            <p>{{ confirmed_user.username }}</p>
+                        {% endfor %}                
+                    </td>
+                    {% block session_extra_cells %}{% endblock %}                
+                </tr>           
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
