@@ -87,6 +87,7 @@ def join_activity(request, activity_id):
     if request.method == "POST":
         if activity.auto_register:
             activity.attendants.add(user)
+            activity.num_attendants = activity.attendants.count()
         else:
             activity.pending_attendants.add(user)
         activity.save()
@@ -101,6 +102,7 @@ def leave_activity(request, activity_id):
 
     if request.method == "POST":
         activity.attendants.remove(user)
+        activity.num_attendants = activity.attendants.count()
         activity.save()
         for session in activity.session_set.all():
             if not session.has_finished():
@@ -117,6 +119,7 @@ def kick_attendant(request, activity_id):
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("attending"))
         activity.attendants.remove(selected_user)
+        activity.num_attendants = activity.attendants.count()
         activity.save()
         for session in activity.session_set.all():
             if not session.has_finished():
@@ -137,7 +140,9 @@ def pending_requests(request, activity_id):
             activity.pending_attendants.remove(selected_user)
 
         elif "reject_request" in request.POST:
-            activity.pending_attendants.remove(selected_user)            
+            activity.pending_attendants.remove(selected_user)   
+        
+        activity.num_attendants = activity.attendants.count()
         activity.save()
         # TO-DO --> Send "You have pending requests" email to activity's author
 

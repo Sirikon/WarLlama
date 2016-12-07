@@ -39,10 +39,5 @@ def activity_summary_demo(request):
 
     context = sort_activity_table(activity_list, to_sort_column, last_column)
     context['user'] = user
-
-    activity_list = context['activity_list']
-    count = activity_list.count()
-    table = [activity_list[:3], activity_list[3:6], activity_list[6:9], activity_list[9:12]]
-
-    context['activity_table'] = table     
+   
     return render(request, 'Alpaca/index_demo.html', context)

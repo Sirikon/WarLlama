@@ -7,14 +7,19 @@
             <span>{{ activity.title }}</span>
             <span class="al-text-tail">by {{ activity.author.username }}</span>
         </h1>
-        {% with activity.get_next_session as next_session %}
-            {% if next_session %}
-                <p>
-                    <i class="fa fa-calendar"></i>
-                    <span>Next Session <b>{{ next_session.start_date }}</b></span>
-                </p>
-            {% endif %}
-        {% endwith %}
+        <span>
+            <p>
+                <i class="fa fa-map-marker"></i>
+                <span>At <b>{{ activity.city }}</b></span>
+                <span>&nbsp;</span>
+                {% with activity.get_next_session as next_session %}
+                    {% if next_session %}
+                        <i class="fa fa-calendar"></i>
+                        <span>Next Session: <b>{{ next_session.start_date }}</b></span>
+                    {% endif %}
+                {% endwith %}            
+            </p>        
+        </span>
     </div>
     <div>
         {% block user_options %}{% endblock %}
@@ -28,7 +33,7 @@
         <p>{{ activity.description | safe }}</p>
     </div>
 
-    <div class="al-flex">
+    <div class="al-flex al-flex-adapt-content">
         <div class="al-content-panel">
             <small>Settings:</small>
             <p>Users may join this activity
@@ -42,7 +47,7 @@
             <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
         </div>
 
-        <div class="al-content-panel">
+        <div class="al-content-panel al-flex-grow">
             <small>Attendants:</small>
             {% block attendants %}{% endblock %}
         </div>
@@ -50,6 +55,8 @@
         {% block requests %}
         {% endblock %}
     </div>
+
+    <h3>Session List</h3>
 
     <div class="al-table">
         <div class="al-table-header">
@@ -66,13 +73,13 @@
                 <th>Where</th>
                 <th>Start</th>
                 <th>End</th>
-                <th>Confirmed Attendants</th>
+                <th>Attendants</th>
                 {% block session_extra_columns %}{% endblock %}
             </tr>
             {% for session in session_list %}
                 <tr>
-                    <td><p>{{ session.description | safe }}</p></td>
-                    <td><p>{{ session.location }}</p></td>
+                    <td style="max-width: 350px;"><p>{{ session.description | safe }}</p></td>
+                    <td class="text-center"><p>{{ session.location }}</p></td>
                     <td><p>{{ session.start_date }}</p></td>
                     <td><p>{{ session.end_date }}</p></td>
                     <td>

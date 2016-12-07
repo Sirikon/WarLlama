@@ -2,23 +2,17 @@
 
 {% block title %}
     {% if user.is_authenticated %}
-        <div class="al-table-header">
-            <div class="al-table-filters">
-                <small>Filters:</small>
-                <a class="al-btn-sqrflat-small" href="?filter=all"> <span>All Activities</span> </a>
-                <a class="al-btn-sqrflat-small" href="?filter=author"> <span>My Activities: Author</span> </a>
-                <a class="al-btn-sqrflat-small" href="?filter=attendant"> <span>My Activities: Attendant</span></a>
-                
+        <div class="al-flex">
+            <div class="al-flex-grow">
+                {% include "./partials/activity-filter-order.html" %}
             </div>
-            <div class="al-table-menu">
-                <a class="al-btn-action-big" href="/newactivity/">
-                    <i class="fa fa-plus"></i><span> New Activity</span>
-                </a>
-            </div>
+            <a class="al-btn-action-big" href="/newactivity/">
+                <i class="fa fa-plus"></i><span> New Activity</span>
+            </a>
         </div>
     {% endif %}
 {% endblock %}
 
 {% block content %}
-    {% include './partials/activity-table.html' %}
+    {% include "./partials/activity-card-list.html" %}
 {% endblock %}

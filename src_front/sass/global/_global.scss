@@ -25,3 +25,18 @@ body {
     font-size: 0.7em;
     font-weight: 100;
 }
+
+.al-sticky-bar {
+    position: fixed;
+    left: 0;
+}
+
+.al-no-style-ul {
+    list-style-type: none;
+    margin: auto;
+    padding: 0 10px 0px 10px; 
+
+    li {
+        padding: 0 0 5px 0;
+    }
+}

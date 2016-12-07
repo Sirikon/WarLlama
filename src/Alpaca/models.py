@@ -47,10 +47,12 @@ class Profile (models.Model):
 class Activity (models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=5000)
+    city = models.TextField(max_length=100)
     pub_date = models.DateTimeField('publication date')
    
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
     attendants = models.ManyToManyField(User, related_name="attending_activities", blank=True)
+    num_attendants = models.IntegerField(default=0)
     pending_attendants = models.ManyToManyField(User, related_name="waiting_activities", blank=True)
 
     # Settings

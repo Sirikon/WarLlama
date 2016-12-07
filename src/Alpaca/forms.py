@@ -74,19 +74,20 @@ class ChangePasswordForm(forms.Form):
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, max_length=200)
     description = forms.CharField(required=True, max_length=5000, widget=forms.Textarea)
+    city = forms.CharField(required=True, max_length=100, help_text="In which city will this activity take place?")
     auto_register = forms.BooleanField(required=False, help_text="Selected: Users join automatically. Not selected: Author decides to accept or reject joining requests.")
     confirmation_period = forms.IntegerField(required=True, validators=[MinValueValidator(3)], initial=3, help_text="How many days before a session starts the assistance confirmation period?")
     age_minimum = forms.IntegerField(required=True, initial=18, help_text="Minimum age to attend this activity.")
     
     class Meta:
         model = Activity
-        fields = ("title", "description", "auto_register", "confirmation_period", "age_minimum")
+        fields = ("title", "description", "city", "auto_register", "confirmation_period", "age_minimum")
 
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, max_length=500, widget=forms.Textarea)
-    start_date = forms.DateTimeField(required=True)
-    end_date = forms.DateTimeField(required=True)
-    location = forms.CharField(required=True, max_length=100)
+    start_date = forms.DateTimeField(required=True, help_text="Example: 1984-11-15 19:25:36")
+    end_date = forms.DateTimeField(required=True, help_text="Example: 1984-11-15 19:25:36")
+    location = forms.CharField(required=True, max_length=100, help_text="Where (place, address) will this activity take place?")
     
     class Meta:
         model = Session

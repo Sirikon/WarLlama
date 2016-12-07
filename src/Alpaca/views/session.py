@@ -30,11 +30,11 @@ def new_session(request, activity_id):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_layout.html', context)
+            return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
         context['form'] = SessionForm()
-        return render(request, 'Alpaca/form_layout.html', context)
+        return render(request, 'Alpaca/_form_layout.html', context)
 
 
 def edit_session(request, activity_id, session_id):
@@ -56,11 +56,11 @@ def edit_session(request, activity_id, session_id):
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_layout.html', context)
+            return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
         context['form'] = SessionForm(instance=session)
-        return render(request, 'Alpaca/form_layout.html', context)
+        return render(request, 'Alpaca/_form_layout.html', context)
 
 
 def confirm_session(request, activity_id):

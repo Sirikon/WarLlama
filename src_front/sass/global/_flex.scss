@@ -1,9 +1,31 @@
 .al-flex {
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
+
+    &-stretch-content {
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+
+    &-adapt-content {
+        flex-wrap: nowrap;
+        align-items: stretch;
+        
+        div:nth-child(n):not(:first-child) {
+            margin-left: 15px;
+        }
+    }    
+
+    &-column {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
 
     &-grow {
         flex-grow: 1;
