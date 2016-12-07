@@ -49,7 +49,7 @@
                     <form action="{{activity.id}}/confirm/" method="POST">
                         {% csrf_token %}
                         <input type="hidden" name="session_id" value="{{ session.id }}"/>
-                        <input type="submit" name="confirm_session" value="I'm going!!"/>
+                        <input type="submit" class="al-btn-sqrflat-small" name="confirm_session" value="I'm going!!"/>
                     </form>
                 {% endif %}
             {% else %}

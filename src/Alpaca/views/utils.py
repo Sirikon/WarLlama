@@ -12,7 +12,7 @@ def sort_activity_table(activity_list, sort_column, last_column):
                     sort_sign = ""
         
         if sort_column == "next_session":
-            sorted_list = sorted(activity_list.all(), key= lambda a: (a.get_next_session() is not None, a.get_next_session().start_date), reverse=(sort_sign=="-"))
+            sorted_list = sorted(activity_list.all(), key= lambda a: (a.get_next_session().start_date), reverse=(sort_sign=="-"))
 
         else:
             sorted_list = activity_list.order_by(sort_sign + sort_column)

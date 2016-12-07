@@ -54,9 +54,9 @@
     {% endif %}
 </a>
 
-<a class="al-btn-sqrflat-small" href="?order_by=attendants&last={{sort_sign}}{{sorted_column}}">
+<a class="al-btn-sqrflat-small" href="?order_by=num_attendants&last={{sort_sign}}{{sorted_column}}">
     # of Attendants
-    {% if sorted_column == "attendants" %}
+    {% if sorted_column == "num_attendants" %}
         <i class="fa {{sort_icon}}" aria-hidden="true"></i>
     {% else %}
         <i class="fa fa-sort" aria-hidden="true"></i>
