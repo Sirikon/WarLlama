@@ -1,0 +1,509 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-08 20:08+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\Alpaca\forms.py:16
+msgid "E-mail"
+msgstr "E-mail"
+
+#: .\Alpaca\forms.py:17 .\Alpaca\forms.py:43
+msgid "Birth date"
+msgstr "Fecha de nacimiento"
+
+#: .\Alpaca\forms.py:18 .\Alpaca\forms.py:41
+msgid "First Name"
+msgstr "Nombre"
+
+#: .\Alpaca\forms.py:18 .\Alpaca\forms.py:19 .\Alpaca\forms.py:41
+#: .\Alpaca\forms.py:42
+msgid "Optional"
+msgstr "Opcional"
+
+#: .\Alpaca\forms.py:19 .\Alpaca\forms.py:42
+msgid "Last Name"
+msgstr "Apellido/s"
+
+#: .\Alpaca\forms.py:21 .\Alpaca\forms.py:58 .\WarLlama\settings.py:150
+msgid "English"
+msgstr "Inglés"
+
+#: .\Alpaca\forms.py:22 .\Alpaca\forms.py:59 .\WarLlama\settings.py:151
+msgid "Spanish"
+msgstr "Español"
+
+#: .\Alpaca\forms.py:23 .\Alpaca\forms.py:60
+msgid "Language"
+msgstr "Lenguaje"
+
+#: .\Alpaca\forms.py:23 .\Alpaca\forms.py:60
+msgid "In which language would you prefer to use Alpaca?"
+msgstr "¿En qué lenguaje preferirías usar Alpaca?"
+
+#: .\Alpaca\forms.py:45
+msgid "Show your birthday?"
+msgstr "¿Mostrar tu cumpleaños?"
+
+#: .\Alpaca\forms.py:46
+msgid "Show your e-mail?"
+msgstr "¿Mostrar tu e-mail?"
+
+#: .\Alpaca\forms.py:47
+msgid "Show your real name?"
+msgstr "¿Mostrar tu nombre real?"
+
+#: .\Alpaca\forms.py:49
+msgid "Username (Full Name)"
+msgstr "Usuario (Nombre Completo)"
+
+#: .\Alpaca\forms.py:50
+msgid "Full Name (Username)"
+msgstr "Nombre Completo (Usuario)"
+
+#: .\Alpaca\forms.py:51
+msgid "Username (First Name)"
+msgstr "Usuario (Nombre)"
+
+#: .\Alpaca\forms.py:52
+msgid "Username (Last Name)"
+msgstr "Usuario (Apellido)"
+
+#: .\Alpaca\forms.py:53
+msgid "First Name (Username)"
+msgstr "Nombre (Usuario)"
+
+#: .\Alpaca\forms.py:54
+msgid "Last Name (Username)"
+msgstr "Apellido (Usuario)"
+
+#: .\Alpaca\forms.py:56
+msgid "How should your name be displayed?"
+msgstr "¿Cómo deberíamos enseñar tu nombre?"
+
+#: .\Alpaca\forms.py:56
+msgid "You can ignore this if you chose not to show your name."
+msgstr "Puedes ignorar esta opción si has elegido no mostrar tu nombre."
+
+#: .\Alpaca\forms.py:67
+msgid "E-mail Or Username"
+msgstr "E-mail o Usuario"
+
+#: .\Alpaca\forms.py:70
+msgid "Old password:"
+msgstr "Contraseña antigua:"
+
+#: .\Alpaca\forms.py:71
+msgid "New password:"
+msgstr "Contraseña nueva:"
+
+#: .\Alpaca\forms.py:72
+msgid "Repeat new password:"
+msgstr "Repetir contraseña nueva:"
+
+#: .\Alpaca\forms.py:88
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:5
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:8
+msgid "Title"
+msgstr "Título"
+
+#: .\Alpaca\forms.py:89 .\Alpaca\forms.py:101
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:74
+msgid "Description"
+msgstr "Descripción"
+
+#: .\Alpaca\forms.py:90
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:23
+msgid "City"
+msgstr "Ciudad"
+
+#: .\Alpaca\forms.py:90
+msgid "In which city will this activity take place?"
+msgstr "¿En qué ciudad tendrá lugar esta actividad?"
+
+#: .\Alpaca\forms.py:92
+msgid "Allow auto-registration?"
+msgstr "¿Permitir auto-registro?"
+
+#: .\Alpaca\forms.py:92
+msgid ""
+"Selected: Users join automatically. Not selected: Author decides to accept "
+"or reject joining requests."
+msgstr ""
+"Seleccionado: Los usuarios podrán unirse a la actividad automáticamente. No "
+"seleccionado: El autor de la actividad decideaceptar o rechazar las "
+"peticiones de aquellos que quieran unirse."
+
+#: .\Alpaca\forms.py:93
+msgid "Confirmation period"
+msgstr "Período de confirmación"
+
+#: .\Alpaca\forms.py:93
+msgid ""
+"How many days before a session starts the assistance confirmation period?"
+msgstr ""
+"¿Cuántos días antes de que empiece una sesión empieza el período de "
+"confirmación de asistencia?"
+
+#: .\Alpaca\forms.py:94
+msgid "Age minimum"
+msgstr "Edad mínima"
+
+#: .\Alpaca\forms.py:94
+msgid "Minimum age to attend this activity."
+msgstr "Edad mínima para participar en esta actividad."
+
+#: .\Alpaca\forms.py:102
+msgid "Start date and time"
+msgstr "Fecha y hora de comienzo"
+
+#: .\Alpaca\forms.py:102 .\Alpaca\forms.py:103
+msgid "Example: 1984-11-15 19:25:36"
+msgstr "Ejemplo: 1984-11-15 19:25:36"
+
+#: .\Alpaca\forms.py:103
+msgid "End date and time"
+msgstr "Fecha y hora de finalización"
+
+#: .\Alpaca\forms.py:104
+msgid "Location"
+msgstr "Localización"
+
+#: .\Alpaca\forms.py:104
+msgid "Where (place, address) will this session take place?"
+msgstr "¿Dónde (lugar, dirección) tendrá lugar esta sesión?"
+
+#: .\Alpaca\templates\Alpaca\_layout.html:22
+msgid "Log out"
+msgstr "Salir"
+
+#: .\Alpaca\templates\Alpaca\_layout.html:24
+#: .\Alpaca\views\authentication.py:57
+msgid "Log in"
+msgstr "Entrar"
+
+#: .\Alpaca\templates\Alpaca\_layout.html:25
+msgid "Sign up"
+msgstr "Registrarse"
+
+#: .\Alpaca\templates\Alpaca\_layout.html:38
+msgid "Found a problem? Please,"
+msgstr "¿Has encontrado un problema? Por favor,"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:9
+#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:8
+msgid "by"
+msgstr "por"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:15
+msgid "At"
+msgstr "En"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:20
+msgid "Next Session:"
+msgstr "Próxima Sesión:"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:34
+msgid "Description:"
+msgstr "Descripción:"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:40
+msgid "Settings:"
+msgstr "Preferencias:"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:41
+msgid "Users may join this activity"
+msgstr "Los usuarios pueden unirse a esta actividad"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:43
+msgid "freely."
+msgstr "libremente."
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:45
+msgid "upon request."
+msgstr "tras pedirlo."
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:48
+msgid "Confirmation period starts"
+msgstr "El período de confirmación empieza"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:48
+msgid "days"
+msgstr "días"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:48
+msgid "before the session's start date."
+msgstr "antes del comienzo de la sesión."
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:49
+msgid "The minimum age to join this activity is"
+msgstr "La edad mínima para participar en esta actividad es"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:49
+#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:29
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:71
+msgid "years-old"
+msgstr "años"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:53
+msgid "Attendants:"
+msgstr "Participantes:"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:61
+msgid "Session List"
+msgstr "Lista de Sesiones"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:75
+msgid "Where"
+msgstr "Dónde"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:76
+msgid "Start"
+msgstr "Empieza"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:77
+msgid "End"
+msgstr "Finaliza"
+
+#: .\Alpaca\templates\Alpaca\_layout_activity.html:78
+msgid "Attendants"
+msgstr "Participantes"
+
+#: .\Alpaca\templates\Alpaca\activity_anon.html:6
+msgid "Join"
+msgstr "Unirse"
+
+#: .\Alpaca\templates\Alpaca\activity_anon.html:13
+#: .\Alpaca\templates\Alpaca\activity_user.html:25
+msgid "There are no users attending this activity, except"
+msgstr "No hay usuarios participando en esta actividad, salvo"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:6
+#: .\Alpaca\templates\Alpaca\activity_author.html:56
+#: .\Alpaca\templates\Alpaca\user_profile.html:12
+msgid "Edit"
+msgstr "Editar"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:13
+msgid "There are no users attending your activity."
+msgstr "No hay usuarios participando en tu actividad."
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:22
+msgid "Kick out"
+msgstr "Echar"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:29
+msgid "Pending requests:"
+msgstr "Peticiones pendientes:"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:31
+msgid "There are no pending requests to join the activity."
+msgstr "No hay peticiones pendientes para unirse a la actividad."
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:33
+msgid "Manage the requests to join the activity:"
+msgstr "Administrar peticiones para unirse a la actividad:"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:41
+msgid "Accept"
+msgstr "Aceptar"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:42
+msgid "Reject"
+msgstr "Rechazar"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:50
+msgid "Add session"
+msgstr "Añadir una sesión"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:55
+#: .\Alpaca\templates\Alpaca\activity_user.html:35
+msgid "State"
+msgstr "Estado"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:63
+#: .\Alpaca\templates\Alpaca\activity_user.html:42
+msgid "Closed & Finished"
+msgstr "Cerrada & Finalizada"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:65
+msgid "Open for confirmation"
+msgstr "Abierta para confirmación"
+
+#: .\Alpaca\templates\Alpaca\activity_author.html:67
+msgid "Not ready yet"
+msgstr "Aún no está lista"
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:6
+msgid "You are too young to attend this activity."
+msgstr "Eres demasiado joven para unirte a esta actividad."
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:8
+msgid "The author of this activity has received your request to join!"
+msgstr "¡El autor de esta actividad ha recibido tu petición de unirte!"
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:12
+msgid "Leave"
+msgstr "Irse"
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:17
+msgid "Join!"
+msgstr "¡Únete!"
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:45
+msgid "Join the activity to come!"
+msgstr "¡Únete a la actividad para venir!"
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:48
+msgid "See you there!"
+msgstr "¡Te vemos allí!"
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:53
+msgid "I am going!!"
+msgstr "¡Yo voy!"
+
+#: .\Alpaca\templates\Alpaca\activity_user.html:57
+msgid "Coming soon..."
+msgstr "Próximamente..."
+
+#: .\Alpaca\templates\Alpaca\form_edit_profile.html:6
+#: .\Alpaca\views\user_management.py:67
+msgid "Change your password"
+msgstr "Cambia tu contraseña"
+
+#: .\Alpaca\templates\Alpaca\form_login.html:6
+msgid "Forgot your password?"
+msgstr "¿Has olvidado tu contraseña?"
+
+#: .\Alpaca\templates\Alpaca\form_login.html:7
+msgid "Or click"
+msgstr "¡O haz click"
+
+#: .\Alpaca\templates\Alpaca\form_login.html:7
+msgid "here"
+msgstr "aquí"
+
+#: .\Alpaca\templates\Alpaca\form_login.html:7
+msgid "to sign up!"
+msgstr "para registrarte!"
+
+#: .\Alpaca\templates\Alpaca\index.html:13
+msgid "New Activity"
+msgstr "Nueva Actividad"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:23
+msgid "No new sessions"
+msgstr "No hay sesiones nuevas"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:25
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:79
+msgid "No sessions yet"
+msgstr "Sin sesiones"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:3
+msgid "Filters:"
+msgstr "Filtros:"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:4
+msgid "All Activities"
+msgstr "Todas las Actividades"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:5
+msgid "My Activities: Author"
+msgstr "Mis Actividades: Autor"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:6
+msgid "My Activities: Attendant"
+msgstr "Mis Actividades: Participante"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:3
+msgid "Order by:"
+msgstr "Ordenar por:"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:14
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:18
+msgid "Author"
+msgstr "Autor"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:32
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:48
+msgid "Published Date"
+msgstr "Fecha de Publicación"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:41
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:58
+msgid "Next Session"
+msgstr "Próxima Sesión"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:50
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:28
+msgid "Age Minimum"
+msgstr "Edad Mínima"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-order.html:59
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:38
+msgid "# of Attendants"
+msgstr "# de Participantes"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:81
+msgid "Waiting for future sessions!"
+msgstr "¡Esperando sesiones nuevas!"
+
+#: .\Alpaca\views\activity.py:25
+msgid "Start a new activity"
+msgstr "Empezar una actividad"
+
+#: .\Alpaca\views\activity.py:26 .\Alpaca\views\session.py:26
+msgid "Create!"
+msgstr "¡Crear!"
+
+#: .\Alpaca\views\activity.py:53
+msgid "Editing activity"
+msgstr "Editando actividad"
+
+#: .\Alpaca\views\activity.py:54 .\Alpaca\views\session.py:55
+#: .\Alpaca\views\user_management.py:37
+msgid "Save changes"
+msgstr "Guardar cambios"
+
+#: .\Alpaca\views\authentication.py:29 .\Alpaca\views\user_management.py:55
+msgid "Sign up!"
+msgstr "¡Registrarse!"
+
+#: .\Alpaca\views\authentication.py:73
+msgid "Error"
+msgstr "Error"
+
+#: .\Alpaca\views\authentication.py:74
+msgid "This user is not active at the moment. Please, verify your e-mail."
+msgstr "Este usuario no ha sido activado. Por favor, verifica tu e-mail."
+
+#: .\Alpaca\views\session.py:25
+msgid "Create a new session"
+msgstr "Crear nueva sesión"
+
+#: .\Alpaca\views\session.py:54
+msgid "Editing a session"
+msgstr "Editando una sesión"
+
+#: .\Alpaca\views\user_management.py:36
+msgid "Edit your profile's settings"
+msgstr "Edita tu perfil"
+
+#: .\Alpaca\views\user_management.py:68
+msgid "Save new password"
+msgstr "Guardar contraseña"

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -18,10 +19,10 @@
                 <div class="al-header-menu">
                     {% if user.is_authenticated %}
                         <a href="/profile/{{user.username}}"><i class="fa fa-sliders"></i> {{user.username}}</a>
-                        <a href="/logout/"><i class="fa fa-sign-out"></i> Log out</a>
+                        <a href="/logout/"><i class="fa fa-sign-out"></i> {% trans "Log out" %}</a>
                     {% else %}
-                        <a href="/login/"><i class="fa fa-sign-in"></i> Log in</a>
-                        <a href="/signup/"><i class="fa fa-thumbs-up"></i> Sign up</a>
+                        <a href="/login/"><i class="fa fa-sign-in"></i> {% trans "Log in" %}</a>
+                        <a href="/signup/"><i class="fa fa-thumbs-up"></i> {% trans "Sign up" %}</a>
                     {% endif %}
                 </div>
             </div>
@@ -34,7 +35,7 @@
 
         <div class="al-footer">
             <div class="al-footer-content">
-                <p>Found a problem? Please, <a href="https://github.com/Darkatom/WarLlama/issues">help us!</a></p>
+                <p>{% trans "Found a problem? Please," %} <a href="https://github.com/Darkatom/WarLlama/issues">{% trans "help us!"}</a></p>
             </div>
         </div>
     </body>

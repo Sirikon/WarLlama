@@ -1,21 +1,23 @@
 {% extends './_layout.html' %}
+{% load i18n %}
 
 {% block title %}
 <div class="al-content-header al-flex">
     <div class="al-flex-grow">
         <h1>
             <span>{{ activity.title }}</span>
-            <span class="al-text-tail">by {{ activity.author.username }}</span>
+            <span class="al-text-tail">{% trans "by" %} {{ activity.author.username }}</span>
+            <span><a class="al-btn-icon" href="{% url 'alpaca:profile' activity.author.username %}"><i class="fa fa-search"></i></a></span>
         </h1>
         <span>
             <p>
                 <i class="fa fa-map-marker"></i>
-                <span>At <b>{{ activity.city }}</b></span>
+                <span>{% trans "At" %} <b>{{ activity.city }}</b></span>
                 <span>&nbsp;</span>
                 {% with activity.get_next_session as next_session %}
                     {% if next_session %}
                         <i class="fa fa-calendar"></i>
-                        <span>Next Session: <b>{{ next_session.start_date }}</b></span>
+                        <span>{% trans "Next Session:" %} <b>{{ next_session.start_date }}</b></span>
                     {% endif %}
                 {% endwith %}            
             </p>        
@@ -29,26 +31,26 @@
 
 {% block content %}
     <div class="al-content-panel">
-        <small>Description:</small>
+        <small>{% trans "Description:" %}</small>
         <p>{{ activity.description | safe }}</p>
     </div>
 
     <div class="al-flex al-flex-adapt-content">
         <div class="al-content-panel">
-            <small>Settings:</small>
-            <p>Users may join this activity
+            <small>{% trans "Settings:" %}</small>
+            <p>{% trans "Users may join this activity" %}
             {% if activity.auto_register %}
-                <b> freely.</b>
+                <b> {% trans "freely." %}</b>
             {% else %}
-                <b> upon request.</b>
+                <b> {% trans "upon request." %}</b>
             {% endif %}    
             </p>
-            <p>Confirmation period starts <b>{{activity.confirmation_period}} days</b> before the session's start date.</p>
-            <p>The minimum age to join this activity is <b>{{activity.age_minimum}} years-old</b>.</p>
+            <p>{% trans "Confirmation period starts" %} <b>{{activity.confirmation_period}} {% trans "days" %}</b> {% trans "before the session's start date." %}</p>
+            <p>{% trans "The minimum age to join this activity is" %} <b>{{activity.age_minimum}} {% trans "years-old" %}</b>.</p>
         </div>
 
         <div class="al-content-panel al-flex-grow">
-            <small>Attendants:</small>
+            <small>{% trans "Attendants:" %}</small>
             {% block attendants %}{% endblock %}
         </div>
         
@@ -56,7 +58,7 @@
         {% endblock %}
     </div>
 
-    <h3>Session List</h3>
+    <h3>{% trans "Session List" %}</h3>
 
     <div class="al-table">
         <div class="al-table-header">
@@ -69,11 +71,11 @@
         </div>
         <table>
             <tr>
-                <th>Description</th>
-                <th>Where</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Attendants</th>
+                <th>{% trans "Description" %}</th>
+                <th>{% trans "Where" %}</th>
+                <th>{% trans "Start" %}</th>
+                <th>{% trans "End" %}</th>
+                <th>{% trans "Attendants" %}</th>
                 {% block session_extra_columns %}{% endblock %}
             </tr>
             {% for session in session_list %}

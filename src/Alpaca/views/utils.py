@@ -1,6 +1,18 @@
 from django.db.models import Count, Q
 
+from django.utils import translation
+from django import http
+from django.conf import settings
+
 # Useful functions for the views. These functions return contexts.
+
+def set_translation(request): 
+    if request.user.is_authenticated():
+        user_language = request.user.profile.language_preference   
+    else: 
+        user_language = "en"
+    translation.activate(user_language)
+    request.session[translation.LANGUAGE_SESSION_KEY] = user_language
 
 def sort_activity_table(activity_list, sort_column, last_column):
     sort_sign = "-"

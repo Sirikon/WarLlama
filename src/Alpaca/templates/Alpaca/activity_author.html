@@ -1,15 +1,16 @@
 {% extends './_layout_activity.html' %}
+{% load i18n %}
 
 {% block user_options %}    
     <a class="al-btn-action-big" href="{% url 'alpaca:edit_activity' activity.id %}">
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>Edit</span>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
     </a>
 {% endblock %}
 
 
 {% block attendants %}
     {% if activity.attendants.count <= 0 %}
-        <p>There are no users attending your activity.</p>
+        <p>{% trans "There are no users attending your activity." %}</p>
     {% else %}
         <form action="kick/{{activity.id}}" method="POST">
             {% csrf_token %}
@@ -18,18 +19,18 @@
                 <option value="{{att.id}}">{{ att.username }}</option>
             {% endfor %}
             </select>
-            <input type="submit" class="al-btn-sqrflat-small" name="kick_participant" value="Kick out"/>
+            <input type="submit" class="al-btn-sqrflat-small" name="kick_participant" value="{% trans 'Kick out' %}"/>
         </form>
     {% endif %}
 {% endblock %}
 
 {% block requests %}
     <div class="al-content-panel">
-        <small>Pending requests:</small>  
+        <small>{% trans "Pending requests:" %}</small>  
         {% if activity.pending_attendants.count <= 0 %}
-            <p>There are no pending requests to join the activity.</p>
+            <p>{% trans "There are no pending requests to join the activity." %}</p>
         {% else %}
-            <p>Manage the requests to join the activity:</p>
+            <p>{% trans "Manage the requests to join the activity:" %}</p>
             <form action="pending/{{activity.id}}" method="POST">
                 {% csrf_token %}
                 <select id="pending_requests" name="user_join_request">
@@ -37,8 +38,8 @@
                     <option value="{{att.id}}">{{ att.username }}</option>
                 {% endfor %}
                 </select>
-                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="Accept"/>
-                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="Reject"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
             </form>  
         {% endif %}
     </div>
@@ -46,24 +47,24 @@
 
 {% block session_list_menu %}
     <a class="al-btn-action-small" href="{% url 'alpaca:new_session' activity.id %}">
-        <i class="fa fa-plus"></i> <span>Add session</span>
+        <i class="fa fa-plus"></i> <span>{% trans "Add session" %}</span>
     </a>
 {% endblock %}
     
 {% block session_extra_columns %}
-    <th>State</th>
-    <th>Edit</th>
+    <th>{% trans "State" %}</th>
+    <th>{% trans "Edit" %}</th>
 {% endblock %}      
  
  
 {% block session_extra_cells %}
     <td class="text-center">
         {% if session.has_finished %}
-            <p>Closed & Finished</p>
+            <p>{% trans "Closed & Finished" %}</p>
         {% elif session.is_on_confirmation_period %}
-            <p>Open for confirmation</p>
+            <p>{% trans "Open for confirmation" %}</p>
         {% else %}
-            <p>Not ready yet</p>
+            <p>{% trans "Not ready yet" %}</p>
         {% endif %}
     </td>
     <td class="text-center">

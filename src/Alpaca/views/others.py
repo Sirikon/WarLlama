@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from django.db.models import Count, Q
+from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from ..models import Activity
 
-from utils import sort_activity_table
+from utils import sort_activity_table, set_translation
 
 
 def index(request):
+    set_translation(request)
     user = request.user
     user_filter = request.GET.get('filter')
     to_sort_column = request.GET.get('order_by')
@@ -26,6 +27,7 @@ def index(request):
     return render(request, 'Alpaca/index.html', context)
 
 def activity_summary_demo(request):
+    set_translation(request)
     user = request.user
     user_filter = request.GET.get('filter')
     to_sort_column = request.GET.get('order_by')

@@ -1,15 +1,16 @@
 {% extends './_layout_activity.html' %}
-    
+{% load i18n %}
+
 {% block user_options %}
     <a class="al-btn-action-big" href="{% url 'alpaca:login' activity.id %}">
-        Join
+        {% trans "Join" %}
     </a>
 {% endblock %}
 
 
 {% block attendants %}
     {% if activity.attendants.count <= 0 %}
-        <p>There are no users attending this activity, except {{ activity.author }}.</p>
+        <p>{% trans "There are no users attending this activity, except" %} {{ activity.author }}.</p>
     {% else %}    
         {% for att in activity.attendants.all %}
             <span class="al-activity-attendant">{{ att.username }}</span>

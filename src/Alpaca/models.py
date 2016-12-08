@@ -14,6 +14,7 @@ class Profile (models.Model):
     birth_date = models.DateField('date of birth')
 
     # USER SETTINGS #
+    language_preference = models.CharField(max_length=50, default="English")
     show_email = models.BooleanField(default=True)
     show_birthday = models.BooleanField(default=True)
     show_real_name = models.BooleanField(default=True)

@@ -1,7 +1,8 @@
 {% extends './_form_layout.html' %}
+{% load i18n %}
 
 {% block other-content %}
     <div class="al-form-base-footer">
-        <a href="{% url 'alpaca:change_password' %}">Change your password</a>
+        <a href="{% url 'alpaca:change_password' %}">{% trans "Change your password" %}</a>
     </div>
 {% endblock %}

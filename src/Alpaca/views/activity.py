@@ -6,19 +6,24 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
+
 from ..models import Activity, Session
 from ..forms import ActivityForm
+from .utils import set_translation
 
 import datetime
 
 ## -- ACTIVITIES -- ##
 def new_activity(request):
+    set_translation(request)
+    
     user = request.user
     if not user.is_authenticated():
         return  HttpResponseRedirect(reverse('alpaca:index'))
     
-    context = { 'form_title': "Start a new activity",
-                'submit_text': "Create!",
+    context = { 'form_title': _("Start a new activity"),
+                'submit_text': _("Create!"),
                 'rich_field_name': "description" }
 
     if request.method == "POST":
@@ -39,13 +44,14 @@ def new_activity(request):
 
 
 def edit_activity(request, activity_id):
+    set_translation(request)
     user = request.user
     activity = get_object_or_404(Activity, pk=activity_id)
     if not user.is_authenticated() or user != activity.author:
         return  HttpResponseRedirect(reverse('alpaca:index'))
 
-    context = { 'form_title': "Editing activity " + activity.title,
-                'submit_text': "Save changes",
+    context = { 'form_title': _("Editing activity") + " " + activity.title,
+                'submit_text': _("Save changes"),
                 'rich_field_name': "description" }
 
     if request.method == "POST":
@@ -63,6 +69,7 @@ def edit_activity(request, activity_id):
 
 
 def activity(request, activity_id):
+    set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
     user = request.user
     session_list = activity.session_set.order_by('start_date')
@@ -81,6 +88,7 @@ def activity(request, activity_id):
 
 
 def join_activity(request, activity_id):
+    set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
     user = request.user
 
@@ -97,6 +105,7 @@ def join_activity(request, activity_id):
 
 
 def leave_activity(request, activity_id):
+    set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
     user = request.user
 
@@ -114,6 +123,7 @@ def leave_activity(request, activity_id):
 
 
 def kick_attendant(request, activity_id):
+    set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":
@@ -131,6 +141,7 @@ def kick_attendant(request, activity_id):
 
 
 def pending_requests(request, activity_id):
+    set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
 
     if request.method == "POST":

@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware', ## Enables Language Selection on request
 ]
 
 ROOT_URLCONF = 'WarLlama.urls'
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.i18n', ## I18N processor por Multi-Language
             ],
         },
     },
@@ -71,6 +73,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'WarLlama.wsgi.application'
 
 ALLOWED_HOSTS = ['*']
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale/'), ## Path to where translation files are stored
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -138,6 +144,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Languages the site will be translated to
+ugettext = lambda s: s
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('es', ugettext('Spanish')),
+)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

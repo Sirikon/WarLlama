@@ -4,24 +4,29 @@ from django.views.generic import *
 from django.core.urlresolvers import reverse
 
 from django.contrib import auth
-from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
+from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
+
 from ..models import Profile
 from ..forms import ProfileCreationForm
+
+from .utils import set_translation
 
 import datetime
 
 ## -- AUTHENTICATION -- ##
 def signup(request, activity_id):
+    set_translation(request)
     if request.user.is_authenticated():
         if activity_id == "":
             return  HttpResponseRedirect(reverse('alpaca:index'))
         else:
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
-    context = { 'submit_text': "Sign up!", 'rich_field_name': "" }
+    context = { 'submit_text': _("Sign up!"), 'rich_field_name': "" }
 
     if request.method == "POST":
         form = ProfileCreationForm(data=request.POST)
@@ -42,13 +47,14 @@ def signup(request, activity_id):
 
 
 def login(request, activity_id):
+    set_translation(request)
     if request.user.is_authenticated():
         if activity_id == "":
             return  HttpResponseRedirect(reverse('alpaca:index'))
         else:
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
-    context = { 'submit_text': "Log in", 'rich_field_name': "" }
+    context = { 'submit_text': _("Log in"), 'rich_field_name': "" }
 
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
@@ -63,7 +69,11 @@ def login(request, activity_id):
                 else:
                     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
             else:
-                return render(request, 'Alpaca/not_active_user.html')
+                context = {
+                    'message_title': _('Error'),
+                    'message_body': _('This user is not active at the moment. Please, verify your e-mail.')
+                }
+                return render(request, 'Alpaca/server_message.html', context)
         else:
             context['form'] = form
             return render(request, 'Alpaca/form_login.html', context)
@@ -72,5 +82,6 @@ def login(request, activity_id):
     return render(request, 'Alpaca/form_login.html', context)
 
 def logout(request):
+    set_translation(request)
     auth.logout(request)
     return HttpResponseRedirect(reverse('alpaca:index'))

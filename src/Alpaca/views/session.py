@@ -5,20 +5,25 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
+
 from ..models import Activity, Session
 from ..forms import SessionForm
+
+from .utils import set_translation
 
 import datetime
 
 ## -- SESSIONS -- ##
 def new_session(request, activity_id):
+    set_translation(request)
     activity = get_object_or_404(Activity, id=activity_id)
     user = request.user
     if not user.is_authenticated() or user != activity.author:
         return  HttpResponseRedirect(reverse('alpaca:index'))
     
-    context = { 'form_title': "Create a new session",
-                'submit_text': "Create!",
+    context = { 'form_title': _("Create a new session"),
+                'submit_text': _("Create!"),
                 'rich_field_name': "description" }
 
     if request.method == "POST":
@@ -38,6 +43,7 @@ def new_session(request, activity_id):
 
 
 def edit_session(request, activity_id, session_id):
+    set_translation(request)
     user = request.user
     activity = get_object_or_404(Activity, id=activity_id)   
     session = get_object_or_404(Session, id=session_id)   
@@ -45,8 +51,8 @@ def edit_session(request, activity_id, session_id):
     if not user.is_authenticated() or user != activity.author:
         return  HttpResponseRedirect(reverse('alpaca:index'))    
 
-    context = { 'form_title': "Editing a session",
-                'submit_text': "Save changes",
+    context = { 'form_title': _("Editing a session"),
+                'submit_text': _("Save changes"),
                 'rich_field_name': "description" }
 
     if request.method == "POST":
@@ -64,6 +70,7 @@ def edit_session(request, activity_id, session_id):
 
 
 def confirm_session(request, activity_id):
+    set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
     user = request.user
 

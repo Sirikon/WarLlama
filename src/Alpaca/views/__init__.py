@@ -6,4 +6,3 @@ from user_management import *
 
 from activity import *
 from session import *
- 

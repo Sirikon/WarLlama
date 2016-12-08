@@ -53,6 +53,11 @@
                 color: inherit; 
                 text-decoration: none;
             }
+
+            i {
+                color: $accent-color;
+                font-size: 1em;
+            }
         }
 
         th:first-child {

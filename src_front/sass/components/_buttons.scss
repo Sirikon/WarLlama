@@ -2,6 +2,14 @@ button {
     vertical-align: middle;
 }
 
+.al-btn-icon {
+    color: $brand-color; 
+    font-size: 0.8em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
 .al-btn-sqrflat-small {
     background-color: $brand-color; 
     line-height: 1.3em;

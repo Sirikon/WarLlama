@@ -1,8 +1,10 @@
 {% extends './_layout.html' %}
+{% load i18n %}
 
-{% block title %}<h1>{{ form_title }}</h1>{% endblock %}
+{% block title %}<h1>form_title</h1>{% endblock %}
 {% block content %}
 <div class="al-content-panel">
+    
     <form method="POST" class="al-form-base al-layout-form">
         {% csrf_token %}
         {{ form.as_p }}
@@ -10,6 +12,7 @@
             <input type="submit" value="{{ submit_text }}"/>
         </div>
     </form>
+
     {% if rich_field_name != "" %}
     <script>
         CKEDITOR.replace( '{{ rich_field_name }}' );
