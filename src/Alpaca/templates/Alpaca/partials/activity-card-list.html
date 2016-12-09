@@ -1,0 +1,36 @@
+{% load i18n %}
+
+<div class="al-flex-grow al-flex">
+    {% for activity in activity_list %}
+    <div class="al-activity-card">
+        <a href="/activity/{{activity.id}}">
+            <div class="al-activity-card-header">
+                <h1>{{ activity.title }} <br/><span class="al-text-tail">{% trans "by" %} {{ activity.author }}</span></h1>
+            </div>
+            <hr/>
+            <div class="al-activity-card-body">
+                <div class="al-activity-card-symbol">
+                    <i class="fa fa-superpowers"></i>
+                </div>
+                <div class="al-activity-card-descriptors"> 
+                    <span><i class="fa fa-map-marker"></i> {{ activity.city }}</span><br/>
+                    <span><i class="fa fa-bookmark"></i> {{ activity.pub_date }}</span><br/>
+                    <span><i class="fa fa-calendar"></i> 
+                        {% with activity.get_next_session as next_session %}
+                            {% if next_session %}
+                                {{ next_session.start_date }}
+                            {% elif activity.session_set.count == 0 %}
+                                {% trans "No new sessions" %}
+                            {% else %}
+                                {% trans "No sessions yet" %}
+                            {% endif %}
+                        {% endwith %}
+                    </span><br/>
+                    <span><i class="fa fa-address-card"></i> {{ activity.age_minimum }} {% trans "years-old" %}</span><br/>
+                    <span><i class="fa fa-user"></i> {{ activity.attendants.count }}</span><br/>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>

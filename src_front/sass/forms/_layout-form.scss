@@ -1,0 +1,27 @@
+
+.al-layout-form {
+    label[for="id_confirmation_period"],
+    label[for="id_age_minimum"] {
+        display: inline-block;
+        width: 160px;
+    }
+    
+    [for="id_start_date"],
+    [for="id_end_date"],
+    [for="id_location"] {
+        width: 100px;
+        display: inline-block;
+    }
+    
+    #id_title {
+        font-size: 1.2em;
+    }
+
+    #id_confirmation_period, #id_age_minimum {
+        width: 100px;
+    }
+
+    #id_start_date, #id_end_date, #id_location {
+        width: 150px;
+    }
+}

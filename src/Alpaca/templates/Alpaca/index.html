@@ -1,22 +1,21 @@
 {% extends './_layout.html' %}
+{% load i18n %}
 
-{% block title %}Awesome Activities{% endblock %}
+{% block title %}
+    {% if user.is_authenticated %}
+        <div class="al-flex">
+            <div class="al-flex-grow">
+                {% include "./partials/activity-order.html" %}
+                <br/>
+                {% include "./partials/activity-filters.html" %}
+            </div>
+            <a class="al-btn-action-big" href="/newactivity/">
+                <i class="fa fa-plus"></i><span> {% trans "New Activity" %}</span>
+            </a>
+        </div>
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th># of Attendants</th>
-            <th>Published Date</th>
-        </tr>
-        {% for activity in activity_list %}
-        <tr>
-            <td><a href="{% url 'alpaca:activity' activity.id %}">{{ activity.title }}</a></td>
-            <td>{{ activity.author }}</td>
-            <td>{{ activity.attendants.count }}</td>
-            <td>{{ activity.pub_date }}</td>
-        </tr>           
-        {% endfor %}
-    </table>
+    {% include "./partials/activity-card-list.html" %}
 {% endblock %}

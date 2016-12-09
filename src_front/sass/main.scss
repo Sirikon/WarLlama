@@ -1,10 +1,13 @@
 @import './global/global';
-@import './global/forms';
-@import './components/header';
+@import './global/layout';
+@import './global/activity';
+@import './global/profile';
+@import './global/variables';
+@import './global/flex';
 @import './components/floating-box';
-@import './components/activity-header';
-@import './components/activity-description';
-@import './components/activity-attendants';
-@import './components/footer';
-@import './forms/new-activity';
-@import './forms/new-session';
+@import './components/buttons';
+@import './components/activity-table';
+@import './components/activity-card';
+@import './forms/form-base';
+@import './forms/layout-form';
+ 

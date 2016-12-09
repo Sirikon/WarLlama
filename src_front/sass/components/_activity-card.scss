@@ -1,0 +1,93 @@
+@import '../global/variables';
+
+.al-activity-card {
+    background-color: $activity-card-background;
+    width: 250px;
+    height: auto;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin: 10px;
+    padding: 5px;
+
+    border: 1px $activity-card-border solid;
+    border-radius: 3px;
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid $activity-card-border;
+    
+    }
+
+    hr.vertical {
+        height: 100%;
+        width: 1px;
+    }
+
+    &-header {
+        text-align: center;
+        margin: 10px 0 10px;
+
+        h1 {
+            font-size: 15px;
+        }
+
+        small {
+            font-size: 12px;
+            font-weight: 200;
+        }
+    }
+
+    &-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-symbol {
+        width: 30%;
+        height: 100%;
+        float: left;
+        margin: auto;
+        text-align: center;
+
+        i {
+            color: $brand-color;
+            font-size: 25px;
+        }
+    }
+
+    &-descriptors {
+        width: 70%;
+        display: block;
+        float: right;
+        font-size: 13px;
+        padding: 2px;   
+
+        i {
+            color: $brand-color;
+        }
+
+        span {
+            padding: 10px 0;   
+        }
+    }
+}
+
+.al-activity-card:hover {
+    background: $activity-card-dark-background;
+    color: white;
+
+    hr {
+        border: 0;
+        border-top: 1px solid $activity-card-background;
+    }
+}

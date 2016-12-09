@@ -1,0 +1,33 @@
+{% extends './_layout.html' %}
+{% load i18n %}
+
+{% block title %}
+<div class="al-content-header al-flex">
+    <div class="al-flex-grow">
+        <h1>{{ looking_at_user.profile.get_display_name }}</h1>
+    </div>
+    {% if user.username == looking_at_user.username %}
+        <div>
+            <a class="al-btn-action-big" href="{% url 'alpaca:edit_profile' %}">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="al-content-panel">
+        {% if looking_at_user.profile.show_birthday %}
+            <p><i class="fa fa-birthday-cake"></i> {{ looking_at_user.profile.birth_date }}</p>
+        {% endif %}
+
+        {% if looking_at_user.profile.show_email %}
+            <p><i class="fa fa-envelope"></i> {{ looking_at_user.email }}</p>
+        {% endif %}
+    </div>
+
+    <h3>Activities organized by {{ looking_at_user.username }}</h3>
+    {% include './partials/activity-table.html' %}
+
+{% endblock %}

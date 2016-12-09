@@ -1,38 +1,97 @@
-{% load static %}
+{% extends './_layout.html' %}
+{% load i18n %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Alpaca</title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Ravi+Prakash" rel="stylesheet">
-        <link rel="stylesheet" href="{% static "font-awesome/css/font-awesome.min.css" %}">
-        <link rel="stylesheet" href="{% static "main.css" %}">
-    </head>
-    <body>
-
-        <div class="al-header">
-            <div class="al-header-content">
-                <h1 class="al-header-title">
-                    <a href="/">Alpaca</a>
-                </h1>
-                <div class="al-header-menu">
-                    {% if user.is_authenticated %}
-                        <a href="/newactivity/"><i class="fa fa-plus"></i> New Activity</a>
-                        <a href="/logout/"><i class="fa fa-sign-out"></i> Log out</a>
-                    {% else %}
-                        <a href="/login/"><i class="fa fa-sign-in"></i> Log in</a>
-                        <a href="/signup/"><i class="fa fa-thumbs-up"></i> Sign up</a>
+{% block title %}
+<div class="al-content-header al-flex">
+    <div class="al-flex-grow">
+        <h1>
+            <span>{{ activity.title }}</span>
+            <span class="al-text-tail">{% trans "by" %} {{ activity.author.username }}</span>
+            <span><a class="al-btn-icon" href="{% url 'alpaca:profile' activity.author.username %}"><i class="fa fa-search"></i></a></span>
+        </h1>
+        <span>
+            <p>
+                <i class="fa fa-map-marker"></i>
+                <span>{% trans "At" %} <b>{{ activity.city }}</b></span>
+                <span>&nbsp;</span>
+                {% with activity.get_next_session as next_session %}
+                    {% if next_session %}
+                        <i class="fa fa-calendar"></i>
+                        <span>{% trans "Next Session:" %} <b>{{ next_session.start_date }}</b></span>
                     {% endif %}
-                </div>
+                {% endwith %}            
+            </p>        
+        </span>
+    </div>
+    <div>
+        {% block user_options %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="al-content-panel">
+        <small>{% trans "Description:" %}</small>
+        <p>{{ activity.description | safe }}</p>
+    </div>
+
+    <div class="al-flex al-flex-adapt-content">
+        <div class="al-content-panel">
+            <small>{% trans "Settings:" %}</small>
+            <p>{% trans "Users may join this activity" %}
+            {% if activity.auto_register %}
+                <b> {% trans "freely." %}</b>
+            {% else %}
+                <b> {% trans "upon request." %}</b>
+            {% endif %}    
+            </p>
+            <p>{% trans "Confirmation period starts" %} <b>{{activity.confirmation_period}} {% trans "days" %}</b> {% trans "before the session's start date." %}</p>
+            <p>{% trans "The minimum age to join this activity is" %} <b>{{activity.age_minimum}} {% trans "years-old" %}</b>.</p>
+        </div>
+
+        <div class="al-content-panel al-flex-grow">
+            <small>{% trans "Attendants:" %}</small>
+            {% block attendants %}{% endblock %}
+        </div>
+        
+        {% block requests %}
+        {% endblock %}
+    </div>
+
+    <h3>{% trans "Session List" %}</h3>
+
+    <div class="al-table">
+        <div class="al-table-header">
+            <div class="al-table-filters">
+            </div>
+            <div class="al-table-menu">
+                {% block session_list_menu %}
+                {% endblock %}
             </div>
         </div>
-
-        <div class="al-content-wrapper">
-            {% block content %}
-            {% endblock %}
-        </div>
-
-        {% include "./partials/footer.html" %}
-
-    </body>
-</html>
+        <table>
+            <tr>
+                <th>{% trans "Description" %}</th>
+                <th>{% trans "Where" %}</th>
+                <th>{% trans "Start" %}</th>
+                <th>{% trans "End" %}</th>
+                <th>{% trans "Attendants" %}</th>
+                {% block session_extra_columns %}{% endblock %}
+            </tr>
+            {% for session in session_list %}
+                <tr>
+                    <td style="max-width: 350px;"><p>{{ session.description | safe }}</p></td>
+                    <td class="text-center"><p>{{ session.location }}</p></td>
+                    <td><p>{{ session.start_date }}</p></td>
+                    <td><p>{{ session.end_date }}</p></td>
+                    <td>
+                        {% for confirmed_user in session.confirmed_attendants.all %}
+                            <p>{{ confirmed_user.username }}</p>
+                        {% endfor %}                
+                    </td>
+                    {% block session_extra_cells %}{% endblock %}                
+                </tr>           
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

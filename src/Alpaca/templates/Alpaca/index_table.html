@@ -1,0 +1,14 @@
+{% extends './_layout.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% if user.is_authenticated %}
+        <div class="al-table-header">
+            {% include "./partials/activity-filter-order.html" %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% include './partials/activity-table.html' %}
+{% endblock %}

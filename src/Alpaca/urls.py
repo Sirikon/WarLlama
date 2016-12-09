@@ -1,13 +1,17 @@
 from django.conf.urls import url
 
-from . import views
+import views
 
 app_name = "alpaca"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^demo/$', views.activity_summary_demo, name='activity_summary_demo'),
     url(r'^signup/(?P<activity_id>[0-9]*)$', views.signup, name='signup'),
     url(r'^login/(?P<activity_id>[0-9]*)$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
+    url(r'^profile/(?P<username>\w+)$', views.profile, name='profile'),
+    url(r'^editprofile$', views.edit_profile, name='edit_profile'),
+    url(r'^changepassword/$', views.change_password, name="change_password"),
     url(r'^resetpassword/$', views.reset_password, name="reset_password"),
     url(r'^newactivity/$', views.new_activity, name='new_activity'),
     url(r'^activity/(?P<activity_id>[0-9]+)$', views.activity, name='activity'),

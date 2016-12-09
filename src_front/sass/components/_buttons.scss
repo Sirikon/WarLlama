@@ -1,0 +1,59 @@
+button {
+    vertical-align: middle;
+}
+
+.al-btn-icon {
+    color: $brand-color; 
+    font-size: 0.8em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-sqrflat-small {
+    background-color: $brand-color; 
+    line-height: 1.3em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 5px 2px 5px;    
+    border: none;
+    border-radius: 2px; 
+
+    color: white;    
+    font-size: 0.8em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-action-big { 
+    background-color: $brand-color; 
+    line-height: 1.5em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1.1em 0.1em 1.1em;    
+    border: none;
+    border-radius: 1.1em; 
+
+    color: white;    
+    font-size: 1.5em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-action-small { 
+    background-color: $brand-color; 
+    line-height: 2em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1em 0.1em 1em;   
+    border: none;
+    border-radius: 1.1em; 
+
+    color: white;    
+    font-size: 0.8em;  
+    text-decoration: none;
+
+    cursor: pointer;
+}

@@ -1,0 +1,88 @@
+{% load i18n %}
+
+<div class="al-table">
+        <table>
+        <tr>
+            <th>
+                <a href="?order_by=title&last={{sort_sign}}{{sorted_column}}">
+                    {% trans "Title" %}
+                    {% if sorted_column == "title" %}
+                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
+            </th>
+            <th>
+                <a href="?order_by=author&last={{sort_sign}}{{sorted_column}}">
+                    {% trans "Author" %}
+                    {% if sorted_column == "author" %}
+                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
+            </th>
+            <th>
+                <a href="?order_by=age_minimum&last={{sort_sign}}{{sorted_column}}">
+                    {% trans "Age Minimum" %}
+                    {% if sorted_column == "age_minimum" %}
+                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
+            </th>
+            <th>
+                <a href="?order_by=attendants&last={{sort_sign}}{{sorted_column}}">
+                    {% trans "# of Attendants" %}
+                    {% if sorted_column == "attendants" %}
+                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
+            </th>
+            <th>
+                <a href="?order_by=pub_date&last={{sort_sign}}{{sorted_column}}">
+                    {% trans "Published Date" %}
+                    {% if sorted_column == "pub_date" %}
+                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
+            </th>
+            <th>
+                <a href="?order_by=next_session&last={{sort_sign}}{{sorted_column}}">
+                    {% trans "Next Session" %}
+                    {% if sorted_column == "next_session" %}
+                        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-sort" aria-hidden="true"></i>
+                    {% endif %}
+                </a>
+            </th>
+        </tr>
+        {% for activity in activity_list %}
+        <tr>
+            <td><a href="{% url 'alpaca:activity' activity.id %}">{{ activity.title }}</a></td>
+            <td><a href="{% url 'alpaca:profile' activity.author.username %}">{{ activity.author }}</a></td>
+            <td class="text-center">{{ activity.age_minimum }} {% trans "years-old" %}</td>
+            <td class="text-center">{{ activity.attendants.count }}</td>
+            <td>{{ activity.pub_date }}</td>
+            <td>
+                {% with activity.get_next_session as next_session %}
+                    {% if next_session %}
+                        {{ next_session.start_date }}
+                    {% elif activity.session_set.count == 0 %}
+                        {% trans "No sessions yet" %}
+                    {% else %}
+                        {% trans "Waiting for future sessions!" %}
+                    {% endif %}
+                {% endwith %}
+            </td>
+        </tr>           
+        {% endfor %}
+    </table>
+</div>

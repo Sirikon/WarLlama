@@ -1,0 +1,9 @@
+{% extends './_form_floating.html' %}
+{% load i18n %}
+
+{% block other-content %}
+    <div class="al-form-base-footer">
+        <p><a href="{% url 'alpaca:reset_password' %}">{% trans "Forgot your password?" %}</a><p>
+        <p>{% trans "Or click" %} <a href="{% url 'alpaca:signup' activity_id %}">{% trans "here" %}</a> {% trans "to sign up!" %}</p>
+    </div>
+{% endblock %}

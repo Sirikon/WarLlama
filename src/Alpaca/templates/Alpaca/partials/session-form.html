@@ -1,9 +1,0 @@
-<div class="al-rich-content">
-    <form method="POST" class="al-new-session-form">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <p>
-            <input type="submit" value="{{ submit_text }}"/>
-        </p>
-    </form>
-</div>
