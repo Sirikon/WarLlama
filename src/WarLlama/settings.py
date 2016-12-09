@@ -155,3 +155,10 @@ LANGUAGES = (
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Email conf
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'alpaca_mailing'
+EMAIL_HOST_PASSWORD = os.environ.get('ALPACA_EMAIL_SERVICE_PASSWORD')
+EMAIL_USE_TLS = True

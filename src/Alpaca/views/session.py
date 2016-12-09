@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
+from django.core.mail import EmailMessage
 
 from ..models import Activity, Session
 from ..forms import SessionForm
@@ -32,6 +33,20 @@ def new_session(request, activity_id):
             session = form.save(commit=False)    
             session.activity = activity
             session.save()    
+            
+            # Send "New Session" email to all attendants
+            for att in activity.attendants.all():
+                msg = EmailMessage("New Session in Activity " + activity.title, 
+                            "Hi," +
+                            "<br><br>You are receiving this message because the activity " + activity.title + " was updated with new sessions!" +
+                            "<br><br>Check them out at http://alpaca.srk.bz/activity/" + str(activity.id) + "! Hope to see you there <3" +
+                            "<br><br>Alpaca hugs, always watching over you," +
+                            "<br>Big Evil Llama", 
+                            'noreply@alpaca.srk.bz', 
+                            [att.email])
+                msg.content_subtype = "html"
+                msg.send()
+
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
@@ -58,7 +73,8 @@ def edit_session(request, activity_id, session_id):
     if request.method == "POST":
         form = SessionForm(data=request.POST, instance=session)
         if form.is_valid():
-            form.save()   
+            form.save()  
+
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
@@ -80,7 +96,17 @@ def confirm_session(request, activity_id):
             if activity == session.activity and session.is_on_confirmation_period():
                 session.confirmed_attendants.add(user)
                 session.save()
-                # TO-DO --> Send "User has confirmed assistance" email to activity's author
+                # Send "User has confirmed assistance" email to activity's author
+                msg = EmailMessage("Update on your activity " + activity.title + " - " + user.username + " confirmed assistance", 
+                          "Hi, " + activity.author.username + 
+                            "<br><br>Congratulations! " + user.username + " has confirmed assistance to the " + session.datetime.date +"'s session!'" +
+                            "<br><br>I hope everything goes as your expect it <3" +
+                            "<br><br>Alpaca hugs, always watching over you," +
+                            "<br>Big Evil Llama", 
+                          'noreply@alpaca.srk.bz', 
+                          [activity.author.email])
+                msg.content_subtype = "html"
+                msg.send()
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
