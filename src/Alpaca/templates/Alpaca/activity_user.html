@@ -19,22 +19,19 @@
     {% endif %}
 {% endblock %}
 
-
 {% block attendants %}
     {% if activity.attendants.count <= 0 %}
         <p>{% trans "There are no users attending this activity, except" %} {{ activity.author }}.</p>
-    {% else %}    
-        {% for att in activity.attendants.all %}
-            <span class="al-activity-attendant">{{ att.username }}</span>
-        {% endfor %}
+    {% else %}   
+        {% for att in activity.attendants.all %}             
+            <span><a class="al-activity-attendant" href="{% url 'alpaca:profile' att.username %}">{{ att.username }}</a></span>
+        {% endfor %}        
     {% endif %}
 {% endblock %}
-
 
 {% block session_extra_columns %}
     <th>{% trans "State" %}</th>
 {% endblock %}   
-
 
 {% block session_extra_cells %}
     <td class="text-center">

@@ -11,6 +11,7 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 from ..models import Activity, Session
 from ..forms import ActivityForm
 from .utils import set_translation
+from .emails import *
 
 import datetime
 
@@ -32,7 +33,8 @@ def new_activity(request):
             activity = form.save(commit=False)    
             activity.pub_date = timezone.now()
             activity.author = user
-            activity.save()    
+            activity.save()  
+            email_registered_your_new_activity(activity)  
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
@@ -58,6 +60,9 @@ def edit_activity(request, activity_id):
         form = ActivityForm(data=request.POST, instance=activity)
         if form.is_valid():
             form.save()   
+            for attendant in activity.attendants:
+                email_activity_got_updated(activity, attendant)
+
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
@@ -96,10 +101,11 @@ def join_activity(request, activity_id):
         if activity.auto_register:
             activity.attendants.add(user)
             activity.num_attendants = activity.attendants.count()
+            email_user_acted_on_your_activity(activity, user, True)
         else:
             activity.pending_attendants.add(user)
+            email_user_requested_to_join(activity, user)
         activity.save()
-        # TO-DO --> Send "User has join your activity" email to activity's author
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -117,7 +123,7 @@ def leave_activity(request, activity_id):
             if not session.has_finished():
                 session.confirmed_attendants.remove(user)
                 session.save()
-                # TO-DO --> Send "User has left your activity" email to activity's author
+        email_user_acted_on_your_activity(activity, user, False)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -135,7 +141,7 @@ def kick_attendant(request, activity_id):
             if not session.has_finished():
                 session.confirmed_attendants.remove(selected_user)
                 session.save()
-                # TO-DO --> Send "You have been kicked from activity" email to kicked user
+        email_you_were_kicked_out_from_activity(activity, selected_user)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -149,12 +155,13 @@ def pending_requests(request, activity_id):
         if "accept_request" in request.POST:
             activity.attendants.add(selected_user)
             activity.pending_attendants.remove(selected_user)
+            email_your_request_was_handled(activity, selected_user, True)
 
         elif "reject_request" in request.POST:
             activity.pending_attendants.remove(selected_user)   
+            email_your_request_was_handled(activity, selected_user, False)
         
         activity.num_attendants = activity.attendants.count()
         activity.save()
-        # TO-DO --> Send "You have pending requests" email to activity's author
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))

@@ -19,7 +19,8 @@ class ProfileCreationForm(UserCreationForm):
     last_name = forms.CharField(required=False, label=_('Last Name'), help_text=_("Optional"))
 
     language_options = ( ("en", _("English")),
-                         ("es", _("Spanish")) )
+                         ("es", _("Spanish")),
+                         ("eus", _("Euskera")) )
     language_preference = forms.ChoiceField(label=_('Language'), required=True, choices=language_options, help_text=_('In which language would you prefer to use Alpaca?'))
 
     class Meta:
@@ -56,7 +57,8 @@ class ProfileForm(forms.ModelForm):
     display_name_format = forms.ChoiceField(label=_('How should your name be displayed?'), required=True, choices=format_options, help_text=_('You can ignore this if you chose not to show your name.'))
 
     language_options = ( ("en", _("English")),
-                         ("es", _("Spanish")) )
+                         ("es", _("Spanish")),
+                         ("eus", _("Euskera")) )
     language_preference = forms.ChoiceField(label=_('Language'), required=True, choices=language_options, help_text=_('In which language would you prefer to use Alpaca?'))
 
     class Meta:
@@ -97,6 +99,30 @@ class ActivityForm(forms.ModelForm):
         model = Activity
         fields = ("title", "description", "city", "auto_register", "confirmation_period", "age_minimum")
 
+
+class SessionCreationForm(forms.ModelForm):
+    description = forms.CharField(required=True, label=_('Description'), max_length=500, widget=forms.Textarea)
+    start_date = forms.DateTimeField(required=True, label=_('Start date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
+    end_date = forms.DateTimeField(required=True, label=_('End date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
+    location = forms.CharField(required=True, label=_('Location'), max_length=100, help_text=_("Where (place, address) will this session take place?"))
+    
+    class Meta:
+        model = Session
+        fields = ("description", "start_date", "end_date", "location")
+
+    def clean(self):
+        super(SessionCreationForm, self).clean()
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+
+        if start_date <= timezone.now():
+            msg = _("The start date and time must be greater than today's date.")
+            self._errors["start_date"] = self.error_class([msg])
+
+        if end_date < start_date:
+            msg = _("The end date and time must be greater than the start date.")
+            self._errors["end_date"] = self.error_class([msg])
+
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, label=_('Description'), max_length=500, widget=forms.Textarea)
     start_date = forms.DateTimeField(required=True, label=_('Start date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
@@ -106,3 +132,17 @@ class SessionForm(forms.ModelForm):
     class Meta:
         model = Session
         fields = ("description", "start_date", "end_date", "location")
+
+    def clean(self):
+        super(SessionForm, self).clean()
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+
+        if start_date != self.instance.start_date:
+            if start_date <= timezone.now():
+                msg = _("The start date and time must be greater than today's date.")
+                self._errors["start_date"] = self.error_class([msg])
+
+        if end_date < start_date:
+            msg = _("The end date should be greater than the start date.")
+            self._errors["end_date"] = self.error_class([msg])

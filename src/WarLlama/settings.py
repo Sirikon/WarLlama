@@ -149,6 +149,7 @@ ugettext = lambda s: s
 LANGUAGES = (
     ('en', ugettext('English')),
     ('es', ugettext('Spanish')),
+    ('eus', ugettext('Euskera')),
 )
 
 # Static files (CSS, JavaScript, Images)

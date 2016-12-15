@@ -7,7 +7,6 @@
     </a>
 {% endblock %}
 
-
 {% block attendants %}
     {% if activity.attendants.count <= 0 %}
         <p>{% trans "There are no users attending your activity." %}</p>
@@ -55,7 +54,6 @@
     <th>{% trans "State" %}</th>
     <th>{% trans "Edit" %}</th>
 {% endblock %}      
- 
  
 {% block session_extra_cells %}
     <td class="text-center">

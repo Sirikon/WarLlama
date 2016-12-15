@@ -4,6 +4,8 @@ from django.utils import translation
 from django import http
 from django.conf import settings
 
+from ..models import *
+
 # Useful functions for the views. These functions return contexts.
 
 def set_translation(request): 
@@ -42,3 +44,5 @@ def sort_activity_table(activity_list, sort_column, last_column):
                 'sort_icon': icon_name }
 
     return context
+
+

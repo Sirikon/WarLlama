@@ -6,12 +6,12 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
-from django.core.mail import EmailMessage
 
 from ..models import Activity, Session
-from ..forms import SessionForm
+from ..forms import SessionCreationForm, SessionForm
 
 from .utils import set_translation
+from .emails import *
 
 import datetime
 
@@ -28,24 +28,15 @@ def new_session(request, activity_id):
                 'rich_field_name': "description" }
 
     if request.method == "POST":
-        form = SessionForm(data=request.POST)
+        form = SessionCreationForm(data=request.POST)
         if form.is_valid():
             session = form.save(commit=False)    
             session.activity = activity
             session.save()    
             
             # Send "New Session" email to all attendants
-            for att in activity.attendants.all():
-                msg = EmailMessage("New Session in Activity " + activity.title, 
-                            "Hi," +
-                            "<br><br>You are receiving this message because the activity " + activity.title + " was updated with new sessions!" +
-                            "<br><br>Check them out at http://alpaca.srk.bz/activity/" + str(activity.id) + "! Hope to see you there <3" +
-                            "<br><br>Alpaca hugs, always watching over you," +
-                            "<br>Big Evil Llama", 
-                            'noreply@alpaca.srk.bz', 
-                            [att.email])
-                msg.content_subtype = "html"
-                msg.send()
+            for attendant in activity.attendants.all():
+                email_activity_new_sessions(activity, attendant)
 
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
@@ -53,7 +44,7 @@ def new_session(request, activity_id):
             return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
-        context['form'] = SessionForm()
+        context['form'] = SessionCreationForm()
         return render(request, 'Alpaca/_form_layout.html', context)
 
 
@@ -97,16 +88,7 @@ def confirm_session(request, activity_id):
                 session.confirmed_attendants.add(user)
                 session.save()
                 # Send "User has confirmed assistance" email to activity's author
-                msg = EmailMessage("Update on your activity " + activity.title + " - " + user.username + " confirmed assistance", 
-                          "Hi, " + activity.author.username + 
-                            "<br><br>Congratulations! " + user.username + " has confirmed assistance to the " + session.datetime.date +"'s session!'" +
-                            "<br><br>I hope everything goes as your expect it <3" +
-                            "<br><br>Alpaca hugs, always watching over you," +
-                            "<br>Big Evil Llama", 
-                          'noreply@alpaca.srk.bz', 
-                          [activity.author.email])
-                msg.content_subtype = "html"
-                msg.send()
+                email_user_confirmed_assistance(activity, session, user)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
