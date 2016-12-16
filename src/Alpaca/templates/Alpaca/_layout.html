@@ -35,7 +35,9 @@
 
         <div class="al-footer">
             <div class="al-footer-content">
-                <p>{% trans "Found a problem? Please," %} <a href="https://github.com/Darkatom/WarLlama/issues">{% trans "help us!" %}</a></p>
+                <p><a href="{% url 'alpaca:about_us'%}">{% trans "About Us" %}</a>
+                 | <a href="{% url 'alpaca:terms_conditions'%}">{% trans "Terms and Conditions" %}</a>
+                 | {% trans "Found a problem? Please," %} <a href="https://github.com/Darkatom/WarLlama/issues">{% trans "help us!" %}</a></p>
             </div>
         </div>
     </body>

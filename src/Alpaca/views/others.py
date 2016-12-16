@@ -26,6 +26,17 @@ def index(request):
 
     return render(request, 'Alpaca/index.html', context)
 
+
+def about_us(request):
+    set_translation(request)
+    return render(request, 'Alpaca/about_us.html')
+
+
+def terms_conditions(request):
+    set_translation(request)
+    return render(request, 'Alpaca/terms_conditions.html')
+
+
 def activity_summary_demo(request):
     set_translation(request)
     user = request.user

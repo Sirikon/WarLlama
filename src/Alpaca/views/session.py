@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from ..models import Activity, Session
-from ..forms import SessionCreationForm, SessionForm
+from ..forms import SessionForm
 
 from .utils import set_translation
 from .emails import *
@@ -28,7 +28,7 @@ def new_session(request, activity_id):
                 'rich_field_name': "description" }
 
     if request.method == "POST":
-        form = SessionCreationForm(data=request.POST)
+        form = SessionForm(data=request.POST)
         if form.is_valid():
             session = form.save(commit=False)    
             session.activity = activity
@@ -44,7 +44,7 @@ def new_session(request, activity_id):
             return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
-        context['form'] = SessionCreationForm()
+        context['form'] = SessionForm()
         return render(request, 'Alpaca/_form_layout.html', context)
 
 
