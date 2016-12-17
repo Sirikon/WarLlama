@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<div class="al-content-panel">
+    <small>{% trans "Show" %}</small>
+    <form name="location_form">
+        <input type="radio" name="filter" onclick="location.href=this.value;" value="?location=here" 
+            {% if current_filter == "here" or current_filter is None%} checked {% endif %}> 
+                <span>{% trans "All Activities" %}</span> 
+        <br>
+        <input type="radio" name="filter" onclick="location.href=this.value;" value="?location=select"
+            {% if current_filter == "select" %} checked {% endif %}> 
+                <span>{% trans "I am author" %}</span> 
+       
+    </form>
+</div>
+
+            

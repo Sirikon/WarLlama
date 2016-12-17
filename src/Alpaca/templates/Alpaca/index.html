@@ -3,11 +3,11 @@
 
 {% block title %}
     {% if user.is_authenticated %}
-        <div class="al-flex">
+        <div class="al-flex-row">
             <div class="al-flex-grow">
-                {% include "./partials/activity-order.html" %}
+                {% include "./partials/activity-order-bar.html" %}
                 <br/>
-                {% include "./partials/activity-filters.html" %}
+                {% include "./partials/activity-filter-bar.html" %}
             </div>
             <a class="al-btn-action-big" href="/newactivity/">
                 <i class="fa fa-plus"></i><span> {% trans "New Activity" %}</span>

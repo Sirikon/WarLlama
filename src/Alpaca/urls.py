@@ -5,7 +5,7 @@ import views
 app_name = "alpaca"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^demo/$', views.activity_summary_demo, name='activity_summary_demo'),
+    url(r'^demo/$', views.index_demo, name='index_demo'),
     url(r'^about_us/$', views.about_us, name='about_us'),
     url(r'^terms_conditions/$', views.terms_conditions, name='terms_conditions'),
     url(r'^activate$', views.activate, name='activate'),
