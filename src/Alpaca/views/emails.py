@@ -15,7 +15,7 @@ def email_signature():
     return "<br/><br/>" + str(_("Always watching over you,")) + "<br/>" + str(_("Big Evil Llama"))
 
 # USERs
-def email_confirm_account(link, new_user):
+def email_confirm_account(new_user):
     # Subject: Alpaca: Confirm your account
     # Body: 
     # Hi!
@@ -34,8 +34,10 @@ def email_confirm_account(link, new_user):
     
     translation.activate(new_user.profile.language_preference)
 
+    link = "http://alpaca.srk.bz/activate?email=" + new_user.email + "&token=" + new_user.profile.current_token
+
     subject = str(_("Alpaca: Confirm your account"))
-    body = str(_("Hi!")) + "<br/><br/>" + str(_("I'm the Big Evil Llama. I watch over every activity in my land")) + ", http://alpaca.srk.bz" + "<br/><br/>" + str(_("It seems like you wanted to become one of my alpacas! If it is so, be welcomed! You can confirm your account by clicking the following link:")) + link + "<br/><br/>" + str(_("If it wasn't you who created this account, you can just ignore this email.")) + "<br/><br/>" + str(_("Alpaca hugs!")) + "<br/>" + str(_("Big Evil Llama"))
+    body = str(_("Hi!")) + "<br/><br/>" + str(_("I'm the Big Evil Llama. I watch over every activity in my land")) + ", http://alpaca.srk.bz" + "<br/><br/>" + str(_("It seems like you wanted to become one of my alpacas! If it is so, be welcomed! You can confirm your account by clicking the following link: ")) + str(link) + "<br/><br/>" + str(_("If it wasn't you who created this account, you can just ignore this email.")) + "<br/><br/>" + str(_("Alpaca hugs!")) + "<br/>" + str(_("Big Evil Llama"))
 
     msg = EmailMessage(subject, body, 'noreply@alpaca.srk.bz', [new_user.email])
     msg.content_subtype = "html"
@@ -63,7 +65,7 @@ def email_registered_your_new_activity(activity):
     
     translation.activate(activity.author.profile.language_preference)
 
-    subject = _('Your Activity "') + activity.title + _('" was succesfully registered!')
+    subject = str(_('Your Activity "')) + activity.title + str(_('" was succesfully registered!'))
 
     body = str(_("Hi, ")) + activity.author.username + "<br/><br/>" + str(_('Your activity "')) + activity.title + str(_('" has been succesfully registered, and you may start sharing it by using the following link:')) + "<br/>http://alpaca.srk.bz/activity/" + str(activity.id) + "<br/><br/>" + str(_("Your activity may not appear on the main page index until some time has passed, but it is already fully functional.")) + "<br/><br/>" + str(_( "Have fun! I hope everything goes as you expect it <3")) + email_signature()
 
@@ -139,7 +141,7 @@ def email_user_confirmed_assistance(activity, session, attendant):
     translation.activate(activity.author.profile.language_preference)
     
     subject = attendant.username + str(_(" confirmed assistance on your activity, ")) + activity.title
-    body =  str(_("Hi, ")) + activity.author.username + "<br/><br/>" + str(_("Congratulations! ")) + attendant.username + str(_(" has confirmed assistance to the ")) + session.datetime.date + str(_("'s session!'")) + "<br/>" + str(_("You can manage your activity at")) + "http://alpaca.srk.bz/activity/" + str(activity.id) + "<br/><br/>" + str(_("I hope everything goes as you expect it <3")) + email_signature()
+    body =  str(_("Hi, ")) + activity.author.username + "<br/><br/>" + str(_("Congratulations! ")) + attendant.username + str(_(" has confirmed assistance to the ")) + str(session.start_date.date) + str(_("'s session!'")) + "<br/>" + str(_("You can manage your activity at")) + "http://alpaca.srk.bz/activity/" + str(activity.id) + "<br/><br/>" + str(_("I hope everything goes as you expect it <3")) + email_signature()
 
     msg = EmailMessage(subject, body, 'noreply@alpaca.srk.bz', [activity.author.email])
     msg.content_subtype = "html"

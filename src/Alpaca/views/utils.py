@@ -6,7 +6,14 @@ from django.conf import settings
 
 from ..models import *
 
+import hashlib
+import random
+
 # Useful functions for the views. These functions return contexts.
+def generate_token():
+    hash_object = hashlib.sha256(str(random.randint(1, 1000)))
+    hex_dig = hash_object.hexdigest()
+    return hex_dig
 
 def set_translation(request): 
     if request.user.is_authenticated():

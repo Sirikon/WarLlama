@@ -163,3 +163,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'alpaca_mailing'
 EMAIL_HOST_PASSWORD = os.environ.get('ALPACA_EMAIL_SERVICE_PASSWORD')
 EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

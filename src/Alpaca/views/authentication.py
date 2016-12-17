@@ -13,13 +13,15 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 from ..models import Profile
 from ..forms import ProfileCreationForm
 
-from .utils import set_translation
+from .utils import set_translation, generate_token
+from .emails import *
 
 import datetime
 
 ## -- AUTHENTICATION -- ##
 def signup(request, activity_id):
     set_translation(request)
+
     if request.user.is_authenticated():
         if activity_id == "":
             return  HttpResponseRedirect(reverse('alpaca:index'))
@@ -32,18 +34,53 @@ def signup(request, activity_id):
         form = ProfileCreationForm(data=request.POST)
 
         if form.is_valid():
-            form.save()
+            new_user = form.save()
+            new_user.profile.current_token = generate_token()
+            new_user.profile.save()
+            
+            email_confirm_account(new_user)
+
+            context = {
+                'message_title': _('You are signed up!'),
+                'message_body': _('Your user is not active at the moment. Please, verify your e-mail (it could end up in the spam folder).')
+            }
+            
+            return render(request, 'Alpaca/server_message.html', context)
+            
         else:
             context['form'] = form
             return render(request, 'Alpaca/_form_floating.html', context)
         
-        if activity_id == "":
-            return  HttpResponseRedirect(reverse('alpaca:index'))
-        else:
-            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
     else:
         context['form'] = ProfileCreationForm()
         return render(request, 'Alpaca/_form_floating.html', context)
+
+
+def activate(request):
+    set_translation(request)
+
+    if request.user.is_authenticated():
+        return  HttpResponseRedirect(reverse('alpaca:index'))
+
+    email = request.GET.get('email')
+    token = request.GET.get('token')
+
+    user = get_object_or_404(User, email=email)
+
+    context = {}
+    if user.profile.current_token == token:
+        user.is_active = True
+        user.save()
+        user.profile.current_token = ""
+        user.profile.save()
+
+        context['message_title'] = _('Welcome to Alpaca!')
+        context['message_body'] = _('You are one of us now. Your account has been activated and you may now log in. Welcome!')
+    else:
+        context['message_title'] = _('What are you doing here?')
+        context['message_body'] = _('It seems like you got lost in our page. Click the Alpaca logo to go back to the index.')
+
+    return render(request, 'Alpaca/server_message.html', context)
 
 
 def login(request, activity_id):

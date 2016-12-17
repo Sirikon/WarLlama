@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from .models import *
 
+import hashlib
 import datetime
 
 
@@ -32,10 +33,13 @@ class ProfileCreationForm(UserCreationForm):
         user.email = self.cleaned_data["email"]
         user.first_name = self.cleaned_data["first_name"]
         user.last_name = self.cleaned_data["last_name"]
+
         if commit:
+            user.is_active = False
             user.save()
             profile = Profile(user=user, birth_date=self.cleaned_data["birth_date"], language_preference=self.cleaned_data["language_preference"])
             profile.save()
+        
         return user
 
 class ProfileForm(forms.ModelForm):
@@ -111,7 +115,7 @@ class SessionForm(forms.ModelForm):
         fields = ("description", "start_date", "end_date", "location")
 
     def clean(self):
-        super(SessionCreationForm, self).clean()
+        super(SessionForm, self).clean()
         start_date = self.cleaned_data.get("start_date")
         end_date = self.cleaned_data.get("end_date")
 
