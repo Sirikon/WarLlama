@@ -57,3 +57,10 @@ button {
 
     cursor: pointer;
 }
+
+.al-submit-big {
+    transform: translate(0px, 50%);       
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding: 0.4em 0.8em;
+}

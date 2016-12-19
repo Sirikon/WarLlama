@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-17 02:36+0100\n"
+"POT-Creation-Date: 2016-12-19 19:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,8 +120,8 @@ msgid "Repeat new password:"
 msgstr "Repetir contraseña nueva:"
 
 #: .\Alpaca\forms.py:94
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:5
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:8
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:5
 msgid "Title"
 msgstr "Título"
 
@@ -131,7 +131,7 @@ msgid "Description"
 msgstr "Descripción"
 
 #: .\Alpaca\forms.py:96
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:23
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:23
 msgid "City"
 msgstr "Ciudad"
 
@@ -191,45 +191,57 @@ msgstr "Localización"
 msgid "Where (place, address) will this session take place?"
 msgstr "¿Dónde (lugar, dirección) tendrá lugar esta sesión?"
 
-#: .\Alpaca\forms.py:123
-msgid "The start date and time must be greater than today's date."
-msgstr ""
-
 #: .\Alpaca\forms.py:127
-msgid "The end date and time must be greater than the start date."
-msgstr ""
+msgid "The start date and time must be greater than today's date."
+msgstr "La fecha y hora de empiece debe ser posterior a la de hoy."
 
-#: .\Alpaca\templates\Alpaca\_layout.html:22
+#: .\Alpaca\forms.py:131
+msgid "The end date and time must be greater than the start date."
+msgstr "La fecha y hora de finalización debe ser posterior a la de empiece."
+
+#: .\Alpaca\forms.py:136
+msgid "From:"
+msgstr "Desde:"
+
+#: .\Alpaca\forms.py:137
+msgid "To:"
+msgstr "Hasta:"
+
+#: .\Alpaca\forms.py:152
+msgid "The end date must be greater than the start date."
+msgstr "La fecha de finalización debe ser posterior a la de empiece."
+
+#: .\Alpaca\templates\Alpaca\_layout.html:23
 msgid "Log out"
 msgstr "Salir"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:24
+#: .\Alpaca\templates\Alpaca\_layout.html:25
 #: .\Alpaca\views\authentication.py:94
 msgid "Log in"
 msgstr "Entrar"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:25
+#: .\Alpaca\templates\Alpaca\_layout.html:26
 msgid "Sign up"
 msgstr "Registrarse"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:38
-msgid "About Us"
-msgstr ""
-
 #: .\Alpaca\templates\Alpaca\_layout.html:39
-msgid "Terms and Conditions"
-msgstr ""
+msgid "About Us"
+msgstr "Sobre Nosotros"
 
 #: .\Alpaca\templates\Alpaca\_layout.html:40
+msgid "Terms and Conditions"
+msgstr "Términos y Condiciones"
+
+#: .\Alpaca\templates\Alpaca\_layout.html:41
 msgid "Found a problem? Please,"
 msgstr "¿Has encontrado un problema? Por favor,"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:40
+#: .\Alpaca\templates\Alpaca\_layout.html:41
 msgid "help us!"
 msgstr "¡ayúdanos!"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:9
-#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:8
+#: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:8
 msgid "by"
 msgstr "por"
 
@@ -278,8 +290,8 @@ msgid "The minimum age to join this activity is"
 msgstr "La edad mínima para participar en esta actividad es"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:49
-#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:29
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:71
+#: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:29
 msgid "years-old"
 msgstr "años"
 
@@ -292,6 +304,7 @@ msgid "Session List"
 msgstr "Lista de Sesiones"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:76
+#: .\Alpaca\templates\Alpaca\partials\index-location-filter-panel.html:4
 msgid "Where"
 msgstr "Dónde"
 
@@ -306,6 +319,139 @@ msgstr "Finaliza"
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:79
 msgid "Attendants"
 msgstr "Participantes"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:10
+msgid "Who are we?"
+msgstr "¿Quiénes somos?"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:11
+msgid ""
+"Darkatom and Sirikon. We are the creators of Alpaca. We make sure everything "
+"at Alpaca works as expected. And yes, that means we are the Big Evil Llama's "
+"parents."
+msgstr ""
+"Darkatom y Sirikon. Somos los creadores de Alpaca. Nos aseguramos de que "
+"todo en Alpaca funcione como debe. Y sí, eso significa que somos los "
+"progenitores de la Gran Llama Malvada."
+
+#: .\Alpaca\templates\Alpaca\about_us.html:13
+msgid "Who is the Big Evil Llama?"
+msgstr "¿Quién es la Gran Llama Malvada?"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:14
+msgid ""
+"That's a great question, but she would get very angry if we told her secret. "
+"However, you may read George Orwell's 1984 novel (if you haven't already) to "
+"get an idea on who the Big Evil Llama might be ;)"
+msgstr ""
+"¡Muy buena pregunta! Pero es muy suya y se enfadaría bastante si contáramos su "
+"secreto. Sin embargo, puedes leer la novela 1984, de George Orwell (si es "
+"que todavía no lo has hecho) para hacerte una idea de quién puede ser la "
+"Gran Llama Malvada ;)"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:16
+msgid "What is Alpaca?"
+msgstr "¿Qué es Alpaca?"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:17
+msgid ""
+"Alpaca is an activity management system application. That is, a place where "
+"you can create and manage your activities. The home page serves for a public "
+"index of all activities in Alpaca. This way, anyone can see your activity "
+"and join in! And you may join others' activities too!"
+msgstr ""
+"Alpaca es una aplicación de sistema de administración de actividades. Es "
+"decir, un lugar donde puedes crear y gestionar tus actividades. La página "
+"principal sirve como índice público de todas las actividades en Alpaca. De "
+"esta forma, ¡cualquiera puede ver tu actividad y unirse! ¡Y tú puedes unirte "
+"a las actividades de otros!"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:19
+msgid "Why 'Alpaca'?"
+msgstr "¿Por qué «Alpaca»?"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:20
+msgid ""
+"We have spent quite a lot of time enjoying INERS Cultural Association's "
+"activities and, eventually, getting involved with it and helping it grow. "
+"One day, we both just realized we needed something that would allow us to "
+"organize and manage activities without the need of messy chat groups. "
+"Somewhere where not only the activity could be easily managed —who is "
+"coming? who is not?— but also somewhere where potential attendants could see "
+"all of our available activities."
+msgstr ""
+"Hemos pasado bastante tiempo disfrutando de las actividades de la Asociación "
+"Cultural INERS y, a la larga, nos hemos hecho parte de ella y hemos ayudado "
+"a que crezca. Un día nos dimos cuenta de que necesitábamos algo que nos "
+"permitiera organizar y gestionar actividades sin necesidad de grupos de "
+"chat, que al final pueden llegar a ser una fuente de problemas para "
+"organizarse. Algún sitio donde no sólo las actividades fueran fáciles de "
+"manejar —¿quién viene? ¿quién no?—, sino también un sitio donde posibles "
+"participantes pudieran ver todas nuestras actividades disponibles."
+
+#: .\Alpaca\templates\Alpaca\about_us.html:21
+msgid ""
+"And we wanted it to be available to anyone and everyone in need of a similar "
+"system. Furthermore, make it a way of advertising the activities at our "
+"localities, reaching out to any groups and people wanting to make something "
+"happen, and giving them the chance of fair, equal advertisement for their "
+"activities."
+msgstr ""
+"Y queríamos que estuviera disponible para cualquiera y para todos aquellos "
+"en necesidad de un sistema parecido. Es más, hacerlo una forma de publicidad "
+"de actividades en nuestras localidades, alcanzar a grupos y gente con ganas "
+"de hacer cosas, y darles la oportunidad de publicidad justa e igualitaria "
+"para sus actividades."
+
+#: .\Alpaca\templates\Alpaca\about_us.html:22
+msgid ""
+"So we reached each other, having thought separately the same. Our ideas "
+"merged and... Alpaca was born."
+msgstr ""
+"Así que fuimos donde el otro, habiendo pensado separadamente en lo mismo. "
+"Nuestras ideas convergieron y... nació Alpaca."
+
+#: .\Alpaca\templates\Alpaca\about_us.html:23
+msgid ""
+"Oh, the name? We just love alpacas. And llamas. And vicuñas. Wish there was "
+"a way to ride them into battle!"
+msgstr ""
+"Ah, ¿el nombre? Es que nos encantan las alpacas. Y las llamas. Y las "
+"vicuñas. ¡Ojalá hubiera una forma de cabalgarlas hacia la batalla!"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:26
+msgid "Contact us!"
+msgstr "¡Contáctanos!"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:27
+msgid "Should you want to reach any of us, here are our e-mails:"
+msgstr "Para contactarnos directamente, aquí tienes nuestros e-mails:"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:28
+msgid ""
+"Should you have any problems with the web functionality, you may post an "
+"issue on our"
+msgstr ""
+"Si tienes cualquier problema con la funcionalidad de la web, puedes dejar "
+"constancia en la"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:28
+msgid "GitHub repository issues section"
+msgstr "sección issues de nuestro repositorio de GitHub"
+
+#: .\Alpaca\templates\Alpaca\about_us.html:29
+msgid ""
+"If you have any other kind of problems with Alpaca, we are working on a form "
+"for this kinds of issues. In the meantime, you may reach Darkatom and she'll "
+"take care of your problem."
+msgstr ""
+"Si tienes cualquier otro tipo de problema con Alpaca, estamos trabajando en "
+"un formulario para poder recoger todas vuestras quejas. Por ahora, puedes "
+"contactar con Darkatom y ella se ocupará de tu problema."
+
+#: .\Alpaca\templates\Alpaca\about_us.html:32
+msgid "Alpaca hugs"
+msgstr "¡Abrazos de Alpaca!"
 
 #: .\Alpaca\templates\Alpaca\activity_anon.html:6
 msgid "Join"
@@ -425,67 +571,86 @@ msgstr "aquí"
 msgid "to sign up!"
 msgstr "para registrarte!"
 
-#: .\Alpaca\templates\Alpaca\index.html:13
-msgid "New Activity"
-msgstr "Nueva Actividad"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:23
-msgid "No new sessions"
-msgstr "No hay sesiones nuevas"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-card-list.html:25
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:79
-msgid "No sessions yet"
-msgstr "Sin sesiones"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:3
-msgid "Filters:"
-msgstr "Filtros:"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:4
-msgid "All Activities"
-msgstr "Todas las Actividades"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:5
-msgid "My Activities: Author"
-msgstr "Mis Actividades: Autor"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-filters.html:6
-msgid "My Activities: Attendant"
-msgstr "Mis Actividades: Participante"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:3
-msgid "Order by:"
-msgstr "Ordenar por:"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:14
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:18
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:14
 msgid "Author"
 msgstr "Autor"
 
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:32
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:48
-msgid "Published Date"
-msgstr "Fecha de Publicación"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:41
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:58
-msgid "Next Session"
-msgstr "Próxima Sesión"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:50
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:28
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:50
 msgid "Age Minimum"
 msgstr "Edad Mínima"
 
-#: .\Alpaca\templates\Alpaca\partials\activity-order.html:59
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:38
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:59
 msgid "# of Attendants"
 msgstr "# de Participantes"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:48
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:32
+msgid "Published Date"
+msgstr "Fecha de Publicación"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:58
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:41
+#: .\Alpaca\views\others.py:45 .\Alpaca\views\others.py:95
+msgid "Next Session"
+msgstr "Próxima Sesión"
+
+#: .\Alpaca\templates\Alpaca\partials\activity-table.html:79
+#: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:25
+msgid "No sessions yet"
+msgstr "Sin sesiones"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:81
 msgid "Waiting for future sessions!"
 msgstr "¡Esperando sesiones nuevas!"
+
+#: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:23
+msgid "No new sessions"
+msgstr "No hay sesiones nuevas"
+
+#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:3
+msgid "Filters:"
+msgstr "Filtros:"
+
+#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:4
+#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:8
+msgid "All Activities"
+msgstr "Todas las Actividades"
+
+#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:5
+msgid "My Activities: Author"
+msgstr "Mis Actividades: Autor"
+
+#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:6
+msgid "My Activities: Attendant"
+msgstr "Mis Actividades: Participante"
+
+#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:4
+#: .\Alpaca\views\others.py:47 .\Alpaca\views\others.py:97
+msgid "Show"
+msgstr "Mostrar"
+
+#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:12
+msgid "My Activities"
+msgstr "Mis Actividades"
+
+#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:16
+msgid "Activities I attend"
+msgstr "Actividades en las que participo"
+
+#: .\Alpaca\templates\Alpaca\partials\index-location-filter-panel.html:8
+msgid "My location"
+msgstr "Mi localización"
+
+#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:3
+msgid "Order by:"
+msgstr "Ordenar por:"
+
+#: .\Alpaca\templates\Alpaca\partials\search-bar.html:8
+msgid "Search..."
+msgstr "Buscar..."
 
 #: .\Alpaca\views\activity.py:26
 msgid "Start a new activity"
@@ -509,38 +674,40 @@ msgid "Sign up!"
 msgstr "¡Registrarse!"
 
 #: .\Alpaca\views\authentication.py:44
-#, fuzzy
-#| msgid "to sign up!"
 msgid "You are signed up!"
-msgstr "para registrarte!"
+msgstr "¡Ya estás registrado!"
 
 #: .\Alpaca\views\authentication.py:45
-#, fuzzy
-#| msgid "This user is not active at the moment. Please, verify your e-mail."
 msgid ""
 "Your user is not active at the moment. Please, verify your e-mail (it could "
 "end up in the spam folder)."
-msgstr "Este usuario no ha sido activado. Por favor, verifica tu e-mail."
+msgstr ""
+"Este usuario no ha sido activado. Por favor, verifica tu e-mail (podría "
+"estar en la carpeta de spam)."
 
 #: .\Alpaca\views\authentication.py:77
 msgid "Welcome to Alpaca!"
-msgstr ""
+msgstr "¡Bienvenido a Alpaca!"
 
 #: .\Alpaca\views\authentication.py:78
 msgid ""
 "You are one of us now. Your account has been activated and you may now log "
 "in. Welcome!"
 msgstr ""
+"Ahora eres uno de nosotros. Tu cuenta ha sido activida y ahora puedes entrar "
+"con tus credenciales. ¡Bienvenid@!"
 
 #: .\Alpaca\views\authentication.py:80
 msgid "What are you doing here?"
-msgstr ""
+msgstr "¿Qué haces aquí?"
 
 #: .\Alpaca\views\authentication.py:81
 msgid ""
 "It seems like you got lost in our page. Click the Alpaca logo to go back to "
 "the index."
 msgstr ""
+"Parece que te has perdido. Haz click en el logo de Alpaca para volver al "
+"índice."
 
 #: .\Alpaca\views\authentication.py:110
 msgid "Error"
@@ -572,10 +739,6 @@ msgid "I'm the Big Evil Llama. I watch over every activity in my land"
 msgstr "Soy la Gran Llama Malvada. Vigilo todas las actividades en mi tierra"
 
 #: .\Alpaca\views\emails.py:40
-#, fuzzy
-#| msgid ""
-#| "It seems like you wanted to become one of my alpacas! If it is so, be "
-#| "welcomed! You can confirm your account by clicking the following link:"
 msgid ""
 "It seems like you wanted to become one of my alpacas! If it is so, be "
 "welcomed! You can confirm your account by clicking the following link: "
@@ -795,3 +958,6 @@ msgstr "Edita tu perfil"
 #: .\Alpaca\views\user_management.py:68
 msgid "Save new password"
 msgstr "Guardar contraseña"
+
+#~ msgid "New Activity"
+#~ msgstr "Nueva Actividad"

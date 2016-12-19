@@ -1,25 +1,13 @@
 {% extends './_layout.html' %}
 {% load i18n %}
 
-{% block title %}
-    <!-- Tomorrow sessions bar goes here -->
-{% endblock %}
-
 {% block content %}
     <div class="al-flex-row al-flex-stretch-content">
-        <div class="al-flex-column">
-            {% include "./partials/search-bar.html" %}
-            {% include "./partials/activity-filter-panel.html" %}
-            <!-- Where Panel -->
-            <!-- Date Panel -->
-        </div>
-        <div class="al-flex-grow al-flex-column">
-            <div>
-                {% include "./partials/activity-order-bar.html" %}
-            </div>
-            <div class="al-flex-row">
-                {% include "./partials/activity-card-list.html" %}
-            </div>
-        </div>
+        {% if user.is_authenticated %}
+            <div style="min-width: 214.16px;">
+                {% include "./partials/activity-filter-order.html" %}
+            </div>                
+        {% endif %}
+        {% include "./partials/activity-card-list.html" %}
     </div>
 {% endblock %}

@@ -1,8 +1,5 @@
-{% extends './_layout.html' %}
 {% load i18n %}
 
-{% block title %}<h1>{{form_title}}</h1>{% endblock %}
-{% block content %}
 <script>
   $(function() {
         $( ".datepicker" ).datepicker({
@@ -15,21 +12,22 @@
   });
 </script>
 
-<div class="al-content-panel">
-    
-    <form method="POST" class="al-form-base al-layout-form">
+<div class="al-content-panel al-content-sidebar">
+    <small>{{ form_title }}</small>
+    <form method="POST" class="al-panel-form">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="al-submit-wrapper">
-            <input type="submit" value="{{ submit_text }}"/>
+            <input type="submit" class="al-btn-action-small" name="{{ form_name }}" value="{{ submit_text }}"/>
         </div>
     </form>
 
-    {% if rich_field_name != "" %}
-    <script>
-        CKEDITOR.replace( '{{ rich_field_name }}' );
-    </script>
+    {% if rich_field_name is not None and rich_field_name != "" %}
+        <script>
+            CKEDITOR.replace( '{{ rich_field_name }}' );
+        </script>
     {% endif %}
     {% block other-content %}{% endblock %}
 </div>
-{% endblock %}
+
+            

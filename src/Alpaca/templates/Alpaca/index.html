@@ -2,20 +2,28 @@
 {% load i18n %}
 
 {% block title %}
-    {% if user.is_authenticated %}
-        <div class="al-flex-row">
-            <div class="al-flex-grow">
-                {% include "./partials/activity-order-bar.html" %}
-                <br/>
-                {% include "./partials/activity-filter-bar.html" %}
-            </div>
-            <a class="al-btn-action-big" href="/newactivity/">
-                <i class="fa fa-plus"></i><span> {% trans "New Activity" %}</span>
-            </a>
-        </div>
-    {% endif %}
+    <!-- Tomorrow sessions bar goes here -->
 {% endblock %}
 
 {% block content %}
-    {% include "./partials/activity-card-list.html" %}
+    <div class="al-flex-row al-flex-stretch-content">
+        <div class="al-flex-column">
+            {% include "./partials/search-bar.html" %}
+
+            {% if user.is_authenticated %}
+                {% include "./partials/index-filter-panel.html" %}
+            {% endif %}
+            
+            <!-- Where Panel -->
+            {% include "./partials/_form_panel.html" %}
+        </div>
+        <div class="al-flex-grow al-flex-column">
+            <div>
+                {% include "./partials/index-order-bar.html" %}
+            </div>
+            <div class="al-flex-row">
+                {% include "./partials/index-activity-cards.html" %}
+            </div>
+        </div>
+    </div>
 {% endblock %}

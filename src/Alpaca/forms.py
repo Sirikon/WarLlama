@@ -113,6 +113,10 @@ class SessionForm(forms.ModelForm):
     class Meta:
         model = Session
         fields = ("description", "start_date", "end_date", "location")
+        widgets = {
+            'start_date': forms.DateTimeInput(attrs={'class':'datepicker'}),
+            'end_date': forms.DateTimeInput(attrs={'class':'datepicker'}),
+        }
 
     def clean(self):
         super(SessionForm, self).clean()
@@ -127,3 +131,32 @@ class SessionForm(forms.ModelForm):
             msg = _("The end date and time must be greater than the start date.")
             self._errors["end_date"] = self.error_class([msg])
 
+## MINOR FORMS ##
+class DateRangeFilterForm(forms.Form):
+    start_date = forms.DateField(required=True, label=_("From:"), initial=datetime.datetime.now())
+    end_date = forms.DateField(required=True, label=_("To:"), initial=datetime.datetime.now())
+ 
+    class Meta:
+        fields = ("start_date", "end_date")
+        widgets = {
+            'start_date': forms.DateInput(attrs={'class':'datepicker'}),
+            'end_date': forms.DateInput(attrs={'class':'datepicker'}),
+        }
+
+    def is_valid(self):
+        cleaned_data = super(DateRangeFilterForm, self).clean()
+        start_date = cleaned_data.get("start_date")
+        end_date = cleaned_data.get("end_date")
+
+        if end_date < start_date:
+           msg = _("The end date must be greater than the start date.")
+           self._errors["end_date"] = self.error_class([msg])
+           return False
+        return True
+        
+    def get_activities(self):    
+        activity_list = sorted(Activity.objects.all(), 
+                              key = lambda a: (a.get_next_session().start_date >= self.data["start_date"] 
+                                               and a.get_next_session().end_date <= self.data["end_date"]), 
+                              reverse=(sort_sign=="-"))
+        return activity_list
