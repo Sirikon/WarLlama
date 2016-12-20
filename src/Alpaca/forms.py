@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from .models import *
 
+import hashlib
 import datetime
 
 
@@ -19,7 +20,8 @@ class ProfileCreationForm(UserCreationForm):
     last_name = forms.CharField(required=False, label=_('Last Name'), help_text=_("Optional"))
 
     language_options = ( ("en", _("English")),
-                         ("es", _("Spanish")) )
+                         ("es", _("Spanish")),
+                         ("eus", _("Euskera")) )
     language_preference = forms.ChoiceField(label=_('Language'), required=True, choices=language_options, help_text=_('In which language would you prefer to use Alpaca?'))
 
     class Meta:
@@ -31,10 +33,13 @@ class ProfileCreationForm(UserCreationForm):
         user.email = self.cleaned_data["email"]
         user.first_name = self.cleaned_data["first_name"]
         user.last_name = self.cleaned_data["last_name"]
+
         if commit:
+            user.is_active = False
             user.save()
             profile = Profile(user=user, birth_date=self.cleaned_data["birth_date"], language_preference=self.cleaned_data["language_preference"])
             profile.save()
+        
         return user
 
 class ProfileForm(forms.ModelForm):
@@ -56,7 +61,8 @@ class ProfileForm(forms.ModelForm):
     display_name_format = forms.ChoiceField(label=_('How should your name be displayed?'), required=True, choices=format_options, help_text=_('You can ignore this if you chose not to show your name.'))
 
     language_options = ( ("en", _("English")),
-                         ("es", _("Spanish")) )
+                         ("es", _("Spanish")),
+                         ("eus", _("Euskera")) )
     language_preference = forms.ChoiceField(label=_('Language'), required=True, choices=language_options, help_text=_('In which language would you prefer to use Alpaca?'))
 
     class Meta:
@@ -97,6 +103,7 @@ class ActivityForm(forms.ModelForm):
         model = Activity
         fields = ("title", "description", "city", "auto_register", "confirmation_period", "age_minimum")
 
+
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, label=_('Description'), max_length=500, widget=forms.Textarea)
     start_date = forms.DateTimeField(required=True, label=_('Start date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
@@ -106,3 +113,46 @@ class SessionForm(forms.ModelForm):
     class Meta:
         model = Session
         fields = ("description", "start_date", "end_date", "location")
+
+    def clean(self):
+        super(SessionForm, self).clean()
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+
+        if start_date <= timezone.now():
+            msg = _("The start date and time must be greater than today's date.")
+            self._errors["start_date"] = self.error_class([msg])
+
+        if end_date < start_date:
+            msg = _("The end date and time must be greater than the start date.")
+            self._errors["end_date"] = self.error_class([msg])
+
+## MINOR FORMS ##
+class DateRangeFilterForm(forms.Form):
+    start_date = forms.DateField(required=True, label=_("From:"), initial=datetime.datetime.now(), widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))
+    end_date = forms.DateField(required=True, label=_("To:"), initial=datetime.datetime.now(), widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))
+ 
+    class Meta:
+        fields = ("start_date", "end_date")
+
+    def is_valid(self):
+        super(DateRangeFilterForm, self).is_valid()
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+
+        if end_date < start_date:
+           msg = _("The end date must be greater than the start date.")
+           self._errors["end_date"] = self.error_class([msg])
+           return False
+        return True
+        
+    def get_activities(self, activity_list):    
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+        
+        activity_list = filter(lambda a: a.get_next_session() != None, activity_list)
+        activity_list = sorted(activity_list, 
+                              key = lambda a: (a.get_next_session().start_date.date() >= start_date 
+                                               and a.get_next_session().start_date.date() <= end_date), 
+                              reverse=True)
+        return activity_list

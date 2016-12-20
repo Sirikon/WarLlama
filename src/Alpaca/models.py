@@ -13,6 +13,8 @@ class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     birth_date = models.DateField('date of birth')
 
+    current_token = models.CharField(max_length=100, default="")
+
     # USER SETTINGS #
     language_preference = models.CharField(max_length=50, default="English")
     show_email = models.BooleanField(default=True)

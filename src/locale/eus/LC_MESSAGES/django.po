@@ -16,313 +16,309 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\Alpaca\forms.py:17
 msgid "E-mail"
-msgstr "E-mail"
+msgstr "E-maila"
 
 #: .\Alpaca\forms.py:18 .\Alpaca\forms.py:48
 msgid "Birth date"
-msgstr "Fecha de nacimiento"
+msgstr "Jaiotze data"
 
 #: .\Alpaca\forms.py:19 .\Alpaca\forms.py:46
 msgid "First Name"
-msgstr "Nombre"
+msgstr "Izena"
 
 #: .\Alpaca\forms.py:19 .\Alpaca\forms.py:20 .\Alpaca\forms.py:46
 #: .\Alpaca\forms.py:47
 msgid "Optional"
-msgstr "Opcional"
+msgstr "Aukerakoa"
 
 #: .\Alpaca\forms.py:20 .\Alpaca\forms.py:47
 msgid "Last Name"
-msgstr "Apellido/s"
+msgstr "Abizena"
 
 #: .\Alpaca\forms.py:22 .\Alpaca\forms.py:63 .\WarLlama\settings.py:150
 msgid "English"
-msgstr "Inglés"
+msgstr "Ingelesa"
 
 #: .\Alpaca\forms.py:23 .\Alpaca\forms.py:64 .\WarLlama\settings.py:151
 msgid "Spanish"
-msgstr "Español"
+msgstr "Gaztelania"
 
 #: .\Alpaca\forms.py:24 .\Alpaca\forms.py:65 .\WarLlama\settings.py:152
 msgid "Euskera"
-msgstr "Euskera"
+msgstr "Euskara"
 
 #: .\Alpaca\forms.py:25 .\Alpaca\forms.py:66
 msgid "Language"
-msgstr "Lenguaje"
+msgstr "Hizkuntza"
 
 #: .\Alpaca\forms.py:25 .\Alpaca\forms.py:66
 msgid "In which language would you prefer to use Alpaca?"
-msgstr "¿En qué lenguaje preferirías usar Alpaca?"
+msgstr "Zein hizkuntzatan nahiago duzu Alpaca erabiltzea?"
 
 #: .\Alpaca\forms.py:50
 msgid "Show your birthday?"
-msgstr "¿Mostrar tu cumpleaños?"
+msgstr "Jaiotze data erakutsi?"
 
 #: .\Alpaca\forms.py:51
 msgid "Show your e-mail?"
-msgstr "¿Mostrar tu e-mail?"
+msgstr "E-maila erakutsi?"
 
 #: .\Alpaca\forms.py:52
 msgid "Show your real name?"
-msgstr "¿Mostrar tu nombre real?"
+msgstr "Benetako izena erakutsi?"
 
 #: .\Alpaca\forms.py:54
 msgid "Username (Full Name)"
-msgstr "Usuario (Nombre Completo)"
+msgstr "Erabiltzaile izena (Izen Osoa)"
 
 #: .\Alpaca\forms.py:55
 msgid "Full Name (Username)"
-msgstr "Nombre Completo (Usuario)"
+msgstr "Izen Osoa (Erabiltzaile izena)"
 
 #: .\Alpaca\forms.py:56
 msgid "Username (First Name)"
-msgstr "Usuario (Nombre)"
+msgstr "Erabiltzaile izena (Izena)"
 
 #: .\Alpaca\forms.py:57
 msgid "Username (Last Name)"
-msgstr "Usuario (Apellido)"
+msgstr "Erabiltzaile izena (Abizena)"
 
 #: .\Alpaca\forms.py:58
 msgid "First Name (Username)"
-msgstr "Nombre (Usuario)"
+msgstr "Izena (Erabiltzaile izena)"
 
 #: .\Alpaca\forms.py:59
 msgid "Last Name (Username)"
-msgstr "Apellido (Usuario)"
+msgstr "Abizena (Erabiltzaile izena)"
 
 #: .\Alpaca\forms.py:61
 msgid "How should your name be displayed?"
-msgstr "¿Cómo deberíamos enseñar tu nombre?"
+msgstr "Nola erakutsi nahi duzu zure izena?"
 
 #: .\Alpaca\forms.py:61
 msgid "You can ignore this if you chose not to show your name."
-msgstr "Puedes ignorar esta opción si has elegido no mostrar tu nombre."
+msgstr "Ezikusiarena egin dezakezu zure izena ez erakustea aukeratu baduzu."
 
 #: .\Alpaca\forms.py:73
 msgid "E-mail Or Username"
-msgstr "E-mail o Usuario"
+msgstr "Emaila edo erabiltzaile izena"
 
 #: .\Alpaca\forms.py:76
 msgid "Old password:"
-msgstr "Contraseña antigua:"
+msgstr "Pasahitz zaharra:"
 
 #: .\Alpaca\forms.py:77
 msgid "New password:"
-msgstr "Contraseña nueva:"
+msgstr "Pasahitz berria:"
 
 #: .\Alpaca\forms.py:78
 msgid "Repeat new password:"
-msgstr "Repetir contraseña nueva:"
+msgstr "Pasahitz berria errepikatu:"
 
 #: .\Alpaca\forms.py:94
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:8
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:5
 msgid "Title"
-msgstr "Título"
+msgstr "Izenburua"
 
 #: .\Alpaca\forms.py:95 .\Alpaca\forms.py:108
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:75
 msgid "Description"
-msgstr "Descripción"
+msgstr "Deskribapena"
 
 #: .\Alpaca\forms.py:96
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:23
 msgid "City"
-msgstr "Ciudad"
+msgstr "Hiria"
 
 #: .\Alpaca\forms.py:96
 msgid "In which city will this activity take place?"
-msgstr "¿En qué ciudad tendrá lugar esta actividad?"
+msgstr "Zein hiritan jazoko da jarduera hau?"
 
 #: .\Alpaca\forms.py:98
 msgid "Allow auto-registration?"
-msgstr "¿Permitir auto-registro?"
+msgstr "Auto-erregistroa onartu?"
 
 #: .\Alpaca\forms.py:98
 msgid ""
 "Selected: Users join automatically. Not selected: Author decides to accept "
 "or reject joining requests."
 msgstr ""
-"Seleccionado: Los usuarios podrán unirse a la actividad automáticamente. No "
-"seleccionado: El autor de la actividad decideaceptar o rechazar las "
-"peticiones de aquellos que quieran unirse."
+"Aukeratua: Erabiltzaileak automatikoki jarduerara batuko dira. Ez aukeratua: "
+"Egileak erabakiko du eskaera onartu ala ez onartu."
 
 #: .\Alpaca\forms.py:99
 msgid "Confirmation period"
-msgstr "Período de confirmación"
+msgstr "Egiaztapen aldia"
 
 #: .\Alpaca\forms.py:99
 msgid ""
 "How many days before a session starts the assistance confirmation period?"
-msgstr ""
-"¿Cuántos días antes de que empiece una sesión empieza el período de "
-"confirmación de asistencia?"
+msgstr "Zenbat egun saioa hasi baino lehen hasten da egiaztapen aldia?"
 
 #: .\Alpaca\forms.py:100
 msgid "Age minimum"
-msgstr "Edad mínima"
+msgstr "Gutxieneko adina"
 
 #: .\Alpaca\forms.py:100
 msgid "Minimum age to attend this activity."
-msgstr "Edad mínima para participar en esta actividad."
+msgstr "Jardueran parte hartzeko gutxieneko adina."
 
 #: .\Alpaca\forms.py:109
 msgid "Start date and time"
-msgstr "Fecha y hora de comienzo"
+msgstr "Hasiera data eta ordua"
 
 #: .\Alpaca\forms.py:109 .\Alpaca\forms.py:110
 msgid "Example: 1984-11-15 19:25:36"
-msgstr "Ejemplo: 1984-11-15 19:25:36"
+msgstr "Adibidez: 1984-11-15 19:25:36"
 
 #: .\Alpaca\forms.py:110
 msgid "End date and time"
-msgstr "Fecha y hora de finalización"
+msgstr "Amaiera data eta ordua"
 
 #: .\Alpaca\forms.py:111
 msgid "Location"
-msgstr "Localización"
+msgstr "Kokalekua"
 
 #: .\Alpaca\forms.py:111
 msgid "Where (place, address) will this session take place?"
-msgstr "¿Dónde (lugar, dirección) tendrá lugar esta sesión?"
+msgstr "Non (tokia, helbidea) jazoko da saio hau?"
 
 #: .\Alpaca\forms.py:127
 msgid "The start date and time must be greater than today's date."
-msgstr "La fecha y hora de empiece debe ser posterior a la de hoy."
+msgstr "Hasiera data eta ordua gaurko egunaren ondorengoa izan behar du."
 
 #: .\Alpaca\forms.py:131
 msgid "The end date and time must be greater than the start date."
-msgstr "La fecha y hora de finalización debe ser posterior a la de empiece."
+msgstr "Amaiera data eta ordua hasiera data baino ondorengoa izan behar du."
 
 #: .\Alpaca\forms.py:136
 msgid "From:"
-msgstr "Desde:"
+msgstr "Noiztik:"
 
 #: .\Alpaca\forms.py:137
 msgid "To:"
-msgstr "Hasta:"
+msgstr "Noraino"
 
 #: .\Alpaca\forms.py:152
 msgid "The end date must be greater than the start date."
-msgstr "La fecha de finalización debe ser posterior a la de empiece."
+msgstr "Amaiera data hasiera data baino  ondorengoa izan behar du."
 
 #: .\Alpaca\templates\Alpaca\_layout.html:23
 msgid "Log out"
-msgstr "Salir"
+msgstr "Irten"
 
 #: .\Alpaca\templates\Alpaca\_layout.html:25
 #: .\Alpaca\views\authentication.py:94
 msgid "Log in"
-msgstr "Entrar"
+msgstr "Sartu"
 
 #: .\Alpaca\templates\Alpaca\_layout.html:26
 msgid "Sign up"
-msgstr "Registrarse"
+msgstr "Izena eman"
 
 #: .\Alpaca\templates\Alpaca\_layout.html:39
 msgid "About Us"
-msgstr "Sobre Nosotros"
+msgstr "Guri Buruz"
 
 #: .\Alpaca\templates\Alpaca\_layout.html:40
 msgid "Terms and Conditions"
-msgstr "Términos y Condiciones"
+msgstr "Zehaztapen eta Baldintzak"
 
 #: .\Alpaca\templates\Alpaca\_layout.html:41
 msgid "Found a problem? Please,"
-msgstr "¿Has encontrado un problema? Por favor,"
+msgstr "Problemaren bat topatu duzu? Mesedez,"
 
 #: .\Alpaca\templates\Alpaca\_layout.html:41
 msgid "help us!"
-msgstr "¡ayúdanos!"
+msgstr "lagun iezaguzu!"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:9
 #: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:8
 msgid "by"
-msgstr "por"
+msgstr "egilea "
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:15
 msgid "At"
-msgstr "En"
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:20
 msgid "Next Session:"
-msgstr "Próxima Sesión:"
+msgstr "Hurrengo saioa:"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:34
 msgid "Description:"
-msgstr "Descripción:"
+msgstr "Deskribapena:"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:40
 msgid "Settings:"
-msgstr "Preferencias:"
+msgstr "lehentasunak:"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:41
 msgid "Users may join this activity"
-msgstr "Los usuarios pueden unirse a esta actividad"
+msgstr "Erabiltzaileak jarduera honetara batu daitezke"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:43
 msgid "freely."
-msgstr "libremente."
+msgstr "libreki."
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:45
 msgid "upon request."
-msgstr "tras pedirlo."
+msgstr "eskaerarekin."
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:48
 msgid "Confirmation period starts"
-msgstr "El período de confirmación empieza"
+msgstr "Egiaztapen aldia hasten da"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:48
 msgid "days"
-msgstr "días"
+msgstr "egun"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:48
 msgid "before the session's start date."
-msgstr "antes del comienzo de la sesión."
+msgstr "sesio hasiera data baino lehen."
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:49
 msgid "The minimum age to join this activity is"
-msgstr "La edad mínima para participar en esta actividad es"
+msgstr "Gutxieneko adina jarduera honetan parte hartzeko da"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:49
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:71
 #: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:29
 msgid "years-old"
-msgstr "años"
+msgstr "urte"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:53
 msgid "Attendants:"
-msgstr "Participantes:"
+msgstr "Partehartzaileak:"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:62
 msgid "Session List"
-msgstr "Lista de Sesiones"
+msgstr "Sesio Zerrenda"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:76
 #: .\Alpaca\templates\Alpaca\partials\index-location-filter-panel.html:4
 msgid "Where"
-msgstr "Dónde"
+msgstr "Non"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:77
 msgid "Start"
-msgstr "Empieza"
+msgstr "Hasiera"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:78
 msgid "End"
-msgstr "Finaliza"
+msgstr "Amaiera"
 
 #: .\Alpaca\templates\Alpaca\_layout_activity.html:79
 msgid "Attendants"
-msgstr "Participantes"
+msgstr "Partehartzaileak"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:10
 msgid "Who are we?"
-msgstr "¿Quiénes somos?"
+msgstr "Nor gara gu?"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:11
 msgid ""
@@ -330,13 +326,13 @@ msgid ""
 "at Alpaca works as expected. And yes, that means we are the Big Evil Llama's "
 "parents."
 msgstr ""
-"Darkatom y Sirikon. Somos los creadores de Alpaca. Nos aseguramos de que "
-"todo en Alpaca funcione como debe. Y sí, eso significa que somos los "
-"progenitores de la Gran Llama Malvada."
+"Darkatom eta Sirikon. Alpacaren sortzaileak gara. Alpacaren barruan dena "
+"behar bezala funtzionatzen duela egiaztatzen dugu. Eta, bai, horrek esan nahi du Llama Handi Gaiztoaren "
+"gurasoak garela."
 
 #: .\Alpaca\templates\Alpaca\about_us.html:13
 msgid "Who is the Big Evil Llama?"
-msgstr "¿Quién es la Gran Llama Malvada?"
+msgstr "Nor da Llama Handi Gaiztoa?"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:14
 msgid ""
@@ -344,14 +340,13 @@ msgid ""
 "However, you may read George Orwell's 1984 novel (if you haven't already) to "
 "get an idea on who the Big Evil Llama might be ;)"
 msgstr ""
-"¡Muy buena pregunta! Pero es muy suya y se enfadaría bastante si contáramos su "
-"secreto. Sin embargo, puedes leer la novela 1984, de George Orwell (si es "
-"que todavía no lo has hecho) para hacerte una idea de quién puede ser la "
-"Gran Llama Malvada ;)"
+"Galdera ona da hori, baina oso haserre jarriko lizateke bere sekretua kontatuko bagenu. "
+"Hala eta guztiz ere, Gorge Orwellen 1984 novela irakurri dezakezu (oraindik egin ez baduzu) "
+"Llama Handi Gaiztoa nor den ideia bat izateko ;)"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:16
 msgid "What is Alpaca?"
-msgstr "¿Qué es Alpaca?"
+msgstr "Zer da Alpaca?"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:17
 msgid ""
@@ -360,15 +355,13 @@ msgid ""
 "index of all activities in Alpaca. This way, anyone can see your activity "
 "and join in! And you may join others' activities too!"
 msgstr ""
-"Alpaca es una aplicación de sistema de administración de actividades. Es "
-"decir, un lugar donde puedes crear y gestionar tus actividades. La página "
-"principal sirve como índice público de todas las actividades en Alpaca. De "
-"esta forma, ¡cualquiera puede ver tu actividad y unirse! ¡Y tú puedes unirte "
-"a las actividades de otros!"
+"Alpaca jarduera administraziorako aplikazio sistema bat da. Hau da, zure jarduerak sortu "
+"eta kudeatzeko leku bat. Orrialde nagusia Alpacan dauden jarduera guztien aurkibidea da. "
+"Honela, edozeinek zure jarduera ikus dezakeke eta batu daiteke. Eta zuk beste jardueretara batu zaitezke ere bai!" 
 
 #: .\Alpaca\templates\Alpaca\about_us.html:19
 msgid "Why 'Alpaca'?"
-msgstr "¿Por qué «Alpaca»?"
+msgstr "Zergatik 'Alpaca'?"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:20
 msgid ""
@@ -380,14 +373,10 @@ msgid ""
 "coming? who is not?— but also somewhere where potential attendants could see "
 "all of our available activities."
 msgstr ""
-"Hemos pasado bastante tiempo disfrutando de las actividades de la Asociación "
-"Cultural INERS y, a la larga, nos hemos hecho parte de ella y hemos ayudado "
-"a que crezca. Un día nos dimos cuenta de que necesitábamos algo que nos "
-"permitiera organizar y gestionar actividades sin necesidad de grupos de "
-"chat, que al final pueden llegar a ser una fuente de problemas para "
-"organizarse. Algún sitio donde no sólo las actividades fueran fáciles de "
-"manejar —¿quién viene? ¿quién no?—, sino también un sitio donde posibles "
-"participantes pudieran ver todas nuestras actividades disponibles."
+"Nahiko denbora igaro dugu INERS Asoziazio Kulturalaren jarduerez gozatzen eta baita haren parte bilakatzen "
+"eta laguntzen. Egun batean, biok konturatu ginen zerbait behar genuela jarduerak aantolatu eta kudeatzeko "
+"txat talde nahasirik gabe. Zerbait non ez bakarrik jarduera modu erosoan kudeatzeko -nor dator? nor ez?- baina baita "
+"baina baita balizko partehartzaileek gure jarduera guztiak ikusteko."
 
 #: .\Alpaca\templates\Alpaca\about_us.html:21
 msgid ""
@@ -397,47 +386,45 @@ msgid ""
 "happen, and giving them the chance of fair, equal advertisement for their "
 "activities."
 msgstr ""
-"Y queríamos que estuviera disponible para cualquiera y para todos aquellos "
-"en necesidad de un sistema parecido. Es más, hacerlo una forma de publicidad "
-"de actividades en nuestras localidades, alcanzar a grupos y gente con ganas "
-"de hacer cosas, y darles la oportunidad de publicidad justa e igualitaria "
-"para sus actividades."
+"Eta antzeko sistema baten beharra daukanaren eskura izatea nahi genuen. "
+"Gainera, jarduerak publizitatzeko modu bat izatea nahi dugu, gauzak egiteko gogotan dagoen "
+"edozein talde edo jendeari heldu eta haiei ere beren jarduerak publizitatzeko aukera bidezkoa "
+"eta berdintasunezkoa ematea."
 
 #: .\Alpaca\templates\Alpaca\about_us.html:22
 msgid ""
 "So we reached each other, having thought separately the same. Our ideas "
 "merged and... Alpaca was born."
 msgstr ""
-"Así que fuimos donde el otro, habiendo pensado separadamente en lo mismo. "
-"Nuestras ideas convergieron y... nació Alpaca."
+"Beraz, bata bestearengana joan ginen, bakoitzak bakarka berdina pentsatu ostean. "
+"Gure ideiak partekatu genituen eta... Alpaca jaio zen."
 
 #: .\Alpaca\templates\Alpaca\about_us.html:23
 msgid ""
 "Oh, the name? We just love alpacas. And llamas. And vicuñas. Wish there was "
 "a way to ride them into battle!"
-msgstr ""
-"Ah, ¿el nombre? Es que nos encantan las alpacas. Y las llamas. Y las "
-"vicuñas. ¡Ojalá hubiera una forma de cabalgarlas hacia la batalla!"
+msgstr "Oh, izena? Alpakaka maite ditutu. Eta llamak. Eta bikuinak. Borrokara "
+"gidatzeko modu bat balego!"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:26
 msgid "Contact us!"
-msgstr "¡Contáctanos!"
+msgstr "Harremanetan jarri gurekin!"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:27
 msgid "Should you want to reach any of us, here are our e-mails:"
-msgstr "Para contactarnos directamente, aquí tienes nuestros e-mails:"
+msgstr "Guretako norbaitekin harremanetan jarri nahi izatekotan, hemen dituzu gure e-mailak:"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:28
 msgid ""
 "Should you have any problems with the web functionality, you may post an "
 "issue on our"
 msgstr ""
-"Si tienes cualquier problema con la funcionalidad de la web, puedes dejar "
-"constancia en la"
+"Web orrialdearen funtzionalitatearekin arazoren bat baduzu, idatzirik utzi dezakezu "
+"gure"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:28
 msgid "GitHub repository issues section"
-msgstr "sección issues de nuestro repositorio de GitHub"
+msgstr "GitHub gordetegiko arazo sailean"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:29
 msgid ""
@@ -445,323 +432,325 @@ msgid ""
 "for this kinds of issues. In the meantime, you may reach Darkatom and she'll "
 "take care of your problem."
 msgstr ""
-"Si tienes cualquier otro tipo de problema con Alpaca, estamos trabajando en "
-"un formulario para poder recoger todas vuestras quejas. Por ahora, puedes "
-"contactar con Darkatom y ella se ocupará de tu problema."
+"Beste arazo motatik badaukazu Alpacarekin, imprimaki batean lanean ari gara "
+"arazo mota horietarako. Bitartean, Darkatomekin harremanetan jarri zaitezke "
+"eta bera arduratuko da zure arazoaz."
 
 #: .\Alpaca\templates\Alpaca\about_us.html:32
 msgid "Alpaca hugs"
-msgstr "¡Abrazos de Alpaca!"
+msgstr "Alpaka besarkada"
 
 #: .\Alpaca\templates\Alpaca\activity_anon.html:6
 msgid "Join"
-msgstr "Unirse"
+msgstr "Batu"
 
 #: .\Alpaca\templates\Alpaca\activity_anon.html:13
 #: .\Alpaca\templates\Alpaca\activity_user.html:24
 msgid "There are no users attending this activity, except"
-msgstr "No hay usuarios participando en esta actividad, salvo"
+msgstr "Ez dago jarduera honetan parte hartzen duen erabiltzailerik, salbu"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:6
 #: .\Alpaca\templates\Alpaca\activity_author.html:55
 #: .\Alpaca\templates\Alpaca\user_profile.html:12
 msgid "Edit"
-msgstr "Editar"
+msgstr "Editatu"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:12
 msgid "There are no users attending your activity."
-msgstr "No hay usuarios participando en tu actividad."
+msgstr "Ez dago zure jardueran parte hartzen duen erabiltzailerik"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:21
 msgid "Kick out"
-msgstr "Echar"
+msgstr "Kanporatu"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:28
 msgid "Pending requests:"
-msgstr "Peticiones pendientes:"
+msgstr "Onartzeke dauden eskaerak:"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:30
 msgid "There are no pending requests to join the activity."
-msgstr "No hay peticiones pendientes para unirse a la actividad."
+msgstr "Ez dago onartzeke dagoen eskaerarik jarduerara batzeko."
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:32
 msgid "Manage the requests to join the activity:"
-msgstr "Administrar peticiones para unirse a la actividad:"
+msgstr "Jarduerara batzeko eskaerak kudeatu:"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:40
 msgid "Accept"
-msgstr "Aceptar"
+msgstr "Onartu"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:41
 msgid "Reject"
-msgstr "Rechazar"
+msgstr "Ukatu"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:49
 msgid "Add session"
-msgstr "Añadir una sesión"
+msgstr "Sesio bat gehitu"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:54
 #: .\Alpaca\templates\Alpaca\activity_user.html:33
 msgid "State"
-msgstr "Estado"
+msgstr "Egoera"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:61
 #: .\Alpaca\templates\Alpaca\activity_user.html:39
 msgid "Closed & Finished"
-msgstr "Cerrada & Finalizada"
+msgstr "Itxita eta amaituta"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:63
 msgid "Open for confirmation"
-msgstr "Abierta para confirmación"
+msgstr "Baieztapenerako irekia"
 
 #: .\Alpaca\templates\Alpaca\activity_author.html:65
 msgid "Not ready yet"
-msgstr "Aún no está lista"
+msgstr "Ez dago prest oraindik"
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:6
 msgid "You are too young to attend this activity."
-msgstr "Eres demasiado joven para unirte a esta actividad."
+msgstr "Gazteegia zara jarduera honetara batzeko."
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:8
 msgid "The author of this activity has received your request to join!"
-msgstr "¡El autor de esta actividad ha recibido tu petición de unirte!"
+msgstr "Jarduera honen egileak jaso du zure batzeko eskaria!"
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:12
 msgid "Leave"
-msgstr "Irse"
+msgstr "Joan"
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:17
 msgid "Join!"
-msgstr "¡Únete!"
+msgstr "Batu!"
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:42
 msgid "Join the activity to come!"
-msgstr "¡Únete a la actividad para venir!"
+msgstr "Etorriko den jarduerara batu!"
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:45
 msgid "See you there!"
-msgstr "¡Te vemos allí!"
+msgstr "Bertan ikusiko dugu elkar!"
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:50
 msgid "I am going!!"
-msgstr "¡Yo voy!"
+msgstr "Banoa!!"
 
 #: .\Alpaca\templates\Alpaca\activity_user.html:54
 msgid "Coming soon..."
-msgstr "Próximamente..."
+msgstr "Laster etortzeke..."
 
 #: .\Alpaca\templates\Alpaca\form_edit_profile.html:6
 #: .\Alpaca\views\user_management.py:67
 msgid "Change your password"
-msgstr "Cambia tu contraseña"
+msgstr "Zure pasahitza aldatu"
 
 #: .\Alpaca\templates\Alpaca\form_login.html:6
 msgid "Forgot your password?"
-msgstr "¿Has olvidado tu contraseña?"
+msgstr "Pasahitza ahaztu duzu?"
 
 #: .\Alpaca\templates\Alpaca\form_login.html:7
 msgid "Or click"
-msgstr "¡O haz click"
+msgstr "Edo klik egin"
 
 #: .\Alpaca\templates\Alpaca\form_login.html:7
 msgid "here"
-msgstr "aquí"
+msgstr "hemen"
 
 #: .\Alpaca\templates\Alpaca\form_login.html:7
 msgid "to sign up!"
-msgstr "para registrarte!"
+msgstr "erregistratzeko!"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:18
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:14
 msgid "Author"
-msgstr "Autor"
+msgstr "Egilea"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:28
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:50
 msgid "Age Minimum"
-msgstr "Edad Mínima"
+msgstr "Gutxieneko Adina"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:38
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:59
 msgid "# of Attendants"
-msgstr "# de Participantes"
+msgstr "Partehartzaile #a"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:48
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:32
 msgid "Published Date"
-msgstr "Fecha de Publicación"
+msgstr "Argitalpen Data"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:58
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:41
 #: .\Alpaca\views\others.py:45 .\Alpaca\views\others.py:95
 msgid "Next Session"
-msgstr "Próxima Sesión"
+msgstr "Hurrengo Sesioa"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:79
 #: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:25
 msgid "No sessions yet"
-msgstr "Sin sesiones"
+msgstr "Sesiorik ez"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:81
 msgid "Waiting for future sessions!"
-msgstr "¡Esperando sesiones nuevas!"
+msgstr "Sesio berrien zain!"
 
 #: .\Alpaca\templates\Alpaca\partials\index-activity-cards.html:23
 msgid "No new sessions"
-msgstr "No hay sesiones nuevas"
+msgstr "Sesio berririk ez"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:3
 msgid "Filters:"
-msgstr "Filtros:"
+msgstr "Iragazkiak:"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:4
 #: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:8
 msgid "All Activities"
-msgstr "Todas las Actividades"
+msgstr "Jarduera Guztiak"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:5
 msgid "My Activities: Author"
-msgstr "Mis Actividades: Autor"
+msgstr "Nire Jarduerak: Egilea"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:6
 msgid "My Activities: Attendant"
-msgstr "Mis Actividades: Participante"
+msgstr "Nire Jarduerak: Partehartzailea"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:4
 #: .\Alpaca\views\others.py:47 .\Alpaca\views\others.py:97
 msgid "Show"
-msgstr "Mostrar"
+msgstr "Erakutsi"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:12
 msgid "My Activities"
-msgstr "Mis Actividades"
+msgstr "Nire jarduerak"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:16
 msgid "Activities I attend"
-msgstr "Actividades en las que participo"
+msgstr "Parte hartzen dudan jarduerak"
 
 #: .\Alpaca\templates\Alpaca\partials\index-location-filter-panel.html:8
 msgid "My location"
-msgstr "Mi localización"
+msgstr "Nire kokalekua"
 
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:3
 msgid "Order by:"
-msgstr "Ordenar por:"
+msgstr "Arabera ordenatu"
 
 #: .\Alpaca\templates\Alpaca\partials\search-bar.html:8
 msgid "Search..."
-msgstr "Buscar..."
+msgstr "Bilatu..."
 
 #: .\Alpaca\views\activity.py:26
 msgid "Start a new activity"
-msgstr "Empezar una actividad"
+msgstr "Jarduera berri bat hasi"
 
 #: .\Alpaca\views\activity.py:27 .\Alpaca\views\session.py:27
 msgid "Create!"
-msgstr "¡Crear!"
+msgstr "Sortu!"
 
 #: .\Alpaca\views\activity.py:55
 msgid "Editing activity"
-msgstr "Editando actividad"
+msgstr "Jarduera editatzen"
 
 #: .\Alpaca\views\activity.py:56 .\Alpaca\views\session.py:61
 #: .\Alpaca\views\user_management.py:37
 msgid "Save changes"
-msgstr "Guardar cambios"
+msgstr "Aldaketak gorde"
 
 #: .\Alpaca\views\authentication.py:31 .\Alpaca\views\user_management.py:55
 msgid "Sign up!"
-msgstr "¡Registrarse!"
+msgstr "Izena eman!"
 
 #: .\Alpaca\views\authentication.py:44
 msgid "You are signed up!"
-msgstr "¡Ya estás registrado!"
+msgstr "Izena emanda daukazu!"
 
 #: .\Alpaca\views\authentication.py:45
 msgid ""
 "Your user is not active at the moment. Please, verify your e-mail (it could "
 "end up in the spam folder)."
 msgstr ""
-"Este usuario no ha sido activado. Por favor, verifica tu e-mail (podría "
-"estar en la carpeta de spam)."
+"Zure erabiltzailea ez dago aktibaturik. Mesedez, egiaztatu zure e-maila (spam  karpetan "
+"egon daiteke)."
 
 #: .\Alpaca\views\authentication.py:77
 msgid "Welcome to Alpaca!"
-msgstr "¡Bienvenido a Alpaca!"
+msgstr "Ongi etorri Alpacara!"
 
 #: .\Alpaca\views\authentication.py:78
 msgid ""
 "You are one of us now. Your account has been activated and you may now log "
 "in. Welcome!"
 msgstr ""
-"Ahora eres uno de nosotros. Tu cuenta ha sido activida y ahora puedes entrar "
-"con tus credenciales. ¡Bienvenid@!"
+"Gutako bat zara orain. Zure kontua aktibatua izan da eta orain sar zaitezke. "
+"Ongi etorri!"
 
 #: .\Alpaca\views\authentication.py:80
 msgid "What are you doing here?"
-msgstr "¿Qué haces aquí?"
+msgstr "Zergatik zaude hemen?"
 
 #: .\Alpaca\views\authentication.py:81
 msgid ""
 "It seems like you got lost in our page. Click the Alpaca logo to go back to "
 "the index."
 msgstr ""
-"Parece que te has perdido. Haz click en el logo de Alpaca para volver al "
-"índice."
+"Badirudi gure orrialdean galdu egin zarela. Klik egin Alpaca logoan klik egizu "
+"aurkibidera bueltatzeko."
 
 #: .\Alpaca\views\authentication.py:110
 msgid "Error"
-msgstr "Error"
+msgstr "Errorea"
 
 #: .\Alpaca\views\authentication.py:111
 msgid "This user is not active at the moment. Please, verify your e-mail."
-msgstr "Este usuario no ha sido activado. Por favor, verifica tu e-mail."
+msgstr "Erabiltzaile hau ez dago aktibaturik. Mesedez, egiaztatu zure e-maila."
 
 #. Translators: This is the signing part of an email.
 #: .\Alpaca\views\emails.py:15
 msgid "Always watching over you,"
-msgstr "Siempre pendiente de todo, "
+msgstr "Beti zure zerbitzura,"
 
 #: .\Alpaca\views\emails.py:15 .\Alpaca\views\emails.py:40
 msgid "Big Evil Llama"
-msgstr "Gran Llama Malvada"
+msgstr "Llama Handi Gaiztoa"
 
 #: .\Alpaca\views\emails.py:39
 msgid "Alpaca: Confirm your account"
-msgstr "Alpaca: Confirma tu cuenta"
+msgstr "Alpaca: Zure kontua egiaztatu"
 
 #: .\Alpaca\views\emails.py:40
 msgid "Hi!"
-msgstr "¡Hola!"
+msgstr "Kaixo!"
 
 #: .\Alpaca\views\emails.py:40
 msgid "I'm the Big Evil Llama. I watch over every activity in my land"
-msgstr "Soy la Gran Llama Malvada. Vigilo todas las actividades en mi tierra"
+msgstr ""
+"Llama Handi Gaiztoa naiz.Nire lurraldeko jarduera guztiak zaintzen ditut"
 
 #: .\Alpaca\views\emails.py:40
 msgid ""
 "It seems like you wanted to become one of my alpacas! If it is so, be "
 "welcomed! You can confirm your account by clicking the following link: "
 msgstr ""
-"¡Parece que quieres convertirte en una de mis alpacas! Si es así, "
-"¡bienvenid@! Puedes confirmar tu cuenta haciendo click en el siguiente link:"
+"Badirudi nire alpaketako bat izan nahi duzula. Hala bada, izan bedi ongi "
+"etorri! Zure kontua egiaztatu dezakezu esteka honetan klik eginez:"
 
 #: .\Alpaca\views\emails.py:40
 msgid ""
 "If it wasn't you who created this account, you can just ignore this email."
-msgstr "Si no has sido tú quien creo esta cuenta, puedes ignorar este email."
+msgstr ""
+"Kontu hau sortu ez baduzu, ezikusiarena egin dezakezu."
 
 #: .\Alpaca\views\emails.py:40
 msgid "Alpaca hugs!"
-msgstr "¡Abrazos de Alpaca!"
+msgstr "Alpaka besarkada!"
 
 #: .\Alpaca\views\emails.py:68
 msgid "Your Activity \""
-msgstr "¡Tu Actividad \""
+msgstr "Zure jarduera\""
 
 #: .\Alpaca\views\emails.py:68
 msgid "\" was succesfully registered!"
-msgstr "\" se ha registrado correctamente!"
+msgstr "\" egokiro izena eman du!"
 
 #: .\Alpaca\views\emails.py:70 .\Alpaca\views\emails.py:98
 #: .\Alpaca\views\emails.py:120 .\Alpaca\views\emails.py:144
@@ -769,195 +758,194 @@ msgstr "\" se ha registrado correctamente!"
 #: .\Alpaca\views\emails.py:220 .\Alpaca\views\emails.py:244
 #: .\Alpaca\views\emails.py:269
 msgid "Hi, "
-msgstr "Hola, "
+msgstr "Kaixo, "
 
 #: .\Alpaca\views\emails.py:70
 msgid "Your activity \""
-msgstr "Tu actividad \""
+msgstr "Zure jarduera \""
 
 #: .\Alpaca\views\emails.py:70
 msgid ""
 "\" has been succesfully registered, and you may start sharing it by using "
 "the following link:"
 msgstr ""
-"\" se ha registrado correctamente, y puedes empezar a compartirla usando el "
-"siguiente link:"
+"\" egokiro erregistratu da eta hasi zaitezke partekatzen hurrengo esteka "
+"erabiliz:"
 
 #: .\Alpaca\views\emails.py:70
 msgid ""
 "Your activity may not appear on the main page index until some time has "
 "passed, but it is already fully functional."
 msgstr ""
-"Puede que tu actividad no aparezca en la página principal hasta pasado un "
-"tiempo, pero ya es completamente funcional."
+"Zure jarduera orrialde nagusian agertu ez liteke denbora pixka bat igaro "
+"arte, baina guztiz erabilgarria da jadanik."
 
 #: .\Alpaca\views\emails.py:70
 msgid "Have fun! I hope everything goes as you expect it <3"
-msgstr "¡Diviértete! Espero que todo vaya como esperas <3"
+msgstr "Goza ezazu! Espero dut dena espero duzun moduan joatea <3"
 
 #: .\Alpaca\views\emails.py:93
 msgid "joined"
-msgstr "unido"
+msgstr "batu"
 
 #: .\Alpaca\views\emails.py:95
 msgid "left"
-msgstr "ido"
+msgstr "joan"
 
 #: .\Alpaca\views\emails.py:97 .\Alpaca\views\emails.py:98
 msgid " has "
-msgstr " se ha "
+msgstr "da"
 
 #: .\Alpaca\views\emails.py:97 .\Alpaca\views\emails.py:98
 msgid " your activity, "
-msgstr " a tu actividad, "
+msgstr " zure jarduera, "
 
 #: .\Alpaca\views\emails.py:98
 msgid "You can manage your activity at "
-msgstr "Puedes gestionar tu actividad en "
+msgstr "Zure jarduera kudeatzeko "
 
 #: .\Alpaca\views\emails.py:119
 msgid " requested to join "
-msgstr " ha solicitado unirse a "
+msgstr " batzeko eskatu du"
 
 #: .\Alpaca\views\emails.py:120
 msgid " has requested to join your activity, "
-msgstr " ha solicitado unirse a tu actividad, "
+msgstr " zure jarduerara batzeko eskatu du, "
 
 #: .\Alpaca\views\emails.py:120
 msgid "You can manage this and any other requests at "
-msgstr "Puedes gestionar ésta y otras peticiones en "
+msgstr "Hau eta beste eskaerak kudeatzeko "
 
 #: .\Alpaca\views\emails.py:143
 msgid " confirmed assistance on your activity, "
-msgstr " ha confirmado su asistencia a tu actividad, "
+msgstr " zure jarduerara etortzea baieztatu du, "
 
 #: .\Alpaca\views\emails.py:144
 msgid "Congratulations! "
-msgstr "¡Felicidades!"
+msgstr "Zorionak!"
 
 #: .\Alpaca\views\emails.py:144
 msgid " has confirmed assistance to the "
-msgstr " ha confirmado su asistencia a la sesión de "
+msgstr " baieztatu du etorriko dela sesio honetara "
 
 #: .\Alpaca\views\emails.py:144
 msgid "'s session!'"
-msgstr ""
+msgstr "(r)en sesioa!"
 
 #: .\Alpaca\views\emails.py:144
 msgid "You can manage your activity at"
-msgstr "Puedes gestionar tu actividad en"
+msgstr "Zure jarduera kudeatzeko"
 
 #: .\Alpaca\views\emails.py:144
 msgid "I hope everything goes as you expect it <3"
-msgstr "Espero que todo vaya como esperas <3"
+msgstr "Espero dut dena espero duzun moduan joatea <3"
 
 #: .\Alpaca\views\emails.py:167
 msgid "You have been removed from the activity "
-msgstr "Has sido eliminado de la actividad "
+msgstr "Jardueratik kanporatua izan zara "
 
 #: .\Alpaca\views\emails.py:168
 msgid "I regret to inform you that you have been removed from the activity "
-msgstr "Lamento informarte de que has sido eliminado de la actividad"
+msgstr "Jardueratik kanporatua izan zarela informatzea sentitzen dut "
 
 #: .\Alpaca\views\emails.py:168
 msgid ""
 "However, don't forget there are many other activities waiting for you at "
 msgstr ""
-"Sin embargo, no olvides que hay muchas otras actividades esperándote en "
+"Hala eta guztiz ere, ez ahaztu beste jarduera pila bat daudela zure zain "
 
 #: .\Alpaca\views\emails.py:191
 msgid "accepted"
-msgstr "aceptada"
+msgstr "onartua"
 
 #: .\Alpaca\views\emails.py:193
 msgid "rejected"
-msgstr "rechazada"
+msgstr "ukatua"
 
 #: .\Alpaca\views\emails.py:195
 msgid " request to join the activity "
-msgstr " petición para unirse a la actividad "
+msgstr " jarduerara batzeko eskaera "
 
 #: .\Alpaca\views\emails.py:196
 msgid "Your request to join the activity "
-msgstr "Tu petición para unirte a la actividad "
+msgstr "Jarduerara batzeko zure eskaera "
 
 #: .\Alpaca\views\emails.py:196
 msgid " has been "
-msgstr " ha sido "
+msgstr " izan da "
 
 #: .\Alpaca\views\emails.py:196
 msgid "Don't forget there are many other activities waiting for you at "
-msgstr "No olvides que hay muchas otras actividades esperándote en "
+msgstr "Ez ahaztu beste jarduera pila bat daudela zure zain "
 
 #: .\Alpaca\views\emails.py:219
 msgid "Updated: Activity "
-msgstr "Actualizado: Actividad "
+msgstr "Eguneratua: Jarduera "
 
 #: .\Alpaca\views\emails.py:220 .\Alpaca\views\emails.py:244
 msgid "You are receiving this message because the activity "
-msgstr "¡Has recibido este mensaje porque la actividad "
+msgstr "Mezu hau jaso duzu zeren eta jarduera "
 
 #: .\Alpaca\views\emails.py:220
 msgid " was updated!"
-msgstr " ha sido actualizada!"
+msgstr "eguneratua izan da!"
 
 #: .\Alpaca\views\emails.py:220
 msgid "Check it out at "
-msgstr "Comprueba los cambios en "
+msgstr "Egiazta ezazu "
 
 #: .\Alpaca\views\emails.py:243
 msgid "New Session in Activity "
-msgstr "Nueva Sesión en la Actividad "
+msgstr "Sesio berria Jardueran "
 
 #: .\Alpaca\views\emails.py:244
 msgid " was updated with new sessions!"
-msgstr " ha sido actualizada con nuevas sesiones!"
+msgstr " eguneratua izan da sesio berriekin!"
 
 #: .\Alpaca\views\emails.py:244
 msgid "Check them out at"
-msgstr "Compruébalas en "
+msgstr "Egiazta itzazu"
 
 #: .\Alpaca\views\emails.py:244
 msgid " Hope to see you there <3"
-msgstr "Esperamos verte allí <3"
+msgstr " Espero dut bertan elkar ikustea <3"
 
 #: .\Alpaca\views\emails.py:268
 msgid "You can confirm your assistance!"
-msgstr "¡Puedes confirmar tu asistencia!"
+msgstr "Zure etortzea baieztatu dezakezu!"
 
 #: .\Alpaca\views\emails.py:269
 msgid "The activity "
-msgstr "¡La actividad "
+msgstr "Jarduera"
 
 #: .\Alpaca\views\emails.py:269
 msgid " is requesting attending users to confirm their assistance to "
 msgstr ""
-" pide a los usuarios que deseen atender que confirmen su asistencia a la "
-"sesión del "
+" eskatzen ari da etorriko diren erabiltzaiei beren etorrera baieztatzeko "
 
 #: .\Alpaca\views\emails.py:269
 msgid "'s session! You may do so by going to the activity's page:"
-msgstr "! Puedes hacerlo yendo a la página de la actividad:"
+msgstr "(r)en sesiora! Jardueraren orrialdean egin dezakezu"
 
 #: .\Alpaca\views\emails.py:269
 msgid "We hope to see you there <3"
-msgstr "Esperamos verte allí <3"
+msgstr "Espero dugu bertan elkar ikustea <3"
 
 #: .\Alpaca\views\session.py:26
 msgid "Create a new session"
-msgstr "Crear nueva sesión"
+msgstr "Sesio berria sortu"
 
 #: .\Alpaca\views\session.py:60
 msgid "Editing a session"
-msgstr "Editando una sesión"
+msgstr "Sesio bat editatzen"
 
 #: .\Alpaca\views\user_management.py:36
 msgid "Edit your profile's settings"
-msgstr "Edita tu perfil"
+msgstr "Zure profila editatu"
 
 #: .\Alpaca\views\user_management.py:68
 msgid "Save new password"
-msgstr "Guardar contraseña"
+msgstr "Pasahitz berria gorde"
 
 #~ msgid "New Activity"
-#~ msgstr "Nueva Actividad"
+#~ msgstr "Jarduera Berria"

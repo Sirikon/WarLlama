@@ -1,6 +1,5 @@
-@import '../global/variables';
 
-.al-form-base {
+.al-panel-form { 
     /* Django-generated-specific */
     span.helptext {
         font-size: 0.7em;
@@ -38,7 +37,7 @@
         -moz-appearance: none;
         appearance: none;
 
-        width: 100%;
+        width: auto;
         box-sizing: border-box;
         padding: 0.4em;
 
@@ -79,4 +78,12 @@
         margin-top: 50px;
     }
 
+    /* Specific Behaviours */
+    [for="id_start_date"],
+    [for="id_end_date"],
+    [for="id_location"] {
+        width: 40px;
+        display: inline-block;
+    }
+    /* ------------------------- */
 }

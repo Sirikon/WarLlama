@@ -41,8 +41,15 @@
     &-attendant {
         background-color: whitesmoke;
         display: inline-block;
+        margin: 0.5em 0;
         padding: 2px 4px;
         border: 1px solid #cccccc;
         border-radius: 3px;
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+            background-color: lightgray;
+        }
     }
 }

@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block title %}
-<div class="al-content-header al-flex">
+<div class="al-content-header al-flex-row">
     <div class="al-flex-grow">
         <h1>
             <span>{{ activity.title }}</span>
@@ -35,7 +35,7 @@
         <p>{{ activity.description | safe }}</p>
     </div>
 
-    <div class="al-flex al-flex-adapt-content">
+    <div class="al-flex-row al-flex-adapt-content">
         <div class="al-content-panel">
             <small>{% trans "Settings:" %}</small>
             <p>{% trans "Users may join this activity" %}
@@ -51,6 +51,7 @@
 
         <div class="al-content-panel al-flex-grow">
             <small>{% trans "Attendants:" %}</small>
+            <br/>
             {% block attendants %}{% endblock %}
         </div>
         

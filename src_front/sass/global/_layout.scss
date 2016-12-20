@@ -5,13 +5,15 @@
     height: 60px;
     padding: 0 20px;
 
+    &-logo {
+        height: 40px;
+        align-self: center;
+    }
+
     &-content {
         max-width: 1120px;
+        height: 100%;
         margin: auto;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
     }
 
     &-title {
@@ -28,8 +30,19 @@
         }
     }
 
+    &-subtitle {
+        font-family: 'Ravi Prakash', cursive;
+        margin: -0.75em 0 0 .23em;
+        color: white;
+        font-size: 1.5em;
+
+        > a {
+            text-decoration: none; 
+            color: inherit;
+        }
+    }
+
     &-menu {
-        width: 100%;
         margin: 0;
         text-align: right;
 
@@ -40,6 +53,10 @@
             text-decoration: none;
         }
     }
+}
+
+.al-icon {
+    color: $brand-color;
 }
 
 .al-content {
@@ -57,6 +74,10 @@
         border: 1px solid #eeeeee;
         border-radius: 5px;
     }
+    
+    &-sidebar {
+        width: 220px;
+    }
 }
 
 .al-footer {
@@ -67,18 +88,12 @@
     left: 0;
     position: absolute;
 
-    height: 40px;  
-    padding: 1rem;
+    padding: 0.10rem;
 
     &-content {
         color: #fff;
         max-width: 1120px;
         margin: auto;
         padding: 0 20px;
-
-        align-items: center;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
     }
 }

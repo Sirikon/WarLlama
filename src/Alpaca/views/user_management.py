@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 from ..models import Profile, Activity
 from ..forms import ProfileForm, ChangePasswordForm
 
-from utils import sort_activity_table, set_translation
+from utils import sort_activities, set_translation
 
 ## -- USER MANAGEMENT -- ##
 def profile(request, username):
@@ -19,7 +19,7 @@ def profile(request, username):
     to_sort_column = request.GET.get('order_by')
     sorted_column = request.GET.get('last')
 
-    context = sort_activity_table(Activity.objects.filter(author_id=looking_at_user.id), to_sort_column, sorted_column)
+    context = sort_activities(Activity.objects.filter(author_id=looking_at_user.id), to_sort_column, sorted_column)
 
     context['user'] = request.user
     context['looking_at_user'] = looking_at_user
