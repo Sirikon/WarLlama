@@ -1,4 +1,9 @@
 .al-flex {    
+
+    &-grow {
+        flex-grow: 1;
+    }
+    
     &-row {
         display: flex;
         flex-direction: row;
@@ -28,8 +33,4 @@
             margin-left: 15px;
         }
     }    
-
-    &-grow {
-        flex-grow: 1;
-    }
 }

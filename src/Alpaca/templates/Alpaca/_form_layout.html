@@ -3,20 +3,8 @@
 
 {% block title %}<h1>{{form_title}}</h1>{% endblock %}
 {% block content %}
-<script>
-  $(function() {
-        $( ".datepicker" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "1900:2012",
-            // You can put more options here.
 
-        });
-  });
-</script>
-
-<div class="al-content-panel">
-    
+<div class="al-content-panel">    
     <form method="POST" class="al-form-base al-layout-form">
         {% csrf_token %}
         {{ form.as_p }}

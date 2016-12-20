@@ -113,10 +113,6 @@ class SessionForm(forms.ModelForm):
     class Meta:
         model = Session
         fields = ("description", "start_date", "end_date", "location")
-        widgets = {
-            'start_date': forms.DateTimeInput(attrs={'class':'datepicker'}),
-            'end_date': forms.DateTimeInput(attrs={'class':'datepicker'}),
-        }
 
     def clean(self):
         super(SessionForm, self).clean()
@@ -133,20 +129,16 @@ class SessionForm(forms.ModelForm):
 
 ## MINOR FORMS ##
 class DateRangeFilterForm(forms.Form):
-    start_date = forms.DateField(required=True, label=_("From:"), initial=datetime.datetime.now())
-    end_date = forms.DateField(required=True, label=_("To:"), initial=datetime.datetime.now())
+    start_date = forms.DateField(required=True, label=_("From:"), initial=datetime.datetime.now(), widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))
+    end_date = forms.DateField(required=True, label=_("To:"), initial=datetime.datetime.now(), widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))
  
     class Meta:
         fields = ("start_date", "end_date")
-        widgets = {
-            'start_date': forms.DateInput(attrs={'class':'datepicker'}),
-            'end_date': forms.DateInput(attrs={'class':'datepicker'}),
-        }
 
     def is_valid(self):
-        cleaned_data = super(DateRangeFilterForm, self).clean()
-        start_date = cleaned_data.get("start_date")
-        end_date = cleaned_data.get("end_date")
+        super(DateRangeFilterForm, self).is_valid()
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
 
         if end_date < start_date:
            msg = _("The end date must be greater than the start date.")
@@ -154,9 +146,13 @@ class DateRangeFilterForm(forms.Form):
            return False
         return True
         
-    def get_activities(self):    
-        activity_list = sorted(Activity.objects.all(), 
-                              key = lambda a: (a.get_next_session().start_date >= self.data["start_date"] 
-                                               and a.get_next_session().end_date <= self.data["end_date"]), 
-                              reverse=(sort_sign=="-"))
+    def get_activities(self, activity_list):    
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+        
+        activity_list = filter(lambda a: a.get_next_session() != None, activity_list)
+        activity_list = sorted(activity_list, 
+                              key = lambda a: (a.get_next_session().start_date.date() >= start_date 
+                                               and a.get_next_session().start_date.date() <= end_date), 
+                              reverse=True)
         return activity_list

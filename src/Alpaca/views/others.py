@@ -12,32 +12,24 @@ from utils import *
 def index(request):
     set_translation(request)
     user = request.user
-
-    form = DateRangeFilterForm()
-    activity_list = None
-
-    # Search is available to anons
-    activity_list = search(request, "search", Activity, ['title', 'age_minimum', 'author__username', 'city', 'description'])    
-    
-    if "date_range_filter" in request.POST:
-        form = DateRangeFilterForm(data=request.POST)
-        if form.is_valid():
-            activity_list = form.get_activities()
-
-    if activity_list is None:
-        activity_list = Activity.objects
-
     user_filter = request.GET.get('filter')
     to_sort_column = request.GET.get('order_by')
     last_column = request.GET.get('last')
 
-    if user.is_authenticated: # Can't filter for anons
-        if user_filter == "author":
-            activity_list = activity_list.filter(author__id=user.id)
-        elif user_filter == "attendant":
-            activity_list = user.attending_activities    
+    activity_list = search(request, "search", Activity, ['title', 'age_minimum', 'author__username', 'city', 'description'])    
+    
+    if activity_list is None:
+        activity_list = Activity.objects
 
-    context = sort_activity_table(activity_list, to_sort_column, last_column)
+    activity_list = filter_activities(request, user, activity_list, user_filter)
+    context = sort_activities(activity_list, to_sort_column, last_column)
+    
+    form = DateRangeFilterForm()
+    if "date_range_filter" in request.POST:
+        form = DateRangeFilterForm(data=request.POST)
+        if form.is_valid():
+            context['activity_list'] = form.get_activities(context['activity_list'])
+
     context["current_filter"] = user_filter
     context['user'] = user
 
@@ -87,7 +79,7 @@ def index_demo(request):
         elif user_filter == "attendant":
             activity_list = user.attending_activities    
 
-    context = sort_activity_table(activity_list, to_sort_column, last_column)
+    context = sort_activities(activity_list, to_sort_column, last_column)
     context["current_filter"] = user_filter
     context['user'] = user
 

@@ -9,15 +9,16 @@
         <link rel="stylesheet" href="{% static "font-awesome/css/font-awesome.min.css" %}">
         <link rel="stylesheet" href="{% static "main.css" %}">
         {% include "./partials/ckeditor.html" %}
-        <script language="JavaScript" type="text/javascript" src="{% static "js/jquery-3.1.1.min.js" %}"></script>
     </head>
     <body>
         <div class="al-header">
-            <div class="al-header-content">
-                <h1 class="al-header-title">
-                    <a href="/">Alpaca</a>
-                </h1>
-                <div class="al-header-menu">
+            <div class="al-header-content al-flex-row">
+                <div>
+                    <a href="/">
+                        <img src="{% static 'alpaca-logo-white.svg' %}" class="al-header-logo"/>
+                    </a>
+                </div>
+                <div class="al-header-menu al-flex-grow">
                     {% if user.is_authenticated %}
                         <a href="/profile/{{user.username}}"><i class="fa fa-sliders"></i> {{user.username}}</a>
                         <a href="/logout/"><i class="fa fa-sign-out"></i> {% trans "Log out" %}</a>

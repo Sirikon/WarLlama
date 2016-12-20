@@ -24,7 +24,7 @@ def set_translation(request):
     translation.activate(user_language)
     request.session[translation.LANGUAGE_SESSION_KEY] = user_language
 
-def sort_activity_table(activity_list, sort_column, last_column):
+def sort_activities(activity_list, sort_column, last_column):
     sort_sign = "-"
 
     if sort_column != None and sort_column != "":        
@@ -34,8 +34,8 @@ def sort_activity_table(activity_list, sort_column, last_column):
                     sort_sign = ""
         
         if sort_column == "next_session":
-            # only_sessions_list = sorted(activity_list.all(), key= lambda a: (a.session_set.count() > 0), reverse=(sort_sign=="-"))
-            sorted_list = sorted(activity_list.all(), key= lambda a: (a.get_next_session() or None ), reverse=(sort_sign=="-"))
+            has_sessions_list = filter(lambda a: a.get_next_session() != None, act)
+            sorted_list = sorted(has_sessions_list, key= lambda a: (a.get_next_session() or None ), reverse=(sort_sign=="-"))
 
         else:
             sorted_list = activity_list.order_by(sort_sign + sort_column)
@@ -54,6 +54,15 @@ def sort_activity_table(activity_list, sort_column, last_column):
 
     return context
 
+# FILTER  & ORDER FUNCTIONS
+def filter_activities(request, user, activity_list, user_filter):
+    if user.is_authenticated: # Can't filter for anons
+        if user_filter == "author":
+            activity_list = activity_list.filter(author__id=user.id)
+        elif user_filter == "attendant":
+            activity_list = user.attending_activities  
+
+    return activity_list  
 
 # SEARCH FUNCTIONS - Courtesy of http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
 def normalize_query(query_string,
