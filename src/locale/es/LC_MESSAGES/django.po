@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-19 19:21+0100\n"
+"POT-Creation-Date: 2016-12-21 19:04+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,15 +39,15 @@ msgstr "Opcional"
 msgid "Last Name"
 msgstr "Apellido/s"
 
-#: .\Alpaca\forms.py:22 .\Alpaca\forms.py:63 .\WarLlama\settings.py:150
+#: .\Alpaca\forms.py:22 .\Alpaca\forms.py:63 .\WarLlama\settings.py:152
 msgid "English"
 msgstr "Inglés"
 
-#: .\Alpaca\forms.py:23 .\Alpaca\forms.py:64 .\WarLlama\settings.py:151
+#: .\Alpaca\forms.py:23 .\Alpaca\forms.py:64 .\WarLlama\settings.py:153
 msgid "Spanish"
 msgstr "Español"
 
-#: .\Alpaca\forms.py:24 .\Alpaca\forms.py:65 .\WarLlama\settings.py:152
+#: .\Alpaca\forms.py:24 .\Alpaca\forms.py:65 .\WarLlama\settings.py:154
 msgid "Euskera"
 msgstr "Euskera"
 
@@ -191,52 +191,52 @@ msgstr "Localización"
 msgid "Where (place, address) will this session take place?"
 msgstr "¿Dónde (lugar, dirección) tendrá lugar esta sesión?"
 
-#: .\Alpaca\forms.py:127
+#: .\Alpaca\forms.py:123
 msgid "The start date and time must be greater than today's date."
 msgstr "La fecha y hora de empiece debe ser posterior a la de hoy."
 
-#: .\Alpaca\forms.py:131
+#: .\Alpaca\forms.py:127
 msgid "The end date and time must be greater than the start date."
 msgstr "La fecha y hora de finalización debe ser posterior a la de empiece."
 
-#: .\Alpaca\forms.py:136
+#: .\Alpaca\forms.py:132
 msgid "From:"
 msgstr "Desde:"
 
-#: .\Alpaca\forms.py:137
+#: .\Alpaca\forms.py:133
 msgid "To:"
 msgstr "Hasta:"
 
-#: .\Alpaca\forms.py:152
+#: .\Alpaca\forms.py:144
 msgid "The end date must be greater than the start date."
 msgstr "La fecha de finalización debe ser posterior a la de empiece."
 
-#: .\Alpaca\templates\Alpaca\_layout.html:23
+#: .\Alpaca\templates\Alpaca\_layout.html:27
 msgid "Log out"
 msgstr "Salir"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:25
+#: .\Alpaca\templates\Alpaca\_layout.html:29
 #: .\Alpaca\views\authentication.py:94
 msgid "Log in"
 msgstr "Entrar"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:26
+#: .\Alpaca\templates\Alpaca\_layout.html:30
 msgid "Sign up"
 msgstr "Registrarse"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:39
+#: .\Alpaca\templates\Alpaca\_layout.html:43
 msgid "About Us"
 msgstr "Sobre Nosotros"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:40
+#: .\Alpaca\templates\Alpaca\_layout.html:44
 msgid "Terms and Conditions"
 msgstr "Términos y Condiciones"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:41
+#: .\Alpaca\templates\Alpaca\_layout.html:45
 msgid "Found a problem? Please,"
 msgstr "¿Has encontrado un problema? Por favor,"
 
-#: .\Alpaca\templates\Alpaca\_layout.html:41
+#: .\Alpaca\templates\Alpaca\_layout.html:45
 msgid "help us!"
 msgstr "¡ayúdanos!"
 
@@ -344,8 +344,8 @@ msgid ""
 "However, you may read George Orwell's 1984 novel (if you haven't already) to "
 "get an idea on who the Big Evil Llama might be ;)"
 msgstr ""
-"¡Muy buena pregunta! Pero es muy suya y se enfadaría bastante si contáramos su "
-"secreto. Sin embargo, puedes leer la novela 1984, de George Orwell (si es "
+"¡Muy buena pregunta! Pero es muy suya y se enfadaría bastante si contáramos "
+"su secreto. Sin embargo, puedes leer la novela 1984, de George Orwell (si es "
 "que todavía no lo has hecho) para hacerte una idea de quién puede ser la "
 "Gran Llama Malvada ;)"
 
@@ -593,7 +593,7 @@ msgstr "Fecha de Publicación"
 
 #: .\Alpaca\templates\Alpaca\partials\activity-table.html:58
 #: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:41
-#: .\Alpaca\views\others.py:45 .\Alpaca\views\others.py:95
+#: .\Alpaca\views\others.py:37 .\Alpaca\views\others.py:87
 msgid "Next Session"
 msgstr "Próxima Sesión"
 
@@ -628,7 +628,7 @@ msgid "My Activities: Attendant"
 msgstr "Mis Actividades: Participante"
 
 #: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:4
-#: .\Alpaca\views\others.py:47 .\Alpaca\views\others.py:97
+#: .\Alpaca\views\others.py:39 .\Alpaca\views\others.py:89
 msgid "Show"
 msgstr "Mostrar"
 
@@ -718,230 +718,193 @@ msgid "This user is not active at the moment. Please, verify your e-mail."
 msgstr "Este usuario no ha sido activado. Por favor, verifica tu e-mail."
 
 #. Translators: This is the signing part of an email.
-#: .\Alpaca\views\emails.py:15
+#: .\Alpaca\views\emails.py:21
 msgid "Always watching over you,"
 msgstr "Siempre pendiente de todo, "
 
-#: .\Alpaca\views\emails.py:15 .\Alpaca\views\emails.py:40
+#: .\Alpaca\views\emails.py:21
 msgid "Big Evil Llama"
 msgstr "Gran Llama Malvada"
 
-#: .\Alpaca\views\emails.py:39
+#: .\Alpaca\views\emails.py:43
 msgid "Alpaca: Confirm your account"
 msgstr "Alpaca: Confirma tu cuenta"
 
-#: .\Alpaca\views\emails.py:40
-msgid "Hi!"
-msgstr "¡Hola!"
-
-#: .\Alpaca\views\emails.py:40
-msgid "I'm the Big Evil Llama. I watch over every activity in my land"
-msgstr "Soy la Gran Llama Malvada. Vigilo todas las actividades en mi tierra"
-
-#: .\Alpaca\views\emails.py:40
+#: .\Alpaca\views\emails.py:44
+#, python-brace-format
 msgid ""
-"It seems like you wanted to become one of my alpacas! If it is so, be "
-"welcomed! You can confirm your account by clicking the following link: "
+"Hi!{newline}I'm the Big Evil Llama. I watch over every activity in my land, "
+"{alpaca_link}.{newline}It seems like you wanted to become one of my alpacas! "
+"If it is so, be welcomed! You can confirm your account by clicking the "
+"following link: {confirmation_link}.{newline}If it wasn't you who created "
+"this account, you can just ignore this email.{newline}Alpaca hugs!{jumpline}"
+"Big Evil Llama"
 msgstr ""
-"¡Parece que quieres convertirte en una de mis alpacas! Si es así, "
-"¡bienvenid@! Puedes confirmar tu cuenta haciendo click en el siguiente link:"
 
-#: .\Alpaca\views\emails.py:40
-msgid ""
-"If it wasn't you who created this account, you can just ignore this email."
-msgstr "Si no has sido tú quien creo esta cuenta, puedes ignorar este email."
-
-#: .\Alpaca\views\emails.py:40
-msgid "Alpaca hugs!"
-msgstr "¡Abrazos de Alpaca!"
-
-#: .\Alpaca\views\emails.py:68
+#: .\Alpaca\views\emails.py:74
 msgid "Your Activity \""
 msgstr "¡Tu Actividad \""
 
-#: .\Alpaca\views\emails.py:68
+#: .\Alpaca\views\emails.py:74
 msgid "\" was succesfully registered!"
 msgstr "\" se ha registrado correctamente!"
 
-#: .\Alpaca\views\emails.py:70 .\Alpaca\views\emails.py:98
-#: .\Alpaca\views\emails.py:120 .\Alpaca\views\emails.py:144
-#: .\Alpaca\views\emails.py:168 .\Alpaca\views\emails.py:196
-#: .\Alpaca\views\emails.py:220 .\Alpaca\views\emails.py:244
-#: .\Alpaca\views\emails.py:269
-msgid "Hi, "
-msgstr "Hola, "
-
-#: .\Alpaca\views\emails.py:70
-msgid "Your activity \""
-msgstr "Tu actividad \""
-
-#: .\Alpaca\views\emails.py:70
+#: .\Alpaca\views\emails.py:75
+#, python-brace-format
 msgid ""
-"\" has been succesfully registered, and you may start sharing it by using "
-"the following link:"
+"Hi, {author}!{newline}Your activity \"{title}\" has been succesfully "
+"registered, and you may start sharing it by using the following link: "
+"{activity_link}.{newline}Your activity may not appear on the main page index "
+"until some time has passed, but it is already fully functional.{newline}Have "
+"fun! I hope everything goes as you expect it <3 {email_signature}"
 msgstr ""
-"\" se ha registrado correctamente, y puedes empezar a compartirla usando el "
-"siguiente link:"
+"¡Hola, {author}!{newline}¡Tu Actividad \"{title}\" sse ha registrado "
+"correctamente, y puedes empezar a compartirla usando el siguiente link: "
+"{activity_link}.{newline}Puede que tu actividad no aparezca en la página "
+"principal hasta pasado un tiempo, pero ya es completamente funcional."
+"{newline} ¡Diviértete! Espero que todo vaya como esperas <3 {email_signature}"
 
-#: .\Alpaca\views\emails.py:70
-msgid ""
-"Your activity may not appear on the main page index until some time has "
-"passed, but it is already fully functional."
-msgstr ""
-"Puede que tu actividad no aparezca en la página principal hasta pasado un "
-"tiempo, pero ya es completamente funcional."
-
-#: .\Alpaca\views\emails.py:70
-msgid "Have fun! I hope everything goes as you expect it <3"
-msgstr "¡Diviértete! Espero que todo vaya como esperas <3"
-
-#: .\Alpaca\views\emails.py:93
+#: .\Alpaca\views\emails.py:98
 msgid "joined"
 msgstr "unido"
 
-#: .\Alpaca\views\emails.py:95
+#: .\Alpaca\views\emails.py:100
 msgid "left"
 msgstr "ido"
 
-#: .\Alpaca\views\emails.py:97 .\Alpaca\views\emails.py:98
+#: .\Alpaca\views\emails.py:102
 msgid " has "
 msgstr " se ha "
 
-#: .\Alpaca\views\emails.py:97 .\Alpaca\views\emails.py:98
+#: .\Alpaca\views\emails.py:102
 msgid " your activity, "
 msgstr " a tu actividad, "
 
-#: .\Alpaca\views\emails.py:98
-msgid "You can manage your activity at "
-msgstr "Puedes gestionar tu actividad en "
+#: .\Alpaca\views\emails.py:103
+#, python-brace-format
+msgid ""
+"Hi, {author}!{newline}{attendant} has {action} your activity, {title}."
+"{jumpline}You can manage your activity at {activity_link}.{email_signature}"
+msgstr ""
+"¡Hola, {author}!{newline}{attendant} ha {action} tu actividad, {title}."
+"{jumpline}Puedes gestionar tu actividad en {activity_link}.{email_signature}"
 
-#: .\Alpaca\views\emails.py:119
+#: .\Alpaca\views\emails.py:130
 msgid " requested to join "
 msgstr " ha solicitado unirse a "
 
-#: .\Alpaca\views\emails.py:120
-msgid " has requested to join your activity, "
-msgstr " ha solicitado unirse a tu actividad, "
+#: .\Alpaca\views\emails.py:131
+#, python-brace-format
+msgid ""
+"Hi, {author}!{newline}{attendant} has requested to join your activity, "
+"{title}.{jumpline}You can manage this and any other requests at "
+"{activity_link}.{email_signature}"
+msgstr ""
+"¡Hola, {author}!{newline}{attendant} ha solicitado unirse a tu actividad, "
+"{title}.{jumpline}Puedes gestionar ésta y otras peticiones en "
+"{activity_link}.{email_signature}"
 
-#: .\Alpaca\views\emails.py:120
-msgid "You can manage this and any other requests at "
-msgstr "Puedes gestionar ésta y otras peticiones en "
-
-#: .\Alpaca\views\emails.py:143
+#: .\Alpaca\views\emails.py:158
 msgid " confirmed assistance on your activity, "
 msgstr " ha confirmado su asistencia a tu actividad, "
 
-#: .\Alpaca\views\emails.py:144
-msgid "Congratulations! "
-msgstr "¡Felicidades!"
-
-#: .\Alpaca\views\emails.py:144
-msgid " has confirmed assistance to the "
-msgstr " ha confirmado su asistencia a la sesión de "
-
-#: .\Alpaca\views\emails.py:144
-msgid "'s session!'"
+#: .\Alpaca\views\emails.py:159
+#, python-brace-format
+msgid ""
+"Hi, {author}!{newline}Congratulations! {attendant} has confirmed assistance "
+"to the {date}'s session!{jumpline}You can manage your activity at "
+"{activity_link}.{newline}I hope everything goes as you expect it <3 "
+"{email_signature}"
 msgstr ""
+"¡Hola, {author}!{newline}¡Felicidades! ¡{attendant} ha confirmado su "
+"asistencia a la sesión del {date}!{jumpline}Puedes gestionar tu actividad en "
+"{activity_link}.{newline}Espero que todo vaya como esperas <3 "
+"{email_signature}"
 
-#: .\Alpaca\views\emails.py:144
-msgid "You can manage your activity at"
-msgstr "Puedes gestionar tu actividad en"
-
-#: .\Alpaca\views\emails.py:144
-msgid "I hope everything goes as you expect it <3"
-msgstr "Espero que todo vaya como esperas <3"
-
-#: .\Alpaca\views\emails.py:167
+#: .\Alpaca\views\emails.py:186
 msgid "You have been removed from the activity "
 msgstr "Has sido eliminado de la actividad "
 
-#: .\Alpaca\views\emails.py:168
-msgid "I regret to inform you that you have been removed from the activity "
-msgstr "Lamento informarte de que has sido eliminado de la actividad"
-
-#: .\Alpaca\views\emails.py:168
+#: .\Alpaca\views\emails.py:187
+#, python-brace-format
 msgid ""
-"However, don't forget there are many other activities waiting for you at "
+"Hi, {attendant},{newline}I regret to inform you that you have been removed "
+"from the activity {title}.{newline}However, don't forget there are many "
+"other activities waiting for you at {alpaca_link}.{email_signature}"
 msgstr ""
-"Sin embargo, no olvides que hay muchas otras actividades esperándote en "
+"Hola, {attendant},{newline}Lamento informate de que has sido eliminado de la "
+"actividad {title}.{newline}Sin embargo, no olvides que hay muchas otras "
+"actividades esperándote en {alpaca_link}.{email_signature}"
 
-#: .\Alpaca\views\emails.py:191
+#: .\Alpaca\views\emails.py:214
 msgid "accepted"
 msgstr "aceptada"
 
-#: .\Alpaca\views\emails.py:193
+#: .\Alpaca\views\emails.py:216
 msgid "rejected"
 msgstr "rechazada"
 
-#: .\Alpaca\views\emails.py:195
+#: .\Alpaca\views\emails.py:218
 msgid " request to join the activity "
 msgstr " petición para unirse a la actividad "
 
-#: .\Alpaca\views\emails.py:196
-msgid "Your request to join the activity "
-msgstr "Tu petición para unirte a la actividad "
-
-#: .\Alpaca\views\emails.py:196
-msgid " has been "
-msgstr " ha sido "
-
-#: .\Alpaca\views\emails.py:196
-msgid "Don't forget there are many other activities waiting for you at "
-msgstr "No olvides que hay muchas otras actividades esperándote en "
-
 #: .\Alpaca\views\emails.py:219
+#, python-brace-format
+msgid ""
+"Hi, {attendant},{newline}Your request to join the activity {title} has been "
+"{action}.{newline}Don't forget there are many other activities waiting for "
+"you at {alpaca_link}.{email_signature}"
+msgstr ""
+"Hola, {attendant},{newline}Tu petición para unirte a la actividad {title} ha "
+"sido {action}.{newline}No olvides que hay muchas otras actividades "
+"esperándote en {alpaca_link}.{email_signature}"
+
+#: .\Alpaca\views\emails.py:248
 msgid "Updated: Activity "
 msgstr "Actualizado: Actividad "
 
-#: .\Alpaca\views\emails.py:220 .\Alpaca\views\emails.py:244
-msgid "You are receiving this message because the activity "
-msgstr "¡Has recibido este mensaje porque la actividad "
+#: .\Alpaca\views\emails.py:249
+#, python-brace-format
+msgid ""
+"Hi, {attendant}!{newline}You are receiving this message because the activity "
+"{title} was updated!{newline}Check it out at {activity_link}."
+"{email_signature}"
+msgstr ""
+"¡Hola, {attendant}!{newline}¡Has recibido este mensaje porque la actividad "
+"{title} ha sido actualizada!{newline}Comprueba los cambios en "
+"{activity_link}.{email_signature}"
 
-#: .\Alpaca\views\emails.py:220
-msgid " was updated!"
-msgstr " ha sido actualizada!"
-
-#: .\Alpaca\views\emails.py:220
-msgid "Check it out at "
-msgstr "Comprueba los cambios en "
-
-#: .\Alpaca\views\emails.py:243
+#: .\Alpaca\views\emails.py:277
 msgid "New Session in Activity "
 msgstr "Nueva Sesión en la Actividad "
 
-#: .\Alpaca\views\emails.py:244
-msgid " was updated with new sessions!"
-msgstr " ha sido actualizada con nuevas sesiones!"
+#: .\Alpaca\views\emails.py:278
+#, python-brace-format
+msgid ""
+"Hi, {attendant}!{newline}You are receiving this message because the activity "
+"{title} was updated with new sessions!{newline}Check them out at "
+"{activity_link}.{newline}Hope to see you there <3{email_signature}"
+msgstr ""
+"¡Hola, {attendant}!{newline}¡Has recibido este mensaje porque la actividad "
+"{title} ha sido actualizada con nuevas sesiones!{newline}Compruébalas en "
+"{activity_link}.{newline}Esperamos verte allí <3{email_signature}"
 
-#: .\Alpaca\views\emails.py:244
-msgid "Check them out at"
-msgstr "Compruébalas en "
-
-#: .\Alpaca\views\emails.py:244
-msgid " Hope to see you there <3"
-msgstr "Esperamos verte allí <3"
-
-#: .\Alpaca\views\emails.py:268
+#: .\Alpaca\views\emails.py:306
 msgid "You can confirm your assistance!"
 msgstr "¡Puedes confirmar tu asistencia!"
 
-#: .\Alpaca\views\emails.py:269
-msgid "The activity "
-msgstr "¡La actividad "
-
-#: .\Alpaca\views\emails.py:269
-msgid " is requesting attending users to confirm their assistance to "
+#: .\Alpaca\views\emails.py:307
+#, python-brace-format
+msgid ""
+"Hi, {attendant}!{newline}The activity {title} is requesting attending users "
+"to confirm their assistance to {date}'s session! You may do so by going to "
+"the activity's page:{activity_link}.{newline}We hope to see you there <3 "
+"{email_signature}"
 msgstr ""
-" pide a los usuarios que deseen atender que confirmen su asistencia a la "
-"sesión del "
-
-#: .\Alpaca\views\emails.py:269
-msgid "'s session! You may do so by going to the activity's page:"
-msgstr "! Puedes hacerlo yendo a la página de la actividad:"
-
-#: .\Alpaca\views\emails.py:269
-msgid "We hope to see you there <3"
-msgstr "Esperamos verte allí <3"
+"¡Hola, {attendant}!{newline}¡La actividad {title} pide a los usuarios que "
+"deseen atender que confirmen su asistencia a la sesión del {date}! Puedes "
+"hacerlo yendo a la página de la actividad: {activity_link}.{newline}"
+"Esperamos verte allí <3 {email_signature}"
 
 #: .\Alpaca\views\session.py:26
 msgid "Create a new session"
@@ -958,6 +921,3 @@ msgstr "Edita tu perfil"
 #: .\Alpaca\views\user_management.py:68
 msgid "Save new password"
 msgstr "Guardar contraseña"
-
-#~ msgid "New Activity"
-#~ msgstr "Nueva Actividad"
