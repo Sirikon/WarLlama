@@ -13,17 +13,24 @@
     <body>
         <div class="al-header">
             <div class="al-header-content al-flex-row">
-                <div>
+                <div class="al-flex-row">
                     <a href="/">
                         <img src="{% static 'alpaca-logo-white.svg' %}" class="al-header-logo"/>
                     </a>
-                </div>
-                <div>
                     <h3 class="al-header-subtitle">ß</h3>
                 </div>
-                <div class="al-header-menu al-flex-grow">
+                <div class="al-flex-grow">
+
+                </div>
+                <div class="al-header-menu al-flex-row">
                     {% if user.is_authenticated %}
-                        <a href="/profile/{{user.username}}"><i class="fa fa-sliders"></i> {{user.username}}</a>
+                        <a href="/profile/{{user.username}}">
+                            <i class="fa fa-sliders"></i> 
+                            <span>{{user.username}}</span>
+                        </a>
+                        {% if user.profile.avatar.name != "no-avatar.png" %}
+                            <a href="/profile/{{user.username}}"><img src="{{user.profile.avatar.url}}" class="al-avatar-miniature"></a>
+                        {% endif %}
                         <a href="/logout/"><i class="fa fa-sign-out"></i> {% trans "Log out" %}</a>
                     {% else %}
                         <a href="/login/"><i class="fa fa-sign-in"></i> {% trans "Log in" %}</a>

@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div class="al-content-panel al-content-sidebar">
-    <small>{{ form_title }}</small>
+    <h2>{{ form_title }}</h2>
     <form method="POST" class="al-panel-form">
         {% csrf_token %}
         {{ form.as_p }}

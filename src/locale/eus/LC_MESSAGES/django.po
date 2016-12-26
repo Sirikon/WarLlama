@@ -408,7 +408,7 @@ msgid ""
 "Oh, the name? We just love alpacas. And llamas. And vicuñas. Wish there was "
 "a way to ride them into battle!"
 msgstr ""
-"Oh, izena? Alpakaka maite ditutu. Eta llamak. Eta bikuinak. Borrokara "
+"Oh, izena? Alpakak maite ditutu. Eta llamak. Eta bikuinak. Borrokara "
 "gidatzeko modu bat balego!"
 
 #: .\Alpaca\templates\Alpaca\about_us.html:26
@@ -734,6 +734,12 @@ msgid ""
 "this account, you can just ignore this email.{newline}Alpaca hugs!{jumpline}"
 "Big Evil Llama"
 msgstr ""
+"Kaixo! {newline} Llama Handi Gaiztoa naiz. Nire lurraldeko jarduera guztiak zaintzen ditut, "
+"{alpaca_link}. {newline} Badirudi nire alpaketako bat izan nahi duzula! "
+"Hala bada, izan bedi ongi etorri!  Zure kontua egiaztatu dezakezu esteka honetan "
+"klik eginez:{confirmation_link}.{newline} Kontu hau sortu ez baduzu, "
+"ezikusiarena egin dezakezu.{newline}Alpaka besarkada!{jumpline}"
+"Llama Handi Gaiztoa"
 
 #: .\Alpaca\views\emails.py:74
 msgid "Your Activity \""
@@ -752,6 +758,10 @@ msgid ""
 "until some time has passed, but it is already fully functional.{newline}Have "
 "fun! I hope everything goes as you expect it <3 {email_signature}"
 msgstr ""
+"Kaixo, {author}!{newline}Zure jarduera \"{title}\" zure jarduera egokiro erregistratu da, "
+"eta hasi zaitezke partekatzen hurrengo esteka erabiliz:{activity_link}.{newline}Zure jarduera "
+"orrialde nagusian agertu ez liteke denbora pixka bat igaro arte, baina guztiz "
+"erabilgarria da jadanik.{newline}Goza ezazu! Espero dut dena espero duzun moduan joatea <3 {email_signature}"
 
 #: .\Alpaca\views\emails.py:98
 msgid "joined"
@@ -775,6 +785,8 @@ msgid ""
 "Hi, {author}!{newline}{attendant} has {action} your activity, {title}."
 "{jumpline}You can manage your activity at {activity_link} {email_signature}"
 msgstr ""
+"Kaixo, {author}!{newline}{attendant}(e)k zure jarduera {action} du, {title}."
+"{jumpline}Zure jarduera kudeatu dezakezu hemen {activity_link} {email_signature}" 
 
 #: .\Alpaca\views\emails.py:130
 msgid " requested to join "
@@ -787,6 +799,8 @@ msgid ""
 "{title}.{jumpline}You can manage this and any other requests at "
 "{activity_link}.{email_signature}"
 msgstr ""
+"Kaixo, {author}!{newline}{attendant} (e)k zure jarduerara batzeko eskaria egin du, "
+"{title}.{jumpline}Hau eta beste eskaerak kudeatzeko, hemen {activity_link}.{email_signature}"
 
 #: .\Alpaca\views\emails.py:158
 msgid " confirmed assistance on your activity, "
@@ -800,6 +814,10 @@ msgid ""
 "{activity_link}.{newline}I hope everything goes as you expect it <3 "
 "{email_signature}"
 msgstr ""
+"Kaixo, {author}!{newline}Zorionak! {attendant}(e)k baieztatu du etorriko dela "
+"{date}(e)ko sesiora!{jumpline}Zure jarduera kudeatzeko, hemen "
+"{activity_link}.{newline} Espero dut dena espero duzun moduan joatea <3 "
+"{email_signature}"
 
 #: .\Alpaca\views\emails.py:186
 msgid "You have been removed from the activity "
@@ -812,6 +830,9 @@ msgid ""
 "from the activity {title}.{newline}However, don't forget there are many "
 "other activities waiting for you at {alpaca_link}.{email_signature}"
 msgstr ""
+"Kaixo, {attendant},{newline}{title} jardueratik kanporatua izan zarela informatzea "
+"sentitzen dut.{newline}Hala eta guztiz ere, ez ahaztu beste jarduera pila "
+"bat daudela zure zain hemen {alpaca_link}.{email_signature}"
 
 #: .\Alpaca\views\emails.py:214
 msgid "accepted"
@@ -832,6 +853,8 @@ msgid ""
 "{action}.{newline}Don't forget there are many other activities waiting for "
 "you at {alpaca_link}.{email_signature}"
 msgstr ""
+"Kaixo, {attendant},{newline}{title} jarduerara batzeko eskaria {action} izan da. "
+"Ez ahaztu beste jarduera pila bat daudela zure zain hemen {alpaca_link}.{email_signature}"
 
 #: .\Alpaca\views\emails.py:248
 msgid "Updated: Activity "
@@ -844,6 +867,9 @@ msgid ""
 "{title} was updated!{newline}Check it out at {activity_link}."
 "{email_signature}"
 msgstr ""
+"Kaixo, {attendant}!{newline} Mezu hau jaso duzu zeren eta {title} jarduera "
+"eguneratua izan da!{newline}Egiazta ezazu hemen {activity_link}."
+"{email_signature}"
 
 #: .\Alpaca\views\emails.py:277
 msgid "New Session in Activity "
@@ -856,6 +882,9 @@ msgid ""
 "{title} was updated with new sessions!{newline}Check them out at "
 "{activity_link}.{newline}Hope to see you there <3{email_signature}"
 msgstr ""
+"Kaixo, {attendant}!{newline}Mezu hau jaso duzu seren eta {title} jarduera "
+"eguneratua izan da sesio berriekin!{newline}Egiazta itzazu hemen "
+"{activity_link}.{newline} Espero dut bertan elkar ikustea <3{email_signature}"
 
 #: .\Alpaca\views\emails.py:306
 msgid "You can confirm your assistance!"
@@ -869,6 +898,10 @@ msgid ""
 "the activity's page:{activity_link}.{newline}We hope to see you there <3 "
 "{email_signature}"
 msgstr ""
+"Kaixo, {attendant}!{newline}{title} jarduera eskatzen ari da etorriko diren "
+"erabiltzaiei beren etorrera baieztatzeko {date}(e)ko sesiora! Jardueraren orrialdean "
+"egin dezakezu:{activity_link}.{newline}Espero dugu bertan elkar ikustea <3 "
+"{email_signature}"
 
 #: .\Alpaca\views\session.py:26
 msgid "Create a new session"

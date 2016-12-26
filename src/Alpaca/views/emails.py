@@ -53,6 +53,36 @@ def email_confirm_account(new_user):
     send_my_email(subject, body, new_user.email)
 
 
+def email_reset_password(user):
+    # Subject: Alpaca: Confirm your account
+    # Body: 
+    # Hi, [user]!
+    #
+    # You are receiving this message because you forgot your password and asked for a new one.
+    # You may do so by clicking the following link and the instructions there:
+    # [Link]
+    #
+    # If it wasn't you asked for a new password, you can just ignore this email.
+    #
+    # [Signature]
+
+    # Translators: This is an e-mail. Some sentences may be cut due to the site's necesities. Please, read all parts before translating them, so every punctuation mark is correct. There may be spaces before or after some sentences, include them. You may ask the admin of the site for a copy of the e-mail, should you need it.
+    
+    translation.activate(user.profile.language_preference)
+
+    subject = str(_("Alpaca: Reset your password"))
+    body = str(_("Hi, {username}!{newline}You are receiving this message because you forgot your password and asked for a new one.{jumpline}You may do so by clicking the following link and the instructions there:{jumpline}{reset_link}{newline}If it wasn't you asked for a new password, you can just ignore this email.{email_signature}"))
+
+    link = "http://alpaca.srk.bz/resetpassword?email=" + user.email + "&token=" + user.profile.current_token
+    body = body.format( jumpline="<br/>",
+                        newline="<br/><br/>", 
+                        username=user.username,
+                        reset_link=link, 
+                        email_signature=email_signature())
+
+    send_my_email(subject, body, user.email)
+
+
 
 # AUTHORs
 def email_registered_your_new_activity(activity):

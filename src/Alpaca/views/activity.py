@@ -57,10 +57,12 @@ def edit_activity(request, activity_id):
                 'rich_field_name': "description" }
 
     if request.method == "POST":
-        form = ActivityForm(data=request.POST, instance=activity)
+        form = ActivityForm(request.POST, request.FILES, instance=activity)
         if form.is_valid():
-            form.save()   
-            for attendant in activity.attendants:
+            activity = form.save(commit=False)   
+            activity.cover = form.cleaned_data["cover"]
+            activity.save() 
+            for attendant in activity.attendants.all():
                 email_activity_got_updated(activity, attendant)
 
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))

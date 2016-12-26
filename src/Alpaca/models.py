@@ -7,10 +7,27 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from .storage import *
+
 import datetime
+import re #RegEx
+
+    
+def user_avatar_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/avatar
+    return 'user_{0}/{1}'.format(str(instance.user.id), "avatar." + filename.rsplit('.', 1)[1])
+    
+def activity_cover_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/avatar
+    return 'user_{0}/{1}/{2}'.format(str(instance.author.id), "activities", str(instance.id) + "cover." + filename.rsplit('.', 1)[1])
 
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField( upload_to=user_avatar_path, 
+                                storage=OverwriteStorage(),
+                                null=True, blank=True,
+                                default="no-avatar.png")
+
     birth_date = models.DateField('date of birth')
 
     current_token = models.CharField(max_length=100, default="")
@@ -47,7 +64,12 @@ class Profile (models.Model):
             return display_name
         return self.user.username
 
-class Activity (models.Model):
+class Activity (models.Model):    
+    cover = models.ImageField( upload_to=activity_cover_path, 
+                               storage=OverwriteStorage(),
+                               null=True, blank=True,
+                               default="no-cover.png")
+
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=5000)
     city = models.TextField(max_length=100)
@@ -89,6 +111,13 @@ class Activity (models.Model):
         elapsed_years = years_difference - int(is_before_birthday)
         return elapsed_years >= self.age_minimum
 
+    def get_short_description(self):
+        temp = re.sub("(<img)(?<=(<img)).*?(?=>)(>)", " ", self.description)
+
+        if len(temp) > 200:
+            temp = temp[:200]
+            
+        return temp
 
 class Session (models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)

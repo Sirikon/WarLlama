@@ -101,6 +101,9 @@ if os.environ.get('ALPACA_ENVIRONMENT') == 'PRODUCTION':
             'NAME': os.environ['ALPACA_DB_PATH'],
         }
     }
+    MEDIA_ROOT = os.environ['ALPACA_MEDIA_ROOT']
+    MEDIA_URL = os.environ['ALPACA_MEDIA_URL']
+
 else:
     DATABASES = {
         'default': {
@@ -109,6 +112,8 @@ else:
         }
     }
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+    MEDIA_URL = "/media/"
 
 
 

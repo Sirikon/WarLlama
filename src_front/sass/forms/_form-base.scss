@@ -46,7 +46,7 @@
         border-radius: 3px;       
 
         &:focus {
-            border-color: $brand-color;
+            border-color: $brand;
         }
     }
 
@@ -62,7 +62,7 @@
     }
 
     input[type="submit"] {
-        background-color: $brand-color;
+        background-color: $brand;
         height: 2.2em;
         display: inline-block;
         vertical-align: middle;

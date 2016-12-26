@@ -5,7 +5,7 @@
 {% block content %}
 
 <div class="al-content-panel">    
-    <form method="POST" class="al-form-base al-layout-form">
+    <form method="POST" enctype="multipart/form-data" class="al-form-base al-layout-form">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="al-submit-wrapper">

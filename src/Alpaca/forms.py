@@ -42,7 +42,10 @@ class ProfileCreationForm(UserCreationForm):
         
         return user
 
+
+
 class ProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(required=False)
     first_name = forms.CharField(label=_('First Name'), required=False, help_text=_("Optional"))
     last_name = forms.CharField(label=_('Last Name'), required=False, help_text=_("Optional"))
     birth_date = forms.DateField(label=_('Birth date'), widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))
@@ -67,32 +70,18 @@ class ProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ("first_name", "last_name", "birth_date", "show_birthday", "show_email", "show_real_name", "display_name_format", "language_preference")
+        fields = ("avatar", "first_name", "last_name", "birth_date", "show_birthday", "show_email", "show_real_name", "display_name_format", "language_preference")
+   
 
-class PasswordResetRequestForm(forms.Form):
-    email_or_username = forms.CharField(label=_("E-mail Or Username"), max_length=254)
 
-class ChangePasswordForm(forms.Form):
-    old_password = forms.CharField(required=True, label=_("Old password:"), widget=forms.PasswordInput())
-    new_password = forms.CharField(required=True, label=_("New password:"), widget=forms.PasswordInput())
-    repeat_password = forms.CharField(required=True, label=_("Repeat new password:"), widget=forms.PasswordInput())
- 
-    class Meta:
-        fields = ("old_password", "new_password", "repeat_password")
 
-    def is_valid(self, user):
-        return user.check_password(self.data['old_password']) and self.data['new_password'] == self.data['repeat_password']
-        
-    def save(self, user, commit=True):    
-        user.set_password(self.data['new_password'])
-        if commit:
-            user.save()
-        return user
 
 
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, label=_('Title'), max_length=200)
     description = forms.CharField(required=True, label=_('Description'), max_length=5000, widget=forms.Textarea)
+    cover = forms.ImageField(required=False, help_text=_("Covers are optional. You may change it at any time."))
+    
     city = forms.CharField(required=True, label=_('City'), max_length=100, help_text=_("In which city will this activity take place?"))
 
     auto_register = forms.BooleanField(required=False, label=_('Allow auto-registration?'), help_text=_("Selected: Users join automatically. Not selected: Author decides to accept or reject joining requests."))
@@ -101,7 +90,7 @@ class ActivityForm(forms.ModelForm):
     
     class Meta:
         model = Activity
-        fields = ("title", "description", "city", "auto_register", "confirmation_period", "age_minimum")
+        fields = ("title", "description", "cover", "city", "auto_register", "confirmation_period", "age_minimum")
 
 
 class SessionForm(forms.ModelForm):
@@ -128,6 +117,44 @@ class SessionForm(forms.ModelForm):
             self._errors["end_date"] = self.error_class([msg])
 
 ## MINOR FORMS ##
+class ForgotPasswordForm(forms.Form):
+    email_or_username = forms.CharField(label=_("E-mail Or Username"), max_length=254)
+
+
+class NewPasswordForm(forms.Form):
+    new_password = forms.CharField(required=True, label=_("New password:"), widget=forms.PasswordInput())
+    repeat_password = forms.CharField(required=True, label=_("Repeat new password:"), widget=forms.PasswordInput())
+ 
+    class Meta:
+        fields = ("new_password", "repeat_password")
+
+    def is_valid(self, user):
+        return self.data['new_password'] == self.data['repeat_password']
+        
+    def save(self, user, commit=True):    
+        user.set_password(self.data['new_password'])
+        if commit:
+            user.save()
+        return user
+
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(required=True, label=_("Old password:"), widget=forms.PasswordInput())
+    new_password = forms.CharField(required=True, label=_("New password:"), widget=forms.PasswordInput())
+    repeat_password = forms.CharField(required=True, label=_("Repeat new password:"), widget=forms.PasswordInput())
+ 
+    class Meta:
+        fields = ("old_password", "new_password", "repeat_password")
+
+    def is_valid(self, user):
+        return user.check_password(self.data['old_password']) and self.data['new_password'] == self.data['repeat_password']
+        
+    def save(self, user, commit=True):    
+        user.set_password(self.data['new_password'])
+        if commit:
+            user.save()
+        return user
+
 class DateRangeFilterForm(forms.Form):
     start_date = forms.DateField(required=True, label=_("From:"), initial=datetime.datetime.now(), widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))
     end_date = forms.DateField(required=True, label=_("To:"), initial=datetime.datetime.now(), widget=SelectDateWidget(years=range(datetime.date.today().year, 1900, -1)))

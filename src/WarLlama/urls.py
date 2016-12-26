@@ -13,6 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
+
 from django.conf.urls import include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
@@ -22,7 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^', include('Alpaca.urls')) ## Enabling translation
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 ## About Multi-Language, quoting: 
 ## http://stackoverflow.com/questions/10280881/django-site-with-2-languages/26520044#26520044

@@ -38,6 +38,19 @@
         text-align: right;  
     }
 
+    &-cover {
+        width: 30%;
+        float: left;
+        margin-right: 1em;
+        
+        text-align: center;
+        
+        > i {
+            color: $brand;
+            font-size: 5em;
+        }
+    }
+
     &-attendant {
         background-color: whitesmoke;
         display: inline-block;

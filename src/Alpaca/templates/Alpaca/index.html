@@ -22,7 +22,11 @@
                 {% include "./partials/index-order-bar.html" %}
             </div>
             <div class="al-flex-row">
-                {% include "./partials/index-activity-cards.html" %}
+                <div class="al-flex-grow">
+                    {% for activity in activity_list %}
+                        {% include "./partials/activity-card.html" %}                
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

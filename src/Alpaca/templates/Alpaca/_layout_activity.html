@@ -32,7 +32,15 @@
 {% block content %}
     <div class="al-content-panel">
         <small>{% trans "Description:" %}</small>
+        <div class="al-activity-cover">            
+            {% if activity.cover.name == "no-cover.png" %}
+                <i class="fa fa-superpowers"></i>
+            {% else %} 
+                <img src="{{activity.cover.url}}" width="100%" height="100%"/>
+            {% endif %}
+        </div>
         <p>{{ activity.description | safe }}</p>
+        <div class="clear-fix"></div>
     </div>
 
     <div class="al-flex-row al-flex-adapt-content">

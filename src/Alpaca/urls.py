@@ -8,14 +8,20 @@ urlpatterns = [
     url(r'^demo/$', views.index_demo, name='index_demo'),
     url(r'^about_us/$', views.about_us, name='about_us'),
     url(r'^terms_conditions/$', views.terms_conditions, name='terms_conditions'),
-    url(r'^activate$', views.activate, name='activate'),
+
+    url(r'^forgotpassword/$', views.forgot_password, name="forgot_password"),
+    url(r'^resetpassword$', views.reset_password, name='reset_password'),
+
     url(r'^signup/(?P<activity_id>[0-9]*)$', views.signup, name='signup'),
+    url(r'^activate$', views.activate, name='activate'),
+
     url(r'^login/(?P<activity_id>[0-9]*)$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
+
     url(r'^profile/(?P<username>\w+)$', views.profile, name='profile'),
     url(r'^editprofile$', views.edit_profile, name='edit_profile'),
     url(r'^changepassword/$', views.change_password, name="change_password"),
-    url(r'^resetpassword/$', views.reset_password, name="reset_password"),
+
     url(r'^newactivity/$', views.new_activity, name='new_activity'),
     url(r'^activity/(?P<activity_id>[0-9]+)$', views.activity, name='activity'),
     url(r'^activity/(?P<activity_id>[0-9]+)/edit/$', views.edit_activity, name='edit_activity'),
