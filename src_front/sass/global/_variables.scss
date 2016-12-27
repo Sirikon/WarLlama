@@ -1,7 +1,27 @@
+/*
 $brand-color: #e67e22;
 $secondary-color: #514036;
 $accent-color: #00828F;
 $error-color: #e74c3c;
-$activity-card-background: #F0F3FA;
-$activity-card-dark-background: #3A4769;
-$activity-card-border: #A5B1D1;
+*/
+
+$background: #F3F1EF;
+
+$brand: #e67e22;
+$dark-gray: #4d4238;
+$gray: #867464;
+$light-gray: #f2f1ef;
+$white: #ffffff;
+$accent: #16828c;
+$detail_green: #1ab22d;
+$detail_yellow: #e6a722;
+$detail_red: #e62c22;
+
+$card-background: #ffffff;
+$card-dark-background: #3A4769;
+$card-border: #ececea;
+
+@font-face {
+    font-family: "Open Sans";
+    src: url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+}

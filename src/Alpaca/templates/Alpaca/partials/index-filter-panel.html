@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div class="al-content-panel al-content-sidebar">
-    <small>{% trans "Show" %}</small>
+    <h2>{% trans "Show" %}</h2>
     <form name="filter_form" method="GET" class="al-form-base al-panel-form">
         <input type="radio" name="filter" onclick="location.href=this.value;" value="?filter=all" 
             {% if current_filter == "all" or current_filter is None%} checked {% endif %}> 

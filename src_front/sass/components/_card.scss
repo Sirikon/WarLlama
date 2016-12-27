@@ -1,0 +1,117 @@
+@import '../global/variables';
+
+.al-card {
+    background-color: $card-background;
+    width: 100%;
+    height: auto;
+    
+    margin: 10px;
+
+    box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+
+    text-decoration: none;
+    color: inherit;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: stretch;
+
+    &-cover {
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
+
+        min-width: 15%;
+        max-width: 15%;
+        overflow: hidden;
+               
+        i {
+            color: $brand;
+            font-size: 25px;
+        }
+
+        img {
+            display: block;
+        }
+    }
+
+    &-body {
+        flex-grow: 1;
+
+        padding-bottom: 1em;
+        padding-left: 1em;
+        padding-right: 1.5em;
+        
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+    }
+
+    &-header {
+        margin: 10px 0 10px;
+        color: $accent;
+
+        h1 {
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+    }
+
+    &-descriptors {
+        width: 100%;
+        display: block;
+        
+        span {
+            margin-right: 0.5em;
+        }
+
+        span.next-session {
+            color: $detail-green;
+        }
+
+        span.no-sessions {
+            color: $light-gray;
+        }
+
+        span.at-descriptor {
+            color: $gray;
+        }
+
+        span.attendant-count {
+            color: $brand;
+        }
+
+        span.adults-only {
+            background-color: $detail-red;            
+            padding: 0.15em 0.5em;
+            color: white;
+            font-size: 0.8em;
+            border-radius: 5px;
+        }
+    }
+
+    &-text {
+        flex-grow: 1;
+        box-sizing: border-box;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &-footer {
+        text-align: right;
+    }
+    
+    &-pub-date {
+        color: $gray;
+    }
+    
+}
+
+.al-card:hover {
+    box-shadow: 0px 3px 0px $brand;
+}

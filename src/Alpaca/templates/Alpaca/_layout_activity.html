@@ -32,7 +32,13 @@
 {% block content %}
     <div class="al-content-panel">
         <small>{% trans "Description:" %}</small>
+        {% if activity.cover.name != "False" %}
+            <div class="al-activity-cover">              
+                <img src="{{activity.cover.url}}" width="100%" height="auto"/>
+            </div>
+        {% endif %}
         <p>{{ activity.description | safe }}</p>
+        <div class="clear-fix"></div>
     </div>
 
     <div class="al-flex-row al-flex-adapt-content">

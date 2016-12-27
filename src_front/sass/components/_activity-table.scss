@@ -33,15 +33,15 @@
         animation: float 5s infinite;
 
         i {
-            color: $brand-color;
+            color: $brand;
             font-size: 2em;
         }
 
         th {
             color: black;
             background: darkgray;
-            border-bottom: 4px solid $accent-color;
-            border-right: 1px solid $accent-color;
+            border-bottom: 4px solid $accent;
+            border-right: 1px solid $accent;
             font-size: 17px;
             font-weight: 150;
             padding: 15px;
@@ -55,7 +55,7 @@
             }
 
             i {
-                color: $accent-color;
+                color: $accent;
                 font-size: 1em;
             }
         }
