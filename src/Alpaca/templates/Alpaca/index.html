@@ -7,9 +7,16 @@
 
 {% block content %}
     <div class="al-flex-row al-flex-stretch-content">
-        <div class="al-flex-column">
-            {% include "./partials/search-bar.html" %}
+        <div class="al-flex-column">            
+            {% if user.is_authenticated %}
+                <a href="{% url 'alpaca:new_activity' %}" class="al-btn-sqrflat-big">
+                    <i class="fa fa-plus" aria-hidden="true"></i> 
+                    <span>{% trans "New Activity" %}</span>
+                </a>
+            {% endif %}
 
+            {% include "./partials/search-bar.html" %}
+            
             {% if user.is_authenticated %}
                 {% include "./partials/index-filter-panel.html" %}
             {% endif %}
@@ -18,9 +25,9 @@
             {% include "./partials/_form_panel.html" %}
         </div>
         <div class="al-flex-grow al-flex-column">
-            <div>
-                {% include "./partials/index-order-bar.html" %}
-            </div>
+            
+            {% include "./partials/index-order-bar.html" %}
+
             <div class="al-flex-row">
                 <div class="al-flex-grow">
                     {% for activity in activity_list %}

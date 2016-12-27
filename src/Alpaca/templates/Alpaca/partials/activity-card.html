@@ -2,9 +2,8 @@
 
 
 <a class="al-card"href="/activity/{{activity.id}}">
-    {% if activity.cover.name != "no-cover.png" %}
-        <div class="al-card-cover">        
-                <img src="{{activity.cover.url}}" width="100%" height="100%"/>
+    {% if activity.cover.name != "False" %}
+        <div class="al-card-cover" style="background-image: url({{activity.cover.url}});">  
         </div>
     {% endif %}
     <div class="al-card-body">

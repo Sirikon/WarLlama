@@ -11,16 +11,28 @@ from .storage import *
 
 import datetime
 import re #RegEx
+import random
 
     
 def user_avatar_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/avatar
     return 'user_{0}/{1}'.format(str(instance.user.id), "avatar." + filename.rsplit('.', 1)[1])
     
+def group_logo_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/avatar
+    return 'group_{0}/{1}'.format(str(instance.id), "logo." + filename.rsplit('.', 1)[1])
+    
 def activity_cover_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/avatar
     return 'user_{0}/{1}/{2}'.format(str(instance.author.id), "activities", str(instance.id) + "cover." + filename.rsplit('.', 1)[1])
 
+def activity_no_cover_path():
+    alpaquitas = ["Zero", "Branding", "Reversed", "Dark"]
+    lucky_one = random.randint(0, len(alpaquitas) - 1)
+    return "web/activities/Al-Paquita_{0}.png".format(alpaquitas[lucky_one])
+
+    
+## -- USERS -- ##
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField( upload_to=user_avatar_path, 
@@ -64,11 +76,37 @@ class Profile (models.Model):
             return display_name
         return self.user.username
 
-class Activity (models.Model):    
+class Group (models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField(max_length=254)
+    logo = models.ImageField( upload_to=group_logo_path, 
+                                storage=OverwriteStorage(),
+                                null=True, blank=True,
+                                default="no-logo.png")
+
+    superuser = models.OneToOneField(User)
+    admin_list = models.ManyToManyField(User, related_name="admin_of", blank=True)
+    member_list = models.ManyToManyField(User, related_name="member_of", blank=True)
+    pending_members = models.ManyToManyField(User, related_name="waiting_groups", blank=True)
+
+    creation_date = models.DateTimeField('creation date')
+
+    # Settings
+    show_email = models.BooleanField(default=True)
+    show_birthday = models.BooleanField(default=True)
+    auto_register_users = models.BooleanField(default=False)
+    auto_register_activities = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name + " - #" + str(1 + admin_list.count + member_list.count)
+
+## -- ACTIVITIES -- ##
+class Activity (models.Model):
     cover = models.ImageField( upload_to=activity_cover_path, 
                                storage=OverwriteStorage(),
                                null=True, blank=True,
-                               default="no-cover.png")
+                               default=activity_no_cover_path )
+
 
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=5000)
@@ -118,6 +156,38 @@ class Activity (models.Model):
             temp = temp[:200]
             
         return temp
+
+class Event (models.Model): 
+    cover = models.ImageField( upload_to=activity_cover_path, 
+                               storage=OverwriteStorage(),
+                               null=True, blank=True,
+                               default=activity_no_cover_path )
+
+    banner = models.ImageField( upload_to=activity_cover_path, 
+                               storage=OverwriteStorage(),
+                               null=True, blank=True,
+                               default=activity_no_cover_path )
+
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=5000)
+    city = models.TextField(max_length=100)
+    pub_date = models.DateTimeField('publication date')
+   
+    author_group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="owned_events")
+    organizers = models.ManyToManyField(User, related_name="organizing_events", blank=True)
+    attendants = models.ManyToManyField(User, related_name="attending_events", blank=True)
+    num_attendants = models.IntegerField(default=0)
+
+    pending_attendants = models.ManyToManyField(User, related_name="waiting_events", blank=True)
+    pending_activities = models.ManyToManyField(Activity, blank=True)
+
+    # Settings
+    group_only_attendants = models.BooleanField(default=False)
+    allow_any_users = models.BooleanField(default=True) 
+    auto_register_users = models.BooleanField(default=True)
+    auto_register_activities = models.BooleanField(default=False)    
+    age_minimum = models.IntegerField(default=0)
+
 
 class Session (models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)

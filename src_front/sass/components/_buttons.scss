@@ -10,6 +10,36 @@ button {
     cursor: pointer;
 }
 
+.al-btn-sqrflat-big {
+    background-color: $brand; 
+    line-height: 1.5em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1.1em 0.1em 1.1em;    
+    border: none;
+    border-radius: 2px; 
+
+    color: white;    
+    font-size: 1.5em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-sqrflat-medium {
+    background-color: $brand; 
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1em 0.1em 1em;    
+    border: none;
+    border-radius: 2px; 
+
+    color: white;    
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
 .al-btn-sqrflat-small {
     background-color: $brand; 
     line-height: 1.3em;

@@ -19,12 +19,14 @@
     align-content: stretch;
 
     &-cover {
-        min-width: 30%;
-        max-width: 30%;
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
+
+        min-width: 15%;
+        max-width: 15%;
         overflow: hidden;
-       
-        margin-right: 1em;
-        
+               
         i {
             color: $brand;
             font-size: 25px;

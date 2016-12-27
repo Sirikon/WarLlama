@@ -81,6 +81,11 @@ class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, label=_('Title'), max_length=200)
     description = forms.CharField(required=True, label=_('Description'), max_length=5000, widget=forms.Textarea)
     cover = forms.ImageField(required=False, help_text=_("Covers are optional. You may change it at any time."))
+
+    cover_disclaimer = forms.CharField( disabled=True, 
+                                        widget=forms.Textarea(attrs={ 'rows': 3, 'cols': 10, 'style':'resize:none;'}), 
+                                        label="", 
+                                        initial=_("We would like to remind you that some images are copyrighted. We do not take responsibility for any copyright infrigements. The images will be deleted upon request of their rightful owner or their lawyers. Please, be aware of the rights you have over the image you want to upload before using it."))
     
     city = forms.CharField(required=True, label=_('City'), max_length=100, help_text=_("In which city will this activity take place?"))
 
@@ -90,7 +95,7 @@ class ActivityForm(forms.ModelForm):
     
     class Meta:
         model = Activity
-        fields = ("title", "description", "cover", "city", "auto_register", "confirmation_period", "age_minimum")
+        fields = ("title", "description", "cover", "cover_disclaimer", "city", "auto_register", "confirmation_period", "age_minimum")
 
 
 class SessionForm(forms.ModelForm):
