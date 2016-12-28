@@ -72,10 +72,28 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ("avatar", "first_name", "last_name", "birth_date", "show_birthday", "show_email", "show_real_name", "display_name_format", "language_preference")
    
+class GroupForm(forms.ModelForm):
+    logo = forms.ImageField(required=False)
+    name = forms.CharField(required=True, label=_('Group Name'))
+    description = forms.CharField(required=True, label=_('Description'), max_length=5000, widget=forms.Textarea)
+    email = forms.EmailField(required=True, label=_('E-mail'))
 
+    show_email = forms.BooleanField(label=_("Show the group's e-mail?"), required=False)
+    auto_register_users = forms.BooleanField(
+                            required=False, 
+                            label=_('Allow user auto-registration?'), 
+                            help_text=_("Selected: Users join the group automatically. Not selected: Admins decide to accept or reject joining requests.")
+                        )
+    auto_register_activities = forms.BooleanField(
+                            required=False, 
+                            label=_('Allow activity auto-registration?'), 
+                            help_text=_("Your group may have organize activities! Are members allowed to relate any of their activities to this group?")
+                        )
 
-
-
+    class Meta:
+        model = Group
+        fields = ("logo", "name", "description", "email", "show_email", "auto_register_users", "auto_register_activities")
+   
 
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, label=_('Title'), max_length=200)

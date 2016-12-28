@@ -22,6 +22,18 @@ urlpatterns = [
     url(r'^editprofile$', views.edit_profile, name='edit_profile'),
     url(r'^changepassword/$', views.change_password, name="change_password"),
 
+
+    url(r'^newgroup/$', views.new_group, name='new_group'),
+    url(r'^group/(?P<group_id>[0-9]+)$', views.group, name='group'),
+    url(r'^group/(?P<group_id>[0-9]+)/edit/$', views.edit_group, name='edit_group'),
+    url(r'^group/join/(?P<group_id>[0-9]+)$', views.join_group, name='join_group'),
+    url(r'^group/leave/(?P<group_id>[0-9]+)$', views.leave_group, name='leave_group'),
+    url(r'^group/kick/(?P<group_id>[0-9]+)$', views.kick_member, name='kick_member'),
+    url(r'^group/members/(?P<group_id>[0-9]+)$', views.pending_members, name='pending_members'),
+    url(r'^group/activities/(?P<activity_id>[0-9]+)$', views.pending_activities, name='pending_activities'),
+    url(r'^group/promote/(?P<group_id>[0-9]+)$', views.promote_member, name='promote_member'),
+    url(r'^group/demote/(?P<group_id>[0-9]+)$', views.kick_member, name='demote_member'),
+
     url(r'^newactivity/$', views.new_activity, name='new_activity'),
     url(r'^activity/(?P<activity_id>[0-9]+)$', views.activity, name='activity'),
     url(r'^activity/(?P<activity_id>[0-9]+)/edit/$', views.edit_activity, name='edit_activity'),

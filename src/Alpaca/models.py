@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 from .storage import *
-from .file_paths import *
+from file_paths import *
 
 import datetime
 import re #RegEx
@@ -58,28 +58,33 @@ class Profile (models.Model):
         return self.user.username
 
 class Group (models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=254)
     logo = models.ImageField( upload_to=group_logo_path, 
                                 storage=OverwriteStorage(),
                                 null=True, blank=True,
                                 default="no-logo.png")
+    name = models.CharField(max_length=50)
+    description = models.TextField(max_length=5000)
+    email = models.EmailField(max_length=254)
 
     superuser = models.OneToOneField(User)
     admin_list = models.ManyToManyField(User, related_name="admin_of", blank=True)
     member_list = models.ManyToManyField(User, related_name="member_of", blank=True)
+    total_num_members = models.IntegerField(default=0)
+
     pending_members = models.ManyToManyField(User, related_name="waiting_groups", blank=True)
 
     creation_date = models.DateTimeField('creation date')
 
     # Settings
     show_email = models.BooleanField(default=True)
-    show_birthday = models.BooleanField(default=True)
     auto_register_users = models.BooleanField(default=False)
     auto_register_activities = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name + " - #" + str(1 + admin_list.count + member_list.count)
+
+    def member_count(self):
+        return  1 + group.admin_list.count() + group.member_list.count()
 
 ## -- ACTIVITIES -- ##
 class Activity (models.Model):
@@ -94,6 +99,9 @@ class Activity (models.Model):
     city = models.TextField(max_length=100)
     pub_date = models.DateTimeField('publication date')
    
+    group = models.ForeignKey(Group, related_name="activity_list", blank=True, null=True)
+    pending_group = models.ForeignKey(Group, related_name="pending_activities", blank=True, null=True)
+
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
     attendants = models.ManyToManyField(User, related_name="attending_activities", blank=True)
     num_attendants = models.IntegerField(default=0)
