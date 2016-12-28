@@ -1,0 +1,29 @@
+{% extends './_layout_group.html' %}
+{% load i18n %}
+
+{% block user_options %}
+    <a class="al-btn-action-big" href="{% url 'alpaca:login' group.id %}">
+        {% trans "Join" %}
+    </a>
+{% endblock %}
+
+{% block admin_list %}
+    <div class="al-group-member-list">
+        <a class="al-icon-user" href="{% url 'alpaca:profile' group.superuser.username %}">{{ group.superuser.username }}</a>
+        {% for admin in group.admin_list.all %}
+            <a class="al-icon-user" href="{% url 'alpaca:profile' admin.username %}">{{ admin.username }}</a>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block member_list %}
+    {% if group.member_list.count <= 0 %}
+        <p>{% trans "There are no other members in this group!" %}</p>
+    {% else %}  
+        <div class="al-group-member-list">  
+            {% for member in group.member_list.all %}
+                <a class="al-icon-user" href="{% url 'alpaca:profile' admin.username %}">{{ admin.username }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

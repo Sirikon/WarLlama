@@ -1,0 +1,93 @@
+{% extends './_layout_group.html' %}
+{% load i18n %}
+
+{% block user_options %}    
+    <a class="al-btn-action-big" href="{% url 'alpaca:edit_group' group.id %}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
+    </a>
+{% endblock %}
+
+{% block admin_list %}
+    {% if user == group.superuser %}
+        {% if group.admin_list.count <= 0 %}
+            <p>{% trans "You are the one in charge of this group. Promote a member to admin if you need help." %}</p>
+        {% else %}
+            <p>{% trans "You are the one in charge of this group, the only one who can demote admins." %}</p>
+            <form action="demote/{{activity.id}}" method="POST">
+                {% csrf_token %}
+                <select id="admin_list" name="member">
+                {% for admin in group.admin_list.all %}
+                    <option value="{{admin.id}}">{{ admin.username }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-btn-sqrflat-small" name="demote_member" value="{% trans 'Demote' %}"/>
+            </form>
+        {% endif %}
+    {% else %}    
+        <div class="al-group-member-list">
+            <a class="al-icon-user" href="{% url 'alpaca:profile' group.superuser.username %}">{{ group.superuser.username }}</a>
+            {% for admin in group.admin_list.all %}
+                <a class="al-icon-user" href="{% url 'alpaca:profile' admin.username %}">{{ admin.username }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block member_list %}
+    {% if activity.attendants.count <= 0 %}
+        <p>{% trans "There are no other members in this group!" %}</p>
+    {% else %}
+        <form action="action/{{activity.id}}" method="POST">
+            {% csrf_token %}
+            <select id="member_list" name="member">
+            {% for member in group.member_list.all %}
+                <option value="{{member.id}}">{{ member.username }}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" class="al-btn-sqrflat-small" name="promote_member" value="{% trans 'Promote' %}"/>
+            <input type="submit" class="al-btn-sqrflat-small" name="kick_member" value="{% trans 'Kick out' %}"/>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block pending_members_list %}
+    <div class="al-content-panel"> 
+        <small>{% trans "Membership requests:" %}</small>  
+        {% if group.pending_members.count <= 0 %}
+            <p>{% trans "There are no pending requests to join the group." %}</p>
+        {% else %}
+            <p>{% trans "Manage the requests to join the group:" %}</p>
+            <form action="members/{{group.id}}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="user_join_request">
+                {% for member in group.pending_members.all %}
+                    <option value="{{member.id}}">{{ member.username }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+{% endblock %}
+    
+{% block pending_activities_list %}
+    <div class="al-content-panel"> 
+        <small>{% trans "Activity requests:" %}</small>  
+        {% if group.pending_activities.count <= 0 %}
+            <p>{% trans "There are no pending activities to confirm." %}</p>
+        {% else %}
+            <p>{% trans "Manage the activities that want to be related to this group:" %}</p>
+            <form action="activities/{{group.id}}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="activity_request">
+                {% for act in activity.pending_attendants.all %}
+                    <option value="{{act.id}}">{{ act.title }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+{% endblock %}

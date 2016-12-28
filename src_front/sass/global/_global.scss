@@ -28,6 +28,50 @@ body {
     font-weight: 100;
 }
 
+
+.al-avatar {
+    &-miniature {
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
+
+        width: 50px;
+        height: 50px;
+        margin-left: 0.5em;
+        border-radius: 50%;        
+    }
+
+    &-logo-small {        
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
+
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;    
+    }
+}
+
+.al-icon {
+    color: $brand;
+
+    &-user {
+        background-color: whitesmoke;
+        display: inline-block;
+        margin: 0.5em 0;
+        padding: 2px 4px;
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        text-decoration: none;
+        color: inherit;
+
+        &:hover {
+            background-color: lightgray;
+        }
+    }
+}
+
+
 .al-sticky-bar {
     position: fixed;
     left: 0;

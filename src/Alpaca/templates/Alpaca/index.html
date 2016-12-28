@@ -13,6 +13,10 @@
                     <i class="fa fa-plus" aria-hidden="true"></i> 
                     <span>{% trans "New Activity" %}</span>
                 </a>
+                <a href="{% url 'alpaca:new_group' %}" class="al-btn-sqrflat-big">
+                    <i class="fa fa-plus" aria-hidden="true"></i> 
+                    <span>{% trans "New Group" %}</span>
+                </a>
             {% endif %}
 
             {% include "./partials/search-bar.html" %}

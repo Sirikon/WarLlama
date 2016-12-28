@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from ..models import Profile, Group, Activity
@@ -13,6 +14,25 @@ from .emails import email_reset_password
 
 from utils import set_translation
 
+import datetime
+
+
+def group(request, group_id):
+    set_translation(request)
+    group = get_object_or_404(Group, pk=group_id)
+    user = request.user
+    activity_list = group.activity_list.order_by('pub_date')
+    context = { 'user': user,
+                'group': group,
+                'activity_list': activity_list}
+
+    if user.is_authenticated:
+        if user == group.superuser or user in group.member_list.all():
+            return render(request, 'Alpaca/group/group_admin.html', context)
+        else:
+            return render(request, 'Alpaca/group/group_member.html', context)
+    else:        
+        return render(request, 'Alpaca/group/group_anon.html', context)
 
 def new_group(request):
     set_translation(request)
@@ -72,23 +92,7 @@ def edit_group(request, group_id):
         return render(request, 'Alpaca/_form_layout.html', context)
 
 
-def group(request, group_id):
-    set_translation(request)
-    group = get_object_or_404(Group, pk=group_id)
-    user = request.user
-    activity_list = group.activity_set.order_by('start_date')
-    context = { 'user': user,
-                'activity_list': activity_list}
-
-    if user.is_authenticated:
-        if user == group.superuser or user in group.member_list.all():
-            return render(request, 'Alpaca/group_admin.html', context)
-        else:
-            return render(request, 'Alpaca/group_member.html', context)
-    else:        
-        return render(request, 'Alpaca/group_anon.html', context)
-
-
+## USER ACTIONS ##
 def join_group(request, group_id):
     set_translation(request)
     group = get_object_or_404(Group, pk=group_id)
@@ -120,21 +124,25 @@ def leave_group(request, group_id):
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
-
-def kick_member(request, group_id):
+## ADMIN ACTIONS ##
+def handle_member(request, group_id):
     set_translation(request)
     group = get_object_or_404(Group, pk=group_id)
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("member"))
-        group.admin_list.remove(selected_user)
-        group.member_list.remove(selected_user)
-        group.total_num_members = group.member_count()
+        if "promote_member" in request.POST:
+            selected_user = get_object_or_404(User, id=request.POST.get("member"))
+            group.admin_list.add(selected_user)
+            group.member_list.remove(selected_user)
+            #email_you_were_kicked_out_from_activity(activity, selected_user)   
+        elif "kick_member" in request.POST: 
+            group.member_list.remove(selected_user)
+            group.total_num_members = group.member_count()
+            #email_you_were_kicked_out_from_activity(activity, selected_user)
         group.save()
-        #email_you_were_kicked_out_from_activity(activity, selected_user)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
-
 
 def pending_members(request, group_id):
     set_translation(request)
@@ -161,7 +169,7 @@ def pending_activities(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
 
     if request.method == "POST":
-        selected_activity = get_object_or_404(Activity, id=request.POST.get("user_join_request"))
+        selected_activity = get_object_or_404(Activity, id=request.POST.get("activity_request"))
         if "accept_request" in request.POST:
             group.activity_list.add(selected_activity)
             group.activity_list.remove(selected_activity)
@@ -174,20 +182,9 @@ def pending_activities(request, group_id):
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
-def promote_member(request, group_id):
-    set_translation(request)
-    group = get_object_or_404(Group, pk=group_id)
 
-    if request.method == "POST":
-        selected_user = get_object_or_404(User, id=request.POST.get("member"))
-        group.admin_list.add(selected_user)
-        group.member_list.remove(selected_user)
-        group.save()
-        #email_you_were_kicked_out_from_activity(activity, selected_user)
 
-    return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
-
-def demote_member(request, group_id):
+def demote_admin(request, group_id):
     set_translation(request)
     group = get_object_or_404(Group, pk=group_id)
 

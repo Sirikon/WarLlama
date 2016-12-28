@@ -13,7 +13,7 @@
         <p>{% trans "There are no users attending this activity, except" %} {{ activity.author }}.</p>
     {% else %}    
         {% for att in activity.attendants.all %}
-            <a class="al-activity-attendant" href="{% url 'alpaca:profile' att.username %}">{{ att.username }}</a>
+            <a class="al-icon-user" href="{% url 'alpaca:profile' att.username %}">{{ att.username }}</a>
         {% endfor %}
     {% endif %}
 {% endblock %}

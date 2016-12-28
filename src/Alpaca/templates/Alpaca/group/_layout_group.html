@@ -1,0 +1,64 @@
+{% extends './../_layout.html' %}
+{% load i18n %}
+
+{% block title %}
+<div class="al-group-header">
+    <div class="al-group-header-title">
+        <div class="al-avatar-logo-small" style="background-image: url({{group.logo.url}})"></div>
+        <h1>{{group.name}}</h1>
+    </div>       
+    <div class="al-group-description">
+        <p>{{ group.description | safe }}</p>
+    </div> 
+    <div class="al-group-data">  
+        <p>
+            <span class="icon"><i class="fa fa-user"></i> {{ group.total_num_members }}</span>
+            <span class="icon"><i class="fa fa-bookmark"></i> {{ group.creation_date }}</span>
+        </p>
+    </div>
+    <div class="al-group-user-section">
+        {% block user_options %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+    <div class="al-content-panel">        
+        <small>{% trans "Administrators:" %}</small>
+        <div class="al-group-member-list">
+            {% block admin_list %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="al-content-panel"> 
+        <small>{% trans "Members:" %}</small>  
+        {% block member_list %}{% endblock %}
+    </div>
+
+    {% block pending_members_list %}{% endblock %}
+    
+    {% block pending_activities_list %}{% endblock %}
+    
+    <div class="al-group-history">
+        <div class="al-content-panel al-group-history-events">
+            <h2>{% trans "Events" %}</h2>  
+            {% if group.event_list.count <= 0 %}
+                <p>{% trans "No events yet!" %}</p>
+            {% else %}
+                {% include "./../partials/activity-table.html" %}
+            {% endif %}
+        </div>
+
+        <div class="al-content-panel al-group-history-activities">
+            <h2>{% trans "Activities" %}</h2>  
+            {% if group.activity_list.count <= 0 %}
+                <p>{% trans "No activities yet!" %}</p>
+            {% else %}
+                {% for activity in group.activity_list.all %}
+                    {% include "./partials/activity-card.html" %}                
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

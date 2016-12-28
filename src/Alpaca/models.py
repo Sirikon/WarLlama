@@ -63,7 +63,7 @@ class Group (models.Model):
                                 null=True, blank=True,
                                 default="no-logo.png")
     name = models.CharField(max_length=50)
-    description = models.TextField(max_length=5000)
+    description = models.TextField(max_length=200)
     email = models.EmailField(max_length=254)
 
     superuser = models.OneToOneField(User)
