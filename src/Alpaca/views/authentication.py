@@ -35,9 +35,8 @@ def signup(request, activity_id):
 
         if form.is_valid():
             new_user = form.save()
-            new_user.profile.current_token = generate_token()
-            new_user.profile.save()
-            
+            new_user.profile.generate_token()
+                        
             email_confirm_account(new_user)
 
             context = {
@@ -49,11 +48,11 @@ def signup(request, activity_id):
             
         else:
             context['form'] = form
-            return render(request, 'Alpaca/_form_floating.html', context)
+            return render(request, 'Alpaca/form_signup.html', context)
         
     else:
         context['form'] = ProfileCreationForm()
-        return render(request, 'Alpaca/_form_floating.html', context)
+        return render(request, 'Alpaca/form_signup.html', context)
 
 
 def activate(request):
@@ -69,10 +68,7 @@ def activate(request):
 
     context = {}
     if user.profile.current_token == token:
-        user.is_active = True
-        user.save()
-        user.profile.current_token = ""
-        user.profile.save()
+        user.profile.activate()
 
         context['message_title'] = _('Welcome to Alpaca!')
         context['message_body'] = _('You are one of us now. Your account has been activated and you may now log in. Welcome!')

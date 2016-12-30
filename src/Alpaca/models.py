@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from .storage import *
 from file_paths import *
 
+import hashlib
+import random
 import datetime
 import re #RegEx
     
@@ -32,6 +34,7 @@ class Profile (models.Model):
     show_real_name = models.BooleanField(default=True)
     display_name_format = models.CharField(max_length=50, default="nick (full_name)")
 
+    # -- GETs
     def __str__(self):
         return self.user.username
 
@@ -56,6 +59,18 @@ class Profile (models.Model):
             display_name = display_name.replace("()", "")
             return display_name
         return self.user.username
+    # -- SETs
+    def generate_token(self):
+        hash_object = hashlib.sha256(str(random.randint(1, 1000)))
+        self.current_token = hash_object.hexdigest()
+        self.save()
+
+    def activate(self):
+        self.user.is_active = True
+        self.user.save()
+        self.generate_token() # For security, a new token is created.
+
+
 
 class Group (models.Model):
     logo = models.ImageField( upload_to=group_logo_path, 
@@ -113,8 +128,8 @@ class Event (models.Model):
     city = models.TextField(max_length=100)
     pub_date = models.DateTimeField('publication date')
     
-    start_date = models.DateTimeField('start date', default=timezone.now())
-    end_date = models.DateTimeField('end date', default=timezone.now())
+    start_date = models.DateTimeField('start date', default=timezone.now)
+    end_date = models.DateTimeField('end date', default=timezone.now)
     age_minimum = models.IntegerField(default=0)
    
     attendants = models.ManyToManyField(User, related_name="attending_events", blank=True)
