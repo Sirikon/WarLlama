@@ -96,11 +96,68 @@ class Group (models.Model):
 
 
 ## -- ACTIVITIES -- ##
+class Event (models.Model): 
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    cover = models.ImageField( upload_to=event_cover_path, 
+                               storage=OverwriteStorage(),
+                               null=True, blank=True,
+                               default=no_cover_path )
+
+    banner = models.ImageField( upload_to=event_banner_path, 
+                               storage=OverwriteStorage(),
+                               null=True, blank=True,
+                               default=event_no_banner_path )
+
+    title = models.CharField(max_length=200)
+    description = models.TextField(max_length=5000)
+    city = models.TextField(max_length=100)
+    pub_date = models.DateTimeField('publication date')
+    
+    start_date = models.DateTimeField('start date', default=timezone.now())
+    end_date = models.DateTimeField('end date', default=timezone.now())
+    age_minimum = models.IntegerField(default=0)
+   
+    attendants = models.ManyToManyField(User, related_name="attending_events", blank=True)
+    num_attendants = models.IntegerField(default=0)
+
+    pending_attendants = models.ManyToManyField(User, related_name="waiting_events", blank=True)
+
+    # Settings   
+    show_title = models.BooleanField(default=True)
+    group_only_attendants = models.BooleanField(default=False)
+    auto_register_users = models.BooleanField(default=True)
+    auto_register_activities = models.BooleanField(default=False) 
+
+
+    def __str__(self):
+        return self.pub_date.strftime('(%Y-%m-%d, %H:%M)') + " " + self.title + " - Group: " + self.group.name
+
+    def __unicode__(self):
+        return u'{t}/{d}'.format(t=self.title, d=self.description)
+
+    # -- GETs
+    def get_short_description(self):
+        temp = re.sub("(<img)(?<=(<img)).*?(?=>)(>)", " ", self.description)
+
+        if len(temp) > 200:
+            temp = temp[:200]
+            
+        return temp
+    
+    # -- SETs
+    def remove_attendant(user):
+        self.attendants.remove(user)
+        self.num_attendants = self.attendants.count()
+        self.save()
+        for activity in self.activity_list.all():
+            activity.remove_attendant(user)
+
+
 class Activity (models.Model):
     cover = models.ImageField( upload_to=activity_cover_path, 
                                storage=OverwriteStorage(),
                                null=True, blank=True,
-                               default=activity_no_cover_path )
+                               default=no_cover_path )
 
 
     title = models.CharField(max_length=200)
@@ -110,6 +167,9 @@ class Activity (models.Model):
    
     group = models.ForeignKey(Group, related_name="activity_list", blank=True, null=True)
     pending_group = models.ForeignKey(Group, related_name="pending_activities", blank=True, null=True)
+    
+    event = models.ForeignKey(Event, related_name="activity_list", blank=True, null=True)
+    pending_event = models.ForeignKey(Event, related_name="pending_activities", blank=True, null=True)
 
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_activities")
     attendants = models.ManyToManyField(User, related_name="attending_activities", blank=True)
@@ -126,7 +186,7 @@ class Activity (models.Model):
 
     def __unicode__(self):
         return u'{t}/{d}'.format(t=self.title, d=self.description)
-
+    ## - GETs
     def get_past_sessions(self):
         today = timezone.now()
         return self.session_set.filter(Q(start_date__lt=today))
@@ -154,38 +214,15 @@ class Activity (models.Model):
             temp = temp[:200]
             
         return temp
-
-class Event (models.Model): 
-    cover = models.ImageField( upload_to=activity_cover_path, 
-                               storage=OverwriteStorage(),
-                               null=True, blank=True,
-                               default=activity_no_cover_path )
-
-    banner = models.ImageField( upload_to=activity_cover_path, 
-                               storage=OverwriteStorage(),
-                               null=True, blank=True,
-                               default=activity_no_cover_path )
-
-    title = models.CharField(max_length=200)
-    description = models.TextField(max_length=5000)
-    city = models.TextField(max_length=100)
-    pub_date = models.DateTimeField('publication date')
-   
-    author_group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="owned_events")
-    organizers = models.ManyToManyField(User, related_name="organizing_events", blank=True)
-    attendants = models.ManyToManyField(User, related_name="attending_events", blank=True)
-    num_attendants = models.IntegerField(default=0)
-
-    pending_attendants = models.ManyToManyField(User, related_name="waiting_events", blank=True)
-    pending_activities = models.ManyToManyField(Activity, blank=True)
-
-    # Settings
-    group_only_attendants = models.BooleanField(default=False)
-    allow_any_users = models.BooleanField(default=True) 
-    auto_register_users = models.BooleanField(default=True)
-    auto_register_activities = models.BooleanField(default=False)    
-    age_minimum = models.IntegerField(default=0)
-
+    ## - SETs
+    def remove_attendant(user):
+        self.attendants.remove(user)
+        self.num_attendants = self.attendants.count()
+        self.save()
+        for session in self.session_set.all():
+            if not session.has_finished():
+                session.confirmed_attendants.remove(user)
+                session.save()
 
 class Session (models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)

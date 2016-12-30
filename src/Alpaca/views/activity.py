@@ -154,13 +154,7 @@ def leave_activity(request, activity_id):
     user = request.user
 
     if request.method == "POST":
-        activity.attendants.remove(user)
-        activity.num_attendants = activity.attendants.count()
-        activity.save()
-        for session in activity.session_set.all():
-            if not session.has_finished():
-                session.confirmed_attendants.remove(user)
-                session.save()
+        activity.remove_attendant(user)
         email_user_acted_on_your_activity(activity, user, False)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
@@ -172,13 +166,7 @@ def kick_attendant(request, activity_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("attending"))
-        activity.attendants.remove(selected_user)
-        activity.num_attendants = activity.attendants.count()
-        activity.save()
-        for session in activity.session_set.all():
-            if not session.has_finished():
-                session.confirmed_attendants.remove(selected_user)
-                session.save()
+        activity.remove_attendant(selected_user)
         email_you_were_kicked_out_from_activity(activity, selected_user)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))

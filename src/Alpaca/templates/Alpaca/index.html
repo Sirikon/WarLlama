@@ -33,8 +33,16 @@
 
             <div class="al-item-list">
             {% include "./partials/index-order-bar.html" %}
-                {% for activity in activity_list %}
-                    {% include "./partials/activity-card.html" %}                
+                {% for item in activity_list %}
+                    {% if item.banner is None %}
+                        {% with item as activity %}
+                            {% include "./partials/activity-card.html" %}   
+                        {% endwith %}             
+                    {% else %}
+                        {% with item as event %}
+                            {% include "./partials/event-card.html" %}     
+                        {% endwith %}                
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>

@@ -3,7 +3,9 @@ from django.core.urlresolvers import reverse
 
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
-from ..models import Activity, activity_no_cover_path
+from itertools import chain
+
+from ..models import Activity
 from ..forms import *
 
 from utils import *
@@ -16,10 +18,10 @@ def index(request):
     to_sort_column = request.GET.get('order_by')
     last_column = request.GET.get('last')
 
-    activity_list = search(request, "search", Activity, ['title', 'age_minimum', 'author__username', 'city', 'description'])    
+    activity_list = search(request, "search", [Activity, Event], ['title', 'age_minimum', 'author__username', 'city', 'description'])    
     
     if activity_list is None:
-        activity_list = Activity.objects
+        activity_list = list(chain(Activity.objects.all(), Event.objects.all()))
 
     activity_list = filter_activities(request, user, activity_list, user_filter)
     context = sort_activities(activity_list, to_sort_column, last_column)

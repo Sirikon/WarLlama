@@ -4,6 +4,8 @@ from django.utils import translation
 from django import http
 from django.conf import settings
 
+from itertools import chain
+
 from ..models import *
 
 import hashlib
@@ -27,6 +29,9 @@ def set_translation(request):
 def sort_activities(activity_list, sort_column, last_column):
     sort_sign = "-"
 
+    if activity_list is not list:
+        activity_list = list(activity_list)
+
     if sort_column != None and sort_column != "":        
         if last_column != None and sort_column != "":
             if last_column[0] == "-":
@@ -38,9 +43,9 @@ def sort_activities(activity_list, sort_column, last_column):
             sorted_list = sorted(has_sessions_list, key= lambda a: (a.get_next_session() or None ), reverse=(sort_sign=="-"))
 
         else:
-            sorted_list = activity_list.order_by(sort_sign + sort_column)
+            sorted_list = sorted(activity_list, key= lambda a: a[sort_column], reverse=(sort_sign=="-"))
     else: 
-         sorted_list = activity_list.order_by('-pub_date')
+         sorted_list = sorted(activity_list, key= lambda a: a.pub_date, reverse=True)
          sort_column = "pub_date"
     
     icon_name = "fa-sort-desc"
@@ -58,7 +63,10 @@ def sort_activities(activity_list, sort_column, last_column):
 def filter_activities(request, user, activity_list, user_filter):
     if user.is_authenticated: # Can't filter for anons
         if user_filter == "author":
-            activity_list = activity_list.filter(author__id=user.id)
+            if activity_list is list:
+                activity_list = filter(lambda act: act.author.id == user.id, activity_list)
+            else:
+                activity_list = activity_list.filter(author__id=user.id)
         elif user_filter == "attendant":
             activity_list = user.attending_activities  
 
@@ -109,7 +117,7 @@ def get_query(query_string, search_fields):
     return query
 
     
-def search(request, query_name, model, search_fields):
+def search(request, query_name, models, search_fields):
     # Adapted 
     query_string = ''
     found_entries = None
@@ -119,6 +127,8 @@ def search(request, query_name, model, search_fields):
         
         entry_query = get_query(query_string, search_fields)
         
-        found_entries = model.objects.filter(entry_query)
+        found_entries = {}
+        for model in models:
+            chain(found_entries, model.objects.filter(entry_query))
     
     return found_entries

@@ -1,0 +1,68 @@
+{% extends './../_layout.html' %}
+{% load i18n %}
+
+{% block title %}
+    <div class="al-content-header">
+        <div class="al-event-banner" style="background-image: url({{event.banner.url}});">
+            {% if event.show_title %}
+                <h1>{{ event.title }}</h1>
+            {% endif %}
+        </div>
+        <div class="al-event-banner-footer">
+            <p>
+                <span class="location"><i class="fa fa-map-marker"></i><b>{{ event.city }}</b></span>
+                <span class="when"><i class="fa fa-calendar"></i><b>{{ event.start_date }}</b></span>                   
+            </p>   
+        </div>
+        <div class="al-event-user-options">
+            {% block user_options %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="al-content-panel">
+        <small>{% trans "Description:" %}</small>
+        <p>{{ event.description | safe }}</p>
+    </div>
+
+    <div class="al-flex-row al-flex-adapt-content">
+        <div class="al-content-panel">
+            <small>{% trans "Settings:" %}</small>
+            <p>{% trans "Users may join this event" %}
+            {% if event.auto_register_users %}
+                <b> {% trans "freely." %}</b>
+            {% else %}
+                <b> {% trans "upon request." %}</b>
+            {% endif %}    
+            </p>
+            <p>{% trans "Activities may join this event" %}
+            {% if event.auto_register_activities %}
+                <b> {% trans "freely." %}</b>
+            {% else %}
+                <b> {% trans "upon request." %}</b>
+            {% endif %}    
+            </p>
+        </div>
+
+        <div class="al-content-panel al-flex-grow">
+            <small>{% trans "Attendants:" %}</small>
+            <br/>
+            {% block attendants %}{% endblock %}
+        </div>
+        
+        {% block user_requests %}{% endblock %}
+        {% block activity_requests %}{% endblock %}
+    </div>
+
+    <h3>{% trans "Activity List" %}</h3>
+
+    {% if event.activity_list.count <= 0 %}
+        <p>{% trans "No activities yet!" %}</p>
+    {% else %}
+        {% include "./../partials/index-order-bar.html" %}
+        {% for activity in event.activity_list.all %}
+            {% include "./../partials/activity-card.html" %}                
+        {% endfor %}
+    {% endif %}
+{% endblock %}

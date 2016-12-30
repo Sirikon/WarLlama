@@ -147,6 +147,53 @@ class SessionForm(forms.ModelForm):
             msg = _("The end date and time must be greater than the start date.")
             self._errors["end_date"] = self.error_class([msg])
 
+class EventForm(forms.ModelForm):
+    cover = forms.ImageField(required=False, help_text=_("This is the image that will be displayed at the index. If you don't have one yet, we will provide a default and you may upload yours later."))
+    banner = forms.ImageField(required=False, help_text=_("This is the image that will be displayed at the event page, and is intended to be bigger than a cover. If you don't have one yet, we will provide a default and you may upload yours later."))
+    image_disclaimer = forms.CharField( disabled=True, 
+                                        widget=forms.Textarea(attrs={ 'rows': 3, 'cols': 10, 'style':'resize:none;'}), 
+                                        label="", 
+                                        initial=_("We would like to remind you that some images are copyrighted. We do not take responsibility for any copyright infrigements. The images will be deleted upon request of their rightful owner or their lawyers. Please, be aware of the rights you have over the image you want to upload before using it."))
+    
+    title = forms.CharField(required=True, label=_('Event Title'))
+    description = forms.CharField(required=True, label=_('Description'), max_length=5000, widget=forms.Textarea) 
+    
+    city = forms.CharField(required=True, label=_('City'), max_length=100, help_text=_("In which city will this activity take place?"))
+
+    start_date = forms.DateTimeField(required=True, label=_('Start date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
+    end_date = forms.DateTimeField(required=True, label=_('End date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
+
+
+    age_minimum = forms.IntegerField(required=True, label=_('Age minimum'), initial=18, help_text=_("Minimum age to attend this event."))
+
+    show_title = forms.BooleanField(
+                    required=False, 
+                    label=_('Show the title?'), 
+                    help_text=_("This is merely an aesthetic option. Maybe your banner already contains the event's title and you want to hide it?")
+                )
+
+    group_only_attendants = forms.BooleanField(
+                    required=False, 
+                    label=_('Is this a private event for your group?')
+                )
+
+    auto_register_users = forms.BooleanField(
+                            required=False, 
+                            label=_('Allow user auto-registration?'), 
+                            help_text=_("Selected: Users join the group automatically. Not selected: Admins decide to accept or reject joining requests.")
+                        )
+
+    auto_register_activities = forms.BooleanField(
+                            required=False, 
+                            label=_('Allow activity auto-registration?'), 
+                            help_text=_("Your group may have organize activities! Are members allowed to relate any of their activities to this group?")
+                        )
+
+    class Meta:
+        model = Event
+        fields = ("cover", "banner", "image_disclaimer", "title", "description", "city", "start_date", "end_date", "age_minimum", "show_title", "group_only_attendants", "auto_register_users", "auto_register_activities")
+   
+
 ## MINOR FORMS ##
 class ForgotPasswordForm(forms.Form):
     email_or_username = forms.CharField(label=_("E-mail Or Username"), max_length=254)

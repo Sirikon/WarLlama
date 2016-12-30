@@ -1,0 +1,66 @@
+{% extends './_layout_event.html' %}
+{% load i18n %}
+
+{% block user_options %}    
+    <a class="al-btn-action-big" href="{% url 'alpaca:edit_event' event.id %}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
+    </a>
+{% endblock %}
+
+{% block attendants %}
+    {% if event.attendants.count <= 0 %}
+        <p>{% trans "There are no users attending your event." %}</p>
+    {% else %}
+        <form action="kick/{{event.id}}" method="POST">
+            {% csrf_token %}
+            <select id="attending_users" name="attending">
+            {% for att in event.attendants.all %}
+                <option value="{{att.id}}">{{ att.username }}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" class="al-btn-sqrflat-small" name="kick_participant" value="{% trans 'Kick out' %}"/>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block user_requests %}
+    <div class="al-content-panel"> 
+        <small>{% trans "Attending requests:" %}</small>  
+        {% if group.pending_attendants.count <= 0 %}
+            <p>{% trans "There are no pending requests to attend the event." %}</p>
+        {% else %}
+            <p>{% trans "Manage the requests to attend the event:" %}</p>
+            <form action="attendants/{{event.id}}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="user_join_request">
+                {% for att in group.pending_attendants.all %}
+                    <option value="{{att.id}}">{{ att.username }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+{% endblock %}
+    
+{% block activity_requests %}
+    <div class="al-content-panel"> 
+        <small>{% trans "Activity requests:" %}</small>  
+        {% if group.pending_activities.count <= 0 %}
+            <p>{% trans "There are no pending activities to confirm." %}</p>
+        {% else %}
+            <p>{% trans "Manage the activities that want to be related to this event:" %}</p>
+            <form action="activities/{{event.id}}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="activity_request">
+                {% for act in event.pending_activities.all %}
+                    <option value="{{act.id}}">{{ act.title }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+{% endblock %}

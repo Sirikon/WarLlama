@@ -69,7 +69,7 @@ def edit_group(request, group_id):
     set_translation(request)
     user = request.user
     group = get_object_or_404(Group, pk=group_id)
-    if not user.is_authenticated() or user != group.superuser or user not in group.admin_list.all():
+    if not user.is_authenticated() or (user != group.superuser and user not in group.admin_list.all()):
         return  HttpResponseRedirect(reverse('alpaca:index'))
 
     context = { 'form_title': _("Editing group") + " " + group.name,
