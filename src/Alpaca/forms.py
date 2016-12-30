@@ -23,7 +23,12 @@ class ProfileCreationForm(UserCreationForm):
                          ("es", _("Spanish")),
                          ("eus", _("Euskera")) )
     language_preference = forms.ChoiceField(label=_('Language'), required=True, choices=language_options, help_text=_('In which language would you prefer to use Alpaca?'))
-
+    
+    terms_conditions = forms.BooleanField(
+                        required=True, 
+                        label= str(_('I accept the Terms and Conditions')), 
+                    )
+                    
     class Meta:
         model = User
         fields = ("username", "email", "birth_date", "password1", "password2", "first_name", "last_name", "language_preference")
