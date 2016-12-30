@@ -13,7 +13,7 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 from ..models import Profile
 from ..forms import ProfileCreationForm
 
-from .utils import set_translation, generate_token
+from .utils import set_translation
 from .emails import *
 
 import datetime

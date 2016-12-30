@@ -11,7 +11,7 @@ from ..models import Profile, Activity
 from ..forms import ProfileForm, ForgotPasswordForm, NewPasswordForm
 from .emails import email_reset_password
 
-from utils import sort_activities, set_translation, generate_token
+from utils import sort_activities, set_translation
 
 
 def forgot_password(request):
@@ -31,8 +31,7 @@ def forgot_password(request):
             submitted = form.cleaned_data["email_or_username"]
             user = get_object_or_404(User, Q(username=submitted) | Q(email=submitted))
 
-            user.profile.current_token = generate_token()
-            user.profile.save()
+            user.profile.generate_token()
             
             email_reset_password(user)
 
