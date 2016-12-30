@@ -31,6 +31,12 @@
     </div>
 
     <h3>Activities organized by {{ looking_at_user.username }}</h3>
-    {% include './partials/activity-table.html' %}
+    {% include "./partials/index-order-bar.html" %}
+
+    <div class="al-activity-list">
+        {% for activity in activity_list %}
+            {% include "./partials/activity-card.html" %}                
+        {% endfor %}
+    </div>
 
 {% endblock %}

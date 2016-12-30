@@ -26,6 +26,7 @@
 
                 </div>
                 <div class="al-header-menu al-flex-row">
+                    <a href="{% url 'alpaca:group_index'%}"> {% trans "Group List" %}</a>
                     {% if user.is_authenticated %}
                         <a href="/profile/{{user.username}}">
                             <i class="fa fa-sliders"></i> 

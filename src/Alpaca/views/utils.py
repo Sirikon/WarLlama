@@ -64,6 +64,15 @@ def filter_activities(request, user, activity_list, user_filter):
 
     return activity_list  
 
+def filter_groups(request, user, group_list, user_filter):
+    if user.is_authenticated: # Can't filter for anons
+        if user_filter == "admin":
+            group_list = user.admin_of
+        elif user_filter == "member":
+            group_list = user.member_of  
+
+    return group_list  
+
 # SEARCH FUNCTIONS - Courtesy of http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
 def normalize_query(query_string,
                     findterms=re.compile(r'"([^"]+)"|(\S+)').findall,

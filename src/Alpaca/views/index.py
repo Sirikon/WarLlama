@@ -40,6 +40,26 @@ def index(request):
 
     return render(request, 'Alpaca/index.html', context)
 
+def group_index(request):
+    set_translation(request)
+    user = request.user
+
+    user_filter = request.GET.get('filter')
+
+    group_list = search(request, "search", Group, ['name', 'description', 'email'])    
+    
+    if group_list is None:
+        group_list = Group.objects
+
+    group_list = filter_groups(request, user, group_list, user_filter)
+    
+    context = {
+        "user": user,
+        "current_filter": user_filter,
+        "group_list": group_list.all()
+    }
+    return render(request, 'Alpaca/group/_group_index.html', context)
+
 
 def about_us(request):
     set_translation(request)

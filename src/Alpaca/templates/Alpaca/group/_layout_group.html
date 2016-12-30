@@ -25,9 +25,7 @@
 {% block content %}
     <div class="al-content-panel">        
         <small>{% trans "Administrators:" %}</small>
-        <div class="al-group-member-list">
-            {% block admin_list %}{% endblock %}
-        </div>
+        {% block admin_list %}{% endblock %}
     </div>
 
     <div class="al-content-panel"> 
@@ -45,7 +43,7 @@
             {% if group.event_list.count <= 0 %}
                 <p>{% trans "No events yet!" %}</p>
             {% else %}
-                {% include "./../partials/activity-table.html" %}
+                {% include "./../partials/activity-card.html" %}
             {% endif %}
         </div>
 
@@ -55,7 +53,7 @@
                 <p>{% trans "No activities yet!" %}</p>
             {% else %}
                 {% for activity in group.activity_list.all %}
-                    {% include "./partials/activity-card.html" %}                
+                    {% include "./../partials/activity-card.html" %}                
                 {% endfor %}
             {% endif %}
         </div>

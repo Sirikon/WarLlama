@@ -32,7 +32,7 @@
     {% else %}  
         <div class="al-group-member-list">  
             {% for member in group.member_list.all %}
-                <a class="al-icon-user" href="{% url 'alpaca:profile' admin.username %}">{{ admin.username }}</a>
+                <a class="al-icon-user" href="{% url 'alpaca:profile' member.username %}">{{ member.username }}</a>
             {% endfor %}
         </div>
     {% endif %}

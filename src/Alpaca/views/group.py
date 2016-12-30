@@ -27,7 +27,7 @@ def group(request, group_id):
                 'activity_list': activity_list}
 
     if user.is_authenticated:
-        if user == group.superuser or user in group.member_list.all():
+        if user == group.superuser or user in group.admin_list.all():
             return render(request, 'Alpaca/group/group_admin.html', context)
         else:
             return render(request, 'Alpaca/group/group_member.html', context)
@@ -132,7 +132,6 @@ def handle_member(request, group_id):
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("member"))
         if "promote_member" in request.POST:
-            selected_user = get_object_or_404(User, id=request.POST.get("member"))
             group.admin_list.add(selected_user)
             group.member_list.remove(selected_user)
             #email_you_were_kicked_out_from_activity(activity, selected_user)   
@@ -171,14 +170,14 @@ def pending_activities(request, group_id):
     if request.method == "POST":
         selected_activity = get_object_or_404(Activity, id=request.POST.get("activity_request"))
         if "accept_request" in request.POST:
-            group.activity_list.add(selected_activity)
-            group.activity_list.remove(selected_activity)
-            #email_your_request_was_handled(group, selected_user, True)
+            selected_activity.pending_group = None
+            selected_activity.group = group
+            #TO-DO: email_your_request_was_handled(group, selected_user, True)
 
         elif "reject_request" in request.POST:
-            group.activity_list.remove(selected_activity)   
-            #email_your_request_was_handled(group, selected_user, False)
-        group.save()
+            selected_activity.pending_group = None  
+            #TO-DO: email_your_request_was_handled(group, selected_user, False)
+        selected_activity.save()
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 

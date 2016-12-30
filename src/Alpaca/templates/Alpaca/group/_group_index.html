@@ -1,9 +1,5 @@
-{% extends './_layout.html' %}
+{% extends './../_layout.html' %}
 {% load i18n %}
-
-{% block title %}
-    <!-- Tomorrow sessions bar goes here -->
-{% endblock %}
 
 {% block content %}
     <div class="al-flex-row al-flex-stretch-content">
@@ -19,22 +15,17 @@
                 </a>
             {% endif %}
 
-            {% include "./partials/search-bar.html" %}
+            {% include "./../partials/search-bar.html" %}
             
             {% if user.is_authenticated %}
-                {% include "./partials/index-filter-panel.html" %}
+                {% include "./partials/group-filter-panel.html" %}
             {% endif %}
             
-            <!-- Where Panel -->
-            {% include "./partials/_form_panel.html" %}
         </div>
         <div class="al-flex-grow">
-            
-
             <div class="al-item-list">
-            {% include "./partials/index-order-bar.html" %}
-                {% for activity in activity_list %}
-                    {% include "./partials/activity-card.html" %}                
+                {% for group in group_list %}
+                    {% include "./partials/group-card.html" %}                
                 {% endfor %}
             </div>
         </div>

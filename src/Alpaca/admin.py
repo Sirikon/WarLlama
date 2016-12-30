@@ -26,7 +26,6 @@ class SessionInline(admin.TabularInline):
     model = Session
     extra = 1
 
-
 class ActivityAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Activity Description',          {'fields': ['pub_date', 'author', 'title', 'description','attendants']}),
@@ -34,5 +33,15 @@ class ActivityAdmin(admin.ModelAdmin):
     ]
     inlines = [SessionInline]
 
+class GroupAdmin(admin.ModelAdmin):
+    model = Group
+    fieldsets = [
+        ('Group Description',   {'fields': ['logo', 'name', 'description', 'email']}),
+        ('Members',             {'fields': ['superuser', 'admin_list', 'member_list']}),
+        ('Requests',            {'fields': ['pending_members', 'pending_activities']}),
+        ('Overall Settings',    {'fields': ['show_email', 'auto_register_users', 'auto_register_activities']})
+    ]
+
 admin.site.register(Activity, ActivityAdmin)
+admin.site.register(Group, GroupAdmin)
 

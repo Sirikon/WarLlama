@@ -113,8 +113,16 @@ class ActivityForm(forms.ModelForm):
     
     class Meta:
         model = Activity
-        fields = ("title", "description", "cover", "cover_disclaimer", "city", "auto_register", "confirmation_period", "age_minimum")
+        fields = ("title", "description", "cover", "cover_disclaimer",  "city", "auto_register", "confirmation_period", "age_minimum")
 
+    def __init__(self, group_options, *args, **kwargs):
+        super(ActivityForm, self).__init__(*args, **kwargs)
+        self.fields['group_options'] = forms.ChoiceField (
+            label=_('Group'), 
+            required=True, 
+            choices=group_options,
+            help_text=_('Is this activity related to any of your groups? Depending on the group, the activity may need to be accepted first.')
+        )
 
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, label=_('Description'), max_length=500, widget=forms.Textarea)

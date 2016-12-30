@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
+from itertools import chain
+
 from ..models import Activity, Session
 from ..forms import ActivityForm
 from .utils import set_translation
@@ -15,66 +17,8 @@ from .emails import *
 
 import datetime
 
+
 ## -- ACTIVITIES -- ##
-def new_activity(request):
-    set_translation(request)
-    
-    user = request.user
-    if not user.is_authenticated():
-        return  HttpResponseRedirect(reverse('alpaca:index'))
-    
-    context = { 'form_title': _("Start a new activity"),
-                'submit_text': _("Create!"),
-                'rich_field_name': "description" }
-
-    if request.method == "POST":
-        form = ActivityForm(data=request.POST)
-        if form.is_valid():
-            activity = form.save(commit=False)    
-            activity.pub_date = timezone.now()
-            activity.author = user
-            activity.save()  
-            email_registered_your_new_activity(activity)  
-            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
-        else:
-            context['form'] = form
-            return render(request, 'Alpaca/_form_layout.html', context)
-
-    else:
-        context['form'] = ActivityForm() 
-        return render(request, 'Alpaca/_form_layout.html', context)
-
-
-def edit_activity(request, activity_id):
-    set_translation(request)
-    user = request.user
-    activity = get_object_or_404(Activity, pk=activity_id)
-    if not user.is_authenticated() or user != activity.author:
-        return  HttpResponseRedirect(reverse('alpaca:index'))
-
-    context = { 'form_title': _("Editing activity") + " " + activity.title,
-                'submit_text': _("Save changes"),
-                'rich_field_name': "description" }
-
-    if request.method == "POST":
-        form = ActivityForm(request.POST, request.FILES, instance=activity)
-        if form.is_valid():
-            activity = form.save(commit=False)   
-            activity.cover = form.cleaned_data["cover"]
-            activity.save() 
-            for attendant in activity.attendants.all():
-                email_activity_got_updated(activity, attendant)
-
-            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
-        else:
-            context['form'] = form
-            return render(request, 'Alpaca/_form_layout.html', context)
-
-    else:
-        context['form'] = ActivityForm(instance=activity)
-        return render(request, 'Alpaca/_form_layout.html', context)
-
-
 def activity(request, activity_id):
     set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
@@ -87,12 +31,104 @@ def activity(request, activity_id):
     if user.is_authenticated:
         context['user_is_old_enough'] = activity.is_user_old_enough(user)
         if user == activity.author:
-            return render(request, 'Alpaca/activity_author.html', context)
+            return render(request, 'Alpaca/activity/activity_author.html', context)
         else:
-            return render(request, 'Alpaca/activity_user.html', context)
+            return render(request, 'Alpaca/activity/activity_user.html', context)
     else:        
-        return render(request, 'Alpaca/activity_anon.html', context)
+        return render(request, 'Alpaca/activity/activity_anon.html', context)
 
+
+def new_activity(request):
+    set_translation(request)
+    
+    user = request.user
+    if not user.is_authenticated():
+        return  HttpResponseRedirect(reverse('alpaca:index'))
+    
+    temp_list = list(chain(user.member_of.all(), user.admin_of.all(), Group.objects.filter(superuser=user)))
+    temp_list = sorted(temp_list, key=lambda group: group.name)
+    user_groups= [(-1, "(No group)")]
+    for group in temp_list:
+        user_groups.append([group.id, group.name])
+    
+    context = { 'form_title': _("Start a new activity"),
+                'submit_text': _("Create!"),
+                'rich_field_name': "description" }
+
+    if request.method == "POST":
+        form = ActivityForm(group_options=user_groups, data=request.POST)
+        if form.is_valid():
+            activity = form.save(commit=False)    
+            activity.pub_date = timezone.now()
+            activity.author = user
+
+            group_id = form.cleaned_data["group_options"]
+            if group_id > 0:
+                group = get_object_or_404(Group, id=group.id)
+                if group.auto_register_activities:
+                    activity.group = group
+                    #TO-DO: email to group
+                else:
+                    activity.pending_group = group
+                    #TO-DO: email to group - pending activities
+            activity.save()  
+
+            email_registered_your_new_activity(activity)  
+            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
+        else:
+            context['form'] = form
+            return render(request, 'Alpaca/_form_layout.html', context)
+
+    else:
+        context['form'] = ActivityForm(group_options=user_groups) 
+        return render(request, 'Alpaca/_form_layout.html', context)
+
+
+def edit_activity(request, activity_id):
+    set_translation(request)
+    user = request.user
+    activity = get_object_or_404(Activity, pk=activity_id)
+    if not user.is_authenticated() or user != activity.author:
+        return  HttpResponseRedirect(reverse('alpaca:index'))
+ 
+    temp_list = list(chain(user.member_of.all(), user.admin_of.all(), Group.objects.filter(superuser=user)))
+    temp_list = sorted(temp_list, key=lambda group: group.name)
+    user_groups= [(-1, "(No group)")]
+    for group in temp_list:
+        user_groups.append([group.id, group.name])
+    
+    context = { 'form_title': _("Editing activity") + " " + activity.title,
+                'submit_text': _("Save changes"),
+                'rich_field_name': "description" }
+
+    if request.method == "POST":
+        form = ActivityForm(request.POST, request.FILES, instance=activity)
+        if form.is_valid():
+            activity = form.save(commit=False)   
+            activity.cover = form.cleaned_data["cover"]
+            
+            group_id = form.cleaned_data["group_options"]
+            if group_id > 0:
+                group = get_object_or_404(Group, id=group.id)
+                if group.auto_register_activities:
+                    activity.group = group
+                    #TO-DO: email to group
+                else:
+                    activity.pending_group = group
+                    #TO-DO: email to group - pending activities
+
+            activity.save() 
+            for attendant in activity.attendants.all():
+                email_activity_got_updated(activity, attendant)
+
+            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
+        else:
+            context['form'] = form
+            return render(request, 'Alpaca/_form_layout.html', context)
+
+    else:
+        context['form'] = ActivityForm(instance=activity)
+        return render(request, 'Alpaca/_form_layout.html', context)
 
 def join_activity(request, activity_id):
     set_translation(request)

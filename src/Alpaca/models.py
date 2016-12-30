@@ -81,10 +81,19 @@ class Group (models.Model):
     auto_register_activities = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name + " - #" + str(1 + admin_list.count + member_list.count)
+        return self.name + " - #" + str(1 + self.admin_list.count() + self.member_list.count())
 
     def member_count(self):
-        return  1 + group.admin_list.count() + group.member_list.count()
+        return  1 + self.admin_list.count() + self.member_list.count()
+
+    def get_short_description(self):
+        temp = re.sub("(<img)(?<=(<img)).*?(?=>)(>)", " ", self.description)
+
+        if len(temp) > 200:
+            temp = temp[:200]
+            
+        return temp
+
 
 ## -- ACTIVITIES -- ##
 class Activity (models.Model):
