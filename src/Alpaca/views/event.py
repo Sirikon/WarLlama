@@ -43,8 +43,6 @@ def new_event(request, group_id):
     user = request.user
     group = get_object_or_404(Group, pk=group_id)
 
-    print("Superuser? " + str(user == group.superuser))
-
     if not user.is_authenticated() or (user != group.superuser and user not in group.admin_list.all()):
         return  HttpResponseRedirect(reverse('alpaca:index'))
     
@@ -56,13 +54,12 @@ def new_event(request, group_id):
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
-            event = form.save(commit=False)    
-            event.pub_date = timezone.now()
-            event.group = group            
-            event.cover = form.cleaned_data["cover"]
-            event.banner = form.cleaned_data["banner"]
-            event.save()  
-            #email_registered_your_new_activity(activity)  
+            event = form.save(commit=False)
+            cover = form.cleaned_data["cover"]
+            banner = form.cleaned_data["banner"]
+            
+            event.new(timezone.now(), group, cover, banner)
+            
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:
             context['form'] = form
@@ -88,9 +85,9 @@ def edit_event(request, event_id):
         form = EventForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
             event = form.save(commit=False)   
-            event.cover = form.cleaned_data["cover"]
-            event.banner = form.cleaned_data["banner"]
-            event.save() 
+            cover = form.cleaned_data["cover"]
+            banner = form.cleaned_data["banner"]
+            event.edit(cover, banner)
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:
             context['form'] = form
@@ -108,14 +105,7 @@ def join_event(request, event_id):
     user = request.user
 
     if request.method == "POST":
-        if event.auto_register_users:
-            event.attendants.add(user)
-            event.num_members = event.attendants.count()
-            #TO-DO: email_user_acted_on_your_activity(group, user, True)
-        else:
-            event.pending_attendants.add(user)
-            #TO-DO: email_user_requested_to_join(group, user)
-        event.save()
+        event.join(user)
 
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
@@ -126,8 +116,7 @@ def leave_event(request, event_id):
     user = request.user
 
     if request.method == "POST":
-        event.remove_attendant(user)
-        #TO-DO: email_user_acted_on_your_activity(group, user, False)
+        event.leave(user)
 
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
@@ -138,8 +127,7 @@ def kick_attendant(request, event_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("attending"))
-        event.remove_attendant(selected_user)
-        #TO-DO: email_you_were_kicked_out_from_activity(activity, selected_user)
+        event.kick(selected_user)
 
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
@@ -150,17 +138,7 @@ def pending_attendants(request, event_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("user_join_request"))
-        if "accept_request" in request.POST:
-            event.attendants.add(selected_user)
-            event.pending_attendants.remove(selected_user)
-            #TO-DO: email_your_request_was_handled(group, selected_user, True)
-
-        elif "reject_request" in request.POST:
-            event.pending_attendants.remove(selected_user)   
-            #TO-DO: email_your_request_was_handled(group, selected_user, False)
-        
-        event.num_members = event.attendants.count()
-        event.save()
+        event.handle_user_request(user, "accept_request" in request.POST)
 
     return HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
@@ -170,14 +148,6 @@ def pending_activities(request, event_id):
 
     if request.method == "POST":
         selected_activity = get_object_or_404(Activity, id=request.POST.get("activity_request"))
-        if "accept_request" in request.POST:
-            selected_activity.pending_event = None
-            selected_activity.event = event
-            #TO-DO: email_your_request_was_handled(group, selected_user, True)
-
-        elif "reject_request" in request.POST:
-            selected_activity.pending_event = None  
-            #TO-DO: email_your_request_was_handled(group, selected_user, False)
-        selected_activity.save()
+        event.handle_activity_request(selected_activity, "accept_request" in request.POST)
 
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))

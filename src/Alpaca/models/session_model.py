@@ -55,7 +55,7 @@ class Session (models.Model):
     ## -- SETs
     def new(activity):
         self.activity = activity
-        self.safe()        
+        self.save()        
         for attendant in activity.attendants.all():
             email_activity_new_sessions(activity, attendant)
     

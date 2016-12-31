@@ -76,9 +76,9 @@ class Group (models.Model):
     
     def add_member(user):
         self.member_list.add(user)
-        self.pending_attendants.remove(user)
+        self.pending_members.remove(user)
         self.total_num_members = self.member_count()
-        self.safe()
+        self.save()
 
     def remove_member(user):
         self.members.remove(user)
@@ -96,7 +96,7 @@ class Group (models.Model):
  
     def add_activity(activity):
         activity.pending_group = None
-        activity.group = group
+        activity.group = self
         activity.safe()
 
 
@@ -131,10 +131,10 @@ class Group (models.Model):
             self.add_member(user)
             #TO-DO: email_your_request_was_handled(self, user, True)
         else:
-            self.pending_attendants.remove(user)   
+            self.pending_members.remove(user)   
             #TO-DO: email_your_request_was_handled(self, user, False)
             
-        self.num_attendants = self.attendants.count()
+        self.total_num_members = self.members.count()
         self.save()
    
     def handle_activity_request(activity, is_accepted):

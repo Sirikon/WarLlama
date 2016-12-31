@@ -104,7 +104,7 @@ class Activity (models.Model):
 
     def set_cover(new_cover):
         activity.cover = new_cover
-        self.safe()
+        self.save()
 
     def set_group(new_group):
         if new_group is not None:

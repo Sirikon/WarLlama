@@ -60,7 +60,7 @@ class Event (models.Model):
     def __unicode__(self):
         return u'{t}/{d}'.format(t=self.title, d=self.description)
 
-    # -- GETs
+    ## -- GETs
     def get_short_description(self):
         temp = re.sub("(<img)(?<=(<img)).*?(?=>)(>)", " ", self.description)
 
@@ -69,7 +69,33 @@ class Event (models.Model):
             
         return temp
     
-    # -- SETs
+    ## -- SETs
+    def new(pub_date, group, cover, banner):
+        self.pub_date = pub_date
+        self.group = group       
+        self.set_cover(cover)
+        self.set_banner(banner)
+        self.save()  
+        #TO-DO: email_registered_your_new_event(event) to group mail
+
+    def edit(cover, banner):
+        self.set_cover(cover)
+        self.set_banner(banner)
+
+    def set_cover(cover):       
+        self.cover = cover
+        self.save()  
+
+    def set_banner(cover):       
+        self.banner = banner
+        self.save()  
+
+    def add_attendant(user):
+        self.attendants.add(user)
+        self.pending_attendants.remove(user)
+        self.num_attendants = self.attendants.count()
+        self.save()
+
     def remove_attendant(user):
         self.attendants.remove(user)
         self.num_attendants = self.attendants.count()
@@ -77,6 +103,47 @@ class Event (models.Model):
         for activity in self.activity_list.all():
             activity.remove_attendant(user)
 
+    def add_activity(activity):
+        activity.pending_event = None
+        activity.event = self
+        activity.save()
 
+    ## -- USER ACTIONs
+    def join(user):
+        if self.auto_register_users:
+            self.attendants.add(user)
+            self.num_members = self.attendants.count()
+            #TO-DO: email_user_acted_on_your_activity(group, user, True)
+        else:
+            self.pending_attendants.add(user)
+            #TO-DO: email_user_requested_to_join(group, user)
+        self.save()
 
+    def leave(user):
+        self.remove_attendant(user)
+        #TO-DO: email_user_acted_on_your_activity(group, user, False)
 
+    def kick(user):
+        self.remove_attendant(user)
+        #TO-DO: email_you_were_kicked_out_from_group(self, selected_user)
+
+    def handle_user_request(user, is_accepted):
+        if is_accepted:
+            self.add_attendant(user)
+            #TO-DO: email_your_request_was_handled(self, user, True)
+        else:
+            self.pending_attendants.remove(user)   
+            #TO-DO: email_your_request_was_handled(self, user, False)
+            
+        self.num_attendants = self.attendants.count()
+        self.save()
+   
+    def handle_activity_request(activity, is_accepted):
+        if is_accepted:
+            self.add_activity(activity)
+            #TO-DO: email_your_request_was_handled(self, user, True)
+        else:
+            activity.pending_event = None  
+            #TO-DO: email_your_request_was_handled(self, user, False)
+        activity.save()
+        self.save()
