@@ -10,9 +10,8 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from ..models import Profile, Group, Activity
 from ..forms import GroupForm
-from .emails import email_reset_password
-
-from utils import set_translation
+from ..emails import email_reset_password
+from ..utils import set_translation
 
 import datetime
 
@@ -49,12 +48,9 @@ def new_group(request):
         form = GroupForm(request.POST, request.FILES)
         if form.is_valid():
             group = form.save(commit=False)    
-            group.creation_date = timezone.now()
-            group.superuser = user
-            group.total_num_members = 1
-            group.logo = form.cleaned_data["logo"]
-            group.save()  
-            #email_registered_your_new_activity(activity)  
+            logo = form.cleaned_data["logo"]
+            group.new(timezone.now(), user, logo)
+
             return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group.id}))
         else:
             context['form'] = form
@@ -80,8 +76,8 @@ def edit_group(request, group_id):
         form = GroupForm(request.POST, request.FILES, instance=group)
         if form.is_valid():
             group = form.save(commit=False)   
-            group.logo = form.cleaned_data["logo"]
-            group.save() 
+            group.edit(form.cleaned_data["logo"])
+            
             return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group.id}))
         else:
             context['form'] = form
@@ -99,14 +95,7 @@ def join_group(request, group_id):
     user = request.user
 
     if request.method == "POST":
-        if group.auto_register_users:
-            group.member_list.add(user)
-            group.total_num_members = group.member_count()
-            #email_user_acted_on_your_activity(group, user, True)
-        else:
-            group.pending_members.add(user)
-            #email_user_requested_to_join(group, user)
-        group.save()
+        group,join(user)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
@@ -117,10 +106,7 @@ def leave_group(request, group_id):
     user = request.user
 
     if request.method == "POST":
-        group.members.remove(user)
-        group.total_num_members = group.member_count()
-        group.save()
-        #email_user_acted_on_your_activity(group, user, False)
+        group.leave(user)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
@@ -132,14 +118,9 @@ def handle_member(request, group_id):
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("member"))
         if "promote_member" in request.POST:
-            group.admin_list.add(selected_user)
-            group.member_list.remove(selected_user)
-            #email_you_were_kicked_out_from_activity(activity, selected_user)   
+            group.promote(selected_user)
         elif "kick_member" in request.POST: 
-            group.member_list.remove(selected_user)
-            group.total_num_members = group.member_count()
-            #email_you_were_kicked_out_from_activity(activity, selected_user)
-        group.save()
+            group.kick(selected_user)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
@@ -149,18 +130,8 @@ def pending_members(request, group_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("user_join_request"))
-        if "accept_request" in request.POST:
-            group.member_list.add(selected_user)
-            group.pending_members.remove(selected_user)
-            #email_your_request_was_handled(group, selected_user, True)
-
-        elif "reject_request" in request.POST:
-            group.pending_members.remove(selected_user)   
-            #email_your_request_was_handled(group, selected_user, False)
+        group.handle_user_request(selected_user, "accept_request" in request.POST)
         
-        group.total_num_members = group.member_count()
-        group.save()
-
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
 def pending_activities(request, group_id):
@@ -169,19 +140,9 @@ def pending_activities(request, group_id):
 
     if request.method == "POST":
         selected_activity = get_object_or_404(Activity, id=request.POST.get("activity_request"))
-        if "accept_request" in request.POST:
-            selected_activity.pending_group = None
-            selected_activity.group = group
-            #TO-DO: email_your_request_was_handled(group, selected_user, True)
-
-        elif "reject_request" in request.POST:
-            selected_activity.pending_group = None  
-            #TO-DO: email_your_request_was_handled(group, selected_user, False)
-        selected_activity.save()
+        group.handle_activity_request(selected_activity, "accept_request" in request.POST)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
-
-
 
 def demote_admin(request, group_id):
     set_translation(request)
@@ -189,9 +150,6 @@ def demote_admin(request, group_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("member"))
-        group.admin_list.remove(selected_user)
-        group.member_list.add(selected_user)
-        group.save()
-        #email_you_were_kicked_out_from_activity(activity, selected_user)
+        group.demote(selected_user)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))

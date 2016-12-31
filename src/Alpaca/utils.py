@@ -6,7 +6,7 @@ from django.conf import settings
 
 from itertools import chain
 
-from ..models import *
+from models import *
 
 import random
 import re

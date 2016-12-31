@@ -12,7 +12,7 @@ from itertools import chain
 
 from ..models import Activity, Session
 from ..forms import ActivityForm
-from .utils import set_translation
+from ..utils import set_translation
 
 import datetime
 
@@ -114,10 +114,7 @@ def join_activity(request, activity_id):
     set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
     user = request.user
-
-    if request.method == "POST":
-
-    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+    return HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
 
 def leave_activity(request, activity_id):
@@ -128,7 +125,7 @@ def leave_activity(request, activity_id):
     if request.method == "POST":
         activity.leave(user)
 
-    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+    return HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
 
 def kick_attendant(request, activity_id):

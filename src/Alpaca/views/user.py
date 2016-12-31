@@ -12,9 +12,9 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from ..models import Profile, Activity
 from ..forms import ProfileCreationForm, ProfileForm, ForgotPasswordForm, NewPasswordForm
-from .emails import *
+from ..emails import *
 
-from utils import sort_activities, set_translation
+from ..utils import sort_activities, set_translation
 
 import datetime
 

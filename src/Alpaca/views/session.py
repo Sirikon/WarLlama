@@ -10,8 +10,8 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 from ..models import Activity, Session
 from ..forms import SessionForm
 
-from .utils import set_translation
-from .emails import *
+from ..utils import set_translation
+from ..emails import *
 
 import datetime
 

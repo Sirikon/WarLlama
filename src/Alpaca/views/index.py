@@ -5,10 +5,10 @@ from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from itertools import chain
 
-from ..models import Activity
+from Alpaca.models.activity_model import Activity
 from ..forms import *
 
-from utils import *
+from ..utils import *
 
 
 def index(request):

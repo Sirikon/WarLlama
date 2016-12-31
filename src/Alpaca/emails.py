@@ -9,10 +9,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 from django.core.mail import EmailMessage
 
-from ..models import *
-from .utils import set_translation
-
-
+from utils import set_translation
 
 def send_my_email(subject, body, to_whom):
     msg = EmailMessage(subject, body, 'noreply@alpaca.srk.bz', [to_whom])
