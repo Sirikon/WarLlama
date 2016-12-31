@@ -13,7 +13,6 @@ from itertools import chain
 from ..models import Activity, Session
 from ..forms import ActivityForm
 from .utils import set_translation
-from .emails import *
 
 import datetime
 
@@ -45,10 +44,8 @@ def new_activity(request):
     if not user.is_authenticated():
         return  HttpResponseRedirect(reverse('alpaca:index'))
     
-    temp_list = list(chain(user.member_of.all(), user.admin_of.all(), Group.objects.filter(superuser=user)))
-    temp_list = sorted(temp_list, key=lambda group: group.name)
-    user_groups= [(-1, "(No group)")]
-    for group in temp_list:
+    user_groups = [(-1, "(No group)")]
+    for group in user.get_groups():
         user_groups.append([group.id, group.name])
     
     context = { 'form_title': _("Start a new activity"),
@@ -58,22 +55,14 @@ def new_activity(request):
     if request.method == "POST":
         form = ActivityForm(group_options=user_groups, data=request.POST)
         if form.is_valid():
-            activity = form.save(commit=False)    
-            activity.pub_date = timezone.now()
-            activity.author = user
-
+            activity = form.save(commit=False)  
+            cover = form.cleaned_data["cover"]
             group_id = form.cleaned_data["group_options"]
-            if group_id > 0:
-                group = get_object_or_404(Group, id=group.id)
-                if group.auto_register_activities:
-                    activity.group = group
-                    #TO-DO: email to group
-                else:
-                    activity.pending_group = group
-                    #TO-DO: email to group - pending activities
-            activity.save()  
+            group = None
+            if group_id > 0: group = get_object_or_404(Group, id=group.id)
 
-            email_registered_your_new_activity(activity)  
+            activity.new(timezone.now(), user, cover, group)  
+
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
@@ -91,10 +80,8 @@ def edit_activity(request, activity_id):
     if not user.is_authenticated() or user != activity.author:
         return  HttpResponseRedirect(reverse('alpaca:index'))
  
-    temp_list = list(chain(user.member_of.all(), user.admin_of.all(), Group.objects.filter(superuser=user)))
-    temp_list = sorted(temp_list, key=lambda group: group.name)
-    user_groups= [(-1, "(No group)")]
-    for group in temp_list:
+    user_groups = [(-1, "(No group)")]
+    for group in user.get_groups():
         user_groups.append([group.id, group.name])
     
     context = { 'form_title': _("Editing activity") + " " + activity.title,
@@ -105,21 +92,12 @@ def edit_activity(request, activity_id):
         form = ActivityForm(request.POST, request.FILES, instance=activity)
         if form.is_valid():
             activity = form.save(commit=False)   
-            activity.cover = form.cleaned_data["cover"]
-            
+            cover = form.cleaned_data["cover"]
             group_id = form.cleaned_data["group_options"]
-            if group_id > 0:
-                group = get_object_or_404(Group, id=group.id)
-                if group.auto_register_activities:
-                    activity.group = group
-                    #TO-DO: email to group
-                else:
-                    activity.pending_group = group
-                    #TO-DO: email to group - pending activities
+            group = None
+            if group_id > 0:  group = get_object_or_404(Group, id=group.id)
 
-            activity.save() 
-            for attendant in activity.attendants.all():
-                email_activity_got_updated(activity, attendant)
+            activity.edit(cover, group)          
 
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
@@ -136,14 +114,6 @@ def join_activity(request, activity_id):
     user = request.user
 
     if request.method == "POST":
-        if activity.auto_register:
-            activity.attendants.add(user)
-            activity.num_attendants = activity.attendants.count()
-            email_user_acted_on_your_activity(activity, user, True)
-        else:
-            activity.pending_attendants.add(user)
-            email_user_requested_to_join(activity, user)
-        activity.save()
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -154,8 +124,7 @@ def leave_activity(request, activity_id):
     user = request.user
 
     if request.method == "POST":
-        activity.remove_attendant(user)
-        email_user_acted_on_your_activity(activity, user, False)
+        activity.leave(user)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -166,8 +135,7 @@ def kick_attendant(request, activity_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("attending"))
-        activity.remove_attendant(selected_user)
-        email_you_were_kicked_out_from_activity(activity, selected_user)
+        activity.kick(selected_user)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 
@@ -178,16 +146,6 @@ def pending_requests(request, activity_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("user_join_request"))
-        if "accept_request" in request.POST:
-            activity.attendants.add(selected_user)
-            activity.pending_attendants.remove(selected_user)
-            email_your_request_was_handled(activity, selected_user, True)
-
-        elif "reject_request" in request.POST:
-            activity.pending_attendants.remove(selected_user)   
-            email_your_request_was_handled(activity, selected_user, False)
-        
-        activity.num_attendants = activity.attendants.count()
-        activity.save()
+        activity.handle_user_request(selected_user, "accept_request" in request.POST)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
