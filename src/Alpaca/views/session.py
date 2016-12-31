@@ -31,13 +31,7 @@ def new_session(request, activity_id):
         form = SessionForm(data=request.POST)
         if form.is_valid():
             session = form.save(commit=False)    
-            session.activity = activity
-            session.save()    
-            
-            # Send "New Session" email to all attendants
-            for attendant in activity.attendants.all():
-                email_activity_new_sessions(activity, attendant)
-
+            session.new(activity)
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
@@ -65,7 +59,6 @@ def edit_session(request, activity_id, session_id):
         form = SessionForm(data=request.POST, instance=session)
         if form.is_valid():
             form.save()  
-
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
         else:
             context['form'] = form
@@ -82,13 +75,8 @@ def confirm_session(request, activity_id):
     user = request.user
 
     if request.method == "POST":
-        if user in activity.attendants.all():
-            session = get_object_or_404(Session, id=request.POST.get("session_id"))
-            if activity == session.activity and session.is_on_confirmation_period():
-                session.confirmed_attendants.add(user)
-                session.save()
-                # Send "User has confirmed assistance" email to activity's author
-                email_user_confirmed_assistance(activity, session, user)
+        session = get_object_or_404(Session, id=request.POST.get("session_id"))
+        session.confirm(user)
 
     return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
 

@@ -56,11 +56,12 @@ def new_activity(request):
         form = ActivityForm(group_options=user_groups, data=request.POST)
         if form.is_valid():
             activity = form.save(commit=False)  
-            cover = form.cleaned_data["cover"]
+
             group_id = form.cleaned_data["group_options"]
             group = None
             if group_id > 0: group = get_object_or_404(Group, id=group.id)
 
+            cover = form.cleaned_data["cover"]
             activity.new(timezone.now(), user, cover, group)  
 
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
@@ -91,12 +92,13 @@ def edit_activity(request, activity_id):
     if request.method == "POST":
         form = ActivityForm(request.POST, request.FILES, instance=activity)
         if form.is_valid():
-            activity = form.save(commit=False)   
-            cover = form.cleaned_data["cover"]
+            activity = form.save(commit=False) 
+              
             group_id = form.cleaned_data["group_options"]
             group = None
             if group_id > 0:  group = get_object_or_404(Group, id=group.id)
 
+            cover = form.cleaned_data["cover"]
             activity.edit(cover, group)          
 
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))

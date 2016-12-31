@@ -209,6 +209,8 @@ class Activity (models.Model):
     confirmation_period = models.IntegerField(default=3, validators=[MinValueValidator(3)])
     age_minimum = models.IntegerField(default=0)
 
+    ## ---------------------------------
+    ## -- STRINGs
     def __str__(self):
         return self.pub_date.strftime('(%Y-%m-%d, %H:%M)') + " " + self.title + " - Author: " + self.author.username
 
@@ -325,12 +327,15 @@ class Session (models.Model):
     confirmed_attendants = models.ManyToManyField(User, blank=True)
     emails_are_sent = models.BooleanField(default=False)
 
+    ## ---------------------------------
+    ## -- STRINGs
     def __str__(self):
         return self.description + " - " + self.start_date.strftime('%Y-%m-%d, from %H:%M') + " " + self.end_date.strftime('to %Y-%m-%d, %H:%M') 
 
     def __unicode__(self):
         return u'{t}/{d}'.format(t=self.activity.title, d=self.description)
-
+    
+    ## -- GETs
     def has_finished(self):
         now = timezone.now()
         return now >= self.start_date + datetime.timedelta(minutes=30)
@@ -343,3 +348,16 @@ class Session (models.Model):
     def can_user_join(self, user):
         return self.activity.author != user and self.activity.attendants.filter(id=user.id).exists() and not self.confirmed_attendants.filter(id=user.id).exists()
     
+
+    ## -- SETs
+    def new(activity):
+        self.activity = activity
+        self.safe()        
+        for attendant in activity.attendants.all():
+            email_activity_new_sessions(activity, attendant)
+    
+    def confirm(user):
+        if self.is_on_confirmation_period() and user in self.activity.attendants.all()
+            self.confirmed_attendants.add(user)
+            self.save()
+            email_user_confirmed_assistance(self.activity, self, user)
