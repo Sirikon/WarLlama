@@ -11,6 +11,8 @@ from models import *
 import random
 import re
 
+
+
 # Useful functions for the views. These functions return contexts.
 def set_translation(request): 
     if request.user.is_authenticated():
@@ -19,6 +21,18 @@ def set_translation(request):
         user_language = "en"
     translation.activate(user_language)
     request.session[translation.LANGUAGE_SESSION_KEY] = user_language
+
+def handle_form(sent_form, request, context, on_success_address, on_success_kwargs, on_failure_render):
+    form = sent_form
+    if form.is_valid():
+        item = form.save()        
+        return  HttpResponseRedirect(reverse('alpaca:' + on_success_address, kwargs=on_success_kwargs))
+    else:
+        context['form'] = sent_form
+        return render(request, on_failure_render, context)
+
+
+
 
 def sort_activities(activity_list, sort_column, last_column):
     sort_sign = "-"

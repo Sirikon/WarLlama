@@ -26,7 +26,7 @@ class Group (models.Model):
     description = models.TextField(max_length=200)
     email = models.EmailField(max_length=254)
 
-    superuser = models.OneToOneField(User)
+    superuser = models.ForeignKey(User, related_name="superuser_of")
     admin_list = models.ManyToManyField(User, related_name="admin_of", blank=True)
     member_list = models.ManyToManyField(User, related_name="member_of", blank=True)
     total_num_members = models.IntegerField(default=0)
@@ -58,34 +58,33 @@ class Group (models.Model):
         return temp
 
     ## -- SETs
-    def new(creation_date, user, logo):
+    def new(self, creation_date, user):
         self.creation_date = creation_date
         self.superuser = user
         self.total_num_members = 1
-        self.logo = logo
         self.save()  
         #TO-DO: email_registered_your_new_group(group)
     
-    def edit(logo):
+    def edit(self, logo):
         self.set_logo(logo)
         #TO-DO: email to all members - change at group (SPAM)
 
-    def set_logo(logo):
+    def set_logo(self, logo):
         self.logo = logo
         self.save()          
     
-    def add_member(user):
+    def add_member(self, user):
         self.member_list.add(user)
         self.pending_members.remove(user)
         self.total_num_members = self.member_count()
         self.save()
 
-    def remove_member(user):
+    def remove_member(self, user):
         self.members.remove(user)
         self.total_num_members = self.member_count()
         self.save()
 
-    def set_member_rights(user, to_admin):
+    def set_member_rights(self, user, to_admin):
         if to_admin:
             self.admin_list.add(user)
             self.member_list.remove(user)
@@ -94,14 +93,14 @@ class Group (models.Model):
             self.admin_list.remove(user)
         self.save()
  
-    def add_activity(activity):
+    def add_activity(self, activity):
         activity.pending_group = None
         activity.group = self
         activity.safe()
 
 
     ## -- USER ACTIONs
-    def join(user):
+    def join(self, user):
         if self.auto_register_users:
             self.add_member(user)
             #TO-DO: email_user_acted_on_your_group(self, user, True)
@@ -110,23 +109,23 @@ class Group (models.Model):
             #TO-DO: email_user_requested_to_join(self, user)
         self.save()
 
-    def leave(user):
+    def leave(self, user):
         self.remove_member(user)
         #TO-DO: email_user_acted_on_your_activity(group, user, False)
     
-    def kick(user):
+    def kick(self, user):
         self.remove_attendant(user)
         #TO-DO: email_you_were_kicked_out_from_group(self, selected_user)
 
-    def promote(user):
+    def promote(self, user):
         self.set_member_rights(selected_user, to_admin=True)
         #TO-DO: email you were promoted to admin at group 
 
-    def demote(user):
+    def demote(self, user):
         self.set_member_rights(selected_user, to_admin=False)
         #TO-DO: email you were demoted to member at group 
 
-    def handle_user_request(user, is_accepted):
+    def handle_user_request(self, user, is_accepted):
         if is_accepted:
             self.add_member(user)
             #TO-DO: email_your_request_was_handled(self, user, True)
@@ -137,7 +136,7 @@ class Group (models.Model):
         self.total_num_members = self.members.count()
         self.save()
    
-    def handle_activity_request(activity, is_accepted):
+    def handle_activity_request(self, activity, is_accepted):
         if is_accepted:
             self.add_activity(activity)
             #TO-DO: email_your_request_was_handled(self, user, True)

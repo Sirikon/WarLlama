@@ -5,17 +5,16 @@ import views
 app_name = "alpaca"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^demo/$', views.index_demo, name='index_demo'),
     url(r'^about_us/$', views.about_us, name='about_us'),
     url(r'^terms_conditions/$', views.terms_conditions, name='terms_conditions'),
 
     url(r'^forgotpassword/$', views.forgot_password, name="forgot_password"),
     url(r'^resetpassword$', views.reset_password, name='reset_password'),
 
-    url(r'^signup/(?P<activity_id>[0-9]*)$', views.signup, name='signup'),
+    url(r'^signup/$', views.signup, name='signup'),
     url(r'^activate$', views.activate, name='activate'),
 
-    url(r'^login/(?P<activity_id>[0-9]*)$', views.login, name='login'),
+    url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
 
     url(r'^profile/(?P<username>\w+)$', views.profile, name='profile'),

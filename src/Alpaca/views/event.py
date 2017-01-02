@@ -4,6 +4,7 @@ from django.views.generic import *
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
@@ -37,13 +38,14 @@ def event(request, event_id):
     else:        
         return render(request, 'Alpaca/event/event_anon.html', context)
 
+@login_required
 def new_event(request, group_id):
     set_translation(request)
     
     user = request.user
     group = get_object_or_404(Group, pk=group_id)
 
-    if not user.is_authenticated() or (user != group.superuser and user not in group.admin_list.all()):
+    if user != group.superuser and user not in group.admin_list.all():
         return  HttpResponseRedirect(reverse('alpaca:index'))
     
 
@@ -54,12 +56,7 @@ def new_event(request, group_id):
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
-            event = form.save(commit=False)
-            cover = form.cleaned_data["cover"]
-            banner = form.cleaned_data["banner"]
-            
-            event.new(timezone.now(), group, cover, banner)
-            
+            event = form.save_new(group)                     
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:
             context['form'] = form
@@ -70,11 +67,13 @@ def new_event(request, group_id):
         return render(request, 'Alpaca/_form_layout.html', context)
 
 
+@login_required
 def edit_event(request, event_id):
     set_translation(request)
     user = request.user
     event = get_object_or_404(Event, pk=event_id)
-    if not user.is_authenticated() or (user != event.group.superuser and user not in event.group.admin_list.all()):
+    
+    if user != event.group.superuser and user not in event.group.admin_list.all():
         return  HttpResponseRedirect(reverse('alpaca:index'))
 
     context = { 'form_title': _("Editing event") + " " + event.title,
@@ -84,10 +83,7 @@ def edit_event(request, event_id):
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES, instance=event)
         if form.is_valid():
-            event = form.save(commit=False)   
-            cover = form.cleaned_data["cover"]
-            banner = form.cleaned_data["banner"]
-            event.edit(cover, banner)
+            event = form.save()
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:
             context['form'] = form
@@ -99,6 +95,7 @@ def edit_event(request, event_id):
 
 
 ## USER ACTIONS ##
+@login_required
 def join_event(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)
@@ -110,6 +107,7 @@ def join_event(request, event_id):
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
 
+@login_required
 def leave_event(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)
@@ -121,6 +119,7 @@ def leave_event(request, event_id):
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
 ## ADMIN ACTIONS ##
+@login_required
 def kick_attendant(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)
@@ -132,6 +131,7 @@ def kick_attendant(request, event_id):
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
 
+@login_required
 def pending_attendants(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)
@@ -142,6 +142,8 @@ def pending_attendants(request, event_id):
 
     return HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 
+
+@login_required
 def pending_activities(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)

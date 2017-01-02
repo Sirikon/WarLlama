@@ -5,6 +5,7 @@ from django.views.generic import *
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
 from django.utils import timezone
@@ -21,14 +22,11 @@ import datetime
 
 
 ## -- AUTHENTICATION -- ##
-def signup(request, activity_id):
+def signup(request):
     set_translation(request)
 
     if request.user.is_authenticated():
-        if activity_id == "":
-            return  HttpResponseRedirect(reverse('alpaca:index'))
-        else:
-            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+        return  HttpResponseRedirect(reverse('alpaca:index'))
 
     context = { 'submit_text': _("Sign up!"), 'rich_field_name': "" }
 
@@ -81,13 +79,10 @@ def activate(request):
     return render(request, 'Alpaca/server_message.html', context)
 
 
-def login(request, activity_id):
+def login(request):
     set_translation(request)
     if request.user.is_authenticated():
-        if activity_id == "":
-            return  HttpResponseRedirect(reverse('alpaca:index'))
-        else:
-            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+        return  HttpResponseRedirect(reverse('alpaca:index'))
 
     context = { 'submit_text': _("Log in"), 'rich_field_name': "" }
 
@@ -99,10 +94,7 @@ def login(request, activity_id):
             access = auth.authenticate(username=user, password=password)
             if access is not None and access.is_active:
                 auth.login(request, access)
-                if activity_id == "":
-                    return  HttpResponseRedirect(reverse('alpaca:index'))
-                else:
-                    return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity_id}))
+                return  HttpResponseRedirect(reverse('alpaca:index'))
             else:
                 context = {
                     'message_title': _('Error'),
@@ -192,13 +184,12 @@ def reset_password(request):
     context['message_body'] = _('It seems like you got lost in our page. Click the Alpaca logo to go back to the index.')
 
     return render(request, 'Alpaca/server_message.html', context)
-    
+
+
+@login_required
 def change_password(request):
     set_translation(request)
     user = request.user
-
-    if not user.is_authenticated():
-        return  HttpResponseRedirect(reverse('alpaca:index'))
 
     context = { 'form_title': _("Change your password"),
                 'submit_text': _("Save new password"),
@@ -233,12 +224,10 @@ def profile(request, username):
                 
     return render(request, 'Alpaca/user_profile.html', context)
 
+@login_required
 def edit_profile(request):
     set_translation(request)
     user = request.user
-
-    if not user.is_authenticated():
-        return  HttpResponseRedirect(reverse('alpaca:index'))
 
     context = { 'form_title': _("Edit your profile's settings"),
                 'submit_text': _("Save changes"),
@@ -247,9 +236,7 @@ def edit_profile(request):
     if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=user.profile)
         if form.is_valid():
-            profile = form.save(commit=False)   
-            profile.set_avatar(form.cleaned_data["avatar"])
-            
+            profile = form.save()               
             return  HttpResponseRedirect(reverse('alpaca:profile', kwargs={'username': user.username}))
         else:
             context['form'] = form

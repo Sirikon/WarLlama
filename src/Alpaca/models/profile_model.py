@@ -7,6 +7,8 @@ from django.core.validators import MinValueValidator
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from itertools import chain
+
 from Alpaca.storage import *
 from Alpaca.file_paths import *
 from Alpaca.emails import *
@@ -68,11 +70,16 @@ class Profile (models.Model):
         return self.user.username
     
     def get_groups(self):        
-        temp_list = list(chain( user.member_of.all(), 
-                                user.admin_of.all(), 
-                                Group.objects.filter(superuser=user)))
+        temp_list = list(chain( self.user.member_of.all(), 
+                                self.user.admin_of.all(), 
+                                self.user.superuser_of.all()))
         temp_list = sorted(temp_list, key=lambda group: group.name)
-        return temp_list
+
+        id_list = []
+        for g in temp_list:
+            id_list.append(g.id)
+
+        return id_list
 
     # -- SETs
     def set_avatar(self, new_avatar):

@@ -84,39 +84,24 @@ class Activity (models.Model):
             temp = temp[:200]
             
         return temp
+
+
     ## -- SETs
-    def new(pub_date, new_author, new_cover, new_group):
-        activity.pub_date = pub_date
-        activity.author = new_author
-        self.set_cover(new_cover)
-        self.set_group(new_group)
-        self.save()  
-        email_registered_your_new_activity(self)  
-
-    def edit(cover, new_group):
-        self.set_cover(new_cover)
-        self.set_group(new_group)
-        self.save()  
-
-        activity.save() 
-        for attendant in activity.attendants.all():
-            email_activity_got_updated(activity, attendant)
-
-    def set_cover(new_cover):
-        activity.cover = new_cover
+    def set_cover(self, new_cover):
+        self.cover = new_cover
         self.save()
 
-    def set_group(new_group):
+    def set_group(self, new_group):
         if new_group is not None:
             if new_group.auto_register_activities:
-                activity.group = new_group
+                self.group = new_group
                 #TO-DO: email to group
             else:
-                activity.pending_group = new_group
+                self.pending_group = new_group
                 #TO-DO: email to group - pending activities
         self.save()  
 
-    def remove_attendant(user):
+    def remove_attendant(self, user):
         self.attendants.remove(user)
         self.num_attendants = self.attendants.count()
         self.save()
@@ -125,7 +110,23 @@ class Activity (models.Model):
                 session.confirmed_attendants.remove(user)
                 session.save()
 
-    def join(user):
+    ## -- USER ACTIONs
+    def new(self, pub_date, new_author):
+        self.pub_date = pub_date
+        self.author = new_author
+        self.save()  
+        email_registered_your_new_activity(self)  
+
+    def edit(self, cover, new_group):
+        self.set_cover(new_cover)
+        self.set_group(new_group)
+        self.save()  
+
+        self.save() 
+        for attendant in self.attendants.all():
+            email_activity_got_updated(self, attendant)
+
+    def join(self, user):
         if self.auto_register:
             self.attendants.add(user)
             self.num_attendants = self.attendants.count()
@@ -135,15 +136,15 @@ class Activity (models.Model):
             email_user_requested_to_join(self, user)
         self.save()
 
-    def leave(user):
+    def leave(self, user):
         self.remove_attendant(user)
         email_user_acted_on_your_activity(self, user, False)
     
-    def kick(user):
+    def kick(self, user):
         self.remove_attendant(user)
         email_you_were_kicked_out_from_activity(self, user)
 
-    def handle_user_request(user, is_accepted):
+    def handle_user_request(self, user, is_accepted):
         if is_accepted:
             self.attendants.add(user)
             self.pending_attendants.remove(user)

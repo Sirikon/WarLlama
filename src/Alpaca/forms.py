@@ -5,6 +5,7 @@ from django.core.validators import MinValueValidator
 from django.forms.extras.widgets import SelectDateWidget
 from django.shortcuts import get_object_or_404 
 
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from models import *
@@ -99,6 +100,12 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ("logo", "name", "description", "email", "show_email", "auto_register_users", "auto_register_activities")
    
+    def save_new(self, user):
+        group = super(GroupForm, self).save(commit=False)
+        group.new(timezone.now(), user)
+        return group
+         
+
 
 class ActivityForm(forms.ModelForm):
     title = forms.CharField(required=True, label=_('Title'), max_length=200)
@@ -116,18 +123,27 @@ class ActivityForm(forms.ModelForm):
     confirmation_period = forms.IntegerField(required=True, label=_('Confirmation period'), validators=[MinValueValidator(3)], initial=3, help_text=_("How many days before a session starts the assistance confirmation period?"))
     age_minimum = forms.IntegerField(required=True, label=_('Age minimum'), initial=18, help_text=_("Minimum age to attend this activity."))
     
-    class Meta:
-        model = Activity
-        fields = ("title", "description", "cover", "cover_disclaimer",  "city", "auto_register", "confirmation_period", "age_minimum")
-
-    def __init__(self, group_options, *args, **kwargs):
+    ## ----------------------------------------
+    def __init__(self, group_list, *args, **kwargs):
         super(ActivityForm, self).__init__(*args, **kwargs)
-        self.fields['group_options'] = forms.ChoiceField (
+
+        group_choices = Group.objects.filter(pk__in=group_list) #self.to_tuples(group_list)
+
+        self.fields['group'] = forms.ModelChoiceField (
             label=_('Group'), 
             required=True, 
-            choices=group_options,
+            queryset=group_choices,
             help_text=_('Is this activity related to any of your groups? Depending on the group, the activity may need to be accepted first.')
         )
+
+    class Meta:
+        model = Activity
+        fields = ("title", "description", "cover", "cover_disclaimer", "group", "city", "auto_register", "confirmation_period", "age_minimum")
+
+    def save_new(self, user):
+        activity = super(ActivityForm, self).save(commit=False)
+        activity.new(timezone.now(), user)  
+        return activity
 
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, label=_('Description'), max_length=500, widget=forms.Textarea)
@@ -151,6 +167,12 @@ class SessionForm(forms.ModelForm):
         if end_date < start_date:
             msg = _("The end date and time must be greater than the start date.")
             self._errors["end_date"] = self.error_class([msg])
+
+    def save_new(self, activity):
+        session = super(SessionForm, self).save(commit=False)
+        session.new(activity)  
+        return session
+
 
 class EventForm(forms.ModelForm):
     cover = forms.ImageField(required=False, help_text=_("This is the image that will be displayed at the index. If you don't have one yet, we will provide a default and you may upload yours later."))
@@ -197,7 +219,11 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ("cover", "banner", "image_disclaimer", "title", "description", "city", "start_date", "end_date", "age_minimum", "show_title", "group_only_attendants", "auto_register_users", "auto_register_activities")
-   
+    
+    def save_new(self, group):
+        event = super(SessionForm, self).save(commit=False)
+        event.new(timezone.now(), group)  
+        return event
 
 ## MINOR FORMS ##
 class ForgotPasswordForm(forms.Form):

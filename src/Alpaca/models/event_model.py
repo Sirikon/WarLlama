@@ -70,11 +70,9 @@ class Event (models.Model):
         return temp
     
     ## -- SETs
-    def new(pub_date, group, cover, banner):
+    def new(pub_date, group):
         self.pub_date = pub_date
         self.group = group       
-        self.set_cover(cover)
-        self.set_banner(banner)
         self.save()  
         #TO-DO: email_registered_your_new_event(event) to group mail
 
