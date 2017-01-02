@@ -12,9 +12,16 @@ from django.core.mail import EmailMessage
 from utils import set_translation
 
 def send_my_email(subject, body, to_whom):
-    msg = EmailMessage(subject, body, 'noreply@alpaca.srk.bz', [to_whom])
-    msg.content_subtype = "html"
-    msg.send()
+    try:
+        msg = EmailMessage(subject, body, 'noreply@alpaca.srk.bz', [to_whom])
+        msg.content_subtype = "html"
+        msg.send()
+    except Exception as e:
+        print e
+        return False
+    
+    return True
+
 
 def email_signature():
     # Translators: This is the signing part of an email. 
@@ -47,7 +54,7 @@ def email_confirm_account(new_user):
 
     body = body.format(jumpline = "<br/>", newline="<br/><br/>", alpaca_link="https://alpaca.srk.bz", confirmation_link=link)
 
-    send_my_email(subject, body, new_user.email)
+    return send_my_email(subject, body, new_user.email)
 
 
 def email_reset_password(user):
@@ -77,7 +84,7 @@ def email_reset_password(user):
                         reset_link=link, 
                         email_signature=email_signature())
 
-    send_my_email(subject, body, user.email)
+    return send_my_email(subject, body, user.email)
 
 
 
@@ -107,7 +114,7 @@ def email_registered_your_new_activity(activity):
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format(newline="<br/><br/>", author=activity.author.username, title=activity.title, activity_link=link, email_signature=email_signature())
 
-    send_my_email(subject, body, activity.author.email)
+    return send_my_email(subject, body, activity.author.email)
 
 
 def email_user_acted_on_your_activity(activity, attendant, has_joined):
@@ -139,7 +146,7 @@ def email_user_acted_on_your_activity(activity, attendant, has_joined):
                 title=activity.title, activity_link=link, 
                 email_signature=email_signature())
 
-    send_my_email(subject, body, activity.author.email)
+    return send_my_email(subject, body, activity.author.email)
 
 
 def email_user_requested_to_join(activity, attendant):
@@ -165,7 +172,7 @@ def email_user_requested_to_join(activity, attendant):
                 author=activity.author.username, attendant=attendant.username,
                 title=activity.title, activity_link=link, 
                 email_signature=email_signature())
-    send_my_email(subject, body, activity.author.email)
+    return send_my_email(subject, body, activity.author.email)
 
 
 def email_user_confirmed_assistance(activity, session, attendant):
@@ -191,10 +198,10 @@ def email_user_confirmed_assistance(activity, session, attendant):
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format( jumpline="<br/>", newline="<br/><br/>", 
                         author=activity.author.username, attendant=attendant.username,
-                        date=session.datetime.date(), activity_link=link, 
+                        date=session.start_date.date(), activity_link=link, 
                         email_signature=email_signature())
 
-    send_my_email(subject, body, activity.author.email)
+    return send_my_email(subject, body, activity.author.email)
 
 # ATTENDANTs
 def email_you_were_kicked_out_from_activity(activity, attendant):
@@ -222,7 +229,7 @@ def email_you_were_kicked_out_from_activity(activity, attendant):
                         title=activity.title, 
                         alpaca_link=link, 
                         email_signature=email_signature())
-    send_my_email(subject, body, attendant.email)
+    return send_my_email(subject, body, attendant.email)
     
 
 def email_your_request_was_handled(activity, attendant, was_accepted):
@@ -256,7 +263,7 @@ def email_your_request_was_handled(activity, attendant, was_accepted):
                         alpaca_link=link, 
                         email_signature=email_signature())
 
-    send_my_email(subject, body, attendant.email)
+    return send_my_email(subject, body, attendant.email)
     
 
 def email_activity_got_updated(activity, attendant):
@@ -285,7 +292,7 @@ def email_activity_got_updated(activity, attendant):
                         activity_link=link, 
                         email_signature=email_signature())
 
-    send_my_email(subject, body, attendant.email)
+    return send_my_email(subject, body, attendant.email)
 
 
 def email_activity_new_sessions(activity, attendant):
@@ -313,7 +320,7 @@ def email_activity_new_sessions(activity, attendant):
                         title=activity.title, 
                         activity_link=link, 
                         email_signature=email_signature())
-    send_my_email(subject, body, attendant.email)
+    return send_my_email(subject, body, attendant.email)
 
 
 def email_confirm_assistance_period_started(activity, session, attendant):
@@ -339,9 +346,9 @@ def email_confirm_assistance_period_started(activity, session, attendant):
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format( newline="<br/><br/>", 
                         attendant=attendant.username,
-                        title=activity.title, date=session.datetime.date(),
+                        title=activity.title, date=session.start_date.date(),
                         activity_link=link, 
                         email_signature=email_signature())
-    send_my_email(subject, body, attendant.email)
+    return send_my_email(subject, body, attendant.email)
 
 
