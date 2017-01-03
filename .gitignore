@@ -50,6 +50,7 @@ Temporary Items
 src/db.sqlite3
 src/Alpaca/static/main.css
 src/Alpaca/static/main.css.map
+src/Alpaca/media/**/*
 **/*.pyc
 **/*.pyo
 .vscode/

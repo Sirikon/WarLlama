@@ -234,16 +234,16 @@ def edit_profile(request):
                 'rich_field_name': "" }
 
     if request.method == "POST":
-        form = ProfileForm(request.POST, request.FILES, instance=user.profile)
+        form = ProfileForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
-            profile = form.save()               
+            profile = form.save()
             return  HttpResponseRedirect(reverse('alpaca:profile', kwargs={'username': user.username}))
         else:
             context['form'] = form
             return render(request, 'Alpaca/form_edit_profile.html', context)
 
     else:
-        context['form'] = ProfileForm(instance=user.profile)
+        context['form'] = ProfileForm(instance=user)
         return render(request, 'Alpaca/form_edit_profile.html', context)
 
 
