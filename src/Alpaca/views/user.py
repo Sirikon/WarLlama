@@ -12,7 +12,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from ..models import Profile, Activity
-from ..forms import ProfileCreationForm, ProfileForm, ForgotPasswordForm, NewPasswordForm
+from ..forms import *
 from ..emails import *
 
 from ..utils import sort_activities, set_translation
