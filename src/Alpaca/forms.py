@@ -75,8 +75,10 @@ class ProfileForm(forms.ModelForm):
     language_preference = forms.ChoiceField(label=_('Language'), required=True, choices=language_options, help_text=_('In which language would you prefer to use Alpaca?'))
 
     class Meta:
-        model = Profile
+        model = User
         fields = ("avatar", "first_name", "last_name", "birth_date", "show_birthday", "show_email", "show_real_name", "display_name_format", "language_preference")
+
+
    
 class GroupForm(forms.ModelForm):
     logo = forms.ImageField(required=False)

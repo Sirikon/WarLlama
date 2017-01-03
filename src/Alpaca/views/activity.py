@@ -54,7 +54,7 @@ def new_activity(request):
            activity = form.save_new(user)        
            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id} ))
         else:
-           context['form'] = sent_form
+           context['form'] = form
            return render(request, 'Alpaca/_form_layout.html', context)
     else:
         context['form'] = ActivityForm(group_list=user_groups) 
@@ -84,7 +84,7 @@ def edit_activity(request, activity_id):
            activity = form.save()   
            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id} ))
         else:
-           context['form'] = sent_form
+           context['form'] = form
            return render(request, 'Alpaca/_form_layout.html', context)
     else:
         context['form'] = ActivityForm(group_list=user_groups, instance=activity) 
