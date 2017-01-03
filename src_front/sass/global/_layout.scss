@@ -32,7 +32,7 @@ $header-height: 60px;
     }
 
     &-content {
-        max-width: 1120px;
+        max-width: $responsive-breakpoint;
         height: 100%;
         margin: auto;
     }
@@ -65,12 +65,25 @@ $header-height: 60px;
 .al-order-bar {
     width: 100%;
 
-    margin-top: 8px;
+    margin: 15px 10px;
     
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
+
+    &-item {
+        text-decoration: none;
+        color: $gray;
+        padding: 3px 7px;
+        border-radius: 3px;
+
+        &--active {
+            background-color: $accent;
+            color: white;
+            font-weight: bold;
+        }
+    }
 }
 
 .al-item-list {
@@ -84,10 +97,9 @@ $header-height: 60px;
  
 .al-content {
     &-wrapper {
-        max-width: 1120px;
+        max-width: $responsive-breakpoint;
         margin: auto;
-        margin-top: 15px;
-        padding: 0 20px;
+        padding: 1px 20px 30px 20px;
     }
     
     &-panel {
@@ -121,7 +133,7 @@ $header-height: 60px;
 
     &-content {
         color: #fff;
-        max-width: 1120px;
+        max-width: $responsive-breakpoint;
         margin: auto;
         padding: 0 20px;
     }
