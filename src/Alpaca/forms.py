@@ -78,8 +78,32 @@ class ProfileForm(forms.ModelForm):
         model = User
         fields = ("avatar", "first_name", "last_name", "birth_date", "show_birthday", "show_email", "show_real_name", "display_name_format", "language_preference")
 
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['avatar'].initial = self.instance.profile.avatar
+        self.fields['birth_date'].initial = self.instance.profile.birth_date
+        self.fields['show_birthday'].initial = self.instance.profile.show_birthday
+        self.fields['show_email'].initial = self.instance.profile.show_email
+        self.fields['show_real_name'].initial = self.instance.profile.show_real_name
+        self.fields['display_name_format'].initial = self.instance.profile.display_name_format
+        self.fields['language_preference'].initial = self.instance.profile.language_preference
 
-   
+    def save(self, commit=True):
+        user = super(ProfileForm, self).save(commit=False)
+
+        if commit:
+            user.save()
+            user.profile.avatar=self.cleaned_data["avatar"]
+            user.profile.birth_date=self.cleaned_data["birth_date"]
+            user.profile.show_birthday=self.cleaned_data["show_birthday"]
+            user.profile.show_email=self.cleaned_data["show_email"]
+            user.profile.show_real_name=self.cleaned_data["show_real_name"]
+            user.profile.display_name_format=self.cleaned_data["display_name_format"]
+            user.profile.language_preference=self.cleaned_data["language_preference"]
+            user.profile.save()
+        
+        return user
+        
 class GroupForm(forms.ModelForm):
     logo = forms.ImageField(required=False)
     name = forms.CharField(required=True, label=_('Group Name'))
@@ -93,8 +117,8 @@ class GroupForm(forms.ModelForm):
                             help_text=_("Selected: Users join the group automatically. Not selected: Admins decide to accept or reject joining requests.")
                         )
     auto_register_activities = forms.BooleanField(
-                            required=False, 
-                            label=_('Allow activity auto-registration?'), 
+                            required=False,
+                            label=_('Allow activity auto-registration?'),
                             help_text=_("Your group may have organize activities! Are members allowed to relate any of their activities to this group?")
                         )
 
