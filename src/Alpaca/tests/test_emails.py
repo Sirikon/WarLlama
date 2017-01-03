@@ -1,3 +1,6 @@
+#-*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import datetime
 
 from django.contrib.auth.models import User
@@ -29,7 +32,7 @@ class EmailLanguageTests(TestCase):
         attendant_profile = Profile(user=attendant, birth_date=date, language_preference="en")  
         attendant_profile.save()
 
-        activity = Activity(pub_date=time, author=author)
+        activity = Activity(title="Lorem ipsum", pub_date=time, author=author)
         activity.save()
         activity.attendants.add(attendant)   
         activity.save()
@@ -78,7 +81,7 @@ class EmailLanguageTests(TestCase):
         attendant_profile = Profile(user=attendant, birth_date=date, language_preference="es")  
         attendant_profile.save()
 
-        activity = Activity(pub_date=time, author=author)
+        activity = Activity(title="Lórem ipsum", pub_date=time, author=author)
         activity.save()
         activity.attendants.add(attendant)   
         activity.save()
@@ -126,7 +129,7 @@ class EmailLanguageTests(TestCase):
         attendant_profile = Profile(user=attendant, birth_date=date, language_preference="eus")  
         attendant_profile.save()
 
-        activity = Activity(pub_date=time, author=author)
+        activity = Activity(title="Lorem ipsum", pub_date=time, author=author)
         activity.save()
         activity.attendants.add(attendant)   
         activity.save()

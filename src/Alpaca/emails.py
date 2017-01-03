@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db.models import Count, Q
@@ -108,11 +109,15 @@ def email_registered_your_new_activity(activity):
     
     translation.activate(activity.author.profile.language_preference)
 
-    subject = str(_('Your Activity "')) + activity.title + str(_('" was succesfully registered!'))
+    subject = str(_('Your Activity "')) + activity.title.encode("utf8") + str(_('" was succesfully registered!'))
     body = str(_("Hi, {author}!{newline}Your activity \"{title}\" has been succesfully registered, and you may start sharing it by using the following link: {activity_link}.{newline}Your activity may not appear on the main page index until some time has passed, but it is already fully functional.{newline}Have fun! I hope everything goes as you expect it <3 {email_signature}"))
 
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
-    body = body.format(newline="<br/><br/>", author=activity.author.username, title=activity.title, activity_link=link, email_signature=email_signature())
+    body = body.format( newline="<br/><br/>", 
+                        author=activity.author.username, 
+                        title=activity.title.encode("utf8"), 
+                        activity_link=link, 
+                        email_signature=email_signature())
 
     return send_my_email(subject, body, activity.author.email)
 
@@ -136,14 +141,14 @@ def email_user_acted_on_your_activity(activity, attendant, has_joined):
     if not has_joined:
         aux = str(_("left"))
 
-    subject = attendant.username + str(_(" has ")) + aux + str(_(" your activity, ")) + activity.title
+    subject = str(attendant.username) + str(_(" has ")) + str(aux) + str(_(" your activity, ")) + activity.title.encode("utf8")
     body = str(_("Hi, {author}!{newline}{attendant} has {action} your activity, {title}.{jumpline}You can manage your activity at {activity_link}.{email_signature}"))
     
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format(jumpline="<br/>", newline="<br/><br/>", 
                 action=aux,
                 author=activity.author.username, attendant=attendant.username,
-                title=activity.title, activity_link=link, 
+                title=activity.title.encode("utf8"), activity_link=link, 
                 email_signature=email_signature())
 
     return send_my_email(subject, body, activity.author.email)
@@ -164,13 +169,13 @@ def email_user_requested_to_join(activity, attendant):
     
     translation.activate(activity.author.profile.language_preference)
 
-    subject = attendant.username + str(_(" requested to join ")) + activity.title
+    subject = str(attendant.username) + str(_(" requested to join ")) + activity.title.encode("utf8")
     body = str(_("Hi, {author}!{newline}{attendant} has requested to join your activity, {title}.{jumpline}You can manage this and any other requests at {activity_link}.{email_signature}"))
     
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format(jumpline="<br/>", newline="<br/><br/>", 
                 author=activity.author.username, attendant=attendant.username,
-                title=activity.title, activity_link=link, 
+                title=activity.title.encode("utf8"), activity_link=link, 
                 email_signature=email_signature())
     return send_my_email(subject, body, activity.author.email)
 
@@ -192,7 +197,7 @@ def email_user_confirmed_assistance(activity, session, attendant):
     
     translation.activate(activity.author.profile.language_preference)
     
-    subject = attendant.username + str(_(" confirmed assistance on your activity, ")) + activity.title
+    subject = str(attendant.username) + str(_(" confirmed assistance on your activity, ")) + activity.title.encode("utf8")
     body =  str(_("Hi, {author}!{newline}Congratulations! {attendant} has confirmed assistance to the {date}'s session!{jumpline}You can manage your activity at {activity_link}.{newline}I hope everything goes as you expect it <3 {email_signature}"))
 
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
@@ -220,13 +225,13 @@ def email_you_were_kicked_out_from_activity(activity, attendant):
     
     translation.activate(attendant.profile.language_preference)
 
-    subject = str(_("You have been removed from the activity ")) + activity.title
+    subject = str(_("You have been removed from the activity ")) + activity.title.encode("utf8")
     body = str(_("Hi, {attendant},{newline}I regret to inform you that you have been removed from the activity {title}.{newline}However, don't forget there are many other activities waiting for you at {alpaca_link}.{email_signature}"))
 
     link = "http://alpaca.srk.bz"
     body = body.format( jumpline="<br/>", newline="<br/><br/>", 
                         attendant=attendant.username,
-                        title=activity.title, 
+                        title=activity.title.encode("utf8"), 
                         alpaca_link=link, 
                         email_signature=email_signature())
     return send_my_email(subject, body, attendant.email)
@@ -252,14 +257,14 @@ def email_your_request_was_handled(activity, attendant, was_accepted):
     if not was_accepted:
         aux = str(_("rejected"))
 
-    subject = str(aux[:1].upper() + aux[1:]) + str(_(" request to join the activity ")) + str(activity.title)
+    subject = str(aux[:1].upper() + aux[1:]) + str(_(" request to join the activity ")) + activity.title.encode("utf8")
     body = str(_("Hi, {attendant},{newline}Your request to join the activity {title} has been {action}.{newline}Don't forget there are many other activities waiting for you at {alpaca_link}.{email_signature}"))
 
     link = "http://alpaca.srk.bz"
     body = body.format( newline="<br/><br/>", 
                         attendant=attendant.username,
                         action=aux,
-                        title=activity.title, 
+                        title=activity.title.encode("utf8"), 
                         alpaca_link=link, 
                         email_signature=email_signature())
 
@@ -282,13 +287,13 @@ def email_activity_got_updated(activity, attendant):
 
     translation.activate(attendant.profile.language_preference)
 
-    subject = str(_("Updated: Activity ")) + activity.title
+    subject = str(_("Updated: Activity ")) + activity.title.encode("utf8")
     body = str(_("Hi, {attendant}!{newline}You are receiving this message because the activity {title} was updated!{newline}Check it out at {activity_link}.{email_signature}"))
 
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format( newline="<br/><br/>", 
                         attendant=attendant.username,
-                        title=activity.title, 
+                        title=activity.title.encode("utf8"), 
                         activity_link=link, 
                         email_signature=email_signature())
 
@@ -311,13 +316,13 @@ def email_activity_new_sessions(activity, attendant):
     
     translation.activate(attendant.profile.language_preference)
 
-    subject = str(_("New Session in Activity ")) + activity.title
+    subject = str(_("New Session in Activity ")) + activity.title.encode("utf8")
     body = str(_("Hi, {attendant}!{newline}You are receiving this message because the activity {title} was updated with new sessions!{newline}Check them out at {activity_link}.{newline}Hope to see you there <3{email_signature}"))
     
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format( newline="<br/><br/>", 
                         attendant=attendant.username,
-                        title=activity.title, 
+                        title=activity.title.encode("utf8"), 
                         activity_link=link, 
                         email_signature=email_signature())
     return send_my_email(subject, body, attendant.email)
@@ -346,7 +351,7 @@ def email_confirm_assistance_period_started(activity, session, attendant):
     link = "http://alpaca.srk.bz/activity/" + str(activity.id)
     body = body.format( newline="<br/><br/>", 
                         attendant=attendant.username,
-                        title=activity.title, date=session.start_date.date(),
+                        title=activity.title.encode("utf8"), date=session.start_date.date(),
                         activity_link=link, 
                         email_signature=email_signature())
     return send_my_email(subject, body, attendant.email)

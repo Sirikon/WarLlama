@@ -53,13 +53,13 @@ class Session (models.Model):
     
 
     ## -- SETs
-    def new(activity):
+    def new(self, activity):
         self.activity = activity
         self.save()        
         for attendant in activity.attendants.all():
             email_activity_new_sessions(activity, attendant)
     
-    def confirm(user):
+    def confirm(self, user):
         if self.is_on_confirmation_period() and user in self.activity.attendants.all():
             self.confirmed_attendants.add(user)
             self.save()

@@ -80,9 +80,12 @@ def edit_activity(request, activity_id):
 
     if request.method == "POST":
         form = ActivityForm(user_groups, request.POST, request.FILES, instance=activity)
-        handle_form( form, request, context, 
-                     'activity', {'activity_id': activity.id},
-                     'Alpaca/_form_layout.html')
+        if form.is_valid():
+           activity = form.save()   
+           return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id} ))
+        else:
+           context['form'] = sent_form
+           return render(request, 'Alpaca/_form_layout.html', context)
     else:
         context['form'] = ActivityForm(group_list=user_groups, instance=activity) 
         return render(request, 'Alpaca/_form_layout.html', context)

@@ -131,7 +131,7 @@ class ActivityForm(forms.ModelForm):
 
         self.fields['group'] = forms.ModelChoiceField (
             label=_('Group'), 
-            required=True, 
+            required=False, 
             queryset=group_choices,
             help_text=_('Is this activity related to any of your groups? Depending on the group, the activity may need to be accepted first.')
         )
