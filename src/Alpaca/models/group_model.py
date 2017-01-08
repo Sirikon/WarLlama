@@ -83,6 +83,9 @@ class Group (models.Model):
         self.member_list.remove(user)
         self.total_num_members = self.member_count()
         self.save()
+        for event in self.event_set.all():
+            if event.group_only_attendants and event.start_date > timezone.now():
+                event.remove_attendant(user)
 
     def set_member_rights(self, user, to_admin):
         if to_admin:

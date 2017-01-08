@@ -11,7 +11,7 @@
     {% if activity.attendants.count <= 0 %}
         <p>{% trans "There are no users attending your activity." %}</p>
     {% else %}
-        <form action="{% url 'alpaca:kick_attendant' activity.id %}" method="POST">
+        <form action="{% url 'alpaca:activity_kick_attendant' activity.id %}" method="POST">
             {% csrf_token %}
             <select id="attending_users" name="attending">
             {% for att in activity.attendants.all %}

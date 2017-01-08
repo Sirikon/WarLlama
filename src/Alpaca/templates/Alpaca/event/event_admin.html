@@ -11,7 +11,7 @@
     {% if event.attendants.count <= 0 %}
         <p>{% trans "There are no users attending your event." %}</p>
     {% else %}
-        <form action="kick/{{event.id}}" method="POST">
+        <form action="{% url 'alpaca:event_kick_attendant' event.id %}" method="POST">
             {% csrf_token %}
             <select id="attending_users" name="attending">
             {% for att in event.attendants.all %}
@@ -26,14 +26,14 @@
 {% block user_requests %}
     <div class="al-content-panel"> 
         <small>{% trans "Attending requests:" %}</small>  
-        {% if group.pending_attendants.count <= 0 %}
+        {% if event.pending_attendants.count <= 0 %}
             <p>{% trans "There are no pending requests to attend the event." %}</p>
         {% else %}
             <p>{% trans "Manage the requests to attend the event:" %}</p>
-            <form action="attendants/{{event.id}}" method="POST">
+            <form action="{% url 'alpaca:event_pending_attendants' event.id %}" method="POST">
                 {% csrf_token %}
                 <select id="pending_requests" name="user_join_request">
-                {% for att in group.pending_attendants.all %}
+                {% for att in event.pending_attendants.all %}
                     <option value="{{att.id}}">{{ att.username }}</option>
                 {% endfor %}
                 </select>
@@ -47,11 +47,11 @@
 {% block activity_requests %}
     <div class="al-content-panel"> 
         <small>{% trans "Activity requests:" %}</small>  
-        {% if group.pending_activities.count <= 0 %}
+        {% if event.pending_activities.count <= 0 %}
             <p>{% trans "There are no pending activities to confirm." %}</p>
         {% else %}
             <p>{% trans "Manage the activities that want to be related to this event:" %}</p>
-            <form action="activities/{{event.id}}" method="POST">
+            <form action="{% url 'alpaca:event_pending_activities' event.id %}" method="POST">
                 {% csrf_token %}
                 <select id="pending_requests" name="activity_request">
                 {% for act in event.pending_activities.all %}

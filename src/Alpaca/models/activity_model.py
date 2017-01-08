@@ -105,6 +105,7 @@ class Activity (models.Model):
 
     def remove_attendant(self, user):
         self.attendants.remove(user)
+        self.pending_attendants.remove(user)
         self.num_attendants = self.attendants.count()
         self.save()
         for session in self.session_set.all():

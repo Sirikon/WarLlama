@@ -60,7 +60,16 @@ class Event (models.Model):
     def __unicode__(self):
         return u'{t}/{d}'.format(t=self.title, d=self.description)
 
-    ## -- GETs
+    ## -- GETs    
+    def is_user_old_enough(self, user):
+        # http://stackoverflow.com/questions/2217488/age-from-birthdate-in-python/9754466#9754466
+        today = timezone.now()
+        born = user.profile.birth_date
+        years_difference = today.year - born.year
+        is_before_birthday = (today.month, today.day) < (born.month, born.day)
+        elapsed_years = years_difference - int(is_before_birthday)
+        return elapsed_years >= self.age_minimum
+
     def get_short_description(self):
         temp = re.sub("(<img)(?<=(<img)).*?(?=>)(>)", " ", self.description)
 
@@ -96,10 +105,15 @@ class Event (models.Model):
 
     def remove_attendant(self, user):
         self.attendants.remove(user)
+        self.pending_attendants.remove(user)
         self.num_attendants = self.attendants.count()
         self.save()
         for activity in self.activity_list.all():
-            activity.remove_attendant(user)
+            if user is activity.author:
+                if activity.end_date > timezone.now():
+                    self.activity_list.remove(activity)
+            else:
+                activity.remove_attendant(user)
 
     def add_activity(self, activity):
         activity.pending_event = None
@@ -108,6 +122,9 @@ class Event (models.Model):
 
     ## -- USER ACTIONs
     def join(self, user):
+        if self.group_only_attendants and user not in self.group.member_list.all():
+            return
+
         if self.auto_register_users:
             self.attendants.add(user)
             self.num_members = self.attendants.count()

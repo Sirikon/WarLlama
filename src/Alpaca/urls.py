@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^activity/(?P<activity_id>[0-9]+)/edit/$', views.edit_activity, name='edit_activity'),
     url(r'^activity/join/(?P<activity_id>[0-9]+)$', views.join_activity, name='join_activity'),
     url(r'^activity/leave/(?P<activity_id>[0-9]+)$', views.leave_activity, name='leave_activity'),
-    url(r'^activity/kick/(?P<activity_id>[0-9]+)$', views.kick_attendant, name='kick_attendant'),
+    url(r'^activity/kick/(?P<activity_id>[0-9]+)$', views.activity_kick_attendant, name='activity_kick_attendant'),
     url(r'^activity/pending/(?P<activity_id>[0-9]+)$', views.activity_pending_requests, name='activity_pending_attendants'),
 
     url(r'^activity/(?P<activity_id>[0-9]+)/new/$', views.new_session, name='new_session'),
@@ -49,7 +49,7 @@ urlpatterns = [
     url(r'^event/(?P<event_id>[0-9]+)/edit/$', views.edit_event, name='edit_event'),
     url(r'^event/join/(?P<event_id>[0-9]+)$', views.join_event, name='join_event'),
     url(r'^event/leave/(?P<event_id>[0-9]+)$', views.leave_event, name='leave_event'),
-    url(r'^event/kick/(?P<event_id>[0-9]+)$', views.kick_attendant, name='kick_attendant'),
+    url(r'^event/kick/(?P<event_id>[0-9]+)$', views.event_kick_attendant, name='event_kick_attendant'),
     url(r'^event/attendants/(?P<event_id>[0-9]+)$', views.event_pending_attendants, name='event_pending_attendants'),
     url(r'^event/activities/(?P<event_id>[0-9]+)$', views.event_pending_activities, name='event_pending_activities'),
 ]

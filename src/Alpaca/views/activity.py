@@ -116,7 +116,7 @@ def leave_activity(request, activity_id):
 
 
 @login_required
-def kick_attendant(request, activity_id):
+def activity_kick_attendant(request, activity_id):
     set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
 

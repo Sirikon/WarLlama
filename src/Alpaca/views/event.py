@@ -31,6 +31,7 @@ def event(request, event_id):
     context['event'] = event
 
     if user.is_authenticated:
+        context['user_is_old_enough'] = event.is_user_old_enough(user)
         if user == event.group.superuser or user in event.group.admin_list.all():
             return render(request, 'Alpaca/event/event_admin.html', context)
         else:
@@ -120,7 +121,7 @@ def leave_event(request, event_id):
 
 ## ADMIN ACTIONS ##
 @login_required
-def kick_attendant(request, event_id):
+def event_kick_attendant(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)
 
@@ -138,7 +139,7 @@ def event_pending_attendants(request, event_id):
 
     if request.method == "POST":
         selected_user = get_object_or_404(User, id=request.POST.get("user_join_request"))
-        event.handle_user_request(user, "accept_request" in request.POST)
+        event.handle_user_request(selected_user, "accept_request" in request.POST)
 
     return HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
 

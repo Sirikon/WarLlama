@@ -35,6 +35,13 @@
     <div class="al-flex-row al-flex-adapt-content">
         <div class="al-content-panel">
             <small>{% trans "Settings:" %}</small>
+            <p>
+            {% if event.group_only_attendants %}
+                <b> {% trans "Only" %} {{ event.group.name }} {% trans "members" %} </b>
+            {% else %}
+                <b> {% trans "Any user" %}</b>
+            {% endif %}    
+            {% trans "can join this event." %} </p>
             <p>{% trans "Users may join this event" %}
             {% if event.auto_register_users %}
                 <b> {% trans "freely." %}</b>

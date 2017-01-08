@@ -43,10 +43,12 @@
     <div class="al-group-history">
         <div class="al-content-panel al-group-history-events">
             <h2>{% trans "Events" %}</h2>  
-            {% if group.event_list.count <= 0 %}
+            {% if group.event_set.count <= 0 %}
                 <p>{% trans "No events yet!" %}</p>
             {% else %}
-                {% include "./../partials/activity-card.html" %}
+                {% for event in group.event_set.all %}
+                    {% include "./../partials/event-card.html" %}            
+                {% endfor %}
             {% endif %}
         </div>
 
