@@ -18,7 +18,7 @@
             <p>{% trans "You are the one in charge of this group, the only one who can demote admins." %}</p>
             <form action="{% url 'alpaca:demote_admin' group.id %}" method="POST">
                 {% csrf_token %}
-                <select id="admin_list" name="member">
+                <select id="admin_list" name="selected_admin">
                 {% for admin in group.admin_list.all %}
                     <option value="{{admin.id}}">{{ admin.username }}</option>
                 {% endfor %}
@@ -42,7 +42,7 @@
     {% else %}
         <form action="{% url 'alpaca:handle_member' group.id %}" method="POST">
             {% csrf_token %}
-            <select id="member_list" name="member">
+            <select id="member_list" name="selected_member">
             {% for member in group.member_list.all %}
                 <option value="{{member.id}}">{{ member.username }}</option>
             {% endfor %}
@@ -60,7 +60,7 @@
             <p>{% trans "There are no pending requests to join the group." %}</p>
         {% else %}
             <p>{% trans "Manage the requests to join the group:" %}</p>
-            <form action="members/{{group.id}}" method="POST">
+            <form action="{% url 'alpaca:group_pending_members' group.id %}" method="POST">
                 {% csrf_token %}
                 <select id="pending_requests" name="user_join_request">
                 {% for member in group.pending_members.all %}
@@ -81,7 +81,7 @@
             <p>{% trans "There are no pending activities to confirm." %}</p>
         {% else %}
             <p>{% trans "Manage the activities that want to be related to this group:" %}</p>
-            <form action="activities/{{group.id}}" method="POST">
+            <form action="{% url 'alpaca:group_pending_activities' group.id %}" method="POST">
                 {% csrf_token %}
                 <select id="pending_requests" name="activity_request">
                 {% for act in group.pending_activities.all %}

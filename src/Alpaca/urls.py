@@ -27,10 +27,10 @@ urlpatterns = [
     url(r'^group/(?P<group_id>[0-9]+)/edit/$', views.edit_group, name='edit_group'),
     url(r'^group/join/(?P<group_id>[0-9]+)$', views.join_group, name='join_group'),
     url(r'^group/leave/(?P<group_id>[0-9]+)$', views.leave_group, name='leave_group'),
-    url(r'^group/members/(?P<group_id>[0-9]+)$', views.pending_members, name='pending_members'),
-    url(r'^group/activities/(?P<group_id>[0-9]+)$', views.pending_activities, name='pending_activities'),
     url(r'^group/action/(?P<group_id>[0-9]+)$', views.handle_member, name='handle_member'),
     url(r'^group/demote/(?P<group_id>[0-9]+)$', views.demote_admin, name='demote_admin'),
+    url(r'^group/members/(?P<group_id>[0-9]+)$', views.group_pending_members, name='group_pending_members'),
+    url(r'^group/activities/(?P<group_id>[0-9]+)$', views.group_pending_activities, name='group_pending_activities'),
 
     url(r'^activity/new/$', views.new_activity, name='new_activity'),
     url(r'^activity/(?P<activity_id>[0-9]+)$', views.activity, name='activity'),
@@ -38,7 +38,8 @@ urlpatterns = [
     url(r'^activity/join/(?P<activity_id>[0-9]+)$', views.join_activity, name='join_activity'),
     url(r'^activity/leave/(?P<activity_id>[0-9]+)$', views.leave_activity, name='leave_activity'),
     url(r'^activity/kick/(?P<activity_id>[0-9]+)$', views.kick_attendant, name='kick_attendant'),
-    url(r'^activity/pending/(?P<activity_id>[0-9]+)$', views.pending_requests, name='pending_requests'),
+    url(r'^activity/pending/(?P<activity_id>[0-9]+)$', views.activity_pending_requests, name='activity_pending_attendants'),
+
     url(r'^activity/(?P<activity_id>[0-9]+)/new/$', views.new_session, name='new_session'),
     url(r'^activity/(?P<activity_id>[0-9]+)/edit/(?P<session_id>[0-9]+)$', views.edit_session, name='edit_session'),
     url(r'^activity/(?P<activity_id>[0-9]+)/confirm/$', views.confirm_session, name='confirm_session'),
@@ -48,7 +49,7 @@ urlpatterns = [
     url(r'^event/(?P<event_id>[0-9]+)/edit/$', views.edit_event, name='edit_event'),
     url(r'^event/join/(?P<event_id>[0-9]+)$', views.join_event, name='join_event'),
     url(r'^event/leave/(?P<event_id>[0-9]+)$', views.leave_event, name='leave_event'),
-    url(r'^event/attendants/(?P<event_id>[0-9]+)$', views.pending_attendants, name='pending_attendants'),
-    url(r'^event/activities/(?P<event_id>[0-9]+)$', views.pending_activities, name='pending_activities'),
     url(r'^event/kick/(?P<event_id>[0-9]+)$', views.kick_attendant, name='kick_attendant'),
+    url(r'^event/attendants/(?P<event_id>[0-9]+)$', views.event_pending_attendants, name='event_pending_attendants'),
+    url(r'^event/activities/(?P<event_id>[0-9]+)$', views.event_pending_activities, name='event_pending_activities'),
 ]

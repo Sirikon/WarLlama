@@ -32,9 +32,7 @@
                             <i class="fa fa-sliders"></i> 
                             <span>{{user.username}}</span>
                         </a>
-                        {% if user.profile.avatar.name != "no-avatar.png" %}
-                            <div class="al-avatar-miniature" style="background-image: url({{user.profile.avatar.url}})"></div>
-                        {% endif %}
+                        <div class="al-avatar-miniature" style="background-image: url({{user.profile.avatar.url}})"></div>
                         <a href="/logout/"><i class="fa fa-sign-out"></i> {% trans "Log out" %}</a>
                     {% else %}
                         <a href="/login/"><i class="fa fa-sign-in"></i> {% trans "Log in" %}</a>

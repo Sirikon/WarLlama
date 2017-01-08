@@ -80,7 +80,7 @@ class Group (models.Model):
         self.save()
 
     def remove_member(self, user):
-        self.members.remove(user)
+        self.member_list.remove(user)
         self.total_num_members = self.member_count()
         self.save()
 
@@ -93,10 +93,6 @@ class Group (models.Model):
             self.admin_list.remove(user)
         self.save()
  
-    def add_activity(self, activity):
-        activity.pending_group = None
-        activity.group = self
-        activity.safe()
 
 
     ## -- USER ACTIONs
@@ -114,15 +110,15 @@ class Group (models.Model):
         #TO-DO: email_user_acted_on_your_activity(group, user, False)
     
     def kick(self, user):
-        self.remove_attendant(user)
+        self.remove_member(user)
         #TO-DO: email_you_were_kicked_out_from_group(self, selected_user)
 
     def promote(self, user):
-        self.set_member_rights(selected_user, to_admin=True)
+        self.set_member_rights(user, to_admin=True)
         #TO-DO: email you were promoted to admin at group 
 
     def demote(self, user):
-        self.set_member_rights(selected_user, to_admin=False)
+        self.set_member_rights(user, to_admin=False)
         #TO-DO: email you were demoted to member at group 
 
     def handle_user_request(self, user, is_accepted):
@@ -133,14 +129,16 @@ class Group (models.Model):
             self.pending_members.remove(user)   
             #TO-DO: email_your_request_was_handled(self, user, False)
             
-        self.total_num_members = self.members.count()
+        self.total_num_members = self.member_count()
         self.save()
    
     def handle_activity_request(self, activity, is_accepted):
         if is_accepted:
-            self.add_activity(activity)
+            activity.pending_group = None
+            activity.group = self
             #TO-DO: email_your_request_was_handled(self, user, True)
         else:
+            activity.group = None
             activity.pending_group = None  
             #TO-DO: email_your_request_was_handled(self, user, False)
         activity.save()

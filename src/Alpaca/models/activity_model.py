@@ -26,7 +26,6 @@ class Activity (models.Model):
                                null=True, blank=True,
                                default=no_cover_path )
 
-
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=5000)
     city = models.TextField(max_length=100)
@@ -92,12 +91,15 @@ class Activity (models.Model):
         self.save()
 
     def set_group(self, new_group):
-        if new_group is not None:
+        if new_group is None:
+            self.group = None
+        else:
             if new_group.auto_register_activities:
                 self.group = new_group
                 #TO-DO: email to group
             else:
                 self.pending_group = new_group
+                self.group = None
                 #TO-DO: email to group - pending activities
         self.save()  
 

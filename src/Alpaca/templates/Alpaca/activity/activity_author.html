@@ -11,7 +11,7 @@
     {% if activity.attendants.count <= 0 %}
         <p>{% trans "There are no users attending your activity." %}</p>
     {% else %}
-        <form action="kick/{{activity.id}}" method="POST">
+        <form action="{% url 'alpaca:kick_attendant' activity.id %}" method="POST">
             {% csrf_token %}
             <select id="attending_users" name="attending">
             {% for att in activity.attendants.all %}
@@ -30,7 +30,7 @@
             <p>{% trans "There are no pending requests to join the activity." %}</p>
         {% else %}
             <p>{% trans "Manage the requests to join the activity:" %}</p>
-            <form action="pending/{{activity.id}}" method="POST">
+            <form action="{% url 'alpaca:activity_pending_attendants' activity.id %}" method="POST">
                 {% csrf_token %}
                 <select id="pending_requests" name="user_join_request">
                 {% for att in activity.pending_attendants.all %}

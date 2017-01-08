@@ -3,11 +3,17 @@
 
 {% block title %}
     <div class="al-content-header">
-        <div class="al-event-banner" style="background-image: url({{event.banner.url}});">
-            {% if event.show_title %}
+        {% if event.banner.name == "False" %}
+            <div class="al-event-title">
                 <h1>{{ event.title }}</h1>
-            {% endif %}
-        </div>
+            </div>
+        {% else %}
+            <div class="al-event-banner" style="background-image: url({{event.banner.url}});">
+                {% if event.show_title %}
+                    <h1>{{ event.title }}</h1>
+                {% endif %}
+            </div>
+        {% endif %}
         <div class="al-event-banner-footer">
             <p>
                 <span class="location"><i class="fa fa-map-marker"></i><b>{{ event.city }}</b></span>

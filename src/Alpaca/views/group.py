@@ -114,16 +114,16 @@ def handle_member(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
 
     if request.method == "POST":
-        selected_user = get_object_or_404(User, id=request.POST.get("member"))
+        selected_member = get_object_or_404(User, id=request.POST.get("selected_member"))
         if "promote_member" in request.POST:
-            group.promote(selected_user)
+            group.promote(selected_member)
         elif "kick_member" in request.POST: 
-            group.kick(selected_user)
+            group.kick(selected_member)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
 @login_required
-def pending_members(request, group_id):
+def group_pending_members(request, group_id):
     set_translation(request)
     group = get_object_or_404(Group, pk=group_id)
 
@@ -134,7 +134,7 @@ def pending_members(request, group_id):
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))
 
 @login_required
-def pending_activities(request, group_id):
+def group_pending_activities(request, group_id):
     set_translation(request)
     group = get_object_or_404(Group, pk=group_id)
 
@@ -150,7 +150,7 @@ def demote_admin(request, group_id):
     group = get_object_or_404(Group, pk=group_id)
 
     if request.method == "POST":
-        selected_user = get_object_or_404(User, id=request.POST.get("member"))
-        group.demote(selected_user)
+        selected_admin = get_object_or_404(User, id=request.POST.get("selected_admin"))
+        group.demote(selected_admin)
 
     return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group_id}))

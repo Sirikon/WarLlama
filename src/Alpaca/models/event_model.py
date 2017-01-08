@@ -29,7 +29,7 @@ class Event (models.Model):
     banner = models.ImageField( upload_to=event_banner_path, 
                                storage=OverwriteStorage(),
                                null=True, blank=True,
-                               default=event_no_banner_path )
+                               default=no_banner_path )
 
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=5000)
@@ -70,44 +70,44 @@ class Event (models.Model):
         return temp
     
     ## -- SETs
-    def new(pub_date, group):
+    def new(self, pub_date, group):
         self.pub_date = pub_date
         self.group = group       
         self.save()  
         #TO-DO: email_registered_your_new_event(event) to group mail
 
-    def edit(cover, banner):
+    def edit(self, cover, banner):
         self.set_cover(cover)
         self.set_banner(banner)
 
-    def set_cover(cover):       
+    def set_cover(self, cover):       
         self.cover = cover
         self.save()  
 
-    def set_banner(cover):       
+    def set_banner(self, cover):       
         self.banner = banner
         self.save()  
 
-    def add_attendant(user):
+    def add_attendant(self, user):
         self.attendants.add(user)
         self.pending_attendants.remove(user)
         self.num_attendants = self.attendants.count()
         self.save()
 
-    def remove_attendant(user):
+    def remove_attendant(self, user):
         self.attendants.remove(user)
         self.num_attendants = self.attendants.count()
         self.save()
         for activity in self.activity_list.all():
             activity.remove_attendant(user)
 
-    def add_activity(activity):
+    def add_activity(self, activity):
         activity.pending_event = None
         activity.event = self
         activity.save()
 
     ## -- USER ACTIONs
-    def join(user):
+    def join(self, user):
         if self.auto_register_users:
             self.attendants.add(user)
             self.num_members = self.attendants.count()
@@ -117,15 +117,15 @@ class Event (models.Model):
             #TO-DO: email_user_requested_to_join(group, user)
         self.save()
 
-    def leave(user):
+    def leave(self, user):
         self.remove_attendant(user)
         #TO-DO: email_user_acted_on_your_activity(group, user, False)
 
-    def kick(user):
+    def kick(self, user):
         self.remove_attendant(user)
         #TO-DO: email_you_were_kicked_out_from_group(self, selected_user)
 
-    def handle_user_request(user, is_accepted):
+    def handle_user_request(self, user, is_accepted):
         if is_accepted:
             self.add_attendant(user)
             #TO-DO: email_your_request_was_handled(self, user, True)
@@ -136,7 +136,7 @@ class Event (models.Model):
         self.num_attendants = self.attendants.count()
         self.save()
    
-    def handle_activity_request(activity, is_accepted):
+    def handle_activity_request(self, activity, is_accepted):
         if is_accepted:
             self.add_activity(activity)
             #TO-DO: email_your_request_was_handled(self, user, True)

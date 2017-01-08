@@ -128,7 +128,7 @@ def kick_attendant(request, activity_id):
 
 
 @login_required
-def pending_requests(request, activity_id):
+def activity_pending_requests(request, activity_id):
     set_translation(request)
     activity = get_object_or_404(Activity, pk=activity_id)
 

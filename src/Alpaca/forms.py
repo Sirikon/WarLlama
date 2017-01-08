@@ -93,13 +93,13 @@ class ProfileForm(forms.ModelForm):
 
         if commit:
             user.save()
-            user.profile.avatar=self.cleaned_data["avatar"]
-            user.profile.birth_date=self.cleaned_data["birth_date"]
-            user.profile.show_birthday=self.cleaned_data["show_birthday"]
-            user.profile.show_email=self.cleaned_data["show_email"]
-            user.profile.show_real_name=self.cleaned_data["show_real_name"]
-            user.profile.display_name_format=self.cleaned_data["display_name_format"]
-            user.profile.language_preference=self.cleaned_data["language_preference"]
+            user.profile.avatar = self.cleaned_data["avatar"]
+            user.profile.birth_date = self.cleaned_data["birth_date"]
+            user.profile.show_birthday = self.cleaned_data["show_birthday"]
+            user.profile.show_email = self.cleaned_data["show_email"]
+            user.profile.show_real_name = self.cleaned_data["show_real_name"]
+            user.profile.display_name_format = self.cleaned_data["display_name_format"]
+            user.profile.language_preference = self.cleaned_data["language_preference"]
             user.profile.save()
         
         return user
@@ -129,8 +129,16 @@ class GroupForm(forms.ModelForm):
     def save_new(self, user):
         group = super(GroupForm, self).save(commit=False)
         group.new(timezone.now(), user)
+        group.logo = self.cleaned_data["logo"]
+        group.save()        
         return group
-         
+       
+    def save(self, commit=True):
+        group = super(GroupForm, self).save(commit=False)
+        if commit:
+            group.logo = self.cleaned_data["logo"]
+            group.save()        
+        return group  
 
 
 class ActivityForm(forms.ModelForm):
@@ -169,7 +177,22 @@ class ActivityForm(forms.ModelForm):
     def save_new(self, user):
         activity = super(ActivityForm, self).save(commit=False)
         activity.new(timezone.now(), user)  
+        group = self.cleaned_data["group"]
+        activity.set_group(group)
+        activity.save()
         return activity
+
+    def save(self, commit=True):
+        activity = super(ActivityForm, self).save(commit=False)
+
+        group = self.cleaned_data["group"]
+        activity.set_group(group)
+
+        if commit:
+            activity.cover = self.cleaned_data["cover"]
+            activity.save()        
+        return activity
+
 
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, label=_('Description'), max_length=500, widget=forms.Textarea)
@@ -197,6 +220,7 @@ class SessionForm(forms.ModelForm):
     def save_new(self, activity):
         session = super(SessionForm, self).save(commit=False)
         session.new(activity)  
+        session.save()
         return session
 
 
@@ -246,10 +270,35 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ("cover", "banner", "image_disclaimer", "title", "description", "city", "start_date", "end_date", "age_minimum", "show_title", "group_only_attendants", "auto_register_users", "auto_register_activities")
     
+    def clean(self):
+        super(EventForm, self).clean()
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+
+        if start_date <= timezone.now():
+            msg = _("The start date and time must be greater than today's date.")
+            self._errors["start_date"] = self.error_class([msg])
+
+        if end_date < start_date:
+            msg = _("The end date and time must be greater than the start date.")
+            self._errors["end_date"] = self.error_class([msg])
+
+
     def save_new(self, group):
-        event = super(SessionForm, self).save(commit=False)
+        event = super(EventForm, self).save(commit=False)
         event.new(timezone.now(), group)  
+        event.cover = self.cleaned_data["cover"]
+        event.banner = self.cleaned_data["banner"]
+        event.save()
         return event
+        
+    def save(self, commit=True):
+        event = super(EventForm, self).save(commit=False)
+        if commit:
+            event.cover = self.cleaned_data["cover"]
+            event.banner = self.cleaned_data["banner"]
+            event.save()        
+        return event  
 
 ## MINOR FORMS ##
 class ForgotPasswordForm(forms.Form):

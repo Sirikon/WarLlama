@@ -132,7 +132,7 @@ def kick_attendant(request, event_id):
 
 
 @login_required
-def pending_attendants(request, event_id):
+def event_pending_attendants(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)
 
@@ -144,7 +144,7 @@ def pending_attendants(request, event_id):
 
 
 @login_required
-def pending_activities(request, event_id):
+def event_pending_activities(request, event_id):
     set_translation(request)
     event = get_object_or_404(Event, pk=event_id)
 

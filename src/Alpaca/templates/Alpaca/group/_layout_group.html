@@ -15,6 +15,9 @@
             <span class="icon"><i class="fa fa-user"></i> {{ group.total_num_members }}</span>
             <span class="icon"><i class="fa fa-bookmark"></i> {{ group.creation_date }}</span>
         </p>
+        {% if group.show_email %}
+            <span class="icon"><i class="fa fa-envelope"></i> {{ group.email }}</span>
+        {% endif %}
     </div>
     <div class="al-group-user-section">
         {% block user_options %}{% endblock %}

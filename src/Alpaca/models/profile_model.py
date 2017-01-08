@@ -44,7 +44,7 @@ class Profile (models.Model):
         return self.user.username
 
     def __unicode__(self):
-        return u'{fn}/{ln}'.format(fn=self.first_name, ln=self.last_name)
+        return u'{fn}/{ln}'.format(fn=self.user.first_name, ln=self.user.last_name)
 
     # -- GETs
     def get_full_name(self):

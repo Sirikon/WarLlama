@@ -25,7 +25,7 @@ def no_cover_path():
     lucky_one = random.randint(0, len(alpaquitas) - 1)
     return "web/activities/Al-Paquita_{0}.png".format(alpaquitas[lucky_one])
     
-def event_no_banner_path():
+def no_banner_path():
     alpaquitas = ["Zero", "Branding", "Reversed", "Dark"]
     lucky_one = random.randint(0, len(alpaquitas) - 1)
     return "web/activities/Al-Paquita_{0}.png".format(alpaquitas[lucky_one])
