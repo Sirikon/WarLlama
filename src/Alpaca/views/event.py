@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _ ## For Multi-Language
 
 from ..models import Profile, Group, Event, Activity
-from ..forms import EventForm
+from ..forms import EventForm, ActivityForEventForm
 from ..emails import email_reset_password
 
 from ..utils import set_translation, sort_activities
@@ -56,7 +56,7 @@ def new_event(request, group_id):
 
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
-        if form.is_valid():
+        if form.is_valid_new():
             event = form.save_new(group)                     
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:
@@ -118,6 +118,32 @@ def leave_event(request, event_id):
         event.leave(user)
 
     return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
+
+@login_required
+def event_new_activity(request, event_id):
+    user = request.user
+    event = get_object_or_404(Event, pk=event_id)
+
+    if not event.is_user_attending(user):
+        return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event_id}))
+    
+    context = { 'form_title': _("Start a new activity"),
+                'submit_text': _("Create!"),
+                'rich_field_name': "description" }
+    
+    if request.method == "POST":
+        form = ActivityForEventForm(event.group, event, request.POST, request.FILES )
+        if form.is_valid():
+           activity = form.save_new(user)        
+           return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id} ))
+        else:
+           context['form'] = form
+           return render(request, 'Alpaca/_form_layout.html', context)
+    else:
+        context['form'] = ActivityForEventForm(group=event.group, event=event) 
+        return render(request, 'Alpaca/_form_layout.html', context)
+    
+
 
 ## ADMIN ACTIONS ##
 @login_required

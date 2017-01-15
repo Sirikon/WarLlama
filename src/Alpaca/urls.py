@@ -52,4 +52,5 @@ urlpatterns = [
     url(r'^event/kick/(?P<event_id>[0-9]+)$', views.event_kick_attendant, name='event_kick_attendant'),
     url(r'^event/attendants/(?P<event_id>[0-9]+)$', views.event_pending_attendants, name='event_pending_attendants'),
     url(r'^event/activities/(?P<event_id>[0-9]+)$', views.event_pending_activities, name='event_pending_activities'),
+    url(r'^event/(?P<event_id>[0-9]+)/activity/new/$', views.event_new_activity, name='event_new_activity'),
 ]

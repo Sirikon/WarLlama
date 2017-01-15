@@ -13,6 +13,9 @@
             {% csrf_token %}
             <input class="al-btn-action-big" type="submit" name="leave_event" value="{% trans 'Leave' %}"/>
         </form>
+        <a class="al-btn-action-big" href="{% url 'alpaca:event_new_activity' event.id %}">
+            <i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "New Activity" %}</span>
+        </a>
     {% else %}
         <form action="{% url 'alpaca:join_event' event.id %}" method="POST">
             {% csrf_token %}

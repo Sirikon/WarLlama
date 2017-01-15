@@ -22,7 +22,7 @@ class Group (models.Model):
                                 storage=OverwriteStorage(),
                                 null=True, blank=True,
                                 default="no-logo.png")
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     description = models.TextField(max_length=200)
     email = models.EmailField(max_length=254)
 
@@ -80,12 +80,19 @@ class Group (models.Model):
         self.save()
 
     def remove_member(self, user):
-        self.member_list.remove(user)
-        self.total_num_members = self.member_count()
+        if user is self.superuser:
+            self.superuser = self.admin_list.all()[:1].get()
+            # TO-DO: Email you're the new superuser of the group
+        elif user in self.admin_list.all():
+            self.admin_list.remove(user)
+        else:
+            self.member_list.remove(user)
+            self.total_num_members = self.member_count()
+            for event in self.event_set.all():
+                if event.group_only_attendants and event.start_date > timezone.now():
+                    event.remove_attendant(user)
+                
         self.save()
-        for event in self.event_set.all():
-            if event.group_only_attendants and event.start_date > timezone.now():
-                event.remove_attendant(user)
 
     def set_member_rights(self, user, to_admin):
         if to_admin:

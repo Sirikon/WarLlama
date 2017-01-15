@@ -8,6 +8,10 @@
     <a class="al-btn-action-big" href="{% url 'alpaca:new_event' group.id %}">
         <i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "New Event" %}</span>
     </a>
+    <form action="{% url 'alpaca:leave_group' group.id %}" method="POST">
+        {% csrf_token %}
+        <input class="al-btn-action-big" type="submit" name="leave_group" value="{% trans 'Leave' %}"/>
+    </form>
 {% endblock %}
 
 {% block admin_list %}

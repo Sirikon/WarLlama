@@ -31,7 +31,7 @@ class Event (models.Model):
                                null=True, blank=True,
                                default=no_banner_path )
 
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     description = models.TextField(max_length=5000)
     city = models.TextField(max_length=100)
     pub_date = models.DateTimeField('publication date')
@@ -69,6 +69,9 @@ class Event (models.Model):
         is_before_birthday = (today.month, today.day) < (born.month, born.day)
         elapsed_years = years_difference - int(is_before_birthday)
         return elapsed_years >= self.age_minimum
+
+    def is_user_attending(self, user):
+        return user in self.attendants.all() or user in self.group.admin_list.all() or user == self.group.superuser
 
     def get_short_description(self):
         temp = re.sub("(<img)(?<=(<img)).*?(?=>)(>)", " ", self.description)

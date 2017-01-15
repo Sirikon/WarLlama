@@ -96,11 +96,27 @@ class Activity (models.Model):
         else:
             if new_group.auto_register_activities:
                 self.group = new_group
+                self.pending_group = None
                 #TO-DO: email to group
             else:
                 self.pending_group = new_group
                 self.group = None
                 #TO-DO: email to group - pending activities
+        self.save()  
+
+    def set_event(self, new_event):
+        if new_event is None:
+            self.event = None
+        else:
+            self.city = new_event.city
+            if new_event.auto_register_activities:
+                self.event = new_event
+                self.pending_event = None
+                #TO-DO: email to event
+            else:
+                self.pending_event = new_event
+                self.event = None
+                #TO-DO: email to event - pending activities
         self.save()  
 
     def remove_attendant(self, user):

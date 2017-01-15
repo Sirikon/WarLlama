@@ -1,11 +1,10 @@
 {% extends './_layout_activity.html' %}
 {% load i18n %}
 
-{% block user_options %}    
-    {% if not user_is_old_enough %}
-        <p>{% trans "You are too young to attend this activity." %}</p>
-    {% elif user in activity.pending_attendants.all %}
-        <p>{% trans "The author of this activity has received your request to join!" %}</p>
+{% block user_options %}  
+
+    {% if not user_has_actions %}
+        <p>{{why_not_message}}</p>
     {% elif user in activity.attendants.all %}
         <form action="leave/{{activity.id}}" method="POST">
             {% csrf_token %}

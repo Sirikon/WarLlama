@@ -194,6 +194,60 @@ class ActivityForm(forms.ModelForm):
         return activity
 
 
+class ActivityForEventForm(forms.ModelForm):
+    title = forms.CharField(required=True, label=_('Title'), max_length=200)
+    description = forms.CharField(required=True, label=_('Description'), max_length=5000, widget=forms.Textarea)
+    cover = forms.ImageField(required=False, help_text=_("Covers are optional. You may change it at any time."))
+    cover_disclaimer = forms.CharField( disabled=True, 
+                                        widget=forms.Textarea(attrs={ 'rows': 3, 'cols': 10, 'style':'resize:none;'}), 
+                                        label="", 
+                                        initial=_("We would like to remind you that some images are copyrighted. We do not take responsibility for any copyright infrigements. The images will be deleted upon request of their rightful owner or their lawyers. Please, be aware of the rights you have over the image you want to upload before using it."))
+    
+    auto_register = forms.BooleanField(required=False, label=_('Allow auto-registration?'), help_text=_("Selected: Users join automatically. Not selected: Author decides to accept or reject joining requests."))
+    confirmation_period = forms.IntegerField(required=True, label=_('Confirmation period'), validators=[MinValueValidator(3)], initial=3, help_text=_("How many days before a session starts the assistance confirmation period?"))
+    age_minimum = forms.IntegerField(required=True, label=_('Age minimum'), initial=18, help_text=_("Minimum age to attend this activity."))
+    
+    ## ----------------------------------------
+    def __init__(self, group, event, *args, **kwargs):
+        super(ActivityForEventForm, self).__init__(*args, **kwargs)
+
+        self.fields['group_name'] = forms.CharField ( label=_('Group'), required=True, initial=group.name, disabled=True )
+        self.fields['event_name'] = forms.CharField ( label=_('Event'), required=True, initial=event.title, disabled=True )
+        self.fields['city']  = forms.CharField( label=_('City'), required=True, initial=event.city, disabled=True )
+
+    class Meta:
+        model = Activity
+        fields = ("title", "description", "cover", "cover_disclaimer", "city", "auto_register", "confirmation_period", "age_minimum")
+  
+    def clean(self):
+        super(ActivityForEventForm, self).clean()
+        
+        event = get_object_or_404(Event, title=self.cleaned_data["event_name"]) 
+        age_minimum = self.cleaned_data.get("age_minimum")
+
+        if age_minimum < event.age_minimum:
+            msg = _("The event's minimum attendant age is {age}. You activity's minimum age must be greater or equal to the event's.").format(age = event.age_minimum)
+            self._errors["age_minimum"] = self.error_class([msg])
+
+    def save_new(self, user):
+        activity = super(ActivityForEventForm, self).save(commit=False)
+        activity.new(timezone.now(), user)  
+
+        activity.group = get_object_or_404(Group, name=self.cleaned_data["group_name"]) # Created from events, activities are automatically linked to the group.
+        event = get_object_or_404(Event, title=self.cleaned_data["event_name"]) 
+        activity.set_event(event)
+
+        activity.save()
+        return activity
+
+    def save(self, commit=True):
+        activity = super(ActivityForEventForm, self).save(commit=False)
+        if commit:
+            activity.cover = self.cleaned_data["cover"]
+            activity.save()        
+        return activity
+
+
 class SessionForm(forms.ModelForm):
     description = forms.CharField(required=True, label=_('Description'), max_length=500, widget=forms.Textarea)
     start_date = forms.DateTimeField(required=True, label=_('Start date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
@@ -206,6 +260,7 @@ class SessionForm(forms.ModelForm):
 
     def clean(self):
         super(SessionForm, self).clean()
+        
         start_date = self.cleaned_data.get("start_date")
         end_date = self.cleaned_data.get("end_date")
 
@@ -216,6 +271,23 @@ class SessionForm(forms.ModelForm):
         if end_date < start_date:
             msg = _("The end date and time must be greater than the start date.")
             self._errors["end_date"] = self.error_class([msg])
+            
+        activity = self.instance
+        if activity.event != None:
+            event = get_object_or_404(Event, name=self.cleaned_data["event"]) 
+
+            if start_date < event.start_date or start_date > event.end_date:
+                msg = _("The event start date is {start_date} and end date is {end_date}. Your session must start in between those dates.")
+                msg = msg.format( start_date=event.start_date.date(), 
+                                end_date=event.end_date.date() )
+                self._errors["start_date"] = self.error_class([msg])
+
+            if end_date < event.end_date:
+                msg = _("The event start date is {start_date} and end date is {end_date}. Your session must end in between those dates.")
+                msg = msg.format( start_date=event.start_date.date(), 
+                                end_date=event.end_date.date() )
+                self._errors["start_date"] = self.error_class([msg])
+
 
     def save_new(self, activity):
         session = super(SessionForm, self).save(commit=False)
@@ -270,19 +342,26 @@ class EventForm(forms.ModelForm):
         model = Event
         fields = ("cover", "banner", "image_disclaimer", "title", "description", "city", "start_date", "end_date", "age_minimum", "show_title", "group_only_attendants", "auto_register_users", "auto_register_activities")
     
-    def clean(self):
-        super(EventForm, self).clean()
+    def is_valid_new(self):
+        super(EventForm, self).is_valid()
         start_date = self.cleaned_data.get("start_date")
-        end_date = self.cleaned_data.get("end_date")
 
         if start_date <= timezone.now():
             msg = _("The start date and time must be greater than today's date.")
             self._errors["start_date"] = self.error_class([msg])
 
+    def clean(self):
+        super(EventForm, self).clean()
+        start_date = self.cleaned_data.get("start_date")
+        end_date = self.cleaned_data.get("end_date")
+
         if end_date < start_date:
             msg = _("The end date and time must be greater than the start date.")
             self._errors["end_date"] = self.error_class([msg])
-
+            
+        if start_date < self.instance.start_date and start_date < timezone.now():
+            msg = _("You may bring forward the start date and time, but it must be greater than today's date.")
+            self._errors["start_date"] = self.error_class([msg])
 
     def save_new(self, group):
         event = super(EventForm, self).save(commit=False)

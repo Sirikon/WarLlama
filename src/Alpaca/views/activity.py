@@ -28,8 +28,28 @@ def activity(request, activity_id):
                 'activity': activity,
                 'session_list': session_list}
 
+
+
+
     if user.is_authenticated:
-        context['user_is_old_enough'] = activity.is_user_old_enough(user)
+        context['user_has_actions'] = True
+
+        if activity.pending_event != None:
+            context['user_has_actions'] = False
+            context['why_not_message'] = _("This activity is waiting to be part of an event! Come back later :)")        
+
+        elif activity.event != None and not activity.event.is_user_attending(user):
+            context['user_has_actions'] = False
+            context['why_not_message'] = _("This activity is part of an event. Join the event to attend this activity!")        
+            
+        elif not activity.is_user_old_enough(user):
+            context['user_has_actions'] = False
+            context['why_not_message'] = _("You are too young to attend this activity.")
+
+        elif user in activity.pending_attendants.all():
+            context['user_has_actions'] = False
+            context['why_not_message'] = _("The author of this activity has received your request to join!") 
+
         if user == activity.author:
             return render(request, 'Alpaca/activity/activity_author.html', context)
         else:
