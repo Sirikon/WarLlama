@@ -2,7 +2,7 @@
 
 
 <a class="al-card" href="{% url 'alpaca:event' event.id %}">
-    {% if event.cover.name != "False" %}
+    {% if event.cover and event.cover.name != "False" %}
         <div class="al-card-cover" style="background-image: url({{event.cover.url}});">  
         </div>
     {% endif %}

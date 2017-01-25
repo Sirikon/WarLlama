@@ -5,6 +5,7 @@ from django import http
 from django.conf import settings
 
 from itertools import chain
+from operator import attrgetter
 
 from models import *
 
@@ -34,6 +35,26 @@ def handle_form(sent_form, request, context, on_success_address, on_success_kwar
 
 
 
+
+# FILTER  & SORT FUNCTIONS
+def filter_activities(request, user, user_filter, activity_list):
+    if user.is_authenticated: # Can't filter for anons
+        if user_filter == "author":
+            activity_list = list(user.owned_activities.all())
+        elif user_filter == "attendant":
+            activity_list = list(user.attending_activities.all())
+
+    return activity_list  
+
+def filter_groups(request, user, user_filter, group_list):
+    if user.is_authenticated: # Can't filter for anons
+        if user_filter == "admin":
+            group_list = list(chain(user.admin_of.all(), user.superuser_of.all()))
+        elif user_filter == "member":
+            group_list = list(user.member_of.all())
+
+    return group_list
+
 def sort_activities(activity_list, sort_column, last_column):
     sort_sign = "-"
 
@@ -51,7 +72,7 @@ def sort_activities(activity_list, sort_column, last_column):
             sorted_list = sorted(has_sessions_list, key= lambda a: (a.get_next_session() or None ), reverse=(sort_sign=="-"))
 
         else:
-            sorted_list = sorted(activity_list, key= lambda a: a[sort_column], reverse=(sort_sign=="-"))
+            sorted_list = sorted(activity_list, key= attrgetter(sort_column), reverse=(sort_sign=="-"))
     else: 
          sorted_list = sorted(activity_list, key= lambda a: a.pub_date, reverse=True)
          sort_column = "pub_date"
@@ -67,27 +88,6 @@ def sort_activities(activity_list, sort_column, last_column):
 
     return context
 
-# FILTER  & ORDER FUNCTIONS
-def filter_activities(request, user, activity_list, user_filter):
-    if user.is_authenticated: # Can't filter for anons
-        if user_filter == "author":
-            if activity_list is list:
-                activity_list = filter(lambda act: act.author.id == user.id, activity_list)
-            else:
-                activity_list = activity_list.filter(author__id=user.id)
-        elif user_filter == "attendant":
-            activity_list = user.attending_activities  
-
-    return activity_list  
-
-def filter_groups(request, user, group_list, user_filter):
-    if user.is_authenticated: # Can't filter for anons
-        if user_filter == "admin":
-            group_list = user.admin_of
-        elif user_filter == "member":
-            group_list = user.member_of  
-
-    return group_list  
 
 # SEARCH FUNCTIONS - Courtesy of http://julienphalip.com/post/2825034077/adding-search-to-a-django-site-in-a-snap
 def normalize_query(query_string,

@@ -56,7 +56,7 @@ def new_event(request, group_id):
 
     if request.method == "POST":
         form = EventForm(request.POST, request.FILES)
-        if form.is_valid_new():
+        if form.is_valid():
             event = form.save_new(group)                     
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:

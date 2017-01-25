@@ -3,7 +3,7 @@
 
 {% block title %}
     <div class="al-content-header">
-        {% if event.banner.name == "False" %}
+        {% if not event.banner or event.banner.name == "False" %}
             <div class="al-event-title">
                 <h1>{{ event.title }}</h1>
             </div>

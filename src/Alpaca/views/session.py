@@ -30,7 +30,7 @@ def new_session(request, activity_id):
                 'rich_field_name': "description" }
 
     if request.method == "POST":
-        form = SessionForm(data=request.POST)
+        form = SessionForm(activity, data=request.POST)
         if form.is_valid():
             session = form.save_new(activity)
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
@@ -39,7 +39,7 @@ def new_session(request, activity_id):
             return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
-        context['form'] = SessionForm()
+        context['form'] = SessionForm(activity)
         return render(request, 'Alpaca/_form_layout.html', context)
 
 
@@ -58,7 +58,7 @@ def edit_session(request, activity_id, session_id):
                 'rich_field_name': "description" }
 
     if request.method == "POST":
-        form = SessionForm(data=request.POST, instance=session)
+        form = SessionForm(activity, data=request.POST, instance=session)
         if form.is_valid():
             form.save()  
             return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id}))
@@ -67,7 +67,7 @@ def edit_session(request, activity_id, session_id):
             return render(request, 'Alpaca/_form_layout.html', context)
 
     else:
-        context['form'] = SessionForm(instance=session)
+        context['form'] = SessionForm(activity, instance=session)
         return render(request, 'Alpaca/_form_layout.html', context)
 
 

@@ -18,20 +18,20 @@ def index(request):
     to_sort_column = request.GET.get('order_by')
     last_column = request.GET.get('last')
 
-    activity_list = search(request, "search", [Activity, Event], ['title', 'age_minimum', 'author__username', 'city', 'description'])    
-    
+    activity_list = search(request, "search", [Activity], ['title', 'age_minimum', 'author__username', 'city', 'description'])   
+    activity_list = filter_activities(request, user, user_filter, activity_list)
+
     if activity_list is None:
-        activity_list = list(chain(Activity.objects.all(), Event.objects.all()))
-
-    activity_list = filter_activities(request, user, activity_list, user_filter)
-    context = sort_activities(activity_list, to_sort_column, last_column)
-    
+        #activity_list = list(chain(Activity.objects.all(), Event.objects.all()))
+        activity_list = list(Activity.objects.all())
+        
     form = DateRangeFilterForm()
-    if "date_range_filter" in request.POST:
-        form = DateRangeFilterForm(data=request.POST)
-        if form.is_valid():
-            context['activity_list'] = form.get_activities(context['activity_list'])
+    #if "date_range_filter" in request.POST:
+    #    form = DateRangeFilterForm(data=request.POST)
+    #    if form.is_valid():
+    #        activity_list = form.get_activities(activity_list)
 
+    context = sort_activities(activity_list, to_sort_column, last_column)   
     context["current_filter"] = user_filter
     context['user'] = user
 
@@ -49,16 +49,15 @@ def group_index(request):
     user_filter = request.GET.get('filter')
 
     group_list = search(request, "search", Group, ['name', 'description', 'email'])    
+    group_list = filter_groups(request, user, user_filter, group_list)
     
     if group_list is None:
-        group_list = Group.objects
-
-    group_list = filter_groups(request, user, group_list, user_filter)
+        group_list = list(Group.objects.all())
     
     context = {
         "user": user,
         "current_filter": user_filter,
-        "group_list": group_list.all()
+        "group_list": group_list
     }
     return render(request, 'Alpaca/group/_group_index.html', context)
 

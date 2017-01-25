@@ -2,7 +2,7 @@
 
 
 <a class="al-card"href="/activity/{{activity.id}}">
-    {% if activity.cover.name != "False" %}
+    {% if not activity.cover or activity.cover.name != "False" %}
         <div class="al-card-cover" style="background-image: url({{activity.cover.url}});">  
         </div>
     {% endif %}

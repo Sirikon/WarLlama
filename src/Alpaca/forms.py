@@ -211,7 +211,6 @@ class ActivityForEventForm(forms.ModelForm):
     def __init__(self, group, event, *args, **kwargs):
         super(ActivityForEventForm, self).__init__(*args, **kwargs)
 
-        self.fields['group_name'] = forms.CharField ( label=_('Group'), required=True, initial=group.name, disabled=True )
         self.fields['event_name'] = forms.CharField ( label=_('Event'), required=True, initial=event.title, disabled=True )
         self.fields['city']  = forms.CharField( label=_('City'), required=True, initial=event.city, disabled=True )
 
@@ -233,7 +232,6 @@ class ActivityForEventForm(forms.ModelForm):
         activity = super(ActivityForEventForm, self).save(commit=False)
         activity.new(timezone.now(), user)  
 
-        activity.group = get_object_or_404(Group, name=self.cleaned_data["group_name"]) # Created from events, activities are automatically linked to the group.
         event = get_object_or_404(Event, title=self.cleaned_data["event_name"]) 
         activity.set_event(event)
 
@@ -254,9 +252,17 @@ class SessionForm(forms.ModelForm):
     end_date = forms.DateTimeField(required=True, label=_('End date and time'), help_text=_("Example: 1984-11-15 19:25:36"))
     location = forms.CharField(required=True, label=_('Location'), max_length=100, help_text=_("Where (place, address) will this session take place?"))
     
+    ## ----------------------------------------
+    def __init__(self, activity, *args, **kwargs):
+        super(SessionForm, self).__init__(*args, **kwargs)
+
+        self.activity = activity
+
+
     class Meta:
         model = Session
         fields = ("description", "start_date", "end_date", "location")
+
 
     def clean(self):
         super(SessionForm, self).clean()
@@ -272,9 +278,10 @@ class SessionForm(forms.ModelForm):
             msg = _("The end date and time must be greater than the start date.")
             self._errors["end_date"] = self.error_class([msg])
             
-        activity = self.instance
+        
+        activity = self.activity
         if activity.event != None:
-            event = get_object_or_404(Event, name=self.cleaned_data["event"]) 
+            event = activity.event
 
             if start_date < event.start_date or start_date > event.end_date:
                 msg = _("The event start date is {start_date} and end date is {end_date}. Your session must start in between those dates.")
@@ -282,7 +289,7 @@ class SessionForm(forms.ModelForm):
                                 end_date=event.end_date.date() )
                 self._errors["start_date"] = self.error_class([msg])
 
-            if end_date < event.end_date:
+            if end_date > event.end_date:
                 msg = _("The event start date is {start_date} and end date is {end_date}. Your session must end in between those dates.")
                 msg = msg.format( start_date=event.start_date.date(), 
                                 end_date=event.end_date.date() )
@@ -341,14 +348,7 @@ class EventForm(forms.ModelForm):
     class Meta:
         model = Event
         fields = ("cover", "banner", "image_disclaimer", "title", "description", "city", "start_date", "end_date", "age_minimum", "show_title", "group_only_attendants", "auto_register_users", "auto_register_activities")
-    
-    def is_valid_new(self):
-        super(EventForm, self).is_valid()
-        start_date = self.cleaned_data.get("start_date")
-
-        if start_date <= timezone.now():
-            msg = _("The start date and time must be greater than today's date.")
-            self._errors["start_date"] = self.error_class([msg])
+  
 
     def clean(self):
         super(EventForm, self).clean()
@@ -359,7 +359,11 @@ class EventForm(forms.ModelForm):
             msg = _("The end date and time must be greater than the start date.")
             self._errors["end_date"] = self.error_class([msg])
             
-        if start_date < self.instance.start_date and start_date < timezone.now():
+        if self.instance is None and start_date <= timezone.now():
+            msg = _("The start date and time must be greater than today's date.")
+            self._errors["start_date"] = self.error_class([msg])
+                
+        elif start_date < self.instance.start_date and start_date < timezone.now():
             msg = _("You may bring forward the start date and time, but it must be greater than today's date.")
             self._errors["start_date"] = self.error_class([msg])
 
