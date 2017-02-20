@@ -1,8 +1,8 @@
 {% extends './_layout_activity.html' %}
 {% load i18n %}
 
-{% block user_options %}    
-    <a class="al-btn-action-big" href="{% url 'alpaca:edit_activity' activity.id %}">
+{% block user_options %}
+    <a class="al-button al-activity-detail-join-button" href="{% url 'alpaca:edit_activity' activity.id %}">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
     </a>
 {% endblock %}
@@ -18,58 +18,58 @@
                 <option value="{{att.id}}">{{ att.username }}</option>
             {% endfor %}
             </select>
-            <input type="submit" class="al-btn-sqrflat-small" name="kick_participant" value="{% trans 'Kick out' %}"/>
+            <input type="submit" class="al-button al-button-inline" name="kick_participant" value="{% trans 'Kick out' %}"/>
         </form>
     {% endif %}
 {% endblock %}
 
 {% block requests %}
-    <div class="al-content-panel">
-        <small>{% trans "Pending requests:" %}</small>  
+    <div class="al-activity-detail-sidebar-section">
+        <h4 class="al-activity-detail-sidebar-section-header">{% trans "Pending requests:" %}</h4>
+
         {% if activity.pending_attendants.count <= 0 %}
             <p>{% trans "There are no pending requests to join the activity." %}</p>
         {% else %}
             <p>{% trans "Manage the requests to join the activity:" %}</p>
             <form action="{% url 'alpaca:activity_pending_attendants' activity.id %}" method="POST">
-                {% csrf_token %}
-                <select id="pending_requests" name="user_join_request">
-                {% for att in activity.pending_attendants.all %}
-                    <option value="{{att.id}}">{{ att.username }}</option>
-                {% endfor %}
-                </select>
-                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
-                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
+                <p>
+                    {% csrf_token %}
+                    <select id="pending_requests" name="user_join_request">
+                    {% for att in activity.pending_attendants.all %}
+                        <option value="{{att.id}}">{{ att.username }}</option>
+                    {% endfor %}
+                    </select>
+                    <input type="submit" class="al-button al-button-inline" name="accept_request" value="{% trans 'Accept' %}"/>
+                    <input type="submit" class="al-button al-button-inline" name="reject_request" value="{% trans 'Reject' %}"/>
+                </p>
             </form>  
         {% endif %}
+
     </div>
 {% endblock %}
 
 {% block session_list_menu %}
-    <a class="al-btn-action-small" href="{% url 'alpaca:new_session' activity.id %}">
+    <a class="al-button al-button-inline al-float-right" href="{% url 'alpaca:new_session' activity.id %}">
         <i class="fa fa-plus"></i> <span>{% trans "Add session" %}</span>
     </a>
 {% endblock %}
-    
-{% block session_extra_columns %}
-    <th>{% trans "State" %}</th>
-    <th>{% trans "Edit" %}</th>
-{% endblock %}      
- 
-{% block session_extra_cells %}
-    <td class="text-center">
+
+{% block session_state %}
+    <span class="al-float-right">
         {% if session.has_finished %}
-            <p>{% trans "Closed & Finished" %}</p>
+            {% trans "Closed & Finished" %}
         {% elif session.is_on_confirmation_period %}
-            <p>{% trans "Open for confirmation" %}</p>
+            {% trans "Open for confirmation" %}
         {% else %}
-            <p>{% trans "Not ready yet" %}</p>
+            {% trans "Not ready yet" %}
         {% endif %}
-    </td>
-    <td class="text-center">
-        {% if not session.has_finished %}
-            <a href="{% url 'alpaca:edit_session' activity.id session.id %}">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </a>
-        {% endif %}
-    </td>
-{% endblock %}       
+    </span>
+{% endblock %}
+
+{% block session_action %}
+    {% if not session.has_finished %}
+        <a class="al-button al-activity-detail-session-header-join-button al-float-right" href="{% url 'alpaca:edit_session' activity.id session.id %}">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> {% trans "Edit" %}
+        </a>
+    {% endif %}
+{% endblock %}

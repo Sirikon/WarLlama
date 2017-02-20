@@ -1,5 +1,7 @@
-@import '../global/variables';
+@import './variables';
+@import './global';
 
+/* ACTIVITY ITEM IN LIST */
 .al-activity {
     margin: 25px 0;
     padding: 1px 15px;
@@ -48,6 +50,148 @@
         > i {
             color: $brand;
             font-size: 5em;
+        }
+    }
+}
+
+/* ACTIVITY DETAIL PAGE */
+.al-activity-detail {
+    &-header {
+        margin: 2em 0 2.3em 0;
+        text-align: center;
+
+        &-title {
+            font-weight: 600;
+            color: $accent;
+            text-shadow: 0px 3px 0px rgba($accent, 0.2);
+            font-size: 3em;
+            margin: 0;
+        }
+    }
+    &-sidebar {
+        width: 250px;
+        min-width: 250px;
+        margin-left: 18px;
+        hr { border: none; border-bottom: 2px solid rgba($gray, 0.2); margin: 0.7em 0; }
+        &-section {
+            color: $gray;
+            &-header {
+                font-weight: 100;
+                color: $dark-gray;
+                margin: 0.7em 0 0.45em 0;
+            }
+        }
+    }
+    &-cover-image {
+        display: block;
+    }
+    &-join-button-wrapper {
+        padding: 5px 5px 8px 5px;
+    }
+    &-join-button.al-button {
+        font-size: 1.8em;
+        font-weight: 600;
+    }
+    &-no-action-message {
+        color: $dark-gray;
+        margin: 5px;
+    }
+    &-registration-info {
+        @extend .al-section-title;
+        border-bottom: 2px solid rgba($gray, 0.2);
+        padding: 0.3em 0 0.35em 0;
+        margin: 0;
+
+        &-max-age {
+            font-size: 0.75em;
+            background-color: $detail_red;
+            color: white;
+            border-radius: 3px;
+            float: right;
+            margin-top: 0.23em;
+            padding: 0.05em 0.2em;
+        }
+    }
+    &-attendants {
+        &-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            &-item {
+                margin-bottom: 12px;
+                a { text-decoration: none; color: inherit; }
+                &-avatar {
+                    width: 50px;
+                    height: 50px;
+                    background-size: cover;
+                    border-radius: 50%;
+                    box-shadow: 0 3px 0 rgba($dark-gray, 0.2);
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                &-name {
+                    color: $gray;
+                    vertical-align: middle;
+                    font-size: 1.1em;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+    &-description {
+        margin-top: 0;
+        &-footer {
+            font-size: .8em;
+            margin: -6px 0 1px 0;
+
+            &-date {
+                display: inline-block;
+                margin: 0.8em 0 1.2em 0;
+            }
+
+            &-author {
+                float: right;
+                text-decoration: none;
+                
+                &-avatar {
+                    width: 3em;
+                    height: 3em;
+                    background-size: cover;
+                    border-radius: 50%;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                &-name {
+                    font-family: 'Open Sans', sans-serif;
+                    font-weight: 600;
+                    font-size: 1.5em;
+                    color: $gray;
+                    vertical-align: middle;
+                    display: inline-block;
+                    margin: 0 .3em 0.2em .3em;
+                }
+            }
+        }
+    }
+    &-session {
+        &-header {
+            margin: 0.4em 0;
+            font-size: 1.4em;
+            font-weight: 400;
+            color: $detail_green;
+
+            &-join-button.al-button {
+                width: auto;
+                float: right;
+                font-size: 0.9em;
+            }
+        }
+        &-start-date,
+        &-location,
+        &-end-date {
+            margin: 0.4em 0;
+            color: $gray;
+            b { font-weight: 600; }
         }
     }
 }

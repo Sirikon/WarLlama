@@ -75,6 +75,9 @@ body {
     }
 }
 
+.al-float-right {
+    float: right;
+}
 
 .al-sticky-bar {
     position: fixed;
@@ -93,4 +96,23 @@ body {
 
 .clear-fix {
     clear: both;
+}
+
+.al-panel {
+    background-color: white;
+    box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.al-section-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: $gray;
+    margin: 1em 0 0.5em 0;
+
+    .al-button {
+        font-size: .7em;
+        margin-top: .2em;
+    }
 }

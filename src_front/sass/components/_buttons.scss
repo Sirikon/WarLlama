@@ -2,6 +2,40 @@ button {
     vertical-align: middle;
 }
 
+.al-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 3px;
+    padding: 0 0.4em;
+    padding-bottom: .1em;
+    color: white;
+    background-color: $accent;
+    box-shadow: 0px 3px 0px #126870;
+    cursor: pointer;
+    transition: all .1s ease;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1em;
+    box-sizing: border-box;
+
+    &-inline {
+        display: inline-block;
+        width: auto;
+    }
+
+    &:active {
+        transform: translate(0, 2px);
+        box-shadow: 0px 1px 0px #126870;
+    }
+}
+
 .al-btn-icon {
     color: $brand; 
     font-size: 0.8em;
