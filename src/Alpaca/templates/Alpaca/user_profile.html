@@ -1,26 +1,21 @@
 {% extends './_layout.html' %}
 {% load i18n %}
 
-{% block title %}
-<div class="al-content-header al-flex-row">
-    <div class="al-flex-grow">
-        <h1>{{ looking_at_user.profile.get_display_name }}</h1>
-    </div>
-    {% if user.username == looking_at_user.username %}
-        <div>
-            <a class="al-btn-action-big" href="{% url 'alpaca:edit_profile' %}">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
-            </a>
-        </div>
-    {% endif %}
-</div>
-{% endblock %}
-
 {% block content %}
+
+    <div class="al-flex-row al-margin-top">
+        <img draggable="false" class="al-margin-right al-rounded" src="{{ looking_at_user.profile.avatar.url}}" width="100px" height="auto"/>
+        <h1 class="al-title al-flex-grow">
+            <span>{{ looking_at_user.profile.get_display_name }}</span>
+            {% if user.username == looking_at_user.username %}
+                <a class="al-button al-button-inline al-float-right" href="{% url 'alpaca:edit_profile' %}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
+                </a>
+            {% endif %}
+        </h1>
+    </div>
+
     <div class="al-content-panel">
-        <img src="{{ looking_at_user.profile.avatar.url}}" width="100px" height="auto"/>
-
-
         {% if looking_at_user.profile.show_birthday %}
             <p><i class="fa fa-birthday-cake"></i> {{ looking_at_user.profile.birth_date }}</p>
         {% endif %}
@@ -30,7 +25,8 @@
         {% endif %}
     </div>
 
-    <h3>Activities organized by {{ looking_at_user.username }}</h3>
+    <div class="al-section-title">Activities organized by {{ looking_at_user.username }}</div>
+
     {% include "./partials/index-order-bar.html" %}
 
     <div class="al-activity-list">

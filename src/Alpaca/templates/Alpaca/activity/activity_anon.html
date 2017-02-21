@@ -14,7 +14,7 @@
         {% for att in activity.attendants.all %}
             <li class="al-activity-detail-attendants-list-item">
                 <a href="{% url 'alpaca:profile' att.username %}">
-                    <div class="al-activity-detail-attendants-list-item-avatar" style="background-image: url({{att.profile.avatar.url}})"></div>
+                    <div class="al-activity-detail-attendants-list-item-avatar al-circle" style="background-image: url({{att.profile.avatar.url}})"></div>
                     <span class="al-activity-detail-attendants-list-item-name">{{ att }}</span>
                 </a>
             </li>

@@ -1,15 +1,18 @@
 {% extends './_layout.html' %}
 {% load i18n %}
 
-{% block title %}<h1>{{form_title}}</h1>{% endblock %}
+{% block title %}{% endblock %}
 {% block content %}
+
+<h1 class="al-title">{{form_title}}</h1>
 
 <div class="al-content-panel">    
     <form method="POST" enctype="multipart/form-data" class="al-form-base al-layout-form">
         {% csrf_token %}
         {{ form.as_p }}
-        <div class="al-submit-wrapper">
-            <input type="submit" value="{{ submit_text }}"/>
+        <div class="al-margin-top al-margin-bottom">
+            <input class="al-button al-button-inline al-float-right" type="submit" value="{{ submit_text }}"></input>
+            <div class="clear-fix"></div>
         </div>
     </form>
 

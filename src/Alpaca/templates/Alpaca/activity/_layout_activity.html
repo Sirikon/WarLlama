@@ -19,7 +19,7 @@
                     <hr>
                     <div class="al-activity-detail-description-footer">
                         <a class="al-activity-detail-description-footer-author" href="{% url 'alpaca:profile' activity.author.username %}">
-                            <div class="al-activity-detail-description-footer-author-avatar" style="background-image: url({{activity.author.profile.avatar.url}})"></div>
+                            <div class="al-activity-detail-description-footer-author-avatar al-circle" style="background-image: url({{activity.author.profile.avatar.url}})"></div>
                             <span class="al-activity-detail-description-footer-author-name">{{ activity.author }}</span>
                         </a>
                         <i class="al-activity-detail-description-footer-date">{{ activity.pub_date }}</i>

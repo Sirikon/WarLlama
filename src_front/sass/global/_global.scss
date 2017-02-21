@@ -27,6 +27,18 @@ body {
     overflow-y: scroll;
 }
 
+.al-title {
+    font-weight: 600;
+    color: $accent;
+    margin: 0.9em 0 1em 0;
+
+    .al-button {
+        float: right;
+        font-size: .7em;
+        margin-top: .2em;
+    }
+}
+
 .al-text-tail {
     font-size: 0.7em;
     font-weight: 100;
@@ -79,6 +91,22 @@ body {
     float: right;
 }
 
+.al-margin-top {
+    margin-top: 18px;
+}
+
+.al-margin-right {
+    margin-right: 18px;
+}
+
+.al-margin-bottom {
+    margin-bottom: 18px;
+}
+
+.al-margin-left {
+    margin-left: 18px;
+}
+
 .al-sticky-bar {
     position: fixed;
     left: 0;
@@ -98,21 +126,25 @@ body {
     clear: both;
 }
 
-.al-panel {
-    background-color: white;
+.al-rounded {
     box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.1);
     border-radius: 3px;
+}
+
+.al-circle {
+    @extend .al-rounded;
+    border-radius: 50%;
+}
+
+.al-panel {
+    @extend .al-rounded;
+    background-color: white;
     overflow: hidden;
 }
 
 .al-section-title {
-    font-size: 1.5em;
-    font-weight: 600;
+    @extend .al-title;
+    font-size: 1.4em;
     color: $gray;
-    margin: 1em 0 0.5em 0;
-
-    .al-button {
-        font-size: .7em;
-        margin-top: .2em;
-    }
+    margin: 1em 0 0.5em 0; 
 }

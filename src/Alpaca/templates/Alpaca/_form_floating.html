@@ -4,9 +4,9 @@
     <form method="POST" class="al-form-base">
         {% csrf_token %}
         {{ form.as_p }}
-        <div class="al-submit-wrapper-edge">
-            <input class="al-submit-big" type="submit" value="{{ submit_text }}"/>
-        </div>
+        <p>
+            <input class="al-button" type="submit" value="{{ submit_text }}"/>
+        </p>
     </form>
     {% if rich_field_name != "" %}
     <script>
