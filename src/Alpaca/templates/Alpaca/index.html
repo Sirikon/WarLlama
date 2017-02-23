@@ -34,7 +34,9 @@
                 {% for item in activity_list %}
                     {% with item as activity %}
                         {% include "./shared/visuals/_activity-card.html" %}   
-                    {% endwith %}   
+                    {% endwith %}
+                {% empty %}
+                    {% include "./shared/visuals/_empty.html" with message="Your search returned <b>zero results</b>" %}
                 {% endfor %}
             </div>
         </div>

@@ -1,3 +1,14 @@
+@import './shared/global';
+@import './shared/layout';
+@import './shared/variables';
+@import './shared/flex';
+
+@import './shared/visuals/buttons';
+@import './shared/visuals/activity-table';
+@import './shared/visuals/card';
+@import './shared/visuals/empty';
+@import './shared/visuals/floating-box';
+
 @import './activity/activity';
 
 @import './event/event';
@@ -7,15 +18,5 @@
 @import './forms/panel-form';
 
 @import './group/group';
-
-@import './shared/visuals/floating-box';
-@import './shared/visuals/buttons';
-@import './shared/visuals/activity-table';
-@import './shared/visuals/card';
-
-@import './shared/global';
-@import './shared/layout';
-@import './shared/variables';
-@import './shared/flex';
 
 @import './user-profile/user-profile';

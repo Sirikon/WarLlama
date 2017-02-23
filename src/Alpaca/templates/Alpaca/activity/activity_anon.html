@@ -8,16 +8,5 @@
 {% endblock %}
 
 {% block attendants %}
-    {% if activity.attendants.count <= 0 %}
-        <p>{% trans "There are no users attending this activity, except" %} {{ activity.author }}.</p>
-    {% else %}    
-        {% for att in activity.attendants.all %}
-            <li class="al-activity-detail-attendants-list-item">
-                <a href="{% url 'alpaca:profile' att.username %}">
-                    <div class="al-activity-detail-attendants-list-item-avatar al-circle" style="background-image: url({{att.profile.avatar.url}})"></div>
-                    <span class="al-activity-detail-attendants-list-item-name">{{ att }}</span>
-                </a>
-            </li>
-        {% endfor %}
-    {% endif %}
+    {% include "./partials/_attendants-list.html" %}
 {% endblock %}

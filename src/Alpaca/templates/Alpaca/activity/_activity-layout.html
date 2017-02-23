@@ -70,6 +70,8 @@
                             {{ session.description | safe }}
                         </div>
                     </div>
+                {% empty %}
+                    {% include "../shared/visuals/_empty.html" with message="There isn't any session yet" %}
                 {% endfor %}
 
             </div>

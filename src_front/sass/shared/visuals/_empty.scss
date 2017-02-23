@@ -1,0 +1,9 @@
+@import '../variables';
+
+.al-empty {
+    padding: 1px 1em;
+    border: 3px dashed rgba(0,0,0,0.1);
+    border-radius: 3px;
+    color: $gray;
+    text-align: center;
+}
