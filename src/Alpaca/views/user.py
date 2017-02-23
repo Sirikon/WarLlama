@@ -48,11 +48,11 @@ def signup(request):
             
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_signup.html', context)
+            return render(request, 'Alpaca/signup/signup.html', context)
         
     else:
         context['form'] = ProfileCreationForm()
-        return render(request, 'Alpaca/form_signup.html', context)
+        return render(request, 'Alpaca/signup/signup.html', context)
 
 
 def activate(request):
@@ -103,10 +103,10 @@ def login(request):
                 return render(request, 'Alpaca/server_message.html', context)
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_login.html', context)
+            return render(request, 'Alpaca/login/login.html', context)
 
     context['form'] = AuthenticationForm() 
-    return render(request, 'Alpaca/form_login.html', context)
+    return render(request, 'Alpaca/login/login.html', context)
 
 def logout(request):
     set_translation(request)
@@ -143,10 +143,10 @@ def forgot_password(request):
 
         else:
             context['form'] = form
-            return render(request, 'Alpaca/_form_floating.html', context)
+            return render(request, 'Alpaca/shared/layouts/_form-floating-layout.html', context)
 
     context['form'] = ForgotPasswordForm()
-    return render(request, 'Alpaca/_form_floating.html', context)
+    return render(request, 'Alpaca/shared/layouts/_form-floating-layout.html', context)
 
 def reset_password(request):
     set_translation(request)
@@ -171,19 +171,19 @@ def reset_password(request):
                     'message_title': _("Great!"),
                     'message_body': _("Your new password is in place. Use it now to log in!")
                 }            
-                return render(request, 'Alpaca/server_message.html', context)
+                return render(request, 'Alpaca/server-message/server-message.html', context)
 
             else:
                 context['form'] = form
-                return render(request, 'Alpaca/_form_floating.html', context)
+                return render(request, 'shared/layouts/_form-floating-layout.html', context)
         else:
             context['form'] = NewPasswordForm()
-            return render(request, 'Alpaca/_form_floating.html', context)
+            return render(request, 'shared/layouts/_form-floating-layout.html', context)
         
     context['message_title'] = _('What are you doing here?')
     context['message_body'] = _('It seems like you got lost in our page. Click the Alpaca logo to go back to the index.')
 
-    return render(request, 'Alpaca/server_message.html', context)
+    return render(request, 'Alpaca/server-message/server-message.html', context)
 
 
 @login_required
@@ -202,11 +202,11 @@ def change_password(request):
             return  HttpResponseRedirect(reverse('alpaca:profile', kwargs={'username': user.username}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/_form_layout.html', context)
+            return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
     else:
         context['form'] = ChangePasswordForm()
-        return render(request, 'Alpaca/_form_layout.html', context)
+        return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
 
 ## -- USER MANAGEMENT -- ##
@@ -222,7 +222,7 @@ def profile(request, username):
     context['user'] = request.user
     context['looking_at_user'] = looking_at_user
                 
-    return render(request, 'Alpaca/user_profile.html', context)
+    return render(request, 'Alpaca/user-profile/user-profile.html', context)
 
 @login_required
 def edit_profile(request):
@@ -240,10 +240,10 @@ def edit_profile(request):
             return  HttpResponseRedirect(reverse('alpaca:profile', kwargs={'username': user.username}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/form_edit_profile.html', context)
+            return render(request, 'Alpaca/user-profile/form-edit-profile.html', context)
 
     else:
         context['form'] = ProfileForm(instance=user)
-        return render(request, 'Alpaca/form_edit_profile.html', context)
+        return render(request, 'Alpaca/user-profile/form-edit-profile.html', context)
 
 

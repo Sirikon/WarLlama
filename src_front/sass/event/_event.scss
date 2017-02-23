@@ -1,0 +1,80 @@
+@import '../shared/variables';
+
+.al-event {
+    margin: 25px 0;
+    padding: 1px 15px;
+
+    &-header  {
+        margin: 15px 0 25px 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-title {
+        background-color: $white;
+        height: 100%;
+        margin-top: 1em;
+        padding-top: 0.5em;
+        text-align: center;
+
+        border-radius: 3px 3px 0 0;
+    }
+
+    &-banner {
+        height: 300px;
+        background-position: center; 
+        background-size: cover;
+        background-repeat: no-repeat;
+        
+        margin: 0;
+        
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            font-size: 4em;
+        }
+
+        &-footer {
+            background-color: $white;
+            height: 30px;
+
+            border-radius: 0 0 3px 3px;
+            box-shadow: 0px 3px 0px rgba(0, 0, 0, 0.1);
+
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            i {
+                padding: 0 0.25em;
+            }
+
+            span {                
+                margin: 0 0.5em;
+            }
+            
+            span.location {
+               color: $dark-gray;
+            }
+
+            span.when {
+                i {
+                    color: $brand;
+                }
+            }
+        }
+    }
+
+    &-user-options {
+        margin-top: 1em;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+}

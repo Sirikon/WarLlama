@@ -1,4 +1,4 @@
-{% extends './_layout.html' %}
+{% extends './shared/layouts/_layout.html' %}
 {% load i18n %}
 
 {% block title %}
@@ -19,21 +19,21 @@
                 </a>
             {% endif %}
 
-            {% include "./partials/search-bar.html" %}
+            {% include "./shared/visuals/_search-bar.html" %}
             
             {% if user.is_authenticated %}
-                {% include "./partials/index-filter-panel.html" %}
+                {% include "./shared/visuals/_filter-panel.html" %}
             {% endif %}
             
             <!-- Where Panel -->
-            {% include "./partials/_form_panel.html" %}
+            {% include "./shared/visuals/_form-panel.html" %}
         </div>
         <div class="al-flex-grow">
             <div class="al-margin-left">
-                {% include "./partials/index-order-bar.html" %}
+                {% include "./shared/visuals/_order-bar.html" %}
                 {% for item in activity_list %}
                     {% with item as activity %}
-                        {% include "./partials/activity-card.html" %}   
+                        {% include "./shared/visuals/_activity-card.html" %}   
                     {% endwith %}   
                 {% endfor %}
             </div>

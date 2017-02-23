@@ -59,15 +59,14 @@ def group_index(request):
         "current_filter": user_filter,
         "group_list": group_list
     }
-    return render(request, 'Alpaca/group/_group_index.html', context)
+    return render(request, 'Alpaca/group-index/group-index.html', context)
 
 
 def about_us(request):
     set_translation(request)
-    return render(request, 'Alpaca/about_us.html')
+    return render(request, 'Alpaca/about-us/about-us.html')
 
 
 def terms_conditions(request):
     set_translation(request)
-    return render(request, 'Alpaca/terms_conditions.html')
-
+    return render(request, 'Alpaca/terms-conditions/terms-conditions.html')

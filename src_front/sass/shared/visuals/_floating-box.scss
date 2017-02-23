@@ -1,0 +1,36 @@
+@import '../variables';
+
+.al-floating-box {
+    max-width: 600px;
+    margin: auto;
+    padding: 40px 0 0 0;
+
+    &-title {
+        padding-bottom: 20px;
+
+        &-image {
+            width: 200px;
+            display: block;
+            margin: auto;
+        }
+    }
+
+    &-content {
+        form {
+            p label {
+                display: inline-block;
+                vertical-align: middle;
+            }
+            input {
+                font-size: 1.2em;
+                vertical-align: middle;
+
+                &[type="text"],
+                &[type="email"],
+                &[type="password"], {
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+}

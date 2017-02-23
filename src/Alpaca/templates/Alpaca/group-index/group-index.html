@@ -1,0 +1,33 @@
+{% extends '../shared/layouts/_layout.html' %}
+{% load i18n %}
+
+{% block content %}
+    <div class="al-flex-row al-flex-stretch-content">
+        <div class="al-flex-column">            
+            {% if user.is_authenticated %}
+                <a href="{% url 'alpaca:new_activity' %}" class="al-btn-sqrflat-big">
+                    <i class="fa fa-plus" aria-hidden="true"></i> 
+                    <span>{% trans "New Activity" %}</span>
+                </a>
+                <a href="{% url 'alpaca:new_group' %}" class="al-btn-sqrflat-big">
+                    <i class="fa fa-plus" aria-hidden="true"></i> 
+                    <span>{% trans "New Group" %}</span>
+                </a>
+            {% endif %}
+
+            {% include "../shared/visuals/_search-bar.html" %}
+            
+            {% if user.is_authenticated %}
+                {% include "./visuals/_group-filter-panel.html" %}
+            {% endif %}
+            
+        </div>
+        <div class="al-flex-grow">
+            <div class="al-item-list">
+                {% for group in group_list %}
+                    {% include "./visuals/_group-card.html" %}                
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

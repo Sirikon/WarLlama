@@ -61,11 +61,11 @@ def new_event(request, group_id):
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/_form_layout.html', context)
+            return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
     else:
         context['form'] = EventForm() 
-        return render(request, 'Alpaca/_form_layout.html', context)
+        return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
 
 @login_required
@@ -88,11 +88,11 @@ def edit_event(request, event_id):
             return  HttpResponseRedirect(reverse('alpaca:event', kwargs={'event_id': event.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/_form_layout.html', context)
+            return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
     else:
         context['form'] = EventForm(instance=event)
-        return render(request, 'Alpaca/_form_layout.html', context)
+        return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
 
 ## USER ACTIONS ##
@@ -138,10 +138,10 @@ def event_new_activity(request, event_id):
            return  HttpResponseRedirect(reverse('alpaca:activity', kwargs={'activity_id': activity.id} ))
         else:
            context['form'] = form
-           return render(request, 'Alpaca/_form_layout.html', context)
+           return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
     else:
         context['form'] = ActivityForEventForm(group=event.group, event=event) 
-        return render(request, 'Alpaca/_form_layout.html', context)
+        return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
     
 
 

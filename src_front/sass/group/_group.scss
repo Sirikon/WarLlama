@@ -1,0 +1,77 @@
+@import '../shared/variables';
+
+.al-group {
+
+    &-header {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        
+        &-title {   
+            width: 30%;         
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    &-description {
+        width: 30%;
+
+    }
+
+    &-data {
+        width: 30%;
+
+        i {
+            color: $brand;
+        }
+
+        span.icon {
+            margin-left: 0.25em;
+        }
+    }
+
+    &-user-section {
+        margin: 1em;
+    }
+
+    &-member-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+
+    &-history {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+
+        &-events {
+            width: 50%;
+            margin-right: 0.5em;
+            text-align: center;
+        }
+
+        &-activities {
+            width: 50%;
+            margin-left: 0.5em;
+            text-align: center;
+        }
+    }
+
+    &-requests {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-around;
+    }
+}

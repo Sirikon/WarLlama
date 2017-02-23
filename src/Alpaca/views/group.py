@@ -51,11 +51,11 @@ def new_group(request):
             return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/_form_layout.html', context)
+            return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
     else:
         context['form'] = GroupForm() 
-        return render(request, 'Alpaca/_form_layout.html', context)
+        return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
 @login_required
 def edit_group(request, group_id):
@@ -77,11 +77,11 @@ def edit_group(request, group_id):
             return  HttpResponseRedirect(reverse('alpaca:group', kwargs={'group_id': group.id}))
         else:
             context['form'] = form
-            return render(request, 'Alpaca/_form_layout.html', context)
+            return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
     else:
         context['form'] = GroupForm(instance=group)
-        return render(request, 'Alpaca/_form_layout.html', context)
+        return render(request, 'Alpaca/shared/layouts/_form-layout.html', context)
 
 
 ## USER ACTIONS ##

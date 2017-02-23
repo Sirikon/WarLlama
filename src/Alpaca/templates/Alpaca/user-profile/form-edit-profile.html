@@ -1,0 +1,8 @@
+{% extends '../shared/layouts/_form-layout.html' %}
+{% load i18n %}
+
+{% block other-content %}
+    <p>
+        <a href="{% url 'alpaca:change_password' %}">{% trans "Change your password" %}</a>
+    </p>
+{% endblock %}
