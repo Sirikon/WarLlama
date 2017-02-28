@@ -27,11 +27,15 @@
 
     <div class="al-section-title">Activities organized by {{ looking_at_user.username }}</div>
 
-    {% include "../shared/visuals/_order-bar.html" %}
+    {% if activity_list %}
+        {% include "../shared/visuals/_order-bar.html" %}
+    {% endif %}
 
     <div class="al-activity-list">
         {% for activity in activity_list %}
-            {% include "../shared/visuals/_activity-card.html" %}                
+            {% include "../shared/visuals/_activity-card.html" %}
+        {% empty %}
+            {% include "../shared/visuals/_empty.html" with message="There isn't any activity yet" %}
         {% endfor %}
     </div>
 
