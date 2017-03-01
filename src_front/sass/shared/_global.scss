@@ -27,6 +27,10 @@ body {
     overflow-y: scroll;
 }
 
+a {
+    color: $accent;
+}
+
 .al-title {
     font-weight: 600;
     color: $accent;
