@@ -1,0 +1,25 @@
+@import '../variables';
+
+.al-search-bar {
+    margin-top: 18px;
+    width: 250px;
+    &-magnifier {
+        font-size: 2em;
+        margin-right: 12px;
+        color: $gray;
+    }
+    &-input {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        font-size: 1.18em;
+        width: 0;
+        flex-grow: 1;
+        background-color: transparent;
+        border: none;
+        border-bottom: 3px solid rgba($gray, 0.2);
+        color: $accent;
+        font-weight: 600;
+        padding-bottom: 0.15em;
+    }
+}

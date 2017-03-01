@@ -2,18 +2,9 @@
 {% load i18n %}
 
 {% block content %}
+
     <div class="al-flex-row al-flex-stretch-content">
-        <div class="al-flex-column">            
-            {% if user.is_authenticated %}
-                <a href="{% url 'alpaca:new_activity' %}" class="al-btn-sqrflat-big">
-                    <i class="fa fa-plus" aria-hidden="true"></i> 
-                    <span>{% trans "New Activity" %}</span>
-                </a>
-                <a href="{% url 'alpaca:new_group' %}" class="al-btn-sqrflat-big">
-                    <i class="fa fa-plus" aria-hidden="true"></i> 
-                    <span>{% trans "New Group" %}</span>
-                </a>
-            {% endif %}
+        <div class="al-flex-column al-sidebar">
 
             {% include "../shared/visuals/_search-bar.html" %}
             
@@ -23,7 +14,7 @@
             
         </div>
         <div class="al-flex-grow">
-            <div class="al-item-list">
+            <div class="al-margin-left">
                 {% for group in group_list %}
                     {% include "./visuals/_group-card.html" %}
                 {% empty %}

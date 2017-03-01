@@ -1,20 +1,19 @@
 {% load i18n %}
 
-<div class="al-content-panel al-content-sidebar">
-    <h2>{% trans "Show" %}</h2>
-    <form name="filter_form" method="GET" class="al-form-base al-panel-form">
+<div class="al-sidebar-section">
+    {% comment %} TODO: Fully translate {% endcomment %}
+    <h2 class="al-sidebar-section-title">{% trans "Show" %}</h2>
+    <form name="filter_form" method="GET" class="al-form-base">
         <input type="radio" name="filter" onclick="location.href=this.value;" value="?filter=all" 
             {% if current_filter == "all" or current_filter is None%} checked {% endif %}> 
                 <span>{% trans "All Activities" %}</span> 
         <br>
         <input type="radio" name="filter" onclick="location.href=this.value;" value="?filter=author"
             {% if current_filter == "author" %} checked {% endif %}> 
-                <span>{% trans "My Activities" %}</span> 
+                <span>Las que organizo</span> 
         <br>
         <input type="radio" name="filter" onclick="location.href=this.value;" value="?filter=attendant"
             {% if current_filter == "attendant" %} checked {% endif %}> 
-                <span>{% trans "Activities I attend" %}</span>
+                <span>En las que participo</span>
     </form>
 </div>
-
-            

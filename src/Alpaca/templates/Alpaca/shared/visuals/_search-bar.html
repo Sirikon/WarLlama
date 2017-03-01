@@ -1,13 +1,6 @@
 {% load i18n %}
 
-<div class="al-content-panel al-content-sidebar">
-    <form name="search_form" method="GET" class="al-panel-form">
-        <span>
-            <i class="fa fa-search al-icon" aria-hidden="true"></i>
-            &nbsp;
-            <input type="text" class="search-bar" name="search" placeholder="{% trans 'Search...' %}">
-        </span>
-    </form>
-</div>
-
-            
+<form class="al-search-bar al-flex-row al-flex-align-end" name="search_form" method="GET">
+    <i class="fa fa-search al-search-bar-magnifier" aria-hidden="true"></i>
+    <input type="text" class="al-search-bar-input" name="search" placeholder="{% trans 'Search...' %}">
+</form>

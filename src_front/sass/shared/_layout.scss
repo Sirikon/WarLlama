@@ -16,6 +16,11 @@ $header-height: 60px;
         align-items: center;
         height: $header-height;
 
+        &-wrapper.al-flex-row {
+            justify-content: flex-start;
+            min-width: 250px + 18px;
+        }
+
         &-face {
             width: 67px;
             height: $header-height;
@@ -50,6 +55,37 @@ $header-height: 60px;
         }
     }
 
+    &-navigation {
+        &-option {
+            text-decoration: none;
+            display: inline-block;
+            line-height: 60px;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-right: 18px;
+            color: rgba(255,255,255,0.7);
+            box-shadow: inset 0px 0px 0px $accent;
+            transition: all 0.1s ease;
+
+            &:hover:not(.active) {
+                color: rgba(255,255,255,0.9);
+                box-shadow: inset 0px -2px 0px $accent;
+            }
+
+            &.active {
+                color: white;
+                box-shadow: inset 0px -4px 0px $accent;
+            }
+        }
+        &-action.al-button {
+            float: right;
+            font-size: 1.2em;
+            line-height: 40px;
+            margin-top: 8px;
+            padding: 0 10px;
+        }
+    }
+
     &-menu {
         margin: 0;
         text-align: right;
@@ -63,26 +99,21 @@ $header-height: 60px;
     }
 }
 
-.al-order-bar {
-    width: 100%;
+.al-sidebar {
+    width: 250px;
+    max-width: 250px;
 
-    margin: 18px 0;
-    
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    &-section {
+        @extend .al-panel;
+        margin-top: 18px;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px 12px 10px 12px;
 
-    &-item {
-        text-decoration: none;
-        color: $gray;
-        padding: 3px 7px;
-        border-radius: 3px;
-
-        &--active {
-            background-color: $accent;
-            color: white;
-            font-weight: bold;
+        &-title {
+            font-weight: 300;
+            color: $dark-gray;
+            margin: 0;
         }
     }
 }
@@ -111,20 +142,10 @@ $header-height: 60px;
 
         hr { border: none; border-bottom: 2px solid rgba($gray, 0.1); margin: 0.7em 0; }
     }
-    
-    &-sidebar {
-        width: 220px;
-        
-        h1, h2, h3 {
-            margin: 0;
-            font-weight: 300;
-            font-style: normal;
-        }
-    }
 }
 
 .al-footer {
-    background-color: $brand;
+    // background-color: $brand;
 
     right: 0;
     bottom: 0;
@@ -134,9 +155,33 @@ $header-height: 60px;
     padding: 0.10rem;
 
     &-content {
-        color: #fff;
+        color: $gray;
         max-width: $responsive-breakpoint;
         margin: auto;
         padding: 0 20px;
+    }
+
+    &-link {
+        color: $accent;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    &-side-detail {
+        font-size: .9em;
+        width: 250px;
+        text-align: left;
+        
+        &.al-float-right {
+            text-align: right;
+        }
+    }
+
+    .fa-code {
+        color: $brand;
+    }
+
+    .fa-heart {
+        color: $detail_red;
     }
 }
