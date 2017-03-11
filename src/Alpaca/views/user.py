@@ -44,7 +44,7 @@ def signup(request):
                 'message_body': _('Your user is not active at the moment. Please, verify your e-mail (it could end up in the spam folder).')
             }
             
-            return render(request, 'Alpaca/server_message.html', context)
+            return render(request, 'Alpaca/server-message/server-message.html', context)
             
         else:
             context['form'] = form
@@ -76,7 +76,7 @@ def activate(request):
         context['message_title'] = _('What are you doing here?')
         context['message_body'] = _('It seems like you got lost in our page. Click the Alpaca logo to go back to the index.')
 
-    return render(request, 'Alpaca/server_message.html', context)
+    return render(request, 'Alpaca/server-message/server-message.html', context)
 
 
 def login(request):
@@ -100,7 +100,7 @@ def login(request):
                     'message_title': _('Error'),
                     'message_body': _('This user is not active at the moment. Please, verify your e-mail.')
                 }
-                return render(request, 'Alpaca/server_message.html', context)
+                return render(request, 'Alpaca/server-message/server-message.html', context)
         else:
             context['form'] = form
             return render(request, 'Alpaca/login/login.html', context)
@@ -139,7 +139,7 @@ def forgot_password(request):
                 'message_title': _("Check your inbox!"),
                 'message_body': _("We have sent you an e-email that will help you get a new password.")
             }            
-            return render(request, 'Alpaca/server_message.html', context)
+            return render(request, 'Alpaca/server-message/server-message.html', context)
 
         else:
             context['form'] = form

@@ -14,11 +14,11 @@
             
         </div>
         <div class="al-flex-grow">
-            <div class="al-margin-left">
+            <div class="al-margin-left al-margin-top">
                 {% for group in group_list %}
                     {% include "./visuals/_group-card.html" %}
                 {% empty %}
-                    {% include "./shared/visuals/_empty.html" with message="Your search returned <b>zero results</b>" %}
+                    {% include "../shared/visuals/_empty.html" with message="Your search returned <b>zero results</b>" %}
                 {% endfor %}
             </div>
         </div>
