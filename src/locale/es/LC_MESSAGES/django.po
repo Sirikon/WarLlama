@@ -8,31 +8,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-02 17:52+0100\n"
+"POT-Creation-Date: 2017-03-12 21:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
 #. Translators: This is the signing part of an email.
-#: .\Alpaca\emails.py:28
+#: .\Alpaca\emails.py:29
 msgid "Always watching over you,"
-msgstr "Siempre pendiente de todo, "
+msgstr ""
 
-#: .\Alpaca\emails.py:28
+#: .\Alpaca\emails.py:29
 msgid "Big Evil Llama"
-msgstr "Gran Llama Malvada"
-
-#: .\Alpaca\emails.py:50
-msgid "Alpaca: Confirm your account"
-msgstr "Alpaca: Confirma tu cuenta"
+msgstr ""
 
 #: .\Alpaca\emails.py:51
-#, python-brace-format
+msgid "Alpaca: Confirm your account"
+msgstr ""
+
+#: .\Alpaca\emails.py:52
 msgid ""
 "Hi!{newline}I'm the Big Evil Llama. I watch over every activity in my land, "
 "{alpaca_link}.{newline}It seems like you wanted to become one of my alpacas! "
@@ -42,14 +39,11 @@ msgid ""
 "Big Evil Llama"
 msgstr ""
 
-#: .\Alpaca\emails.py:77
-#, fuzzy
-#| msgid "Change your password"
-msgid "Alpaca: Reset your password"
-msgstr "Cambia tu contraseña"
-
 #: .\Alpaca\emails.py:78
-#, python-brace-format
+msgid "Alpaca: Reset your password"
+msgstr ""
+
+#: .\Alpaca\emails.py:79
 msgid ""
 "Hi, {username}!{newline}You are receiving this message because you forgot "
 "your password and asked for a new one.{jumpline}You may do so by clicking "
@@ -58,16 +52,15 @@ msgid ""
 "{email_signature}"
 msgstr ""
 
-#: .\Alpaca\emails.py:111
+#: .\Alpaca\emails.py:112
 msgid "Your Activity \""
-msgstr "¡Tu Actividad \""
-
-#: .\Alpaca\emails.py:111
-msgid "\" was succesfully registered!"
-msgstr "\" se ha registrado correctamente!"
+msgstr ""
 
 #: .\Alpaca\emails.py:112
-#, python-brace-format
+msgid "\" was succesfully registered!"
+msgstr ""
+
+#: .\Alpaca\emails.py:113
 msgid ""
 "Hi, {author}!{newline}Your activity \"{title}\" has been succesfully "
 "registered, and you may start sharing it by using the following link: "
@@ -75,548 +68,463 @@ msgid ""
 "until some time has passed, but it is already fully functional.{newline}Have "
 "fun! I hope everything goes as you expect it <3 {email_signature}"
 msgstr ""
-"¡Hola, {author}!{newline}¡Tu Actividad \"{title}\" sse ha registrado "
-"correctamente, y puedes empezar a compartirla usando el siguiente link: "
-"{activity_link}.{newline}Puede que tu actividad no aparezca en la página "
-"principal hasta pasado un tiempo, pero ya es completamente funcional."
-"{newline} ¡Diviértete! Espero que todo vaya como esperas <3 {email_signature}"
-
-#: .\Alpaca\emails.py:135
-msgid "joined"
-msgstr "unido"
-
-#: .\Alpaca\emails.py:137
-msgid "left"
-msgstr "ido"
-
-#: .\Alpaca\emails.py:139
-msgid " has "
-msgstr " se ha "
-
-#: .\Alpaca\emails.py:139
-msgid " your activity, "
-msgstr " a tu actividad, "
 
 #: .\Alpaca\emails.py:140
-#, python-brace-format
+msgid "joined"
+msgstr ""
+
+#: .\Alpaca\emails.py:142
+msgid "left"
+msgstr ""
+
+#: .\Alpaca\emails.py:144
+msgid " has "
+msgstr ""
+
+#: .\Alpaca\emails.py:144
+msgid " your activity, "
+msgstr ""
+
+#: .\Alpaca\emails.py:145
 msgid ""
 "Hi, {author}!{newline}{attendant} has {action} your activity, {title}."
 "{jumpline}You can manage your activity at {activity_link}.{email_signature}"
 msgstr ""
-"¡Hola, {author}!{newline}{attendant} ha {action} tu actividad, {title}."
-"{jumpline}Puedes gestionar tu actividad en {activity_link}.{email_signature}"
 
-#: .\Alpaca\emails.py:167
+#: .\Alpaca\emails.py:172
 msgid " requested to join "
-msgstr " ha solicitado unirse a "
+msgstr ""
 
-#: .\Alpaca\emails.py:168
-#, python-brace-format
+#: .\Alpaca\emails.py:173
 msgid ""
 "Hi, {author}!{newline}{attendant} has requested to join your activity, "
 "{title}.{jumpline}You can manage this and any other requests at "
 "{activity_link}.{email_signature}"
 msgstr ""
-"¡Hola, {author}!{newline}{attendant} ha solicitado unirse a tu actividad, "
-"{title}.{jumpline}Puedes gestionar ésta y otras peticiones en "
-"{activity_link}.{email_signature}"
 
-#: .\Alpaca\emails.py:195
+#: .\Alpaca\emails.py:200
 msgid " confirmed assistance on your activity, "
-msgstr " ha confirmado su asistencia a tu actividad, "
+msgstr ""
 
-#: .\Alpaca\emails.py:196
-#, python-brace-format
+#: .\Alpaca\emails.py:201
 msgid ""
 "Hi, {author}!{newline}Congratulations! {attendant} has confirmed assistance "
 "to the {date}'s session!{jumpline}You can manage your activity at "
 "{activity_link}.{newline}I hope everything goes as you expect it <3 "
 "{email_signature}"
 msgstr ""
-"¡Hola, {author}!{newline}¡Felicidades! ¡{attendant} ha confirmado su "
-"asistencia a la sesión del {date}!{jumpline}Puedes gestionar tu actividad en "
-"{activity_link}.{newline}Espero que todo vaya como esperas <3 "
-"{email_signature}"
 
-#: .\Alpaca\emails.py:223
+#: .\Alpaca\emails.py:228
 msgid "You have been removed from the activity "
-msgstr "Has sido eliminado de la actividad "
+msgstr ""
 
-#: .\Alpaca\emails.py:224
-#, python-brace-format
+#: .\Alpaca\emails.py:229
 msgid ""
 "Hi, {attendant},{newline}I regret to inform you that you have been removed "
 "from the activity {title}.{newline}However, don't forget there are many "
 "other activities waiting for you at {alpaca_link}.{email_signature}"
 msgstr ""
-"Hola, {attendant},{newline}Lamento informarte de que has sido eliminado de "
-"la actividad {title}.{newline}Sin embargo, no olvides que hay muchas otras "
-"actividades esperándote en {alpaca_link}.{email_signature}"
-
-#: .\Alpaca\emails.py:251
-msgid "accepted"
-msgstr "aceptada"
-
-#: .\Alpaca\emails.py:253
-msgid "rejected"
-msgstr "rechazada"
-
-#: .\Alpaca\emails.py:255
-msgid " request to join the activity "
-msgstr " petición para unirse a la actividad "
 
 #: .\Alpaca\emails.py:256
-#, python-brace-format
+msgid "accepted"
+msgstr ""
+
+#: .\Alpaca\emails.py:258
+msgid "rejected"
+msgstr ""
+
+#: .\Alpaca\emails.py:260
+msgid " request to join the activity "
+msgstr ""
+
+#: .\Alpaca\emails.py:261
 msgid ""
 "Hi, {attendant},{newline}Your request to join the activity {title} has been "
 "{action}.{newline}Don't forget there are many other activities waiting for "
 "you at {alpaca_link}.{email_signature}"
 msgstr ""
-"Hola, {attendant},{newline}Tu petición para unirte a la actividad {title} ha "
-"sido {action}.{newline}No olvides que hay muchas otras actividades "
-"esperándote en {alpaca_link}.{email_signature}"
 
-#: .\Alpaca\emails.py:285
+#: .\Alpaca\emails.py:290
 msgid "Updated: Activity "
-msgstr "Actualizado: Actividad "
+msgstr ""
 
-#: .\Alpaca\emails.py:286
-#, python-brace-format
+#: .\Alpaca\emails.py:291
 msgid ""
 "Hi, {attendant}!{newline}You are receiving this message because the activity "
 "{title} was updated!{newline}Check it out at {activity_link}."
 "{email_signature}"
 msgstr ""
-"¡Hola, {attendant}!{newline}¡Has recibido este mensaje porque la actividad "
-"{title} ha sido actualizada!{newline}Comprueba los cambios en "
-"{activity_link}.{email_signature}"
 
-#: .\Alpaca\emails.py:314
+#: .\Alpaca\emails.py:319
 msgid "New Session in Activity "
-msgstr "Nueva Sesión en la Actividad "
+msgstr ""
 
-#: .\Alpaca\emails.py:315
-#, python-brace-format
+#: .\Alpaca\emails.py:320
 msgid ""
 "Hi, {attendant}!{newline}You are receiving this message because the activity "
 "{title} was updated with new sessions!{newline}Check them out at "
 "{activity_link}.{newline}Hope to see you there <3{email_signature}"
 msgstr ""
-"¡Hola, {attendant}!{newline}¡Has recibido este mensaje porque la actividad "
-"{title} ha sido actualizada con nuevas sesiones!{newline}Compruébalas en "
-"{activity_link}.{newline}Esperamos verte allí <3{email_signature}"
 
-#: .\Alpaca\emails.py:343
+#: .\Alpaca\emails.py:348
 msgid "You can confirm your assistance!"
-msgstr "¡Puedes confirmar tu asistencia!"
+msgstr ""
 
-#: .\Alpaca\emails.py:344
-#, python-brace-format
+#: .\Alpaca\emails.py:349
 msgid ""
 "Hi, {attendant}!{newline}The activity {title} is requesting attending users "
 "to confirm their assistance to {date}'s session! You may do so by going to "
 "the activity's page:{activity_link}.{newline}We hope to see you there <3 "
 "{email_signature}"
 msgstr ""
-"¡Hola, {attendant}!{newline}¡La actividad {title} pide a los usuarios que "
-"deseen atender que confirmen su asistencia a la sesión del {date}! Puedes "
-"hacerlo yendo a la página de la actividad: {activity_link}.{newline}"
-"Esperamos verte allí <3 {email_signature}"
 
-#: .\Alpaca\forms.py:18 .\Alpaca\forms.py:85
+#: .\Alpaca\forms.py:18 .\Alpaca\forms.py:111
 msgid "E-mail"
-msgstr "E-mail"
+msgstr ""
 
 #: .\Alpaca\forms.py:19 .\Alpaca\forms.py:57
 msgid "Birth date"
-msgstr "Fecha de nacimiento"
+msgstr ""
 
 #: .\Alpaca\forms.py:20 .\Alpaca\forms.py:55
 msgid "First Name"
-msgstr "Nombre"
+msgstr ""
 
 #: .\Alpaca\forms.py:20 .\Alpaca\forms.py:21 .\Alpaca\forms.py:55
 #: .\Alpaca\forms.py:56
 msgid "Optional"
-msgstr "Opcional"
+msgstr ""
 
 #: .\Alpaca\forms.py:21 .\Alpaca\forms.py:56
 msgid "Last Name"
-msgstr "Apellido/s"
+msgstr ""
 
 #: .\Alpaca\forms.py:23 .\Alpaca\forms.py:72 .\WarLlama\settings.py:157
 msgid "English"
-msgstr "Inglés"
+msgstr ""
 
 #: .\Alpaca\forms.py:24 .\Alpaca\forms.py:73 .\WarLlama\settings.py:158
 msgid "Spanish"
-msgstr "Español"
+msgstr ""
 
 #: .\Alpaca\forms.py:25 .\Alpaca\forms.py:74 .\WarLlama\settings.py:159
 msgid "Euskera"
-msgstr "Euskera"
+msgstr ""
 
 #: .\Alpaca\forms.py:26 .\Alpaca\forms.py:75
 msgid "Language"
-msgstr "Lenguaje"
+msgstr ""
 
 #: .\Alpaca\forms.py:26 .\Alpaca\forms.py:75
 msgid "In which language would you prefer to use Alpaca?"
-msgstr "¿En qué lenguaje preferirías usar Alpaca?"
+msgstr ""
 
 #: .\Alpaca\forms.py:30
-#, fuzzy
-#| msgid "Terms and Conditions"
 msgid "I accept the Terms and Conditions"
-msgstr "Términos y Condiciones"
+msgstr ""
 
 #: .\Alpaca\forms.py:59
 msgid "Show your birthday?"
-msgstr "¿Mostrar tu cumpleaños?"
+msgstr ""
 
 #: .\Alpaca\forms.py:60
 msgid "Show your e-mail?"
-msgstr "¿Mostrar tu e-mail?"
+msgstr ""
 
 #: .\Alpaca\forms.py:61
 msgid "Show your real name?"
-msgstr "¿Mostrar tu nombre real?"
+msgstr ""
 
 #: .\Alpaca\forms.py:63
 msgid "Username (Full Name)"
-msgstr "Usuario (Nombre Completo)"
+msgstr ""
 
 #: .\Alpaca\forms.py:64
 msgid "Full Name (Username)"
-msgstr "Nombre Completo (Usuario)"
+msgstr ""
 
 #: .\Alpaca\forms.py:65
 msgid "Username (First Name)"
-msgstr "Usuario (Nombre)"
+msgstr ""
 
 #: .\Alpaca\forms.py:66
 msgid "Username (Last Name)"
-msgstr "Usuario (Apellido)"
+msgstr ""
 
 #: .\Alpaca\forms.py:67
 msgid "First Name (Username)"
-msgstr "Nombre (Usuario)"
+msgstr ""
 
 #: .\Alpaca\forms.py:68
 msgid "Last Name (Username)"
-msgstr "Apellido (Usuario)"
+msgstr ""
 
 #: .\Alpaca\forms.py:70
 msgid "How should your name be displayed?"
-msgstr "¿Cómo deberíamos enseñar tu nombre?"
+msgstr ""
 
 #: .\Alpaca\forms.py:70
 msgid "You can ignore this if you chose not to show your name."
-msgstr "Puedes ignorar esta opción si has elegido no mostrar tu nombre."
+msgstr ""
 
-#: .\Alpaca\forms.py:83
-#, fuzzy
-#| msgid "First Name"
+#: .\Alpaca\forms.py:109
 msgid "Group Name"
-msgstr "Nombre"
+msgstr ""
 
-#: .\Alpaca\forms.py:84 .\Alpaca\forms.py:112 .\Alpaca\forms.py:149
-#: .\Alpaca\forms.py:186
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:81
+#: .\Alpaca\forms.py:110 .\Alpaca\forms.py:146 .\Alpaca\forms.py:199
+#: .\Alpaca\forms.py:250 .\Alpaca\forms.py:315
 msgid "Description"
-msgstr "Descripción"
+msgstr ""
 
-#: .\Alpaca\forms.py:87
-#, fuzzy
-#| msgid "Show your e-mail?"
+#: .\Alpaca\forms.py:113
 msgid "Show the group's e-mail?"
-msgstr "¿Mostrar tu e-mail?"
+msgstr ""
 
-#: .\Alpaca\forms.py:90 .\Alpaca\forms.py:209
-#, fuzzy
-#| msgid "Allow auto-registration?"
+#: .\Alpaca\forms.py:116 .\Alpaca\forms.py:338
 msgid "Allow user auto-registration?"
-msgstr "¿Permitir auto-registro?"
+msgstr ""
 
-#: .\Alpaca\forms.py:91 .\Alpaca\forms.py:210
-#, fuzzy
-#| msgid ""
-#| "Selected: Users join automatically. Not selected: Author decides to "
-#| "accept or reject joining requests."
+#: .\Alpaca\forms.py:117 .\Alpaca\forms.py:339
 msgid ""
 "Selected: Users join the group automatically. Not selected: Admins decide to "
 "accept or reject joining requests."
 msgstr ""
-"Seleccionado: Los usuarios podrán unirse a la actividad automáticamente. No "
-"seleccionado: El autor de la actividad decideaceptar o rechazar las "
-"peticiones de aquellos que quieran unirse."
 
-#: .\Alpaca\forms.py:95 .\Alpaca\forms.py:215
-#, fuzzy
-#| msgid "Allow auto-registration?"
+#: .\Alpaca\forms.py:121 .\Alpaca\forms.py:344
 msgid "Allow activity auto-registration?"
-msgstr "¿Permitir auto-registro?"
+msgstr ""
 
-#: .\Alpaca\forms.py:96 .\Alpaca\forms.py:216
+#: .\Alpaca\forms.py:122 .\Alpaca\forms.py:345
 msgid ""
 "Your group may have organize activities! Are members allowed to relate any "
 "of their activities to this group?"
 msgstr ""
 
-#: .\Alpaca\forms.py:111
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:8
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:6
+#: .\Alpaca\forms.py:145 .\Alpaca\forms.py:198
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:8
 msgid "Title"
-msgstr "Título"
+msgstr ""
 
-#: .\Alpaca\forms.py:113
+#: .\Alpaca\forms.py:147 .\Alpaca\forms.py:200
 msgid "Covers are optional. You may change it at any time."
 msgstr ""
 
-#: .\Alpaca\forms.py:118 .\Alpaca\forms.py:183
-#, fuzzy
+#: .\Alpaca\forms.py:152 .\Alpaca\forms.py:204 .\Alpaca\forms.py:312
 msgid ""
 "We would like to remind you that some images are copyrighted. We do not take "
 "responsibility for any copyright infrigements. The images will be deleted "
 "upon request of their rightful owner or their lawyers. Please, be aware of "
 "the rights you have over the image you want to upload before using it."
 msgstr ""
-"Nos gustaría recordarte que algunas imágenes tienen derechos de autor. No "
-"nos hacemos responsables de infracciones de derechos de autor. Las imágenes "
-"serán borradas en caso de ser contactados por sus verdaderos dueños, o los "
-"abogados de estos. Por favor, infórmate de los derechos que tienes sobre la "
-"imagen que quieres subir antes de utilizarla."
 
-#: .\Alpaca\forms.py:120 .\Alpaca\forms.py:188
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:24
+#: .\Alpaca\forms.py:154 .\Alpaca\forms.py:215 .\Alpaca\forms.py:317
 msgid "City"
-msgstr "Ciudad"
+msgstr ""
 
-#: .\Alpaca\forms.py:120 .\Alpaca\forms.py:188
+#: .\Alpaca\forms.py:154 .\Alpaca\forms.py:317
 msgid "In which city will this activity take place?"
-msgstr "¿En qué ciudad tendrá lugar esta actividad?"
+msgstr ""
 
-#: .\Alpaca\forms.py:122
+#: .\Alpaca\forms.py:156 .\Alpaca\forms.py:206
 msgid "Allow auto-registration?"
-msgstr "¿Permitir auto-registro?"
+msgstr ""
 
-#: .\Alpaca\forms.py:122
+#: .\Alpaca\forms.py:156 .\Alpaca\forms.py:206
 msgid ""
 "Selected: Users join automatically. Not selected: Author decides to accept "
 "or reject joining requests."
 msgstr ""
-"Seleccionado: Los usuarios podrán unirse a la actividad automáticamente. No "
-"seleccionado: El autor de la actividad decideaceptar o rechazar las "
-"peticiones de aquellos que quieran unirse."
 
-#: .\Alpaca\forms.py:123
+#: .\Alpaca\forms.py:157 .\Alpaca\forms.py:207
 msgid "Confirmation period"
-msgstr "Período de confirmación"
+msgstr ""
 
-#: .\Alpaca\forms.py:123
+#: .\Alpaca\forms.py:157 .\Alpaca\forms.py:207
 msgid ""
 "How many days before a session starts the assistance confirmation period?"
 msgstr ""
-"¿Cuántos días antes de que empiece una sesión empieza el período de "
-"confirmación de asistencia?"
 
-#: .\Alpaca\forms.py:124 .\Alpaca\forms.py:194
+#: .\Alpaca\forms.py:158 .\Alpaca\forms.py:208 .\Alpaca\forms.py:323
 msgid "Age minimum"
-msgstr "Edad mínima"
+msgstr ""
 
-#: .\Alpaca\forms.py:124
+#: .\Alpaca\forms.py:158 .\Alpaca\forms.py:208
 msgid "Minimum age to attend this activity."
-msgstr "Edad mínima para participar en esta actividad."
+msgstr ""
 
-#: .\Alpaca\forms.py:133
+#: .\Alpaca\forms.py:167
 msgid "Group"
 msgstr ""
 
-#: .\Alpaca\forms.py:136
+#: .\Alpaca\forms.py:170
 msgid ""
 "Is this activity related to any of your groups? Depending on the group, the "
 "activity may need to be accepted first."
 msgstr ""
 
-#: .\Alpaca\forms.py:150 .\Alpaca\forms.py:190
+#: .\Alpaca\forms.py:214
+msgid "Event"
+msgstr ""
+
+#: .\Alpaca\forms.py:228
+msgid ""
+"The event's minimum attendant age is {age}. You activity's minimum age must "
+"be greater or equal to the event's."
+msgstr ""
+
+#: .\Alpaca\forms.py:251 .\Alpaca\forms.py:319
 msgid "Start date and time"
-msgstr "Fecha y hora de comienzo"
+msgstr ""
 
-#: .\Alpaca\forms.py:150 .\Alpaca\forms.py:151 .\Alpaca\forms.py:190
-#: .\Alpaca\forms.py:191
+#: .\Alpaca\forms.py:251 .\Alpaca\forms.py:252 .\Alpaca\forms.py:319
+#: .\Alpaca\forms.py:320
 msgid "Example: 1984-11-15 19:25:36"
-msgstr "Ejemplo: 1984-11-15 19:25:36"
+msgstr ""
 
-#: .\Alpaca\forms.py:151 .\Alpaca\forms.py:191
+#: .\Alpaca\forms.py:252 .\Alpaca\forms.py:320
 msgid "End date and time"
-msgstr "Fecha y hora de finalización"
+msgstr ""
 
-#: .\Alpaca\forms.py:152
+#: .\Alpaca\forms.py:253
 msgid "Location"
-msgstr "Localización"
+msgstr ""
 
-#: .\Alpaca\forms.py:152
+#: .\Alpaca\forms.py:253
 msgid "Where (place, address) will this session take place?"
-msgstr "¿Dónde (lugar, dirección) tendrá lugar esta sesión?"
+msgstr ""
 
-#: .\Alpaca\forms.py:164
+#: .\Alpaca\forms.py:274 .\Alpaca\forms.py:363
 msgid "The start date and time must be greater than today's date."
-msgstr "La fecha y hora de empiece debe ser posterior a la de hoy."
+msgstr ""
 
-#: .\Alpaca\forms.py:168
+#: .\Alpaca\forms.py:278 .\Alpaca\forms.py:359
 msgid "The end date and time must be greater than the start date."
-msgstr "La fecha y hora de finalización debe ser posterior a la de empiece."
+msgstr ""
 
-#: .\Alpaca\forms.py:178
+#: .\Alpaca\forms.py:287
+msgid ""
+"The event start date is {start_date} and end date is {end_date}. Your "
+"session must start in between those dates."
+msgstr ""
+
+#: .\Alpaca\forms.py:293
+msgid ""
+"The event start date is {start_date} and end date is {end_date}. Your "
+"session must end in between those dates."
+msgstr ""
+
+#: .\Alpaca\forms.py:307
 msgid ""
 "This is the image that will be displayed at the index. If you don't have one "
 "yet, we will provide a default and you may upload yours later."
 msgstr ""
 
-#: .\Alpaca\forms.py:179
+#: .\Alpaca\forms.py:308
 msgid ""
 "This is the image that will be displayed at the event page, and is intended "
 "to be bigger than a cover. If you don't have one yet, we will provide a "
 "default and you may upload yours later."
 msgstr ""
 
-#: .\Alpaca\forms.py:185
-#, fuzzy
-#| msgid "Title"
+#: .\Alpaca\forms.py:314
 msgid "Event Title"
-msgstr "Título"
+msgstr ""
 
-#: .\Alpaca\forms.py:194
-#, fuzzy
-#| msgid "Minimum age to attend this activity."
+#: .\Alpaca\forms.py:323
 msgid "Minimum age to attend this event."
-msgstr "Edad mínima para participar en esta actividad."
+msgstr ""
 
-#: .\Alpaca\forms.py:198
+#: .\Alpaca\forms.py:327
 msgid "Show the title?"
 msgstr ""
 
-#: .\Alpaca\forms.py:199
+#: .\Alpaca\forms.py:328
 msgid ""
 "This is merely an aesthetic option. Maybe your banner already contains the "
 "event's title and you want to hide it?"
 msgstr ""
 
-#: .\Alpaca\forms.py:204
+#: .\Alpaca\forms.py:333
 msgid "Is this a private event for your group?"
 msgstr ""
 
-#: .\Alpaca\forms.py:230
-msgid "E-mail Or Username"
-msgstr "E-mail o Usuario"
-
-#: .\Alpaca\forms.py:234 .\Alpaca\forms.py:252
-msgid "New password:"
-msgstr "Contraseña nueva:"
-
-#: .\Alpaca\forms.py:235 .\Alpaca\forms.py:253
-msgid "Repeat new password:"
-msgstr "Repetir contraseña nueva:"
-
-#: .\Alpaca\forms.py:251
-msgid "Old password:"
-msgstr "Contraseña antigua:"
-
-#: .\Alpaca\forms.py:268
-msgid "From:"
-msgstr "Desde:"
-
-#: .\Alpaca\forms.py:269
-msgid "To:"
-msgstr "Hasta:"
-
-#: .\Alpaca\forms.py:280
-msgid "The end date must be greater than the start date."
-msgstr "La fecha de finalización debe ser posterior a la de empiece."
-
-#: .\Alpaca\templates\Alpaca\_layout.html:29
-msgid "Group List"
+#: .\Alpaca\forms.py:367
+msgid ""
+"You may bring forward the start date and time, but it must be greater than "
+"today's date."
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\_layout.html:38
-msgid "Log out"
-msgstr "Salir"
+#: .\Alpaca\forms.py:388
+msgid "E-mail Or Username"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\_layout.html:40 .\Alpaca\views\user.py:87
-msgid "Log in"
-msgstr "Entrar"
+#: .\Alpaca\forms.py:392 .\Alpaca\forms.py:410
+msgid "New password:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\_layout.html:41
-msgid "Sign up"
-msgstr "Registrarse"
+#: .\Alpaca\forms.py:393 .\Alpaca\forms.py:411
+msgid "Repeat new password:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\_layout.html:54
+#: .\Alpaca\forms.py:409
+msgid "Old password:"
+msgstr ""
+
+#: .\Alpaca\forms.py:426
+msgid "From:"
+msgstr ""
+
+#: .\Alpaca\forms.py:427
+msgid "To:"
+msgstr ""
+
+#: .\Alpaca\forms.py:438
+msgid "The end date must be greater than the start date."
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:10
 msgid "About Us"
-msgstr "Sobre Nosotros"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\_layout.html:55
-msgid "Terms and Conditions"
-msgstr "Términos y Condiciones"
-
-#: .\Alpaca\templates\Alpaca\_layout.html:56
-msgid "Found a problem? Please,"
-msgstr "¿Has encontrado un problema? Por favor,"
-
-#: .\Alpaca\templates\Alpaca\_layout.html:56
-msgid "help us!"
-msgstr "¡ayúdanos!"
-
-#: .\Alpaca\templates\Alpaca\about_us.html:10
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:13
 msgid "Who are we?"
-msgstr "¿Quiénes somos?"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:11
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:14
 msgid ""
 "Darkatom and Sirikon. We are the creators of Alpaca. We make sure everything "
 "at Alpaca works as expected. And yes, that means we are the Big Evil Llama's "
 "parents."
 msgstr ""
-"Darkatom y Sirikon. Somos los creadores de Alpaca. Nos aseguramos de que "
-"todo en Alpaca funcione como debe. Y sí, eso significa que somos los "
-"progenitores de la Gran Llama Malvada."
 
-#: .\Alpaca\templates\Alpaca\about_us.html:13
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:16
 msgid "Who is the Big Evil Llama?"
-msgstr "¿Quién es la Gran Llama Malvada?"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:14
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:17
 msgid ""
 "That's a great question, but she would get very angry if we told her secret. "
 "However, you may read George Orwell's 1984 novel (if you haven't already) to "
 "get an idea on who the Big Evil Llama might be ;)"
 msgstr ""
-"¡Muy buena pregunta! Pero es muy suya y se enfadaría bastante si contáramos "
-"su secreto. Sin embargo, puedes leer la novela 1984, de George Orwell (si es "
-"que todavía no lo has hecho) para hacerte una idea de quién puede ser la "
-"Gran Llama Malvada ;)"
 
-#: .\Alpaca\templates\Alpaca\about_us.html:16
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:19
 msgid "What is Alpaca?"
-msgstr "¿Qué es Alpaca?"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:17
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:20
 msgid ""
 "Alpaca is an activity management system application. That is, a place where "
 "you can create and manage your activities. The home page serves for a public "
 "index of all activities in Alpaca. This way, anyone can see your activity "
 "and join in! And you may join others' activities too!"
 msgstr ""
-"Alpaca es una aplicación de sistema de administración de actividades. Es "
-"decir, un lugar donde puedes crear y gestionar tus actividades. La página "
-"principal sirve como índice público de todas las actividades en Alpaca. De "
-"esta forma, ¡cualquiera puede ver tu actividad y unirse! ¡Y tú puedes unirte "
-"a las actividades de otros!"
 
-#: .\Alpaca\templates\Alpaca\about_us.html:19
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:22
 msgid "Why 'Alpaca'?"
-msgstr "¿Por qué «Alpaca»?"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:20
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:23
 msgid ""
 "We have spent quite a lot of time enjoying INERS Cultural Association's "
 "activities and, eventually, getting involved with it and helping it grow. "
@@ -626,16 +534,8 @@ msgid ""
 "coming? who is not?— but also somewhere where potential attendants could see "
 "all of our available activities."
 msgstr ""
-"Hemos pasado bastante tiempo disfrutando de las actividades de la Asociación "
-"Cultural INERS y, a la larga, nos hemos hecho parte de ella y hemos ayudado "
-"a que crezca. Un día nos dimos cuenta de que necesitábamos algo que nos "
-"permitiera organizar y gestionar actividades sin necesidad de grupos de "
-"chat, que al final pueden llegar a ser una fuente de problemas para "
-"organizarse. Algún sitio donde no sólo las actividades fueran fáciles de "
-"manejar —¿quién viene? ¿quién no?—, sino también un sitio donde posibles "
-"participantes pudieran ver todas nuestras actividades disponibles."
 
-#: .\Alpaca\templates\Alpaca\about_us.html:21
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:24
 msgid ""
 "And we wanted it to be available to anyone and everyone in need of a similar "
 "system. Furthermore, make it a way of advertising the activities at our "
@@ -643,673 +543,632 @@ msgid ""
 "happen, and giving them the chance of fair, equal advertisement for their "
 "activities."
 msgstr ""
-"Y queríamos que estuviera disponible para cualquiera y para todos aquellos "
-"en necesidad de un sistema parecido. Es más, hacerlo una forma de publicidad "
-"de actividades en nuestras localidades, alcanzar a grupos y gente con ganas "
-"de hacer cosas, y darles la oportunidad de publicidad justa e igualitaria "
-"para sus actividades."
 
-#: .\Alpaca\templates\Alpaca\about_us.html:22
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:25
 msgid ""
 "So we reached each other, having thought separately the same. Our ideas "
 "merged and... Alpaca was born."
 msgstr ""
-"Así que fuimos donde el otro, habiendo pensado separadamente en lo mismo. "
-"Nuestras ideas convergieron y... nació Alpaca."
 
-#: .\Alpaca\templates\Alpaca\about_us.html:23
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:26
 msgid ""
 "Oh, the name? We just love alpacas. And llamas. And vicuñas. Wish there was "
 "a way to ride them into battle!"
 msgstr ""
-"Ah, ¿el nombre? Es que nos encantan las alpacas. Y las llamas. Y las "
-"vicuñas. ¡Ojalá hubiera una forma de cabalgarlas hacia la batalla!"
 
-#: .\Alpaca\templates\Alpaca\about_us.html:26
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:29
 msgid "Contact us!"
-msgstr "¡Contáctanos!"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:27
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:30
 msgid "Should you want to reach any of us, here are our e-mails:"
-msgstr "Para contactarnos directamente, aquí tienes nuestros e-mails:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:28
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:31
 msgid ""
 "Should you have any problems with the web functionality, you may post an "
 "issue on our"
 msgstr ""
-"Si tienes cualquier problema con la funcionalidad de la web, puedes dejar "
-"constancia en la"
 
-#: .\Alpaca\templates\Alpaca\about_us.html:28
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:31
 msgid "GitHub repository issues section"
-msgstr "sección issues de nuestro repositorio de GitHub"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:29
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:32
 msgid ""
 "If you have any other kind of problems with Alpaca, we are working on a form "
 "for this kinds of issues. In the meantime, you may reach Darkatom and she'll "
 "take care of your problem."
 msgstr ""
-"Si tienes cualquier otro tipo de problema con Alpaca, estamos trabajando en "
-"un formulario para poder recoger todas vuestras quejas. Por ahora, puedes "
-"contactar con Darkatom y ella se ocupará de tu problema."
 
-#: .\Alpaca\templates\Alpaca\about_us.html:32
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:35
 msgid "Last, but not least, a big THANK YOU to..."
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:33
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:36
 msgid "Our translators:"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\about_us.html:39
+#: .\Alpaca\templates\Alpaca\about-us\about-us.html:42
 msgid "Alpaca hugs"
-msgstr "¡Abrazos de Alpaca!"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:9
-#: .\Alpaca\templates\Alpaca\partials\activity-card.html:11
-#: .\Alpaca\templates\Alpaca\partials\event-card.html:11
-msgid "by"
-msgstr "por"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:15
-msgid "At"
-msgstr "En"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:20
-msgid "Next Session:"
-msgstr "Próxima Sesión:"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:34
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:25
-msgid "Description:"
-msgstr "Descripción:"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:46
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:31
-msgid "Settings:"
-msgstr "Preferencias:"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:47
-msgid "Users may join this activity"
-msgstr "Los usuarios pueden unirse a esta actividad"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:49
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:34
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:41
-msgid "freely."
-msgstr "libremente."
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:51
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:36
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:43
-msgid "upon request."
-msgstr "tras pedirlo."
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:54
-msgid "Confirmation period starts"
-msgstr "El período de confirmación empieza"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:54
-msgid "days"
-msgstr "días"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:54
-msgid "before the session's start date."
-msgstr "antes del comienzo de la sesión."
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:55
-msgid "The minimum age to join this activity is"
-msgstr "La edad mínima para participar en esta actividad es"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:55
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:71
-msgid "years-old"
-msgstr "años"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:59
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:49
-msgid "Attendants:"
-msgstr "Participantes:"
-
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:68
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:30
 msgid "Session List"
-msgstr "Lista de Sesiones"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:82
-#: .\Alpaca\templates\Alpaca\partials\index-location-filter-panel.html:4
-msgid "Where"
-msgstr "Dónde"
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:50
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:58
+#: .\Alpaca\views\index.py:38 .\Alpaca\views\index.py:87
+msgid "Next Session"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:83
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:54
 msgid "Start"
-msgstr "Empieza"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:84
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:66
 msgid "End"
-msgstr "Finaliza"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\_layout_activity.html:85
-msgid "Attendants"
-msgstr "Participantes"
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:96
+msgid "Users may join this activity"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:98
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:70
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:77
+msgid "freely."
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:100
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:72
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:79
+msgid "upon request."
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:103
+msgid "Confirmation period starts"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:103
+msgid "days"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:103
+msgid "before the session's start date."
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:104
+msgid "The minimum age to join this activity is"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:104
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:71
+msgid "years-old"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\activity\_activity-layout.html:110
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:87
+msgid "Attendants:"
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\activity\activity_anon.html:6
+#: .\Alpaca\templates\Alpaca\activity\activity_user.html:15
 #: .\Alpaca\templates\Alpaca\event\event_anon.html:6
 #: .\Alpaca\templates\Alpaca\group\group_anon.html:6
 msgid "Join"
-msgstr "Unirse"
-
-#: .\Alpaca\templates\Alpaca\activity\activity_anon.html:13
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:24
-#: .\Alpaca\templates\Alpaca\event\event_anon.html:13
-#: .\Alpaca\templates\Alpaca\event\event_user.html:24
-msgid "There are no users attending this activity, except"
-msgstr "No hay usuarios participando en esta actividad, salvo"
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\activity\activity_author.html:6
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:55
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:72
 #: .\Alpaca\templates\Alpaca\event\event_admin.html:6
 #: .\Alpaca\templates\Alpaca\group\group_admin.html:6
-#: .\Alpaca\templates\Alpaca\user_profile.html:12
+#: .\Alpaca\templates\Alpaca\user-profile\user-profile.html:26
 msgid "Edit"
-msgstr "Editar"
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\activity\activity_author.html:12
 msgid "There are no users attending your activity."
-msgstr "No hay usuarios participando en tu actividad."
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\activity\activity_author.html:21
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:21
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:51
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:24
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:62
 msgid "Kick out"
-msgstr "Echar"
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\activity\activity_author.html:28
 msgid "Pending requests:"
-msgstr "Peticiones pendientes:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:30
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:31
 msgid "There are no pending requests to join the activity."
-msgstr "No hay peticiones pendientes para unirse a la actividad."
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:32
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:33
 msgid "Manage the requests to join the activity:"
-msgstr "Administrar peticiones para unirse a la actividad:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:40
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:40
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:61
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:70
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:91
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:42
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:44
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:66
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:84
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:105
 msgid "Accept"
-msgstr "Aceptar"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:41
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:41
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:62
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:71
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:92
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:43
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:45
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:67
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:85
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:106
 msgid "Reject"
-msgstr "Rechazar"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:49
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:53
 msgid "Add session"
-msgstr "Añadir una sesión"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:54
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:33
-#: .\Alpaca\templates\Alpaca\event\event_user.html:33
-msgid "State"
-msgstr "Estado"
-
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:61
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:39
-#: .\Alpaca\templates\Alpaca\event\event_user.html:39
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:60
+#: .\Alpaca\templates\Alpaca\activity\activity_user.html:27
 msgid "Closed & Finished"
-msgstr "Cerrada & Finalizada"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:63
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:62
 msgid "Open for confirmation"
-msgstr "Abierta para confirmación"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_author.html:65
+#: .\Alpaca\templates\Alpaca\activity\activity_author.html:64
 msgid "Not ready yet"
-msgstr "Aún no está lista"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:6
-#: .\Alpaca\templates\Alpaca\event\event_user.html:6
-msgid "You are too young to attend this activity."
-msgstr "Eres demasiado joven para unirte a esta actividad."
-
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:8
-#: .\Alpaca\templates\Alpaca\event\event_user.html:8
-msgid "The author of this activity has received your request to join!"
-msgstr "¡El autor de esta actividad ha recibido tu petición de unirte!"
-
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:12
-#: .\Alpaca\templates\Alpaca\event\event_user.html:12
+#: .\Alpaca\templates\Alpaca\activity\activity_user.html:10
+#: .\Alpaca\templates\Alpaca\event\event_user.html:14
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:13
 #: .\Alpaca\templates\Alpaca\group\group_member.html:10
 msgid "Leave"
-msgstr "Irse"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:17
-#: .\Alpaca\templates\Alpaca\event\event_user.html:17
-#: .\Alpaca\templates\Alpaca\group\group_member.html:15
-msgid "Join!"
-msgstr "¡Únete!"
-
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:42
-#: .\Alpaca\templates\Alpaca\event\event_user.html:42
+#: .\Alpaca\templates\Alpaca\activity\activity_user.html:30
 msgid "Join the activity to come!"
-msgstr "¡Únete a la actividad para venir!"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:45
-#: .\Alpaca\templates\Alpaca\event\event_user.html:45
+#: .\Alpaca\templates\Alpaca\activity\activity_user.html:33
 msgid "See you there!"
-msgstr "¡Te vemos allí!"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:50
-#: .\Alpaca\templates\Alpaca\event\event_user.html:50
-msgid "I am going!!"
-msgstr "¡Yo voy!"
-
-#: .\Alpaca\templates\Alpaca\activity\activity_user.html:54
-#: .\Alpaca\templates\Alpaca\event\event_user.html:54
+#: .\Alpaca\templates\Alpaca\activity\activity_user.html:36
 msgid "Coming soon..."
-msgstr "Próximamente..."
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:32
-#, fuzzy
-#| msgid "Users may join this activity"
-msgid "Users may join this event"
-msgstr "Los usuarios pueden unirse a esta actividad"
+#: .\Alpaca\templates\Alpaca\activity\activity_user.html:47
+msgid "I am going!!"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:39
-#, fuzzy
-#| msgid "Users may join this activity"
-msgid "Activities may join this event"
-msgstr "Los usuarios pueden unirse a esta actividad"
+#: .\Alpaca\templates\Alpaca\activity\partials\_attendants-list.html:8
+msgid "There are no users attending this activity, except"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:58
-#, fuzzy
-#| msgid "My Activities"
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:43
 msgid "Activity List"
-msgstr "Mis Actividades"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\_layout_event.html:61
-#: .\Alpaca\templates\Alpaca\group\_layout_group.html:53
-#, fuzzy
-#| msgid "My Activities"
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:47
+#: .\Alpaca\templates\Alpaca\group\_group-layout.html:56
 msgid "No activities yet!"
-msgstr "Mis Actividades"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:12
-#, fuzzy
-#| msgid "There are no users attending your activity."
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:60
+msgid "Settings:"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:63
+#: .\Alpaca\templates\Alpaca\event\event_user.html:8
+msgid "Only"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:63
+msgid "members"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:65
+msgid "Any user"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:67
+msgid "can join this event."
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:68
+msgid "Users may join this event"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\_event-layout.html:75
+msgid "Activities may join this event"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:9
+#: .\Alpaca\templates\Alpaca\event\event_user.html:17
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:34
+msgid "New Activity"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:15
 msgid "There are no users attending your event."
-msgstr "No hay usuarios participando en tu actividad."
-
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:28
-#, fuzzy
-#| msgid "Pending requests:"
-msgid "Attending requests:"
-msgstr "Peticiones pendientes:"
-
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:30
-#, fuzzy
-#| msgid "There are no pending requests to join the activity."
-msgid "There are no pending requests to attend the event."
-msgstr "No hay peticiones pendientes para unirse a la actividad."
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\event\event_admin.html:32
-#, fuzzy
-#| msgid "Manage the requests to join the activity:"
+msgid "Attending requests:"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:34
+msgid "There are no pending requests to attend the event."
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:36
 msgid "Manage the requests to attend the event:"
-msgstr "Administrar peticiones para unirse a la actividad:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:49
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:79
-#, fuzzy
-#| msgid "Pending requests:"
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:54
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:92
 msgid "Activity requests:"
-msgstr "Peticiones pendientes:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:51
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:81
-#, fuzzy
-#| msgid "There are no pending requests to join the activity."
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:56
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:95
 msgid "There are no pending activities to confirm."
-msgstr "No hay peticiones pendientes para unirse a la actividad."
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\event\event_admin.html:53
+#: .\Alpaca\templates\Alpaca\event\event_admin.html:58
 msgid "Manage the activities that want to be related to this event:"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\form_edit_profile.html:6
-#: .\Alpaca\views\user.py:162 .\Alpaca\views\user.py:194
-msgid "Change your password"
-msgstr "Cambia tu contraseña"
-
-#: .\Alpaca\templates\Alpaca\form_login.html:6
-msgid "Forgot your password?"
-msgstr "¿Has olvidado tu contraseña?"
-
-#: .\Alpaca\templates\Alpaca\form_login.html:7
-msgid "Or click"
-msgstr "¡O haz click"
-
-#: .\Alpaca\templates\Alpaca\form_login.html:7
-#: .\Alpaca\templates\Alpaca\form_signup.html:6
-msgid "here"
-msgstr "aquí"
-
-#: .\Alpaca\templates\Alpaca\form_login.html:7
-msgid "to sign up!"
-msgstr "para registrarte!"
-
-#: .\Alpaca\templates\Alpaca\form_signup.html:6
-msgid "Read"
+#: .\Alpaca\templates\Alpaca\event\event_anon.html:12
+msgid "There are no users attending this event, except"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\form_signup.html:6
-#, fuzzy
-#| msgid "Terms and Conditions"
-msgid "Alpaca's Terms and Conditions"
-msgstr "Términos y Condiciones"
-
-#: .\Alpaca\templates\Alpaca\group\_group_index.html:10
-#: .\Alpaca\templates\Alpaca\index.html:14
-#, fuzzy
-#| msgid "New Session in Activity "
-msgid "New Activity"
-msgstr "Nueva Sesión en la Actividad "
-
-#: .\Alpaca\templates\Alpaca\group\_group_index.html:14
-#: .\Alpaca\templates\Alpaca\index.html:18
-msgid "New Group"
+#: .\Alpaca\templates\Alpaca\event\event_user.html:6
+msgid "You are too young to attend this event."
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\_layout_group.html:27
+#: .\Alpaca\templates\Alpaca\event\event_user.html:8
+msgid "members can join this event."
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\event_user.html:10
+msgid "The organizers have received your request to join!"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\event_user.html:22
+#: .\Alpaca\templates\Alpaca\group\group_member.html:15
+msgid "Join!"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\event\event_user.html:29
+msgid "There are no users attending this event yet, be the first one!"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\group-index\visuals\_group-filter-panel.html:4
+#: .\Alpaca\templates\Alpaca\shared\visuals\_filter-panel.html:6
+#: .\Alpaca\views\index.py:40 .\Alpaca\views\index.py:89
+msgid "Show"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\group-index\visuals\_group-filter-panel.html:8
+msgid "All Groups"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\group-index\visuals\_group-filter-panel.html:12
+msgid "As an admin"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\group-index\visuals\_group-filter-panel.html:16
+msgid "As a member"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\group\_group-layout.html:30
 msgid "Administrators:"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\_layout_group.html:32
+#: .\Alpaca\templates\Alpaca\group\_group-layout.html:34
 msgid "Members:"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\_layout_group.html:42
+#: .\Alpaca\templates\Alpaca\group\_group-layout.html:42
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:55
 msgid "Events"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\_layout_group.html:44
-#, fuzzy
-#| msgid "No sessions yet"
+#: .\Alpaca\templates\Alpaca\group\_group-layout.html:45
 msgid "No events yet!"
-msgstr "Sin sesiones"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\_layout_group.html:51
-#, fuzzy
-#| msgid "My Activities"
+#: .\Alpaca\templates\Alpaca\group\_group-layout.html:53
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:49
 msgid "Activities"
-msgstr "Mis Actividades"
+msgstr ""
 
 #: .\Alpaca\templates\Alpaca\group\group_admin.html:9
 msgid "New Event"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:16
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:22
 msgid ""
 "You are the one in charge of this group. Promote a member to admin if you "
 "need help."
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:18
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:24
 msgid ""
 "You are the one in charge of this group, the only one who can demote admins."
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:26
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:33
 msgid "Demote"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:41
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:51
 #: .\Alpaca\templates\Alpaca\group\group_anon.html:21
 #: .\Alpaca\templates\Alpaca\group\group_member.html:31
 msgid "There are no other members in this group!"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:50
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:61
 msgid "Promote"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:58
-#, fuzzy
-#| msgid "Pending requests:"
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:71
 msgid "Membership requests:"
-msgstr "Peticiones pendientes:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:60
-#, fuzzy
-#| msgid "There are no pending requests to join the activity."
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:74
 msgid "There are no pending requests to join the group."
-msgstr "No hay peticiones pendientes para unirse a la actividad."
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:62
-#, fuzzy
-#| msgid "Manage the requests to join the activity:"
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:76
 msgid "Manage the requests to join the group:"
-msgstr "Administrar peticiones para unirse a la actividad:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\group_admin.html:83
+#: .\Alpaca\templates\Alpaca\group\group_admin.html:97
 msgid "Manage the activities that want to be related to this group:"
 msgstr ""
 
 #: .\Alpaca\templates\Alpaca\group\group_member.html:6
-#, fuzzy
-#| msgid "The author of this activity has received your request to join!"
 msgid "The admins of this group have received your request to join!"
-msgstr "¡El autor de esta actividad ha recibido tu petición de unirte!"
-
-#: .\Alpaca\templates\Alpaca\group\partials\group-filter-panel.html:4
-#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:4
-#: .\Alpaca\views\index.py:41
-msgid "Show"
-msgstr "Mostrar"
-
-#: .\Alpaca\templates\Alpaca\group\partials\group-filter-panel.html:8
-msgid "All Groups"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\partials\group-filter-panel.html:12
-msgid "As an admin"
+#: .\Alpaca\templates\Alpaca\login\login.html:6
+msgid "Forgot your password?"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\group\partials\group-filter-panel.html:16
-msgid "As a member"
+#: .\Alpaca\templates\Alpaca\login\login.html:7
+msgid "Or click"
 msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\activity-card.html:17
-#, fuzzy
-#| msgid "No sessions yet"
+#: .\Alpaca\templates\Alpaca\login\login.html:7
+#: .\Alpaca\templates\Alpaca\signup\signup.html:6
+msgid "here"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\login\login.html:7
+msgid "to sign up!"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:41
+msgid "New Group"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:52
+msgid "Groups"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:67
+msgid "Log out"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:69
+#: .\Alpaca\views\user.py:87
+msgid "Log in"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:70
+msgid "Sign up"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:93
+msgid "Found a problem? Please,"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:94
+msgid "help us!"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\layouts\_layout.html:99
+msgid "Terms and Conditions"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-card.html:11
+#: .\Alpaca\templates\Alpaca\shared\visuals\_event-card.html:11
+msgid "by"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-card.html:17
 msgid "No future sessions planned"
-msgstr "Sin sesiones"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:18
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:15
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:18
 msgid "Author"
-msgstr "Autor"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:28
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:51
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:28
 msgid "Age Minimum"
-msgstr "Edad Mínima"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:38
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:60
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:38
 msgid "# of Attendants"
-msgstr "# de Participantes"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:48
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:33
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:48
 msgid "Published Date"
-msgstr "Fecha de Publicación"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:58
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:42
-#: .\Alpaca\views\index.py:39
-msgid "Next Session"
-msgstr "Próxima Sesión"
-
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:79
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:79
 msgid "No sessions yet"
-msgstr "Sin sesiones"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\activity-table.html:81
+#: .\Alpaca\templates\Alpaca\shared\visuals\_activity-table.html:81
 msgid "Waiting for future sessions!"
-msgstr "¡Esperando sesiones nuevas!"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:3
+#: .\Alpaca\templates\Alpaca\shared\visuals\_filter-bar.html:3
 msgid "Filters:"
-msgstr "Filtros:"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:4
-#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:8
+#: .\Alpaca\templates\Alpaca\shared\visuals\_filter-bar.html:4
+#: .\Alpaca\templates\Alpaca\shared\visuals\_filter-panel.html:10
 msgid "All Activities"
-msgstr "Todas las Actividades"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:5
+#: .\Alpaca\templates\Alpaca\shared\visuals\_filter-bar.html:5
 msgid "My Activities: Author"
-msgstr "Mis Actividades: Autor"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\index-filter-bar.html:6
+#: .\Alpaca\templates\Alpaca\shared\visuals\_filter-bar.html:6
 msgid "My Activities: Attendant"
-msgstr "Mis Actividades: Participante"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:12
-msgid "My Activities"
-msgstr "Mis Actividades"
+#: .\Alpaca\templates\Alpaca\shared\visuals\_location-filter-panel.html:4
+msgid "Where"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\index-filter-panel.html:16
-msgid "Activities I attend"
-msgstr "Actividades en las que participo"
-
-#: .\Alpaca\templates\Alpaca\partials\index-location-filter-panel.html:8
+#: .\Alpaca\templates\Alpaca\shared\visuals\_location-filter-panel.html:8
 msgid "My location"
-msgstr "Mi localización"
+msgstr ""
 
-#: .\Alpaca\templates\Alpaca\partials\index-order-bar.html:3
-msgid "Order by:"
-msgstr "Ordenar por:"
-
-#: .\Alpaca\templates\Alpaca\partials\search-bar.html:8
+#: .\Alpaca\templates\Alpaca\shared\visuals\_search-bar.html:5
 msgid "Search..."
-msgstr "Buscar..."
+msgstr ""
 
-#: .\Alpaca\views\activity.py:45
+#: .\Alpaca\templates\Alpaca\signup\signup.html:6
+msgid "Read"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\signup\signup.html:6
+msgid "Alpaca's Terms and Conditions"
+msgstr ""
+
+#: .\Alpaca\templates\Alpaca\user-profile\form-edit-profile.html:6
+#: .\Alpaca\views\user.py:162 .\Alpaca\views\user.py:194
+msgid "Change your password"
+msgstr ""
+
+#: .\Alpaca\views\activity.py:39
+msgid "This activity is waiting to be part of an event! Come back later :)"
+msgstr ""
+
+#: .\Alpaca\views\activity.py:43
+msgid ""
+"This activity is part of an event. Join the event to attend this activity!"
+msgstr ""
+
+#: .\Alpaca\views\activity.py:47
+msgid "You are too young to attend this activity."
+msgstr ""
+
+#: .\Alpaca\views\activity.py:51
+msgid "The author of this activity has received your request to join!"
+msgstr ""
+
+#: .\Alpaca\views\activity.py:65 .\Alpaca\views\event.py:130
 msgid "Start a new activity"
-msgstr "Empezar una actividad"
+msgstr ""
 
-#: .\Alpaca\views\activity.py:46 .\Alpaca\views\event.py:53
-#: .\Alpaca\views\group.py:44 .\Alpaca\views\session.py:29
+#: .\Alpaca\views\activity.py:66 .\Alpaca\views\event.py:54
+#: .\Alpaca\views\event.py:131 .\Alpaca\views\group.py:44
+#: .\Alpaca\views\session.py:29
 msgid "Create!"
-msgstr "¡Crear!"
+msgstr ""
 
-#: .\Alpaca\views\activity.py:77
+#: .\Alpaca\views\activity.py:97
 msgid "Editing activity"
-msgstr "Editando actividad"
+msgstr ""
 
-#: .\Alpaca\views\activity.py:78 .\Alpaca\views\event.py:80
+#: .\Alpaca\views\activity.py:98 .\Alpaca\views\event.py:81
 #: .\Alpaca\views\group.py:70 .\Alpaca\views\session.py:57
 #: .\Alpaca\views\user.py:233
 msgid "Save changes"
-msgstr "Guardar cambios"
+msgstr ""
 
-#: .\Alpaca\views\event.py:52
-#, fuzzy
-#| msgid "Start a new activity"
+#: .\Alpaca\views\event.py:53
 msgid "Start a new event!"
-msgstr "Empezar una actividad"
+msgstr ""
 
-#: .\Alpaca\views\event.py:79
-#, fuzzy
-#| msgid "Editing activity"
+#: .\Alpaca\views\event.py:80
 msgid "Editing event"
-msgstr "Editando actividad"
+msgstr ""
 
 #: .\Alpaca\views\group.py:43
-#, fuzzy
-#| msgid "Start a new activity"
 msgid "Start a new group!"
-msgstr "Empezar una actividad"
+msgstr ""
 
 #: .\Alpaca\views\group.py:69
-#, fuzzy
-#| msgid "Editing a session"
 msgid "Editing group"
-msgstr "Editando una sesión"
+msgstr ""
 
 #: .\Alpaca\views\session.py:28
 msgid "Create a new session"
-msgstr "Crear nueva sesión"
+msgstr ""
 
 #: .\Alpaca\views\session.py:56
 msgid "Editing a session"
-msgstr "Editando una sesión"
+msgstr ""
 
 #: .\Alpaca\views\user.py:31
 msgid "Sign up!"
-msgstr "¡Registrarse!"
+msgstr ""
 
 #: .\Alpaca\views\user.py:43
 msgid "You are signed up!"
-msgstr "¡Ya estás registrado!"
+msgstr ""
 
 #: .\Alpaca\views\user.py:44
 msgid ""
 "Your user is not active at the moment. Please, verify your e-mail (it could "
 "end up in the spam folder)."
 msgstr ""
-"Este usuario no ha sido activado. Por favor, verifica tu e-mail (podría "
-"estar en la carpeta de spam)."
 
 #: .\Alpaca\views\user.py:73
 msgid "Welcome to Alpaca!"
-msgstr "¡Bienvenido a Alpaca!"
+msgstr ""
 
 #: .\Alpaca\views\user.py:74
 msgid ""
 "You are one of us now. Your account has been activated and you may now log "
 "in. Welcome!"
 msgstr ""
-"Ahora eres uno de nosotros. Tu cuenta ha sido activida y ahora puedes entrar "
-"con tus credenciales. ¡Bienvenid@!"
 
 #: .\Alpaca\views\user.py:76 .\Alpaca\views\user.py:183
 msgid "What are you doing here?"
-msgstr "¿Qué haces aquí?"
+msgstr ""
 
 #: .\Alpaca\views\user.py:77 .\Alpaca\views\user.py:184
 msgid ""
 "It seems like you got lost in our page. Click the Alpaca logo to go back to "
 "the index."
 msgstr ""
-"Parece que te has perdido. Haz click en el logo de Alpaca para volver al "
-"índice."
 
 #: .\Alpaca\views\user.py:100
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #: .\Alpaca\views\user.py:101
 msgid "This user is not active at the moment. Please, verify your e-mail."
-msgstr "Este usuario no ha sido activado. Por favor, verifica tu e-mail."
+msgstr ""
 
 #: .\Alpaca\views\user.py:124
-#, fuzzy
-#| msgid "Save new password"
 msgid "Ask for a new password"
-msgstr "Guardar contraseña"
+msgstr ""
 
 #: .\Alpaca\views\user.py:125
 msgid "Submit"
@@ -1328,10 +1187,8 @@ msgid "Save"
 msgstr ""
 
 #: .\Alpaca\views\user.py:171
-#, fuzzy
-#| msgid "Create!"
 msgid "Great!"
-msgstr "¡Crear!"
+msgstr ""
 
 #: .\Alpaca\views\user.py:172
 msgid "Your new password is in place. Use it now to log in!"
@@ -1339,11 +1196,8 @@ msgstr ""
 
 #: .\Alpaca\views\user.py:195
 msgid "Save new password"
-msgstr "Guardar contraseña"
+msgstr ""
 
 #: .\Alpaca\views\user.py:232
 msgid "Edit your profile's settings"
-msgstr "Edita tu perfil"
-
-#~ msgid "No new sessions"
-#~ msgstr "No hay sesiones nuevas"
+msgstr ""

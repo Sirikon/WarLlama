@@ -85,10 +85,9 @@
 
                 <div class="al-activity-detail-registration-info">
                     {% if activity.auto_register %}
-                        {# TODO: Translate #}
-                        <span>Acceso Libre</span>
+                        <span>{% trans "Free Access"}</span>
                     {% else %}
-                        <span>Acceso Limitado</span>
+                        <span>{% trans "Limited Access"}</span>
                     {% endif %}    
                     <span class="al-activity-detail-registration-info-max-age">+{{activity.age_minimum}}</span>
                 </div>

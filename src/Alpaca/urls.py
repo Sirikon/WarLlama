@@ -5,6 +5,8 @@ import views
 app_name = "alpaca"
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^index/group/$', views.group_index, name='group_index'),
+    url(r'^index/event/$', views.event_index, name='event_index'),
     url(r'^about_us/$', views.about_us, name='about_us'),
     url(r'^terms_conditions/$', views.terms_conditions, name='terms_conditions'),
 
@@ -21,7 +23,6 @@ urlpatterns = [
     url(r'^editprofile$', views.edit_profile, name='edit_profile'),
     url(r'^changepassword/$', views.change_password, name="change_password"),
 
-    url(r'^groupindex/$', views.group_index, name='group_index'),
     url(r'^group/new/$', views.new_group, name='new_group'),
     url(r'^group/(?P<group_id>[0-9]+)$', views.group, name='group'),
     url(r'^group/(?P<group_id>[0-9]+)/edit/$', views.edit_group, name='edit_group'),

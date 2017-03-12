@@ -25,6 +25,7 @@
                 <div class="al-header-navigation al-flex-grow">
                     {% url 'alpaca:index' as index_url %}
                     {% url 'alpaca:group_index' as group_index_url %}
+                    {% url 'alpaca:event_index' as event_index_url %}
 
                     {% if user.is_authenticated %}
                         {% if request.path == index_url %}
@@ -42,16 +43,16 @@
                         {% endif %}
                     {% endif %}
 
-                    {% comment %}TODO: Translate this{% endcomment %}
                     {% spaceless %}
                     <a 
                     class="al-header-navigation-option {% if request.path == index_url %}active{% endif %}"
-                    href="{{ index_url }}">Activities</a>
+                    href="{{ index_url }}">{% trans "Activities" %}</a>
                     <a 
                     class="al-header-navigation-option {% if request.path == group_index_url %}active{% endif %}"
-                    href="{{ group_index_url }}">Groups</a>
+                    href="{{ group_index_url }}">{% trans "Groups" %}</a>
                     <a 
-                    class="al-header-navigation-option">Events</a>
+                    class="al-header-navigation-option {% if request.path == event_index_url %}active{% endif %}"
+                    href="{{ event_index_url }}">{% trans "Events" %}</a>
                     {% endspaceless %}
                 </div>
                 <div class="al-header-menu al-flex-row">
