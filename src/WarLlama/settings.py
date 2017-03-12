@@ -23,9 +23,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'd%37@nhizj+h*m=grff5=6kyic4681ljtrz&7_yd%s#y+zhxuu'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -95,6 +92,7 @@ if os.environ.get('ALPACA_ENVIRONMENT') == 'PRODUCTION':
     #         'PORT': '',
     #     }
     # }
+    DEBUG = False
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -105,6 +103,8 @@ if os.environ.get('ALPACA_ENVIRONMENT') == 'PRODUCTION':
     MEDIA_URL = os.environ['ALPACA_MEDIA_URL']
 
 else:
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
