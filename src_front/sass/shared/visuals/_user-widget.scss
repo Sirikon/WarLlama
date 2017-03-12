@@ -1,0 +1,18 @@
+@import '../variables';
+
+.al-user-widget {
+    a { text-decoration: none; color: inherit; }
+    &-avatar {
+        width: 50px;
+        height: 50px;
+        background-size: cover;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    &-name {
+        color: $gray;
+        vertical-align: middle;
+        font-size: 1.1em;
+        margin-left: 5px;
+    }
+}

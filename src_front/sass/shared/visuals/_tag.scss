@@ -1,0 +1,35 @@
+@import '../variables';
+@import '../global';
+
+.al-tag {
+    $height: 2em;
+
+    @extend .al-panel;
+    display: flex;
+    background-color: white;
+    border-radius: $height/1.9 !important;
+    padding: 2px;
+
+    &-icon-wrapper {
+        width: $height;
+        height: $height;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba($accent, 0.2);
+        border-radius: 50%;
+
+        .fa {
+            color: $accent;
+            margin-bottom: 2px;
+        }
+    }
+
+    &-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 0.5em 2px 0.5em;
+        color: $accent;
+    }
+}

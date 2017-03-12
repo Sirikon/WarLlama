@@ -1,0 +1,37 @@
+{% load i18n %}
+
+
+<a class="al-card"href="/activity/{{activity.id}}">
+    {% if not activity.cover or activity.cover.name != "False" %}
+        <div class="al-card-cover" style="background-image: url({{activity.cover.url}});">  
+        </div>
+    {% endif %}
+    <div class="al-card-body">
+        <div class="al-card-header">
+            <h1>{{ activity.title }} <span class="al-text-tail">{% trans "by" %} {{ activity.author }}</span></h1>
+            <div class="al-card-descriptors">             
+                {% with activity.get_next_session as next_session %}
+                    {% if next_session %}
+                        <span class="next-session"><i class="fa fa-calendar-check-o"></i> {{ next_session.start_date }}</span>
+                    {% else %}
+                        <span class="no-sessions"><i class="fa fa-calendar-times-o"></i> {% trans "No future sessions planned" %}</span>
+                    {% endif %}
+                {% endwith %}
+                <span class="at-descriptor"><i class="fa fa-map-marker"></i> {{ activity.city }}</span>
+                <span class="attendant-count"><i class="fa fa-user"></i> {{ activity.attendants.count }}</span>
+                
+                {% if activity.age_minimum >= 18 %}
+                    <span class="adults-only">+18</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="al-card-text">
+            {{ activity.get_short_description | safe }}
+        </div>
+        
+        <div class="al-card-footer">
+            <span class="al-card-pub-date"><i class="fa fa-bookmark"></i> {{ activity.pub_date }}</span>
+        </div>
+    </div>   
+</a>

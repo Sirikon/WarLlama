@@ -1,0 +1,72 @@
+{% extends './_event-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}    
+    <a class="al-button al-button-inline" href="{% url 'alpaca:edit_event' event.id %}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
+    </a>
+    <a class="al-button al-button-inline" href="{% url 'alpaca:event_new_activity' event.id %}">
+        <i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "New Activity" %}</span>
+    </a>
+{% endblock %}
+
+{% block attendants %}
+    {% if event.attendants.count <= 0 %}
+        <p>{% trans "There are no users attending your event." %}</p>
+    {% else %}
+        <form action="{% url 'alpaca:event_kick_attendant' event.id %}" method="POST">
+            {% csrf_token %}
+            <select id="attending_users" name="attending">
+            {% for att in event.attendants.all %}
+                <option value="{{att.id}}">{{ att.username }}</option>
+            {% endfor %}
+            </select>
+            <input type="submit" class="al-button al-button-inline" name="kick_participant" value="{% trans 'Kick out' %}"/>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block user_requests %}
+    <hr>
+    <div class="al-event-sidebar-section">
+        <h4 class="al-event-sidebar-section-header">{% trans "Attending requests:" %}</h4>
+        {% if event.pending_attendants.count <= 0 %}
+            <p>{% trans "There are no pending requests to attend the event." %}</p>
+        {% else %}
+            <p>{% trans "Manage the requests to attend the event:" %}</p>
+            <form action="{% url 'alpaca:event_pending_attendants' event.id %}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="user_join_request">
+                {% for att in event.pending_attendants.all %}
+                    <option value="{{att.id}}">{{ att.username }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-button al-button-inline" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+{% endblock %}
+    
+{% block activity_requests %}
+    <hr>
+    <div class="al-event-sidebar-section">
+        <h4 class="al-event-sidebar-section-header">{% trans "Activity requests:" %}</h4>
+        {% if event.pending_activities.count <= 0 %}
+            <p>{% trans "There are no pending activities to confirm." %}</p>
+        {% else %}
+            <p>{% trans "Manage the activities that want to be related to this event:" %}</p>
+            <form action="{% url 'alpaca:event_pending_activities' event.id %}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="activity_request">
+                {% for act in event.pending_activities.all %}
+                    <option value="{{act.id}}">{{ act.title }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-button al-button-inline" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+
+{% endblock %}

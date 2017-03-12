@@ -1,0 +1,110 @@
+{% extends './_group-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}
+    <a class="al-button al-button-inline" href="{% url 'alpaca:edit_group' group.id %}">
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
+    </a>
+    <a class="al-button al-button-inline" href="{% url 'alpaca:new_event' group.id %}">
+        <i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "New Event" %}</span>
+    </a>
+    <form action="{% url 'alpaca:leave_group' group.id %}" method="POST">
+        {% csrf_token %}
+        <input class="al-button al-button-inline" type="submit" name="leave_group" value="{% trans 'Leave' %}"/>
+    </form>
+{% endblock %}
+
+{% block admin_list %}
+    
+    {% if user == group.superuser %}
+        <div class="al-content-panel">
+            {% if group.admin_list.count <= 0 %}
+                <p>{% trans "You are the one in charge of this group. Promote a member to admin if you need help." %}</p>
+            {% else %}
+                <p>{% trans "You are the one in charge of this group, the only one who can demote admins." %}</p>
+                <form action="{% url 'alpaca:demote_admin' group.id %}" method="POST">
+                    <p>
+                        {% csrf_token %}
+                        <select id="admin_list" name="selected_admin">
+                        {% for admin in group.admin_list.all %}
+                            <option value="{{admin.id}}">{{ admin.username }}</option>
+                        {% endfor %}
+                        </select>
+                        <input type="submit" class="al-button al-button-inline" name="demote_member" value="{% trans 'Demote' %}"/>
+                    </p>
+                </form>
+            {% endif %}
+        </div>
+    {% else %}    
+        <div class="al-flex-row al-flex-margin-between al-flex-justify-start">
+            {% include "../shared/visuals/_user-widget.html" with user=group.superuser %}
+            {% for admin in group.admin_list.all %}
+                {% include "../shared/visuals/_user-widget.html" with user=admin %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block member_list %}
+    <div class="al-content-panel">
+        {% if group.member_list.count <= 0 %}
+            <p>{% trans "There are no other members in this group!" %}</p>
+        {% else %}
+            <form action="{% url 'alpaca:handle_member' group.id %}" method="POST">
+                <p>
+                    {% csrf_token %}
+                    <select id="member_list" name="selected_member">
+                    {% for member in group.member_list.all %}
+                        <option value="{{member.id}}">{{ member.username }}</option>
+                    {% endfor %}
+                    </select>
+                    <input type="submit" class="al-button al-button-inline" name="promote_member" value="{% trans 'Promote' %}"/>
+                    <input type="submit" class="al-button al-button-inline" name="kick_member" value="{% trans 'Kick out' %}"/>
+                </p>
+            </form>
+        {% endif %}
+    </div>
+    
+{% endblock %}
+
+{% block pending_members_list %}
+    <h3 class="al-section-title">{% trans "Membership requests:" %}</h3>
+    <div class="al-content-panel"> 
+        {% if group.pending_members.count <= 0 %}
+            <p>{% trans "There are no pending requests to join the group." %}</p>
+        {% else %}
+            <p>{% trans "Manage the requests to join the group:" %}</p>
+            <form action="{% url 'alpaca:group_pending_members' group.id %}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="user_join_request">
+                {% for member in group.pending_members.all %}
+                    <option value="{{member.id}}">{{ member.username }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-button al-button-inline" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+{% endblock %}
+    
+{% block pending_activities_list %}
+    <h3 class="al-section-title">{% trans "Activity requests:" %}</h3>
+    <div class="al-content-panel"> 
+        {% if group.pending_activities.count <= 0 %}
+            <p>{% trans "There are no pending activities to confirm." %}</p>
+        {% else %}
+            <p>{% trans "Manage the activities that want to be related to this group:" %}</p>
+            <form action="{% url 'alpaca:group_pending_activities' group.id %}" method="POST">
+                {% csrf_token %}
+                <select id="pending_requests" name="activity_request">
+                {% for act in group.pending_activities.all %}
+                    <option value="{{act.id}}">{{ act.title }}</option>
+                {% endfor %}
+                </select>
+                <input type="submit" class="al-button al-button-inline" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="reject_request" value="{% trans 'Reject' %}"/>
+            </form>  
+        {% endif %}
+    </div>
+{% endblock %}

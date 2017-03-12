@@ -1,0 +1,40 @@
+{% extends './_group-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}    
+    {% if user in group.pending_members.all %}
+        <p>{% trans "The admins of this group have received your request to join!" %}</p>
+    {% elif user in group.member_list.all %}
+        <form action="leave/{{group.id}}" method="POST">
+            {% csrf_token %}
+            <input class="al-button al-button-inline" type="submit" name="leave_group" value="{% trans 'Leave' %}"/>
+        </form>
+    {% else %}
+        <form action="join/{{group.id}}" method="POST">
+            {% csrf_token %}
+            <input class="al-button al-button-inline" type="submit" name="join_group" value="{% trans 'Join!' %}"/>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block admin_list %}
+    <div class="al-flex-row al-flex-margin-between al-flex-justify-start">
+        {% include "../shared/visuals/_user-widget.html" with user=group.superuser %}
+        {% for admin in group.admin_list.all %}
+            {% include "../shared/visuals/_user-widget.html" with user=admin %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block member_list %}
+    {% if group.member_list.count <= 0 %}
+        {% trans "There are no other members in this group!" as message %}
+        {% include "../shared/visuals/_empty.html" with message=message %}
+    {% else %}  
+        <div class="al-flex-row al-flex-margin-between al-flex-justify-start">  
+            {% for member in group.member_list.all %}
+                {% include "../shared/visuals/_user-widget.html" with user=member %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

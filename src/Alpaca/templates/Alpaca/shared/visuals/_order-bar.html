@@ -1,0 +1,11 @@
+{% load i18n %}
+
+<div class="al-order-bar">
+    {% include "./_order-bar-item.html" with column_key="title" column_name="Title" %}
+    {% include "./_order-bar-item.html" with column_key="author" column_name="Author" %}
+    {% include "./_order-bar-item.html" with column_key="city" column_name="City" %}
+    {% include "./_order-bar-item.html" with column_key="pub_date" column_name="Published Date" %}
+    {% include "./_order-bar-item.html" with column_key="next_session" column_name="Next Session" %}
+    {% include "./_order-bar-item.html" with column_key="age_minimum" column_name="Age Minimum" %}
+    {% include "./_order-bar-item.html" with column_key="num_attendants" column_name="# of Attendants" %}
+</div>

@@ -1,0 +1,30 @@
+{% extends './_group-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}
+    <a class="al-button al-button-inline" href="{% url 'alpaca:login' %}">
+        {% trans "Join" %}
+    </a>
+{% endblock %}
+
+{% block admin_list %}
+    <div class="al-flex-row al-flex-margin-between al-flex-justify-start">
+        {% include "../shared/visuals/_user-widget.html" with user=group.superuser %}
+        {% for admin in group.admin_list.all %}
+            {% include "../shared/visuals/_user-widget.html" with user=admin %}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block member_list %}
+    {% if group.member_list.count <= 0 %}
+        {% trans "There are no other members in this group!" as message %}
+        {% include "../shared/visuals/_empty.html" with message=message %}
+    {% else %}
+        <div class="al-flex-row al-flex-margin-between al-flex-justify-start">  
+            {% for member in group.member_list.all %}
+                {% include "../shared/visuals/_user-widget.html" with user=member %}
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

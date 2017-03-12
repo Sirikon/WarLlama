@@ -1,0 +1,20 @@
+{% extends './_event-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}
+    <a class="al-button al-button-inline" href="{% url 'alpaca:login' %}">
+        {% trans "Join" %}
+    </a>
+{% endblock %}
+
+{% block attendants %}
+    {% if event.attendants.count <= 0 %}
+        <p>{% trans "There are no users attending this event, except" %} {{ event.author }}.</p>
+    {% else %}    
+        {% for att in event.attendants.all %}
+            <li class="al-activity-detail-attendants-list-item">
+                {% include "../shared/visuals/_user-widget.html" with user=att %}
+            </li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

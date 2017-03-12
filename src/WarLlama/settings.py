@@ -175,3 +175,8 @@ STATIC_URL = '/static/'
 # SVGs
 mimetypes.add_type("image/svg+xml", ".svg", True)
 mimetypes.add_type("image/svg+xml", ".svgz", True)
+
+
+##
+
+LOGIN_URL = 'alpaca:login'

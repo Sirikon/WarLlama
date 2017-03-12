@@ -1,0 +1,122 @@
+{% extends '../shared/layouts/_layout.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="al-activity-detail">
+
+        <div class="al-activity-detail-header">
+            <h1 class="al-activity-detail-header-title">
+                <span>{{ activity.title }}</span>
+            </h1>
+        </div>
+
+        <div class="al-flex-row al-flex-align-start al-flex-stretch-content">
+            <div class="al-flex-grow">
+
+                <div class="al-content-panel al-activity-detail-description">
+                    {{ activity.description | safe }}
+                    <hr>
+                    <div class="al-activity-detail-description-footer">
+                        <a class="al-activity-detail-description-footer-author" href="{% url 'alpaca:profile' activity.author.username %}">
+                            <div class="al-activity-detail-description-footer-author-avatar al-circle" style="background-image: url({{activity.author.profile.avatar.url}})"></div>
+                            <span class="al-activity-detail-description-footer-author-name">{{ activity.author }}</span>
+                        </a>
+                        <i class="al-activity-detail-description-footer-date">{{ activity.pub_date }}</i>
+                    </div>
+                </div>
+
+                <h3 class="al-section-title">
+                    <span>{% trans "Session List" %}</span>
+                    {% block session_list_menu %}
+                    {% endblock %}
+                </h3>
+
+                {% for session in session_list %}
+                    <div class="al-content-panel al-activity-detail-session">
+
+                        {# The title is different when it's the first session (The next one) #}
+                        {% if forloop.counter0 == 0 %}
+                            <div class="al-activity-detail-session-header">
+                        {% else %}
+                            <div class="al-activity-detail-session-start-date">
+                        {% endif %}
+
+                        {% block session_action %}
+                        {% endblock %}
+
+                        {% if forloop.counter0 == 0 %}
+                                <i class="fa fa-calendar-check-o"></i>
+                                <span>{% trans "Next Session" %}: <b>{{ session.start_date }}</b></span>
+                            </div>
+                        {% else %}
+                                <i class="fa fa-calendar-check-o"></i>
+                                <span>{% trans "Start" %}: <b>{{ session.start_date }}</b></span>
+                            </div>
+                        {% endif %}
+
+                        <p class="al-activity-detail-session-location">
+                            {% block session_state %}
+                            {% endblock %}
+                            <i class="fa fa-map-marker"></i>
+                            <span><b>{{ session.location }}</b></span>
+                        </p>
+                        <p class="al-activity-detail-session-end-date">
+                            <i class="fa fa-clock-o"></i>
+                            <span>{% trans "End" %}: <b>{{ session.end_date }}</b></span>
+                        </p>
+                        <hr>
+                        <div>
+                            {{ session.description | safe }}
+                        </div>
+                    </div>
+                {% empty %}
+                    {% include "../shared/visuals/_empty.html" with message="There isn't any session yet" %}
+                {% endfor %}
+
+            </div>
+            <div class="al-activity-detail-sidebar">
+                <div class="al-panel">
+                    <img class="al-activity-detail-cover-image" src="{{activity.cover.url}}" width="100%" height="auto" draggable="false" />
+                    <div class="al-activity-detail-join-button-wrapper">
+                        {% block user_options %}{% endblock %}
+                    </div>
+                </div>
+
+                <div class="al-activity-detail-registration-info">
+                    {% if activity.auto_register %}
+                        <span>{% trans "Free Access"}</span>
+                    {% else %}
+                        <span>{% trans "Limited Access"}</span>
+                    {% endif %}    
+                    <span class="al-activity-detail-registration-info-max-age">+{{activity.age_minimum}}</span>
+                </div>
+                
+                <div class="al-activity-detail-sidebar-section">
+                    <p>{% trans "Users may join this activity" %}
+                    {% if activity.auto_register %}
+                        <b> {% trans "freely." %}</b>
+                    {% else %}
+                        <b> {% trans "upon request." %}</b>
+                    {% endif %}    
+                    </p>
+                    <p>{% trans "Confirmation period starts" %} <b>{{activity.confirmation_period}} {% trans "days" %}</b> {% trans "before the session's start date." %}</p>
+                    <p>{% trans "The minimum age to join this activity is" %} <b>{{activity.age_minimum}} {% trans "years-old" %}</b>.</p>
+                </div>
+
+                <hr>
+
+                <div class="al-activity-detail-sidebar-section">
+                    <h4 class="al-activity-detail-sidebar-section-header">{% trans "Attendants:" %}</h4>
+                    <ul class="al-activity-detail-attendants-list">
+                        {% block attendants %}{% endblock %}
+                    </ul>
+                </div>
+                {% block requests %}
+                {% endblock %}
+                
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

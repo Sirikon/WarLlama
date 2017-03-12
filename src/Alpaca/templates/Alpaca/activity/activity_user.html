@@ -1,0 +1,50 @@
+{% extends './_activity-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}  
+    {% if not user_has_actions %}
+        <p class="al-activity-detail-no-action-message">{{why_not_message}}</p>
+    {% elif user in activity.attendants.all %}
+        <form action="leave/{{activity.id}}" method="POST">
+            {% csrf_token %}
+            <input class="al-button al-activity-detail-join-button" type="submit" name="leave_activity" value="{% trans 'Leave' %}"/>
+        </form>
+    {% else %}
+        <form action="join/{{activity.id}}" method="POST">
+            {% csrf_token %}
+            <input class="al-button al-activity-detail-join-button" type="submit" name="join_activity" value="{% trans 'Join' %}"/>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block attendants %}
+    {% include "./partials/_attendants-list.html" %}
+{% endblock %}
+
+{% block session_state %}
+    <span class="al-float-right">
+        {% if session.has_finished %}
+            {% trans "Closed & Finished" %}
+        {% else %}
+            {% if user not in activity.attendants.all %}
+                {% trans "Join the activity to come!" %}
+            {% elif session.is_on_confirmation_period %}
+                {% if user in session.confirmed_attendants.all %}
+                    {% trans "See you there!" %}
+                {% endif %}
+            {% else %}
+                {% trans "Coming soon..." %}
+            {% endif %}
+        {% endif %}
+    </span>
+{% endblock %}
+
+{% block session_action %}
+    {% if not session.has_finished and user in activity.attendants.all and session.is_on_confirmation_period and user not in session.confirmed_attendants.all %}
+        <form class="al-float-right" action="{{activity.id}}/confirm/" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="session_id" value="{{ session.id }}"></input>
+            <input type="submit" class="al-button al-activity-detail-session-header-join-button" name="confirm_session" value='{% trans "I am going!!" %}'></input>
+        </form>
+    {% endif %}
+{% endblock %}

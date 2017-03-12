@@ -1,0 +1,12 @@
+{% extends './_activity-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}
+    <a class="al-button al-activity-detail-join-button" href="{% url 'alpaca:login' %}">
+        {% trans 'Join' %}
+    </a>
+{% endblock %}
+
+{% block attendants %}
+    {% include "./partials/_attendants-list.html" %}
+{% endblock %}

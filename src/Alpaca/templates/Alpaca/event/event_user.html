@@ -1,0 +1,37 @@
+{% extends './_event-layout.html' %}
+{% load i18n %}
+
+{% block user_options %}    
+    {% if not user_is_old_enough %}
+        <p>{% trans "You are too young to attend this event." %}</p>
+    {% elif event.group_only_attendants and user not in event.group.member_list.all %}
+        <p>{% trans "Only" %} {{event.group.name}} {% trans "members can join this event." %}</p>
+    {% elif user in event.pending_attendants.all %}
+        <p>{% trans "The organizers have received your request to join!" %}</p>
+    {% elif user in event.attendants.all %}
+        <form action="{% url 'alpaca:leave_event' event.id %}" method="POST" style="display: inline-block;">
+            {% csrf_token %}
+            <input class="al-button al-button-inline" type="submit" name="leave_event" value="{% trans 'Leave' %}"/>
+        </form>
+        <a class="al-button al-button-inline" href="{% url 'alpaca:event_new_activity' event.id %}">
+            <i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "New Activity" %}</span>
+        </a>
+    {% else %}
+        <form action="{% url 'alpaca:join_event' event.id %}" method="POST">
+            {% csrf_token %}
+            <input class="al-button al-button-inline" type="submit" name="join_event" value="{% trans 'Join!' %}"/>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block attendants %}
+    {% if event.attendants.count <= 0 %}
+        <p>{% trans "There are no users attending this event yet, be the first one!" %}</p>
+    {% else %}    
+        {% for att in event.attendants.all %}
+            <li class="al-activity-detail-attendants-list-item">
+                {% include "../shared/visuals/_user-widget.html" with user=att %}
+            </li>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

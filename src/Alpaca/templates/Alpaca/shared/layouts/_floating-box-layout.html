@@ -1,0 +1,21 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpaca</title>
+        <link rel="stylesheet" href="{% static "main.css" %}">
+    </head>
+    <body>
+        <div class="al-floating-box">
+            <div class="al-floating-box-title">
+                <img class="al-floating-box-title-image" src="{% static 'alpaca-logo-orange.svg' %}" draggable="false">
+            </div>
+            <div class="al-floating-box-content al-content-panel">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

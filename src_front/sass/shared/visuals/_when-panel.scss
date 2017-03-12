@@ -1,0 +1,14 @@
+@import '../variables';
+
+.al-when-panel {
+    padding-bottom: 1px;
+
+    .al-form-base {
+        p {
+            margin-top: 5px;
+        }
+        label {
+            display: block;
+        }
+    }
+}

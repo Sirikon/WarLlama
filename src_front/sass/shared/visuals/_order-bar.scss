@@ -1,0 +1,25 @@
+@import '../variables';
+
+.al-order-bar {
+    width: 100%;
+
+    margin: 18px 0;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &-item {
+        text-decoration: none;
+        color: $gray;
+        padding: 3px 7px;
+        border-radius: 3px;
+
+        &--active {
+            background-color: $accent;
+            color: white;
+            font-weight: bold;
+        }
+    }
+}

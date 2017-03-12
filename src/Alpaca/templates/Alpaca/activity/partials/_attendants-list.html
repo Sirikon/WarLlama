@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% for att in activity.attendants.all %}
+    <li class="al-activity-detail-attendants-list-item">
+        {% include "../../shared/visuals/_user-widget.html" with user=att %}
+    </li>
+{% empty %}
+    {% trans "There are no users attending this activity, except" as no_users_translated %}
+    {% with no_users_translated|add:" "|add:activity.author.username as empty_message  %}
+        {% include "../../shared/visuals/_empty.html" with message=empty_message %}
+    {% endwith %}
+{% endfor %}

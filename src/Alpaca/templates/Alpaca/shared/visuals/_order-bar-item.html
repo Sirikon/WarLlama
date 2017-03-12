@@ -1,0 +1,10 @@
+{% load i18n %}
+
+<a class="al-order-bar-item {% if sorted_column == column_key %}al-order-bar-item--active{% endif %}" href="?order_by={{column_key}}&last={{sort_sign}}{{sorted_column}}">
+    {% trans column_name %}
+    {% if sorted_column == column_key %}
+        <i class="fa {{sort_icon}}" aria-hidden="true"></i>
+    {% else %}
+        <i class="fa fa-sort" aria-hidden="true"></i>
+    {% endif %}
+</a>

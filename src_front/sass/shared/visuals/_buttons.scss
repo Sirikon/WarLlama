@@ -1,0 +1,132 @@
+@import '../variables';
+
+button {
+    vertical-align: middle;
+}
+
+.al-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 3px;
+    padding: 0 0.4em;
+    padding-bottom: .1em;
+    color: white;
+    background-color: $accent;
+    box-shadow: 0px 3px 0px #126870;
+    cursor: pointer;
+    transition: all .1s ease;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1em;
+    box-sizing: border-box;
+
+    &-inline {
+        display: inline-block;
+        width: auto;
+    }
+
+    &:active {
+        transform: translate(0, 2px);
+        box-shadow: 0px 1px 0px #126870;
+    }
+}
+
+.al-btn-icon {
+    color: $brand; 
+    font-size: 0.8em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-sqrflat-big {
+    background-color: $brand; 
+    line-height: 1.5em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1.1em 0.1em 1.1em;    
+    border: none;
+    border-radius: 2px; 
+
+    color: white;    
+    font-size: 1.5em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-sqrflat-medium {
+    background-color: $brand; 
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1em 0.1em 1em;    
+    border: none;
+    border-radius: 2px; 
+
+    color: white;    
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-sqrflat-small {
+    background-color: $brand; 
+    line-height: 1.3em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 5px 2px 5px;    
+    border: none;
+    border-radius: 2px; 
+
+    color: white;    
+    font-size: 0.8em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-action-big { 
+    background-color: $brand; 
+    line-height: 1.5em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1.1em 0.1em 1.1em;    
+    border: none;
+    border-radius: 1.1em; 
+
+    color: white;    
+    font-size: 1.5em;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-btn-action-small { 
+    background-color: $brand; 
+    line-height: 2em;
+    display: inline-block;
+    vertical-align: middle; 
+    padding: 0 1em 0.1em 1em;   
+    border: none;
+    border-radius: 1.1em; 
+
+    color: white;    
+    font-size: 0.8em;  
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+.al-submit-big {
+    transform: translate(0px, 50%);       
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    padding: 0.4em 0.8em;
+}

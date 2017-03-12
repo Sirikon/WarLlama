@@ -1,0 +1,99 @@
+{% extends '../shared/layouts/_layout.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="al-panel al-margin-top">
+        {% if not event.banner or event.banner.name == "False" %}
+            <div class="al-event-title">
+                <h1>{{ event.title }}</h1>
+            </div>
+        {% else %}
+            <div class="al-event-banner" style="background-image: url({{event.banner.url}});">
+                {% if event.show_title %}
+                    <h1>{{ event.title }}</h1>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        <div class="al-event-banner-footer al-flex-row">
+            <div class="al-flex-grow al-event-banner-footer-info">
+                <span class="al-event-banner-footer-info-date">
+                    <i class="fa fa-calendar"></i>
+                    <b>{{ event.start_date }}</b>
+                </span>
+                <span class="al-event-banner-footer-info-location">
+                    <i class="fa fa-map-marker"></i>
+                    <b>{{ event.city }}</b>
+                </span>
+            </div>
+            <div class="al-event-banner-footer-actions">
+                {% block user_options %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <div class="al-flex-row al-flex-align-start al-flex-stretch-content">
+        <div class="al-flex-grow">
+            <div class="al-content-panel">
+                {{ event.description | safe }}
+            </div>
+
+            <h3 class="al-section-title">
+                <span>{% trans "Activity List" %}</span>
+            </h3>
+
+            {% if event.activity_list.count <= 0 %}
+                <p>{% trans "No activities yet!" %}</p>
+            {% else %}
+                {% comment %}{% include "../shared/visuals/_order-bar.html" %}{% endcomment %}
+                {% for activity in event.activity_list.all %}
+                    {% include "../shared/visuals/_activity-card.html" %}                
+                {% endfor %}
+            {% endif %}
+
+        </div>
+        <div class="al-event-sidebar">
+
+            <div class="al-event-sidebar-section">
+                <h4 class="al-event-sidebar-section-header">{% trans "Settings:" %}</h4>
+                <p>
+                    {% if event.group_only_attendants %}
+                        <b> {% trans "Only" %} {{ event.group.name }} {% trans "members" %} </b>
+                    {% else %}
+                        <b> {% trans "Any user" %}</b>
+                    {% endif %}    
+                    {% trans "can join this event." %} </p>
+                    <p>{% trans "Users may join this event" %}
+                    {% if event.auto_register_users %}
+                        <b> {% trans "freely." %}</b>
+                    {% else %}
+                        <b> {% trans "upon request." %}</b>
+                    {% endif %}    
+                    </p>
+                    <p>{% trans "Activities may join this event" %}
+                    {% if event.auto_register_activities %}
+                        <b> {% trans "freely." %}</b>
+                    {% else %}
+                        <b> {% trans "upon request." %}</b>
+                    {% endif %}    
+                </p>
+            </div>
+
+            <hr>
+
+            <div class="al-event-sidebar-section">
+                <h4 class="al-event-sidebar-section-header">{% trans "Attendants:" %}</h4>
+                <ul class="al-activity-detail-attendants-list">
+                    {% block attendants %}{% endblock %}
+                </ul>
+            </div>
+
+            {% block user_requests %}{% endblock %}
+
+            {% block activity_requests %}{% endblock %}
+
+        </div>
+    </div>
+
+{% endblock %}

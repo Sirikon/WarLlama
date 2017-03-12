@@ -1,0 +1,18 @@
+{% extends './_floating-box-layout.html' %}
+
+{% block content %}
+    <form method="POST" class="al-form-base">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p>
+            <input class="al-button" type="submit" value="{{ submit_text }}"/>
+        </p>
+    </form>
+    {% if rich_field_name != "" %}
+    <script>
+        CKEDITOR.replace( '{{ rich_field_name }}' );
+    </script>
+    {% endif %}
+    
+    {% block other-content %}{% endblock %}
+{% endblock %}

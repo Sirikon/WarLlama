@@ -1,0 +1,31 @@
+{% extends './shared/layouts/_layout.html' %}
+{% load i18n %}
+
+{% block content %}
+    <!-- Tomorrow sessions bar goes here -->
+    <div class="al-flex-row al-flex-stretch-content">
+        <div class="al-flex-column al-sidebar">
+
+            {% include "./shared/visuals/_search-bar.html" %}
+            
+            {% if user.is_authenticated %}
+                {% include "./shared/visuals/_filter-panel.html" %}
+            {% endif %}
+            
+            <!-- When Panel -->
+            {% include "./shared/visuals/_when-panel.html" %}
+        </div>
+        <div class="al-flex-grow">
+            <div class="al-margin-left">
+                {% include "./shared/visuals/_order-bar.html" %}
+                {% for item in event_list %}
+                    {% with item as activity %}
+                        {% include "./shared/visuals/_activity-card.html" %}   
+                    {% endwith %}
+                {% empty %}
+                    {% include "./shared/visuals/_empty.html" with message="Your search returned <b>zero results</b>" %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

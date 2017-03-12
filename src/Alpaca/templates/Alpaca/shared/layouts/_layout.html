@@ -1,0 +1,106 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Alpaca</title>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="{% static "font-awesome/css/font-awesome.min.css" %}">
+        <link rel="stylesheet" href="{% static "main.css" %}">
+        {% include "../visuals/_ckeditor.html" %}
+    </head>
+    <body>
+        <div class="al-header">
+            <div class="al-header-content al-flex-row">
+                <div class="al-flex-row al-header-logo-wrapper">
+                    <a href="/">
+                        <div class="al-header-logo">
+                            <div class="al-header-logo-face" style="background-image: url({% static 'Al-Paquita_Branding.png' %});"></div>
+                            <img class="al-header-logo-title" src="{% static 'alpaca-logo-white.svg' %}" draggable="false" />
+                        </div>
+                    </a>
+                    <h3 class="al-header-subtitle">ß</h3>
+                </div>
+                <div class="al-header-navigation al-flex-grow">
+                    {% url 'alpaca:index' as index_url %}
+                    {% url 'alpaca:group_index' as group_index_url %}
+                    {% url 'alpaca:event_index' as event_index_url %}
+
+                    {% if user.is_authenticated %}
+                        {% if request.path == index_url %}
+                            <a href="{% url 'alpaca:new_activity' %}" class="al-button al-button-inline al-header-navigation-action">
+                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                <span>{% trans "New Activity" %}</span>
+                            </a>
+                        {% endif %}
+
+                        {% if request.path == group_index_url %}
+                            <a href="{% url 'alpaca:new_group' %}" class="al-button al-button-inline al-header-navigation-action">
+                                <i class="fa fa-plus" aria-hidden="true"></i> 
+                                <span>{% trans "New Group" %}</span>
+                            </a>
+                        {% endif %}
+                    {% endif %}
+
+                    {% spaceless %}
+                    <a 
+                    class="al-header-navigation-option {% if request.path == index_url %}active{% endif %}"
+                    href="{{ index_url }}">{% trans "Activities" %}</a>
+                    <a 
+                    class="al-header-navigation-option {% if request.path == group_index_url %}active{% endif %}"
+                    href="{{ group_index_url }}">{% trans "Groups" %}</a>
+                    <a 
+                    class="al-header-navigation-option {% if request.path == event_index_url %}active{% endif %}"
+                    href="{{ event_index_url }}">{% trans "Events" %}</a>
+                    {% endspaceless %}
+                </div>
+                <div class="al-header-menu al-flex-row">
+                    {% comment %}<a href="{% url 'alpaca:group_index'%}"> {% trans "Group List" %}</a>{% endcomment %}
+                    {% if user.is_authenticated %}
+                        <a href="/profile/{{user.username}}">
+                            <i class="fa fa-sliders"></i> 
+                            <span>{{user.username}}</span>
+                        </a>
+                        <div class="al-avatar-miniature" style="background-image: url({{user.profile.avatar.url}})"></div>
+                        <a href="/logout/"><i class="fa fa-sign-out"></i> {% trans "Log out" %}</a>
+                    {% else %}
+                        <a href="/login/"><i class="fa fa-sign-in"></i> {% trans "Log in" %}</a>
+                        <a href="/signup/"><i class="fa fa-thumbs-up"></i> {% trans "Sign up" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="al-content-wrapper">
+            {% block title %}{% endblock %}
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="al-footer">
+            <div class="al-footer-content">
+                <p class="al-text-center">
+                    
+
+                    <i class="fa fa-lg fa-code"></i>
+                    <span>with</span>
+                    <i class="fa fa-lg fa-heart"></i>
+                    <span>by</span>
+                    <a class="al-footer-link" href="{% url 'alpaca:about_us'%}">Darkatom & Sirikon</a>
+                    
+                    <span class="al-float-right al-footer-side-detail">
+                        {% trans "Found a problem? Please," %}
+                        <a class="al-footer-link" href="https://github.com/Darkatom/WarLlama/issues">{% trans "help us!" %}</a>
+                    </span>
+
+                    <span class="al-float-left al-footer-side-detail">
+                        <a class="al-footer-link" href="{% url 'alpaca:terms_conditions'%}">
+                            {% trans "Terms and Conditions" %}
+                        </a>
+                    </span>
+
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

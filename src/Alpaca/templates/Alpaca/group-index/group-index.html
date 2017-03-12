@@ -1,0 +1,26 @@
+{% extends '../shared/layouts/_layout.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    <div class="al-flex-row al-flex-stretch-content">
+        <div class="al-flex-column al-sidebar">
+
+            {% include "../shared/visuals/_search-bar.html" %}
+            
+            {% if user.is_authenticated %}
+                {% include "./visuals/_group-filter-panel.html" %}
+            {% endif %}
+            
+        </div>
+        <div class="al-flex-grow">
+            <div class="al-margin-left al-margin-top">
+                {% for group in group_list %}
+                    {% include "./visuals/_group-card.html" %}
+                {% empty %}
+                    {% include "../shared/visuals/_empty.html" with message="Your search returned <b>zero results</b>" %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,72 @@
+@import '../shared/variables';
+
+.al-event {
+
+    &-title {
+        background-color: $white;
+        height: 100%;
+        margin-top: 1em;
+        padding-top: 0.5em;
+        text-align: center;
+
+        border-radius: 3px 3px 0 0;
+    }
+
+    &-banner {
+        height: 400px;
+        background-position: center; 
+        background-size: cover;
+        background-repeat: no-repeat;
+        
+        margin: 0;
+        
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+        h1 {
+            font-size: 4em;
+        }
+
+        &-footer {
+            padding: 10px;
+            
+            &-info {
+                font-size: 1.3em;
+
+                &-date {
+                    color: $detail_green;
+                    margin-right: 18px;
+                    margin-left: 8px;
+                }
+
+                &-location {
+                    color: $dark-gray;
+                }
+            }
+
+            &-actions {
+                font-size: 1.6em;
+                .al-button {
+                    min-width: 100px;
+                }
+            }
+        }
+    }
+
+    &-sidebar {
+        width: 250px;
+        min-width: 250px;
+        margin-left: 18px;
+        hr { border: none; border-bottom: 2px solid rgba($gray, 0.2); margin: 0.7em 0; }
+        &-section {
+            color: $gray;
+            &-header {
+                font-weight: 100;
+                color: $dark-gray;
+                margin: 0.7em 0 0.45em 0;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,6 @@
+<div class="al-user-widget">
+    <a href="{% url 'alpaca:profile' user.username %}">
+        <div class="al-user-widget-avatar al-circle" style="background-image: url({{user.profile.avatar.url}})"></div>
+        <span class="al-user-widget-name">{{ user }}</span>
+    </a>
+</div>
