@@ -4,6 +4,7 @@
 
  - Node 6.X.X
  - Python >2.7
+    - If you're using Anaconda with Python 3,  [maybe this is helpful](http://stackoverflow.com/questions/24405561/how-to-install-2-anacondas-python-2-7-and-3-4-on-mac-os-10-9)
  - Yarn (`npm install -g yarn`)
 
 ## Setup ##
