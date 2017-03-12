@@ -28,11 +28,12 @@
         </div>
     {% endif %} 
     
+    <!-- TODO: Translate! -->
     <div class="al-section-title">Activities organized by {{ looking_at_user.username }}</div>
 
-    {% if activity_list %}
+    {% comment %}{% if activity_list %}
         {% include "../shared/visuals/_order-bar.html" %}
-    {% endif %}
+    {% endif %}{% endcomment %}
 
     <div class="al-activity-list">
         {% for activity in activity_list %}

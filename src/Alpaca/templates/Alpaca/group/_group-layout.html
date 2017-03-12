@@ -14,9 +14,6 @@
     <div class="al-flex-row al-flex-margin-between">
         {% include "../shared/visuals/_tag.html" with icon="user" text=group.total_num_members %}
         {% include "../shared/visuals/_tag.html" with icon="bookmark" text=group.creation_date %}
-    </div>
-
-    <div class="al-flex-row al-margin-top">
         {% if group.show_email %}
             {% include "../shared/visuals/_tag.html" with icon="envelope" text=group.email %}
         {% endif %}
@@ -30,42 +27,38 @@
         {{ group.description | safe }}
     </div>
 
-    <div class="al-content-panel">        
-        <small>{% trans "Administrators:" %}</small>
-        {% block admin_list %}{% endblock %}
-    </div>
+    <h3 class="al-section-title">{% trans "Administrators:" %}</h3>
 
-    <div class="al-content-panel"> 
-        <small>{% trans "Members:" %}</small>  
-        {% block member_list %}{% endblock %}
-    </div>
+    {% block admin_list %}{% endblock %}
+
+    <h3 class="al-section-title">{% trans "Members:" %}</h3>
+
+    {% block member_list %}{% endblock %}
 
     {% block pending_members_list %}{% endblock %}
     
     {% block pending_activities_list %}{% endblock %}
-    
-    <div class="al-group-history">
-        <div class="al-content-panel al-group-history-events">
-            <h2>{% trans "Events" %}</h2>  
-            {% if group.event_set.count <= 0 %}
-                <p>{% trans "No events yet!" %}</p>
-            {% else %}
-                {% for event in group.event_set.all %}
-                    {% include "../shared/visuals/_event-card.html" %}            
-                {% endfor %}
-            {% endif %}
-        </div>
 
-        <div class="al-content-panel al-group-history-activities">
-            <h2>{% trans "Activities" %}</h2>  
-            {% if group.activity_list.count <= 0 %}
-                <p>{% trans "No activities yet!" %}</p>
-            {% else %}
-                {% for activity in group.activity_list.all %}
-                    {% include "../shared/visuals/_activity-card.html" %}                
-                {% endfor %}
-            {% endif %}
-        </div>
-    </div>
+    <h3 class="al-section-title">{% trans "Events" %}</h3>
+
+    {% if group.event_set.count <= 0 %}
+        {% trans "No events yet!" as message %}
+        {% include "../shared/visuals/_empty.html" with message=message %}
+    {% else %}
+        {% for event in group.event_set.all %}
+            {% include "../shared/visuals/_event-card.html" %}            
+        {% endfor %}
+    {% endif %}
+
+    <h3 class="al-section-title">{% trans "Activities" %}</h3>
+    
+    {% if group.activity_list.count <= 0 %}
+        {% trans "No activities yet!" as message %}
+        {% include "../shared/visuals/_empty.html" with message=message %}
+    {% else %}
+        {% for activity in group.activity_list.all %}
+            {% include "../shared/visuals/_activity-card.html" %}                
+        {% endfor %}
+    {% endif %}
 
 {% endblock %}

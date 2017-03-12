@@ -27,6 +27,7 @@
 {% endblock %}
 
 {% block user_requests %}
+    <hr>
     <div class="al-event-sidebar-section">
         <h4 class="al-event-sidebar-section-header">{% trans "Attending requests:" %}</h4>
         {% if event.pending_attendants.count <= 0 %}
@@ -48,7 +49,7 @@
 {% endblock %}
     
 {% block activity_requests %}
-
+    <hr>
     <div class="al-event-sidebar-section">
         <h4 class="al-event-sidebar-section-header">{% trans "Activity requests:" %}</h4>
         {% if event.pending_activities.count <= 0 %}
