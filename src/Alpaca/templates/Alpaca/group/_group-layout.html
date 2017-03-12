@@ -1,31 +1,35 @@
 {% extends '../shared/layouts/_layout.html' %}
 {% load i18n %}
 
-{% block title %}
-<div class="al-group-header">
-    <div class="al-group-header-title">
-        <div class="al-avatar-logo-small" style="background-image: url({{group.logo.url}})"></div>
-        <h1>{{group.name}}</h1>
-    </div>       
-    <div class="al-group-description">
-        <p>{{ group.description | safe }}</p>
-    </div> 
-    <div class="al-group-data">  
-        <p>
-            <span class="icon"><i class="fa fa-user"></i> {{ group.total_num_members }}</span>
-            <span class="icon"><i class="fa fa-bookmark"></i> {{ group.creation_date }}</span>
-        </p>
+{% block content %}
+
+    <div class="al-flex-row al-margin-top">
+        <img draggable="false" class="al-rounded" src="{{ group.logo.url }}" width="150px" height="auto"/>
+    </div>
+
+    <h1 class="al-title al-text-center al-margin-top al-margin-bottom">
+        <span>{{ group.name }}</span>
+    </h1>
+
+    <div class="al-flex-row al-tag-list">
+        {% include "../shared/visuals/_tag.html" with icon="user" text=group.total_num_members %}
+        {% include "../shared/visuals/_tag.html" with icon="bookmark" text=group.creation_date %}
+    </div>
+
+    <div class="al-flex-row al-margin-top">
         {% if group.show_email %}
-            <span class="icon"><i class="fa fa-envelope"></i> {{ group.email }}</span>
+            {% include "../shared/visuals/_tag.html" with icon="envelope" text=group.email %}
         {% endif %}
     </div>
-    <div class="al-group-user-section">
+
+    <div class="al-flex-row al-margin-top">
         {% block user_options %}{% endblock %}
     </div>
-</div>
-{% endblock %}
 
-{% block content %}
+    <div class="al-content-panel">
+        {{ group.description | safe }}
+    </div>
+
     <div class="al-content-panel">        
         <small>{% trans "Administrators:" %}</small>
         {% block admin_list %}{% endblock %}

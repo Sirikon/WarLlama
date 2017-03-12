@@ -1,13 +1,13 @@
-@import '../shared/variables';
-@import '../shared/global';
+@import '../variables';
+@import '../global';
 
-.al-profile-tag {
+.al-tag {
     $height: 2em;
 
     @extend .al-panel;
     display: flex;
     background-color: white;
-    border-radius: $height/1.9;
+    border-radius: $height/1.9 !important;
     padding: 2px;
 
     &-icon-wrapper {
@@ -34,8 +34,8 @@
     }
 }
 
-.al-profile-tag-list {
-    > .al-profile-tag:not(:first-child) {
+.al-tag-list {
+    > .al-tag:not(:first-child) {
         margin-left: 18px;
     }
 }

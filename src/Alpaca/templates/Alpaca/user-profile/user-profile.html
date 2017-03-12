@@ -4,30 +4,20 @@
 {% block content %}
 
     <div class="al-flex-row al-margin-top">
-        <img draggable="false" class="al-margin-right al-rounded" src="{{ looking_at_user.profile.avatar.url}}" width="150px" height="auto"/>
+        <img draggable="false" class="al-rounded" src="{{ looking_at_user.profile.avatar.url}}" width="150px" height="auto"/>
     </div>
 
     <h1 class="al-title al-text-center al-margin-top al-margin-bottom">
         <span>{{ looking_at_user.profile.get_display_name }}</span>
     </h1>
-
-    <div class="al-flex-row al-profile-tag-list">
-        <div class="al-profile-tag">
-            <div class="al-profile-tag-icon-wrapper">
-                <i class="fa fa-birthday-cake"></i>
-            </div>
-            <div class="al-profile-tag-text">
-                <span>{{ looking_at_user.profile.birth_date }}</span>
-            </div>
-        </div>
-        <div class="al-profile-tag">
-            <div class="al-profile-tag-icon-wrapper">
-                <i class="fa fa-envelope"></i>
-            </div>
-            <div class="al-profile-tag-text">
-                <span>{{ looking_at_user.email }}</span>
-            </div>
-        </div>
+    
+    <div class="al-flex-row al-tag-list">
+        {% if looking_at_user.profile.show_birthday %}
+            {% include "../shared/visuals/_tag.html" with icon="birthday-cake" text=looking_at_user.profile.birth_date %}
+        {% endif %}
+        {% if looking_at_user.profile.show_email %}
+            {% include "../shared/visuals/_tag.html" with icon="envelope" text=looking_at_user.email %}
+        {% endif %}
     </div>
     
     {% if user.username == looking_at_user.username %} 

@@ -1,16 +1,16 @@
 {% extends './_group-layout.html' %}
 {% load i18n %}
 
-{% block user_options %}    
-    <a class="al-btn-action-big" href="{% url 'alpaca:edit_group' group.id %}">
+{% block user_options %}
+    <a class="al-button al-button-inline" href="{% url 'alpaca:edit_group' group.id %}">
         <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
     </a>
-    <a class="al-btn-action-big" href="{% url 'alpaca:new_event' group.id %}">
+    <a class="al-button al-button-inline" href="{% url 'alpaca:new_event' group.id %}">
         <i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "New Event" %}</span>
     </a>
     <form action="{% url 'alpaca:leave_group' group.id %}" method="POST">
         {% csrf_token %}
-        <input class="al-btn-action-big" type="submit" name="leave_group" value="{% trans 'Leave' %}"/>
+        <input class="al-button al-button-inline" type="submit" name="leave_group" value="{% trans 'Leave' %}"/>
     </form>
 {% endblock %}
 

@@ -1,8 +1,3 @@
-@import './shared/global';
-@import './shared/layout';
-@import './shared/variables';
-@import './shared/flex';
-
 @import './shared/visuals/buttons';
 @import './shared/visuals/activity-table';
 @import './shared/visuals/card';
@@ -10,7 +5,13 @@
 @import './shared/visuals/floating-box';
 @import './shared/visuals/order-bar';
 @import './shared/visuals/search-bar';
+@import './shared/visuals/tag';
 @import './shared/visuals/when-panel';
+
+@import './shared/global';
+@import './shared/layout';
+@import './shared/variables';
+@import './shared/flex';
 
 @import './activity/activity';
 
@@ -21,5 +22,3 @@
 @import './forms/panel-form';
 
 @import './group/group';
-
-@import './user-profile/user-profile';
