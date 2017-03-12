@@ -4,25 +4,30 @@
 {% block content %}
 
     <div class="al-flex-row al-margin-top">
-        <img draggable="false" class="al-margin-right al-rounded" src="{{ looking_at_user.profile.avatar.url}}" width="100px" height="auto"/>
-        <h1 class="al-title al-flex-grow">
-            <span>{{ looking_at_user.profile.get_display_name }}</span>
-            {% if user.username == looking_at_user.username %}
-                <a class="al-button al-button-inline al-float-right" href="{% url 'alpaca:edit_profile' %}">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span>
-                </a>
-            {% endif %}
-        </h1>
+        <img draggable="false" class="al-margin-right al-rounded" src="{{ looking_at_user.profile.avatar.url}}" width="150px" height="auto"/>
     </div>
 
-    <div class="al-content-panel">
-        {% if looking_at_user.profile.show_birthday %}
-            <p><i class="fa fa-birthday-cake"></i> {{ looking_at_user.profile.birth_date }}</p>
-        {% endif %}
+    <h1 class="al-title al-text-center al-margin-top al-margin-bottom">
+        <span>{{ looking_at_user.profile.get_display_name }}</span>
+    </h1>
 
-        {% if looking_at_user.profile.show_email %}
-            <p><i class="fa fa-envelope"></i> {{ looking_at_user.email }}</p>
-        {% endif %}
+    <div class="al-flex-row al-profile-tag-list">
+        <div class="al-profile-tag">
+            <div class="al-profile-tag-icon-wrapper">
+                <i class="fa fa-birthday-cake"></i>
+            </div>
+            <div class="al-profile-tag-text">
+                <span>{{ looking_at_user.profile.birth_date }}</span>
+            </div>
+        </div>
+        <div class="al-profile-tag">
+            <div class="al-profile-tag-icon-wrapper">
+                <i class="fa fa-envelope"></i>
+            </div>
+            <div class="al-profile-tag-text">
+                <span>{{ looking_at_user.email }}</span>
+            </div>
+        </div>
     </div>
 
     <div class="al-section-title">Activities organized by {{ looking_at_user.username }}</div>

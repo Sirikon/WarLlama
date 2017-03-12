@@ -1,51 +1,41 @@
 @import '../shared/variables';
+@import '../shared/global';
 
-.al-profile {
-    margin: 25px 0;
-    padding: 1px 15px;
+.al-profile-tag {
+    $height: 2em;
 
-    &-header  {
-        margin: 15px 0 25px 0;
+    @extend .al-panel;
+    display: flex;
+    background-color: white;
+    border-radius: $height/1.9;
+    padding: 2px;
+
+    &-icon-wrapper {
+        width: $height;
+        height: $height;
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-    }    
+        background-color: rgba($accent, 0.2);
+        border-radius: 50%;
 
-    &-user {
-        h1 {
-            font-size: 2.5em;
-            margin: 0 0 10px;
-        }
-
-        small {
-            font-size: .5em;
-            font-weight: 200;
+        .fa {
+            color: $accent;
+            margin-bottom: 2px;
         }
     }
 
-    &-next-session {
-        margin: 0;
-        color: grey;
-        font-size: 0.9em;
-        b {
-            color: black;
-            font-weight: bold;
-        }
+    &-text {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 0.5em 2px 0.5em;
+        color: $accent;
     }
+}
 
-    &-menu {
-        text-align: right;  
-
-        a {
-            text-decoration: none;
-        }
-    }
-
-    &-attendant {
-        display: inline-block;
-        padding: 2px 4px;
-        background-color: whitesmoke;
-        border-radius: 3px;
+.al-profile-tag-list {
+    > .al-profile-tag:not(:first-child) {
+        margin-left: 18px;
     }
 }
