@@ -29,7 +29,15 @@
             </div>
         </div>
     </div>
-
+    
+    {% if user.username == looking_at_user.username %} 
+        <div class="al-flex-row al-margin-top" style="font-size: 1.5em;">
+            <a class="al-button al-button-inline" href="{% url 'alpaca:edit_profile' %}"> 
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>{% trans "Edit" %}</span> 
+            </a> 
+        </div>
+    {% endif %} 
+    
     <div class="al-section-title">Activities organized by {{ looking_at_user.username }}</div>
 
     {% if activity_list %}
