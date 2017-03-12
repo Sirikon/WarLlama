@@ -119,7 +119,7 @@ class GroupForm(forms.ModelForm):
     auto_register_activities = forms.BooleanField(
                             required=False,
                             label=_('Allow activity auto-registration?'),
-                            help_text=_("Your group may have organize activities! Are members allowed to relate any of their activities to this group?")
+                            help_text=_("Your group may organize activities too! Are members allowed to relate any of their activities to this group?")
                         )
 
     class Meta:
@@ -225,7 +225,7 @@ class ActivityForEventForm(forms.ModelForm):
         age_minimum = self.cleaned_data.get("age_minimum")
 
         if age_minimum < event.age_minimum:
-            msg = _("The event's minimum attendant age is {age}. You activity's minimum age must be greater or equal to the event's.").format(age = event.age_minimum)
+            msg = _("The event's minimum attendant age is {age}. Your activity's minimum age must be greater or equal to the event's.").format(age = event.age_minimum)
             self._errors["age_minimum"] = self.error_class([msg])
 
     def save_new(self, user):
