@@ -33,9 +33,3 @@
         color: $accent;
     }
 }
-
-.al-tag-list {
-    > .al-tag:not(:first-child) {
-        margin-left: 18px;
-    }
-}

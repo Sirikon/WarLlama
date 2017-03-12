@@ -6,7 +6,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <div class="al-submit-wrapper">
-            <input type="submit" class="al-btn-action-small" name="{{ form_name }}" value="{{ submit_text }}"/>
+            <input type="submit" class="al-button al-button-inline" name="{{ form_name }}" value="{{ submit_text }}"/>
         </div>
     </form>
 

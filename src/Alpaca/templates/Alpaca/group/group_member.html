@@ -7,12 +7,12 @@
     {% elif user in group.member_list.all %}
         <form action="leave/{{group.id}}" method="POST">
             {% csrf_token %}
-            <input class="al-btn-action-big" type="submit" name="leave_group" value="{% trans 'Leave' %}"/>
+            <input class="al-button al-button-inline" type="submit" name="leave_group" value="{% trans 'Leave' %}"/>
         </form>
     {% else %}
         <form action="join/{{group.id}}" method="POST">
             {% csrf_token %}
-            <input class="al-btn-action-big" type="submit" name="join_group" value="{% trans 'Join!' %}"/>
+            <input class="al-button al-button-inline" type="submit" name="join_group" value="{% trans 'Join!' %}"/>
         </form>
     {% endif %}
 {% endblock %}

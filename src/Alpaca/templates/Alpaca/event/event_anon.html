@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block user_options %}
-    <a class="al-btn-action-big" href="{% url 'alpaca:login' %}">
+    <a class="al-button al-button-inline" href="{% url 'alpaca:login' %}">
         {% trans "Join" %}
     </a>
 {% endblock %}
@@ -12,7 +12,12 @@
         <p>{% trans "There are no users attending this event, except" %} {{ event.author }}.</p>
     {% else %}    
         {% for att in event.attendants.all %}
-            <a class="al-icon-user" href="{% url 'alpaca:profile' att.username %}">{{ att.username }}</a>
+            <li class="al-activity-detail-attendants-list-item">
+                <a href="{% url 'alpaca:profile' att.username %}">
+                    <div class="al-activity-detail-attendants-list-item-avatar al-circle" style="background-image: url({{att.profile.avatar.url}})"></div>
+                    <span class="al-activity-detail-attendants-list-item-name">{{ att }}</span>
+                </a>
+            </li>
         {% endfor %}
     {% endif %}
 {% endblock %}

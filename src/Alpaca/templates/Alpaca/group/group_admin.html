@@ -27,7 +27,7 @@
                     <option value="{{admin.id}}">{{ admin.username }}</option>
                 {% endfor %}
                 </select>
-                <input type="submit" class="al-btn-sqrflat-small" name="demote_member" value="{% trans 'Demote' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="demote_member" value="{% trans 'Demote' %}"/>
             </form>
         {% endif %}
     {% else %}    
@@ -51,8 +51,8 @@
                 <option value="{{member.id}}">{{ member.username }}</option>
             {% endfor %}
             </select>
-            <input type="submit" class="al-btn-sqrflat-small" name="promote_member" value="{% trans 'Promote' %}"/>
-            <input type="submit" class="al-btn-sqrflat-small" name="kick_member" value="{% trans 'Kick out' %}"/>
+            <input type="submit" class="al-button al-button-inline" name="promote_member" value="{% trans 'Promote' %}"/>
+            <input type="submit" class="al-button al-button-inline" name="kick_member" value="{% trans 'Kick out' %}"/>
         </form>
     {% endif %}
 {% endblock %}
@@ -71,8 +71,8 @@
                     <option value="{{member.id}}">{{ member.username }}</option>
                 {% endfor %}
                 </select>
-                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
-                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="reject_request" value="{% trans 'Reject' %}"/>
             </form>  
         {% endif %}
     </div>
@@ -92,8 +92,8 @@
                     <option value="{{act.id}}">{{ act.title }}</option>
                 {% endfor %}
                 </select>
-                <input type="submit" class="al-btn-sqrflat-small" name="accept_request" value="{% trans 'Accept' %}"/>
-                <input type="submit" class="al-btn-sqrflat-small" name="reject_request" value="{% trans 'Reject' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="accept_request" value="{% trans 'Accept' %}"/>
+                <input type="submit" class="al-button al-button-inline" name="reject_request" value="{% trans 'Reject' %}"/>
             </form>  
         {% endif %}
     </div>

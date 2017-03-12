@@ -9,17 +9,17 @@
     {% elif user in event.pending_attendants.all %}
         <p>{% trans "The organizers have received your request to join!" %}</p>
     {% elif user in event.attendants.all %}
-        <form action="{% url 'alpaca:leave_event' event.id %}" method="POST">
+        <form action="{% url 'alpaca:leave_event' event.id %}" method="POST" style="display: inline-block;">
             {% csrf_token %}
-            <input class="al-btn-action-big" type="submit" name="leave_event" value="{% trans 'Leave' %}"/>
+            <input class="al-button al-button-inline" type="submit" name="leave_event" value="{% trans 'Leave' %}"/>
         </form>
-        <a class="al-btn-action-big" href="{% url 'alpaca:event_new_activity' event.id %}">
+        <a class="al-button al-button-inline" href="{% url 'alpaca:event_new_activity' event.id %}">
             <i class="fa fa-plus" aria-hidden="true"></i> <span>{% trans "New Activity" %}</span>
         </a>
     {% else %}
         <form action="{% url 'alpaca:join_event' event.id %}" method="POST">
             {% csrf_token %}
-            <input class="al-btn-action-big" type="submit" name="join_event" value="{% trans 'Join!' %}"/>
+            <input class="al-button al-button-inline" type="submit" name="join_event" value="{% trans 'Join!' %}"/>
         </form>
     {% endif %}
 {% endblock %}
@@ -29,7 +29,12 @@
         <p>{% trans "There are no users attending this event yet, be the first one!" %}</p>
     {% else %}    
         {% for att in event.attendants.all %}
-            <a class="al-icon-user" href="{% url 'alpaca:profile' att.username %}">{{ att.username }}</a>
+            <li class="al-activity-detail-attendants-list-item">
+                <a href="{% url 'alpaca:profile' att.username %}">
+                    <div class="al-activity-detail-attendants-list-item-avatar al-circle" style="background-image: url({{att.profile.avatar.url}})"></div>
+                    <span class="al-activity-detail-attendants-list-item-name">{{ att }}</span>
+                </a>
+            </li>
         {% endfor %}
     {% endif %}
 {% endblock %}

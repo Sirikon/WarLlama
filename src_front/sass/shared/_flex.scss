@@ -12,6 +12,12 @@
         align-items: center;
     }
 
+    &-margin-between {
+        > *:not(:first-child) {
+            margin-left: 18px;
+        }
+    }
+
     &-column {
         display: flex;
         flex-direction: column;

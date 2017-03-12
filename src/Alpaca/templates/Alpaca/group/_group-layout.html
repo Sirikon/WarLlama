@@ -11,7 +11,7 @@
         <span>{{ group.name }}</span>
     </h1>
 
-    <div class="al-flex-row al-tag-list">
+    <div class="al-flex-row al-flex-margin-between">
         {% include "../shared/visuals/_tag.html" with icon="user" text=group.total_num_members %}
         {% include "../shared/visuals/_tag.html" with icon="bookmark" text=group.creation_date %}
     </div>
@@ -22,7 +22,7 @@
         {% endif %}
     </div>
 
-    <div class="al-flex-row al-margin-top">
+    <div class="al-flex-row al-margin-top al-flex-margin-between" style="font-size: 1.5em;">
         {% block user_options %}{% endblock %}
     </div>
 
